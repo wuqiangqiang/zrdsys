@@ -106,7 +106,6 @@ namespace FoodSafetyMonitoring
             }
         }
 
-        //tuivhu
         private void exit_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)

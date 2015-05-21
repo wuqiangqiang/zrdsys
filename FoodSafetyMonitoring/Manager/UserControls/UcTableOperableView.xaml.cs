@@ -54,7 +54,7 @@ namespace FoodSafetyMonitoring.Manager.UserControls
             update();
         }
 
-        private int RowTotal//总行数
+        public int RowTotal//总行数
         {
             get { return Convert.ToInt32(textblock_row_sum.Text); }
             set { textblock_row_sum.Text = value.ToString(); }
@@ -392,6 +392,67 @@ namespace FoodSafetyMonitoring.Manager.UserControls
                     DataRow row = table.Rows[j];
                     StringBuilder sb = new StringBuilder();
                     for (int i = 0; i < table.Columns.Count; i++)
+                    {
+                        sb.Append(row[i]);
+                        sb.Append(",");
+                    }
+                    sw.WriteLine(sb);
+                }
+
+                //StringBuilder sum_sb = new StringBuilder();
+                //for (int i = 0; i < dt.Columns.Count; i++)
+                //{
+                //    if (i == 0)
+                //    {
+                //        sum_sb.Append("共计");
+                //    }
+                //    else if (columnNumbers.Contains(i))
+                //    {
+                //        sum_sb.Append(sumColumns[columnNumbers.IndexOf(i)]);
+                //    }
+                //    sum_sb.Append(",");
+                //}
+                //sw.WriteLine(sum_sb);
+
+                sw.Close();
+                MessageBox.Show("导出文件成功！", "成功", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+
+        public void ExportExcel_test(DataTable dt)
+        {
+            if (dt == null)
+            {
+                return;
+            }
+            System.Windows.Forms.SaveFileDialog sfd = new System.Windows.Forms.SaveFileDialog();
+            sfd.Filter = "导出文件 (*.csv)|*.csv";
+            sfd.FilterIndex = 0;
+            sfd.RestoreDirectory = true;
+            sfd.Title = "导出文件保存路径";
+            sfd.ShowDialog();
+            string strFilePath = sfd.FileName;
+            if (strFilePath != "")
+            {
+                if (File.Exists(strFilePath))
+                {
+                    File.Delete(strFilePath);
+                }
+                StreamWriter sw = new StreamWriter(new FileStream(strFilePath, FileMode.CreateNew), Encoding.Default);
+                string tableHeader = " ";
+                foreach (DataColumn c in dt.Columns)
+                {
+                    GridViewColumn gvc = new GridViewColumn();
+                    tableHeader += myColumns[c.ColumnName.ToLower()].Column_show + ",";
+                }
+                sw.WriteLine(title);
+                sw.WriteLine(tableHeader);
+
+                for (int j = 0; j < dt.Rows.Count; j++)
+                {
+                    DataRow row = dt.Rows[j];
+                    StringBuilder sb = new StringBuilder();
+                    for (int i = 0; i < dt.Columns.Count; i++)
                     {
                         sb.Append(row[i]);
                         sb.Append(",");
