@@ -85,7 +85,13 @@ namespace FoodSafetyMonitoring.Manager
 
         private void _export_Click(object sender, RoutedEventArgs e)
         {
-            _tableview.ExportExcel();
+            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_review_log('{0}','{1}','{2}','{3}','{4}','{5}')",
+                              (Application.Current.Resources["User"] as UserInfo).ID, reportDate_kssj.Value, reportDate_jssj.Value,
+                               _detect_item.SelectedIndex < 1 ? "" : (_detect_item.SelectedItem as Label).Tag,
+                              0,
+                              _tableview.RowTotal)).Tables[0];
+
+            _tableview.ExportExcel(table);
         }
 
     }

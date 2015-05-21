@@ -215,7 +215,7 @@ namespace FoodSafetyMonitoring.Manager
                   0,
                   _tableview.RowTotal)).Tables[0];
 
-            _tableview.ExportExcel_test(table);
+            _tableview.ExportExcel(table);
         }
 
     }

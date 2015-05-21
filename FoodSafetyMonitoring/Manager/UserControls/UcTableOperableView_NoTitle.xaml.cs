@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Toolkit = Microsoft.Windows.Controls;
 
 namespace FoodSafetyMonitoring.Manager.UserControls
 {
@@ -54,7 +55,7 @@ namespace FoodSafetyMonitoring.Manager.UserControls
             update();
         }
 
-        private int RowTotal//总行数
+        public int RowTotal//总行数
         {
             get { return Convert.ToInt32(textblock_row_sum.Text); }
             set { textblock_row_sum.Text = value.ToString(); }
@@ -362,10 +363,11 @@ namespace FoodSafetyMonitoring.Manager.UserControls
 
 
 
-        public void ExportExcel()
+        public void ExportExcel(DataTable dt)
         {
-            if (table == null)
+            if (dt.Rows.Count == 0)
             {
+                Toolkit.MessageBox.Show("当前可导出数据为零！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
             System.Windows.Forms.SaveFileDialog sfd = new System.Windows.Forms.SaveFileDialog();
@@ -383,19 +385,22 @@ namespace FoodSafetyMonitoring.Manager.UserControls
                 }
                 StreamWriter sw = new StreamWriter(new FileStream(strFilePath, FileMode.CreateNew), Encoding.Default);
                 string tableHeader = " ";
-                foreach (DataColumn c in table.Columns)
+                foreach (DataColumn c in dt.Columns)
                 {
                     GridViewColumn gvc = new GridViewColumn();
-                    tableHeader += myColumns[c.ColumnName.ToLower()].Column_show + ",";
+                    if (myColumns[c.ColumnName.ToLower()].BShow)
+                    {
+                        tableHeader += myColumns[c.ColumnName.ToLower()].Column_show + ",";
+                    }  
                 }
                 sw.WriteLine(title);
                 sw.WriteLine(tableHeader);
 
-                for (int j = 0; j < table.Rows.Count; j++)
+                for (int j = 0; j < dt.Rows.Count; j++)
                 {
-                    DataRow row = table.Rows[j];
+                    DataRow row = dt.Rows[j];
                     StringBuilder sb = new StringBuilder();
-                    for (int i = 0; i < table.Columns.Count; i++)
+                    for (int i = 0; i < dt.Columns.Count; i++)
                     {
                         sb.Append(row[i]);
                         sb.Append(",");
@@ -419,7 +424,8 @@ namespace FoodSafetyMonitoring.Manager.UserControls
                 //sw.WriteLine(sum_sb);
 
                 sw.Close();
-                MessageBox.Show("导出文件成功！", "成功", MessageBoxButton.OK, MessageBoxImage.Information);
+                //MessageBox.Show("导出文件成功！", "成功", MessageBoxButton.OK, MessageBoxImage.Information);
+                Toolkit.MessageBox.Show("导出文件成功！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 

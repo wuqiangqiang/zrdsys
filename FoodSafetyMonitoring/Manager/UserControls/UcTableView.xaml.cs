@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Toolkit = Microsoft.Windows.Controls;
 
 namespace FoodSafetyMonitoring.Manager.UserControls
 {
@@ -137,8 +138,9 @@ namespace FoodSafetyMonitoring.Manager.UserControls
 
         public void ExportExcel()
         {
-            if (dt == null)
+            if ((dt == null) || (dt.Rows.Count == 0))
             {
+                Toolkit.MessageBox.Show("当前可导出数据为零！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
             System.Windows.Forms.SaveFileDialog sfd = new System.Windows.Forms.SaveFileDialog();
@@ -192,7 +194,8 @@ namespace FoodSafetyMonitoring.Manager.UserControls
                 //sw.WriteLine(sum_sb);
 
                 sw.Close();
-                MessageBox.Show("导出文件成功！", "成功", MessageBoxButton.OK, MessageBoxImage.Information);
+                //MessageBox.Show("导出文件成功！", "成功", MessageBoxButton.OK, MessageBoxImage.Information);
+                Toolkit.MessageBox.Show("导出文件成功！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 

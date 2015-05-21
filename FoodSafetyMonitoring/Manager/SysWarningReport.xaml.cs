@@ -130,7 +130,15 @@ namespace FoodSafetyMonitoring.Manager
 
         private void _export_Click(object sender, RoutedEventArgs e)
         {
-            _tableview.ExportExcel();
+            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_warning_report('{0}','{1}','{2}','{3}','{4}','{5}',{6},{7})",
+                             (Application.Current.Resources["User"] as UserInfo).ID, reportDate_kssj.Value, reportDate_jssj.Value,
+                              _detect_dept.SelectedIndex < 1 ? "" : (_detect_dept.SelectedItem as Label).Tag,
+                              _detect_item.SelectedIndex < 1 ? "" : (_detect_item.SelectedItem as Label).Tag,
+                              _review_flag.SelectedIndex < 1 ? "" : (_review_flag.SelectedItem as Label).Tag,
+                             0,
+                             _tableview.RowTotal)).Tables[0];
+
+            _tableview.ExportExcel(table);
         }
     }
 }

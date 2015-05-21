@@ -2725,7 +2725,7 @@
 		<col def="S0">Comment</col>
 		<col def="I4">TimeStamp</col>
 		<row><td>COMPANY_NAME</td><td>1033</td><td>ZRD</td><td>0</td><td/><td>-1700587510</td></row>
-		<row><td>COMPANY_NAME</td><td>2052</td><td>ZRD</td><td>0</td><td/><td>-1566361551</td></row>
+		<row><td>COMPANY_NAME</td><td>2052</td><td>ZRD</td><td>0</td><td/><td>-1432156943</td></row>
 		<row><td>DN_AlwaysInstall</td><td>1033</td><td>始终安装</td><td>0</td><td/><td>-1700587510</td></row>
 		<row><td>DN_AlwaysInstall</td><td>2052</td><td>始终安装</td><td>0</td><td/><td>-1700583414</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_COLOR</td><td>1033</td><td>系统颜色设置不足以运行 [ProductName]。</td><td>0</td><td/><td>-1700587510</td></row>
@@ -4975,12 +4975,12 @@
 		<row><td>IDS__TargetReq_DESC_RESOLUTION</td><td>1033</td><td>对于运行 [ProductName] 屏幕分辨率不足。</td><td>0</td><td/><td>-1700585462</td></row>
 		<row><td>IDS__TargetReq_DESC_RESOLUTION</td><td>2052</td><td>对于运行 [ProductName] 屏幕分辨率不足。</td><td>0</td><td/><td>-1700583414</td></row>
 		<row><td>ID_STRING1</td><td>1033</td><td>http://www.ZRD.com</td><td>0</td><td/><td>-1700585462</td></row>
-		<row><td>ID_STRING1</td><td>2052</td><td>http://www.ZRD.com</td><td>0</td><td/><td>-1566361551</td></row>
+		<row><td>ID_STRING1</td><td>2052</td><td>http://www.ZRD.com</td><td>0</td><td/><td>-1432156943</td></row>
 		<row><td>ID_STRING10</td><td>1028</td><td>检测监管系统</td><td>0</td><td/><td>-1566345680</td></row>
 		<row><td>ID_STRING10</td><td>1033</td><td>检测监管系统</td><td>0</td><td/><td>-1566345680</td></row>
 		<row><td>ID_STRING10</td><td>2052</td><td>检测监管系统</td><td>0</td><td/><td>-1566345680</td></row>
 		<row><td>ID_STRING2</td><td>1033</td><td>ZRD</td><td>0</td><td/><td>-1700585462</td></row>
-		<row><td>ID_STRING2</td><td>2052</td><td>ZRD</td><td>0</td><td/><td>-1566361551</td></row>
+		<row><td>ID_STRING2</td><td>2052</td><td>ZRD</td><td>0</td><td/><td>-1432156943</td></row>
 		<row><td>ID_STRING3</td><td>1033</td><td>ZRDSystem</td><td>0</td><td/><td>-1834798639</td></row>
 		<row><td>ID_STRING3</td><td>2052</td><td>ZRDSystem</td><td>0</td><td/><td>-1700583414</td></row>
 		<row><td>ID_STRING4</td><td>1033</td><td>检测监管系统</td><td>0</td><td/><td>-1834782159</td></row>
@@ -5250,7 +5250,7 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<row><td>ISTheme</td><td>InstallShield Blue.theme</td></row>
 		<row><td>ISUSLock</td><td>{FAE012C4-C83D-4588-A4F7-22D94942375C}</td></row>
 		<row><td>ISUSSignature</td><td>{96D101CF-0933-4AC6-A2D9-909CA4CDEC0E}</td></row>
-		<row><td>ISVisitedViews</td><td>viewAssistant,viewProject,viewAppV,viewShortcuts,viewObjects,viewRelease,viewDesignPatches</td></row>
+		<row><td>ISVisitedViews</td><td>viewAssistant,viewProject,viewAppV,viewShortcuts,viewObjects,viewRelease,viewDesignPatches,viewRealSetupDesign</td></row>
 		<row><td>Limited</td><td>1</td></row>
 		<row><td>LockPermissionMode</td><td>1</td></row>
 		<row><td>MsiExecCmdLineOptions</td><td/></row>
