@@ -1,0 +1,38 @@
+﻿<Window x:Class="FoodSafetyMonitoring.Frame"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:FoodSafetyMonitoring" Margin="0"  WindowStyle="None" SizeToContent="WidthAndHeight">
+    <Window.Resources>
+          <ResourceDictionary >
+                <ResourceDictionary.MergedDictionaries>
+                    <ResourceDictionary Source="/Manager/Themes\Shared.xaml" />
+                    <ResourceDictionary Source="/Manager/Themes\textblock.xaml" />
+                    <ResourceDictionary Source="/Manager/Themes\combobox.xaml" />
+                    <ResourceDictionary Source="/Manager/Themes\textbox.xaml" />
+                    <ResourceDictionary Source="/Manager/Themes\button.xaml" />
+                    <ResourceDictionary Source="/Manager/Themes\listviewcolumn.xaml" />
+                    <ResourceDictionary Source="/Manager/Themes\listbox.xaml" />
+                    <ResourceDictionary Source="/Manager/Themes\treeview.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+             
+          </ResourceDictionary>
+    </Window.Resources>
+    <Window.RenderTransform>
+        <RotateTransform x:Name="rotate"></RotateTransform>
+    </Window.RenderTransform>
+    <Border BorderBrush="LightGray" BorderThickness="2">
+        <Grid>
+            <Grid.RowDefinitions >
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <local:TitleBarControl Grid.Row="0"  x:Name="titlebar" MouseMove="titlebar_MouseMove" MouseLeftButtonUp="titlebar_MouseLeftButtonUp"></local:TitleBarControl>
+            <Grid Grid.Row="1" Name="usercontrol">
+                <Grid.Background>
+                    <ImageBrush ImageSource="res/childbg.png" Stretch="Fill"></ImageBrush>
+                </Grid.Background>
+            </Grid>
+        </Grid>
+    </Border>
+    
+</Window>

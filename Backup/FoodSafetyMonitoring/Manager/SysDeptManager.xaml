@@ -1,0 +1,179 @@
+﻿<UserControl x:Class="FoodSafetyMonitoring.Manager.SysDeptManager"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+   xmlns:usercontrols="clr-namespace:FoodSafetyMonitoring.Manager.UserControls"
+     xmlns:toolkitex="http://schemas.microsoft.com/winfx/2006/xaml/presentation/toolkit/extended"  >
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Themes/ImageButtonStyle.xaml"/>
+                <ResourceDictionary Source="Themes/TextBox.xaml"/>
+                <ResourceDictionary Source="Themes/PasswordBox.xaml"/>
+                <ResourceDictionary Source="Themes/Button.xaml"/>
+                <ResourceDictionary Source="Themes/StackPanel.xaml"/>
+                <ResourceDictionary Source="Themes/ComboBox.xaml"/>
+                <ResourceDictionary Source="Themes/TextBlock.xaml"/>
+                <ResourceDictionary Source="Themes/CheckBox.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="13*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="6"></ColumnDefinition>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Background="LightGray">
+                <!--<Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>-->
+                <TextBlock   FontFamily="黑体" FontWeight="300" Margin="10,0,0,0"  Text="部门列表"   />
+                <!--<usercontrols:TextboxSearchControl x:Name="txtSearch" Height="26" MinWidth="220" Grid.Column="1" Grid.Row="0" ImageClick="txtSearch_ImageClick"></usercontrols:TextboxSearchControl>-->
+            </Grid>
+            <TreeView x:Name="_treeView" ItemsSource="{Binding FirstGeneration}" Grid.Row="1"  Background="Transparent" BorderThickness="0" Margin="0,8,0,0">
+                <TreeView.ItemContainerStyle>
+                    <Style TargetType="{x:Type TreeViewItem}">
+                        <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}" />
+                        <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
+                        <Setter Property="FontWeight" Value="Normal" />
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="FontWeight" Value="Bold" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </TreeView.ItemContainerStyle>
+                <TreeView.ItemTemplate>
+                    <HierarchicalDataTemplate ItemsSource="{Binding Children}" >
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="{Binding Img}" Width="20" Height="30" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding Name}" Tag="{Binding Own}" MouseDown="TextBlock_MouseDown" FontFamily="黑体" FontSize="14" VerticalAlignment="Center"/> 
+                        </StackPanel>
+                    </HierarchicalDataTemplate>
+                </TreeView.ItemTemplate>
+            </TreeView>
+            <GridSplitter Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Center" Width="6" Grid.RowSpan="3"></GridSplitter>
+            <Grid Grid.Row="0" Grid.Column="2" Background="LightGray">
+                <TextBlock  Text="详细信息"  FontWeight="300" FontFamily="黑体" />
+            </Grid>
+            <Grid Grid.Column="2" Grid.Row="1" Margin="0,30,0,30" HorizontalAlignment="Center" x:Name="_detail_info_all" Visibility="Hidden">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="13*"/>
+                    <RowDefinition Height="38"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" >
+                    <Grid.Background>
+                        <ImageBrush ImageSource="/Manager/Images/content_back.png" Stretch="Fill"></ImageBrush>
+                    </Grid.Background>
+                    <Grid Margin="80,20,80,20">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="12*"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" >
+                            <Button Content="添加下级" x:Name="_add" Click="_add_Click"  Height="25" Width="80" FontSize="14" FontFamily="黑体" Visibility="Hidden"/>
+                            <Button Content="删除" x:Name="_delete" Click="_delete_Click" Height="25" Width="60" FontSize="14" FontFamily="黑体" Visibility="Hidden"/>
+                            <Button Content="修改" x:Name="_edit" Click="_edit_Click" Height="25" Width="60" FontSize="14" FontFamily="黑体" Visibility="Hidden"/>
+                        </StackPanel>
+                        <Grid Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" x:Name="_detail_info" IsEnabled="False">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="3*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="2*"/>
+                                <!--<RowDefinition Height="*"/>-->
+                                <!--<RowDefinition Height="3*"/>-->
+                            </Grid.RowDefinitions>
+                            <StackPanel>
+                                <TextBlock  MinWidth="100">上级部门:</TextBlock>
+                                <TextBlock   x:Name="_superior_department"  MinWidth="200" Margin="5,0,5,0"  VerticalAlignment="Center"></TextBlock>
+                            </StackPanel>
+                            <StackPanel Grid.Row="1" >
+                                <TextBlock   MinWidth="100">所在地:</TextBlock>
+                                <TextBlock x:Name="_belong_to" MinWidth="0" Margin="5,0,0,0"></TextBlock>
+                                <ComboBox x:Name="_lower_area" Visibility="Hidden" MinWidth="80"></ComboBox>
+                                <TextBlock   MinWidth="20" x:Name="_area_flag" Foreground="Red" Margin="0" ></TextBlock>
+                            </StackPanel>
+                            <Grid Grid.Row="2" >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <StackPanel>
+                                    <TextBlock    MinWidth="100" Height="19" Width="100">部门级别:</TextBlock>
+                                    <TextBlock  x:Name="_regional_level" Margin="5,0,5,0"></TextBlock>
+                                </StackPanel>
+                                <StackPanel  Grid.Row="1">
+                                    <TextBlock   MinWidth="100" x:Name="_station_name">检测点名称:</TextBlock>
+                                    <TextBox    x:Name="_station" Width="230" MaxLength="20"></TextBox>
+                                    <TextBlock   MinWidth="20" x:Name="_station_flag" Foreground="Red" Margin="0" ></TextBlock>
+                                </StackPanel>
+                                <StackPanel Grid.Row="2"  x:Name="_station_property" Visibility="Hidden" >
+                                    <TextBlock MinWidth="100">检测点性质:</TextBlock>
+                                    <CheckBox x:Name="_direct_station"  Checked="_detect_method1_Checked">直属检测站</CheckBox>
+                                    <CheckBox x:Name="_direct_station_2"  Checked="_detect_method1_Checked">加工企业</CheckBox>
+                                    <CheckBox x:Name="_cultivate_station" Checked="_detect_method1_Checked">养殖场</CheckBox>
+                                    <CheckBox x:Name="_slaughter_station" Checked="_detect_method1_Checked">屠宰场</CheckBox>
+                                    <TextBlock   MinWidth="20" x:Name="_station_property_flag" Foreground="Red" Margin="0"></TextBlock>
+                                </StackPanel>
+                            </Grid>
+                            <StackPanel Grid.Row="3">
+                                <TextBlock MinWidth="100" >负责人姓名:</TextBlock>
+                                <TextBox x:Name="_principal_name" MaxLength="20"></TextBox>
+                            </StackPanel>
+                            <StackPanel Grid.Row="4">
+                                <TextBlock MinWidth="100" >手机:</TextBlock>
+                                <TextBox x:Name="_phone"  Width="230" MaxLength="11" InputMethod.IsInputMethodEnabled="False" DataObject.Pasting="Phone_Pasting" PreviewKeyDown="Phone_PreviewKeyDown"  PreviewTextInput="Phone_PreviewTextInput"></TextBox>
+                            </StackPanel>
+                            <StackPanel Grid.Row="5">
+                                <TextBlock MinWidth="100">联系电话:</TextBlock>
+                                <TextBox  x:Name="_contact_number" Width="230" MaxLength="13" InputMethod.IsInputMethodEnabled="False" DataObject.Pasting="Contact_Number_Pasting" PreviewKeyDown="Contact_Number_PreviewKeyDown"  PreviewTextInput="Contact_Number_PreviewTextInput"></TextBox>
+                            </StackPanel>
+                            <StackPanel Grid.Row="6">
+                                <TextBlock   MinWidth="100">地址:</TextBlock>
+                                <TextBox  x:Name="_address" Width="300" MaxLength="50"></TextBox>
+                            </StackPanel>
+                            <StackPanel Grid.Row="7">
+                                <TextBlock  x:Name="_Supplier_name" MinWidth="100" Visibility="Hidden">供应商:</TextBlock>
+                                <ComboBox x:Name="_Supplier" Visibility="Hidden" MinWidth="80"></ComboBox>
+                            </StackPanel>
+                            <!--<StackPanel Grid.Row="7">
+                                <TextBlock   MinWidth="100">系统标题:</TextBlock>
+                                <TextBox  x:Name="_title" MinWidth="300" ></TextBox>
+                            </StackPanel>-->
+                            <!--<StackPanel Grid.Row="7">
+                                <TextBlock   MinWidth="100">备注:</TextBlock>
+                                <TextBox  x:Name="_note" Width="300"  Height="80" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"></TextBox>
+                            </StackPanel>-->
+                        </Grid>
+                    </Grid>
+                </Grid>
+                <Grid Grid.Row="1" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Name="txtMsg"  Foreground="Red" FontSize="15" FontFamily="黑体"   ></TextBlock>
+                    <StackPanel HorizontalAlignment="Center" Grid.Column="1">
+                        <Button Name="btnSave" Width="76" Height="30" Click="btnSave_Click" Style="{StaticResource SaveImageButtonTemplate}" Margin="0,0,20,0"/>
+                        <Button Name="btnCancel" Width="76" Height="30"  Click="Clear_Click" Style="{StaticResource CancelImageButtonTemplate}" Margin="20,0,0,0"/>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+             
+        </Grid> 
+    </Grid>
+</UserControl>

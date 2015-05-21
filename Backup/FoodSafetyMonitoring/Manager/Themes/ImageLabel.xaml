@@ -1,0 +1,52 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style x:Key="ImageLabel" TargetType="Label">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Label">
+                    <Border Name="myGrid" Background="Transparent" Height="30">
+                        <Grid >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="30"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Name="head" Source="/Manager/Images/person.png" Width="20" Height="20"></Image>
+                            <ContentPresenter Grid.Column="1" Content="{TemplateBinding Content}" HorizontalAlignment="{TemplateBinding HorizontalAlignment}" VerticalAlignment="{TemplateBinding VerticalAlignment}"></ContentPresenter>
+                            <Border Grid.Column="2" Name="myBorder" Height="20" Width="20">
+                                <Image Name="lblImg" Source="/res/close.png" ToolTip="删除用户记录"></Image>
+                            </Border>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter TargetName="myGrid" Property="Background" Value="#3399FF"/>
+                            <Setter TargetName="myGrid" Property="Height" Value="40"/>
+                        </Trigger>
+                        <Trigger SourceName="myBorder" Property="IsMouseOver" Value="true">
+                            <Setter TargetName="myBorder" Property="Background" Value="White"/>
+                        </Trigger>
+
+                        <EventTrigger RoutedEvent="Mouse.MouseEnter">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Storyboard.TargetName="head" Storyboard.TargetProperty="Height" From="20" To="35" Duration="0:0:0.2"/>
+                                    <DoubleAnimation Storyboard.TargetName="head" Storyboard.TargetProperty="Width" From="20" To="35" Duration="0:0:0.2"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="Mouse.MouseLeave">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Storyboard.TargetName="head" Storyboard.TargetProperty="Height" From="35" To="20" Duration="0:0:0.2"/>
+                                    <DoubleAnimation Storyboard.TargetName="head" Storyboard.TargetProperty="Width" From="35" To="20" Duration="0:0:0.2"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

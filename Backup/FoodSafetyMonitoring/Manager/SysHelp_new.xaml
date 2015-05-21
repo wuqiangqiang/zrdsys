@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="FoodSafetyMonitoring.Manager.SysHelp_new"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:usercontrols="clr-namespace:FoodSafetyMonitoring.Manager.UserControls">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Themes/TextBlock.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <!--<Grid.Background>
+            <ImageBrush ImageSource="/res/help.png" ></ImageBrush>
+        </Grid.Background>-->
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,50,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="109"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="396"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="1">
+                    <Grid.Background>
+                        <ImageBrush ImageSource="/res/help_title.png"></ImageBrush>
+                    </Grid.Background>
+                </Grid>
+            </Grid>
+            <TextBlock Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" Margin="50,0,0,0">智锐达仪器科技南通有限公司是一家专注于食品安全快速检测仪器研发、生产销售以及食品安全检测信息化管理软件开发与系统集成的科 </TextBlock>
+            <TextBlock Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" >技公司，公司营运总部设在江苏省南通市经济技术开发区，并在深圳设有研发与技术服务中心。</TextBlock>
+            <TextBlock Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" Margin="50,0,0,0">《检测监管系统软件》是智锐达仪器科技南通有限公司专门针对畜、水产品食品安全监管检测开发的套管理软件。 </TextBlock>
+            <TextBlock Grid.Row="5" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" Margin="50,0,0,0">如您在软件的使用过程中有任何疑问或发现问题，请与我们联系 </TextBlock>
+            <TextBlock Grid.Row="6" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" Margin="50,0,0,0">电话：0513-89169777</TextBlock>
+            <TextBlock Grid.Row="7" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" Margin="50,0,0,0">E-MAIL：qqwu@zrodo.com </TextBlock>
+        </Grid>
+    </Grid>
+</UserControl>

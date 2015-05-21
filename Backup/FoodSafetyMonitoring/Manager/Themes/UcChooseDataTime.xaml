@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="FoodSafetyMonitoring.Manager.Themes.UcChooseDataTime"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+     Height="30" >
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="textblock.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="6*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0" Name="CalendarContain" VerticalAlignment="Center" ></Grid>
+        <Grid Grid.Column="1" VerticalAlignment="Center" Name="HourContain"></Grid>
+        <TextBlock Grid.Column="2" VerticalAlignment="Center" Style="{StaticResource ResourceKey= TextBlock}">时</TextBlock>
+        <Grid Grid.Column="3" VerticalAlignment="Center" Name="MinuteContain"></Grid>
+        <TextBlock Grid.Column="4" VerticalAlignment="Center" Style="{StaticResource ResourceKey= TextBlock}">分</TextBlock>
+
+    </Grid>
+</UserControl>

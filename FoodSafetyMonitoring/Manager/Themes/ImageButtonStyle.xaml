@@ -1,0 +1,191 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!--按钮样式继承-->
+    <Style x:Key="ButtonBase" TargetType="Button">
+        <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+        <Setter Property="RenderTransformOrigin" Value="0.5,0.5"></Setter>
+        <!--<Setter Property="Opacity" Value="0.7"></Setter>-->
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Cursor" Value="Hand"/>
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="True" >
+                <Setter Property="RenderTransform">
+                    <Setter.Value>
+                        <ScaleTransform ScaleX="1.1" ScaleY="1.1" />
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="Opacity" Value="1">
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!--重置密码按钮-->
+    <Style x:Key="ResetImageButtonTemplate" TargetType="Button"  BasedOn="{StaticResource ButtonBase}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid>
+                        <Image x:Name="save" Source="/Manager/Images/btn_back2.png"></Image>
+                        <TextBlock FontFamily="黑体" FontSize="14"  HorizontalAlignment="Center" VerticalAlignment="Center" Text="重置密码" Foreground="White"></TextBlock>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <!--保存按钮-->
+    <Style x:Key="SaveImageButtonTemplate" TargetType="Button"  BasedOn="{StaticResource ButtonBase}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid>
+                        <Image x:Name="save" Source="/Manager/Images/btn_back1.png"></Image> 
+                        <TextBlock FontFamily="黑体" FontSize="14"  HorizontalAlignment="Center" VerticalAlignment="Center" Text="保存" Foreground="White"></TextBlock>
+                    </Grid> 
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--取消按钮-->
+    <Style x:Key="CancelImageButtonTemplate" TargetType="Button"  BasedOn="{StaticResource ButtonBase}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid>
+                        <Image x:Name="save" Source="/Manager/Images/btn_back1.png"></Image>
+                        <TextBlock FontFamily="黑体" FontSize="14"  HorizontalAlignment="Center" VerticalAlignment="Center" Text="取消" Foreground="White"></TextBlock>
+                    </Grid> 
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--查询按钮-->
+    <Style x:Key="SelectImageButtonTemplate" TargetType="Button"  BasedOn="{StaticResource ButtonBase}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid>
+                        <Image x:Name="save" Source="/Manager/Images/btn_back1.png"></Image>
+                        <TextBlock FontFamily="黑体" FontSize="14"  HorizontalAlignment="Center" VerticalAlignment="Center" Text="查询" Foreground="White"></TextBlock>
+                    </Grid> 
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--导出按钮-->
+    <Style x:Key="ExportImageButtonTemplate" TargetType="Button"  BasedOn="{StaticResource ButtonBase}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid>
+                        <Image x:Name="save" Source="/Manager/Images/btn_back1.png"></Image>
+                        <TextBlock FontFamily="黑体" FontSize="14"  HorizontalAlignment="Center" VerticalAlignment="Center" Text="导出" Foreground="White"></TextBlock>
+                    </Grid> 
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--创建按钮-->
+    <Style x:Key="CreateImageButtonTemplate" TargetType="Button"  BasedOn="{StaticResource ButtonBase}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid>
+                        <Image x:Name="save" Source="/Manager/Images/btn_back3.png"></Image>
+                        <TextBlock FontFamily="黑体" FontSize="14"  HorizontalAlignment="Center" VerticalAlignment="Center" Text="创建新帐号" Foreground="White"></TextBlock>
+                    </Grid> 
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--添加图片按钮-->
+    <!--<Style x:Key="AddImageImageButtonTemplate" TargetType="Button"  BasedOn="{StaticResource ButtonBase}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid>
+                        <Image Source="/Manager/Images/AddImage.png" ToolTip="添加"></Image> 
+                    </Grid> 
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>-->
+
+   
+
+    <!--删除图片按钮-->
+    <!--<Style x:Key="DeleteImageImageButtonTemplate" TargetType="Button"  BasedOn="{StaticResource ButtonBase}"> 
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid>
+                        <Image Source="/Manager/Images/DeleteImage.png" ToolTip="删除" ></Image> 
+                    </Grid> 
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>-->
+
+
+    <!--列表修改图片按钮-->
+    <Style x:Key="ListModifyImageButtonTemplate" TargetType="Button"  BasedOn="{StaticResource ButtonBase}"> 
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid>
+                        <Image Source="/Manager/Images/modify.png" ToolTip="修改" ></Image> 
+                    </Grid> 
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--列表新增图片按钮-->
+    <Style x:Key="ListNewImageButtonTemplate" TargetType="Button"  BasedOn="{StaticResource ButtonBase}"> 
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid> 
+                        <Image Source="/Manager/Images/modify.png" ToolTip="新增" />
+                    </Grid> 
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <!--删除图片按钮-->
+    <Style x:Key="ListDeleteImageButtonTemplate" TargetType="Button" BasedOn="{StaticResource ButtonBase}"> 
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid>
+                        <Image Source="/Manager/Images/delete.png" ToolTip="删除" ></Image>
+                    </Grid> 
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--详情图片按钮-->
+    <Style x:Key="ListDetailsImageButtonTemplate" TargetType="Button" BasedOn="{StaticResource ButtonBase}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid>
+                        <Image Source="/Manager/Images/details.png" ToolTip="详情" ></Image>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

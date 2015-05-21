@@ -1,0 +1,935 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{CE73DA63-3B6B-49AF-A31E-70F9BB46B6FF}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FoodSafetyMonitoring</RootNamespace>
+    <AssemblyName>检测监管系统</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <ApplicationIcon>logo.ico</ApplicationIcon>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="MySql.Data, Version=5.2.3.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
+    <Reference Include="NPOI, Version=2.1.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL" />
+    <Reference Include="NPOI.OOXML, Version=2.1.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL" />
+    <Reference Include="NPOI.OpenXml4Net, Version=2.1.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL" />
+    <Reference Include="NPOI.OpenXmlFormats, Version=2.1.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL" />
+    <Reference Include="PresentationFramework.Aero">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.ServiceModel">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UIAutomationProvider">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WCFFrameWork, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6a6ada49cab48f75, processorArchitecture=MSIL" />
+    <Reference Include="WindowsBase">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationCore">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationFramework">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsFormsIntegration">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WPFToolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="WPFToolkit.Extended, Version=1.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL" />
+    <Reference Include="WPFVisifire.Charts, Version=4.0.2.2, Culture=neutral, PublicKeyToken=9f1c752402bc35c9, processorArchitecture=MSIL" />
+    <Reference Include="WWTFrameWork, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6a6ada49cab48f75, processorArchitecture=MSIL" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="AniControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ChildMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Frame.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="LoginWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindowTradition.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\AddReviewDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\detectdetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\detectDetailsReview.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\SetTaskGrade.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\SysAreaAnalysis.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\SysComparisonAndAnalysis.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\SysDataDicManager.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\SysDayReport.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Manager\SysHelp.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\SysHelp_new.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\SysLoadPicture.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Manager\SysLogManager.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\SysMessageCenter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\SysMessageSetManager.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\SysModifyPassword.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\SysPersonManager.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\SysReviewInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\SysReviewLog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\SysRoleManager.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Manager\SysRolePowerManager.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\SysTaskCheck.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\SysTrendAnalysis.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\SysUserManager.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Manager\SysWarningReport.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\Themes\btn.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Manager\Themes\Button.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Manager\Themes\CheckBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\Themes\Combobox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Manager\Themes\Combobox_login.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Manager\Themes\ExpandDockPanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Manager\Themes\GridViewColumnHeaderStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\Themes\groupbox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Manager\Themes\Image.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\Themes\ImageButtonStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Manager\Themes\ImageLabel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\Themes\ListBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Manager\Themes\ListViewColumn.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Manager\Themes\ListviewStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Manager\Themes\menu.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Manager\Themes\normalbutton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Manager\Themes\PasswordBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Manager\Themes\RichTextBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\Themes\ScrollBar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Manager\Themes\Shared.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Manager\Themes\SplitBarControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Manager\Themes\StackPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\Themes\tabcontrol.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Manager\Themes\TextBlock.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Manager\Themes\TextBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Manager\Themes\TextBoxStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Manager\Themes\ToolbarStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Manager\Themes\TreeView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Manager\Themes\UcChooseDataTime.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Manager\UcDayReportDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\UcDetectBillManager.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\UcDetectInquire.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\UcMainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\UcMonthReportDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\UcReviewdetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\UcSourceCompanyManager.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\UcTaskAllocation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\UcUnrealizedModul.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\SysMonthReport.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\SysYearReport.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\SysDesignReport.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\SysWarningInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\UcWarningdetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\UcWarningReportDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\UcYearReportDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\UserControls\TitleBarControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Manager\Themes\ToolkitMessageboxStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Manager\UserControls\ButtonAddControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\UserControls\DatePickerControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Manager\UserControls\TextboxSearchControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Manager\SysDeptManager.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Manager\UserControls\UcEditableTable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\UserControls\UcTableOperableView_NoPages.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\UserControls\UcTableOperableView_NoTitle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\UserControls\UcTableView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Manager\UserControls\UcTableOperableView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Manager\SysManualDataEntry.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\UcUserManager.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\UserControls\UcTableView_NoTitle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TestUserControl1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TitleBarControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UcHeaderTitle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UcMenuImage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControlTemplet.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VerAniControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AlarmEngine.cs" />
+    <Compile Include="AniControl.xaml.cs">
+      <DependentUpon>AniControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ChildMenu.xaml.cs">
+      <DependentUpon>ChildMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Common\ComboboxTool.cs" />
+    <Compile Include="Common\ImagePathConverter.cs" />
+    <Compile Include="Common\OperationType.cs" />
+    <Compile Include="Common\SerializerTool.cs" />
+    <Compile Include="Common\SysLogEntry.cs" />
+    <Compile Include="dao\DBOperation_MySQL.cs" />
+    <Compile Include="dao\IDBOperation.cs" />
+    <Compile Include="ExpandDockItemData.cs" />
+    <Compile Include="ExpandDockPanel.cs" />
+    <Compile Include="Frame.xaml.cs">
+      <DependentUpon>Frame.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FullScreenHelper.cs" />
+    <Compile Include="IFrameChild.cs" />
+    <Compile Include="IUserControlClose.cs" />
+    <Compile Include="LoginWindow.xaml.cs">
+      <DependentUpon>LoginWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainMenu.xaml.cs">
+      <DependentUpon>MainMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindowTradition.xaml.cs">
+      <DependentUpon>MainWindowTradition.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\AddReviewDetails.xaml.cs">
+      <DependentUpon>AddReviewDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\AlarmData.cs" />
+    <Compile Include="Manager\detectdetails.xaml.cs">
+      <DependentUpon>detectdetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\detectDetailsReview.xaml.cs">
+      <DependentUpon>detectDetailsReview.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\IClickChildMenuInitUserControlUI.cs" />
+    <Compile Include="Manager\SetTaskGrade.xaml.cs">
+      <DependentUpon>SetTaskGrade.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\SysAreaAnalysis.xaml.cs">
+      <DependentUpon>SysAreaAnalysis.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\SysComparisonAndAnalysis.xaml.cs">
+      <DependentUpon>SysComparisonAndAnalysis.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\SysDataDicManager.xaml.cs">
+      <DependentUpon>SysDataDicManager.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\SysDayReport.xaml.cs">
+      <DependentUpon>SysDayReport.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\SysHelp.xaml.cs">
+      <DependentUpon>SysHelp.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\SysHelp_new.xaml.cs">
+      <DependentUpon>SysHelp_new.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\SysLoadPicture.xaml.cs">
+      <DependentUpon>SysLoadPicture.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\SysLogManager.xaml.cs">
+      <DependentUpon>SysLogManager.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\SysMessageCenter.xaml.cs">
+      <DependentUpon>SysMessageCenter.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\SysMessageSetManager.xaml.cs">
+      <DependentUpon>SysMessageSetManager.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\SysModifyPassword.xaml.cs">
+      <DependentUpon>SysModifyPassword.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\SysPersonManager.xaml.cs">
+      <DependentUpon>SysPersonManager.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\SysReviewInfo.xaml.cs">
+      <DependentUpon>SysReviewInfo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\SysReviewLog.xaml.cs">
+      <DependentUpon>SysReviewLog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\SysRoleManager.xaml.cs">
+      <DependentUpon>SysRoleManager.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\SysRolePowerManager.xaml.cs">
+      <DependentUpon>SysRolePowerManager.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\SysTaskCheck.xaml.cs">
+      <DependentUpon>SysTaskCheck.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\SysTrendAnalysis.xaml.cs">
+      <DependentUpon>SysTrendAnalysis.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\SysUserManager.xaml.cs">
+      <DependentUpon>SysUserManager.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\SysWarningReport.xaml.cs">
+      <DependentUpon>SysWarningReport.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\Themes\SplitBarControl.xaml.cs">
+      <DependentUpon>SplitBarControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\Themes\UcChooseDataTime.xaml.cs">
+      <DependentUpon>UcChooseDataTime.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\UcDayReportDetails.xaml.cs">
+      <DependentUpon>UcDayReportDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\UcDetectBillManager.xaml.cs">
+      <DependentUpon>UcDetectBillManager.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\UcDetectInquire.xaml.cs">
+      <DependentUpon>UcDetectInquire.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\UcMainPage.xaml.cs">
+      <DependentUpon>UcMainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\UcMonthReportDetails.xaml.cs">
+      <DependentUpon>UcMonthReportDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\UcReviewdetails.xaml.cs">
+      <DependentUpon>UcReviewdetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\UcSourceCompanyManager.xaml.cs">
+      <DependentUpon>UcSourceCompanyManager.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\UcTaskAllocation.xaml.cs">
+      <DependentUpon>UcTaskAllocation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\UcUnrealizedModul.xaml.cs">
+      <DependentUpon>UcUnrealizedModul.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\SysMonthReport.xaml.cs">
+      <DependentUpon>SysMonthReport.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\SysYearReport.xaml.cs">
+      <DependentUpon>SysYearReport.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\SysDesignReport.xaml.cs">
+      <DependentUpon>SysDesignReport.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\SysWarningInfo.xaml.cs">
+      <DependentUpon>SysWarningInfo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\UcWarningdetails.xaml.cs">
+      <DependentUpon>UcWarningdetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\UcWarningReportDetails.xaml.cs">
+      <DependentUpon>UcWarningReportDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\UcYearReportDetails.xaml.cs">
+      <DependentUpon>UcYearReportDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\UserControls\TitleBarControl.xaml.cs">
+      <DependentUpon>TitleBarControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\UserControls\ButtonAddControl.xaml.cs">
+      <DependentUpon>ButtonAddControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\UserControls\DatePickerControl.xaml.cs">
+      <DependentUpon>DatePickerControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\UserControls\TextboxSearchControl.xaml.cs">
+      <DependentUpon>TextboxSearchControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\SysDeptManager.xaml.cs">
+      <DependentUpon>SysDeptManager.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\UserControls\UcEditableTable.xaml.cs">
+      <DependentUpon>UcEditableTable.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\UserControls\UcTableOperableView_NoPages.xaml.cs">
+      <DependentUpon>UcTableOperableView_NoPages.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\UserControls\UcTableOperableView_NoTitle.xaml.cs">
+      <DependentUpon>UcTableOperableView_NoTitle.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\UserControls\UcTableView.xaml.cs">
+      <DependentUpon>UcTableView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\UserControls\UcTableOperableView.xaml.cs">
+      <DependentUpon>UcTableOperableView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\SysManualDataEntry.xaml.cs">
+      <DependentUpon>SysManualDataEntry.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\UcUserManager.xaml.cs">
+      <DependentUpon>UcUserManager.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\UserControls\UcTableView_NoTitle.xaml.cs">
+      <DependentUpon>UcTableView_NoTitle.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="TestUserControl1.xaml.cs">
+      <DependentUpon>TestUserControl1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TitleBarControl.xaml.cs">
+      <DependentUpon>TitleBarControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UcHeaderTitle.xaml.cs">
+      <DependentUpon>UcHeaderTitle.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UcMenuImage.xaml.cs">
+      <DependentUpon>UcMenuImage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlTemplet.xaml.cs">
+      <DependentUpon>UserControlTemplet.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VerAniControl.xaml.cs">
+      <DependentUpon>VerAniControl.xaml</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="res\jssz.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="res\close.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="res\clock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\DataSources\System.Data.DataSet.datasource" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="res\loginButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Manager\Images\txtSearch.png" />
+    <Resource Include="Manager\Images\person.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DBUtility\DBUtility.csproj">
+      <Project>{ECFBE7C4-FFE7-43FB-BA15-684571506039}</Project>
+      <Name>DBUtility</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Manager\Images\role.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DLL\ICSharpCode.SharpZipLib.dll" />
+    <Content Include="DLL\MySql.Data.dll" />
+    <Content Include="DLL\NPOI.dll" />
+    <Content Include="DLL\NPOI.OOXML.dll" />
+    <Resource Include="DLL\NPOI.OOXML.XML" />
+    <Content Include="DLL\NPOI.OpenXml4Net.dll" />
+    <Resource Include="DLL\NPOI.OpenXml4Net.XML" />
+    <Content Include="DLL\NPOI.OpenXmlFormats.dll" />
+    <Content Include="DLL\WCFFrameWork.dll" />
+    <Content Include="DLL\WPFToolkit.dll" />
+    <Content Include="DLL\WPFToolkit.Extended.dll" />
+    <Content Include="DLL\WPFVisifire.Charts.dll" />
+    <Content Include="DLL\WWTFrameWork.dll" />
+    <Resource Include="res\nkrx.png" />
+    <Resource Include="res\zrd.png" />
+    <Resource Include="res\title_logo.png" />
+    <Resource Include="res\help_title.png" />
+    <Resource Include="res\line.png" />
+    <Resource Include="res\details_big.jpg" />
+    <Resource Include="res\details_small.jpg" />
+    <Resource Include="res\logo.png" />
+    <Resource Include="res\close_on.png" />
+    <Resource Include="res\max_on.png" />
+    <Resource Include="res\min_on.png" />
+    <Resource Include="res\details.jpg" />
+    <Resource Include="res\help.jpg" />
+    <Resource Include="Manager\Images\btn_back1.png" />
+    <Resource Include="Manager\Images\btn_back2.png" />
+    <Resource Include="Manager\Images\btn_back3.png" />
+    <Resource Include="res\help.png" />
+    <Resource Include="res\mainmenu_bar.jpg" />
+    <Resource Include="res\bottom_bar.jpg" />
+    <Resource Include="res\title_bar.jpg" />
+    <Resource Include="Manager\Images\detail_close.png" />
+    <Resource Include="Manager\Images\all.png" />
+    <Resource Include="Manager\Images\country.png" />
+    <Resource Include="Manager\Images\dept.png" />
+    <Resource Include="Manager\Images\provice.png" />
+    <Resource Include="Manager\Images\btn_create.png" />
+    <Resource Include="Manager\Images\btn_reset.png" />
+    <Resource Include="Manager\Images\content_back.png" />
+    <Resource Include="Manager\Images\power.png" />
+    <Resource Include="Manager\Images\closeLeave.png" />
+    <Resource Include="Manager\Images\closeOver.jpg" />
+    <Resource Include="Manager\Images\test.jpg" />
+    <Resource Include="Manager\Images\middle.png" />
+    <Resource Include="Manager\Images\btn_cancle.png" />
+    <Resource Include="Manager\Images\btn_export.png" />
+    <Resource Include="Manager\Images\btn_query.png" />
+    <Resource Include="Manager\Images\btn_save.png" />
+    <Resource Include="Manager\Images\delete.png" />
+    <Resource Include="Manager\Images\details.png" />
+    <Resource Include="Manager\Images\modify.png" />
+    <Resource Include="res\analysis_bar.jpg" />
+    <Resource Include="res\detect_bar.jpg" />
+    <Resource Include="res\firstpage_bar.jpg" />
+    <Resource Include="res\help_bar.jpg" />
+    <Resource Include="res\report_bar.jpg" />
+    <Resource Include="res\system_bar.jpg" />
+    <Resource Include="res\task_bar.jpg" />
+    <Resource Include="res\warning_bar.jpg" />
+    <Resource Include="res\shut.png" />
+    <Resource Include="res\max.png" />
+    <Resource Include="res\min.png" />
+    <Resource Include="logo.ico" />
+    <Resource Include="res\header.png" />
+    <Resource Include="res\detect_back.png" />
+    <Resource Include="res\title.jpg" />
+    <Resource Include="res\childmenu_bar.jpg" />
+    <Resource Include="res\analysis_unpressed.jpg" />
+    <Resource Include="res\detect_unpressed.jpg" />
+    <Resource Include="res\firstpage_unpressed.jpg" />
+    <Resource Include="res\help_unpressed.jpg" />
+    <Resource Include="res\report_unpressed.jpg" />
+    <Resource Include="res\system_unpressed.jpg" />
+    <Resource Include="res\task_unpressed.jpg" />
+    <Resource Include="res\warning_unpressed.jpg" />
+    <Resource Include="res\detect_normal.jpg" />
+    <Resource Include="res\detect_select.jpg" />
+    <Resource Include="res\firstpage_normal.jpg" />
+    <Resource Include="res\firstpage_select.jpg" />
+    <Resource Include="res\help_select.jpg" />
+    <Resource Include="res\report_normal.jpg" />
+    <Resource Include="res\report_select.jpg" />
+    <Resource Include="res\system_normal.jpg" />
+    <Resource Include="res\system_select.jpg" />
+    <Resource Include="res\task_normal.jpg" />
+    <Resource Include="res\task_select.jpg" />
+    <Resource Include="res\warning_normal.jpg" />
+    <Resource Include="res\warning_select.jpg" />
+    <Resource Include="res\analysis_normal.jpg" />
+    <Resource Include="res\analysis_select.jpg" />
+    <Resource Include="res\background.jpg" />
+    <Resource Include="res\help_normal.jpg" />
+    <Resource Include="res\small.png" />
+    <Resource Include="res\login.jpg" />
+    <Resource Include="res\logo.ico" />
+    <Resource Include="Manager\Images\City.png" />
+    <Resource Include="res\person.png" />
+    <Resource Include="DLL\NPOI.XML" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

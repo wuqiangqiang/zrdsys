@@ -1,0 +1,132 @@
+﻿<UserControl x:Class="FoodSafetyMonitoring.Manager.SysDataDicManager"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:usercontrols="clr-namespace:FoodSafetyMonitoring.Manager.UserControls" >
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Themes/ImageButtonStyle.xaml"/>
+                <ResourceDictionary Source="Themes/GridViewColumnHeaderStyle.xaml"/> 
+                <ResourceDictionary Source="Themes/TextBox.xaml"/>
+                <ResourceDictionary Source="Themes/PasswordBox.xaml"/>
+                <ResourceDictionary Source="Themes/ComboBox.xaml"/>
+                <ResourceDictionary Source="Themes/TextBlock.xaml"/>
+                <ResourceDictionary Source="Themes/StackPanel.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="Images/信息栏背body.png"></ImageBrush>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.Background>
+                <ImageBrush ImageSource="Images/档案栏背head.png"></ImageBrush>
+            </Grid.Background>
+            <TextBlock   FontSize="18"  Text="系统字典列表"   />
+        </Grid>
+        <Grid Grid.Row="0" Grid.Column="1">
+            <Grid.Background>
+                <ImageBrush ImageSource="Images/信息栏背head.png"></ImageBrush>
+            </Grid.Background>
+            <TextBlock   FontSize="18"  Text="详细信息"   />
+        </Grid>
+        <StackPanel x:Name="container" Orientation="Vertical" Grid.Row="1"  >
+        </StackPanel>
+        <Grid Grid.Column="1" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <ListView Grid.Row="0"  Name="lvlist" ItemsSource="{Binding}" BorderThickness="0" Margin="5,0,5,5" Padding="5,5,5,5" ScrollViewer.HorizontalScrollBarVisibility="Hidden" HorizontalAlignment="Center">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="{x:Type ListViewItem}">
+                        <Setter Property="Height" Value="40" />
+                        <Setter Property="Margin" Value="0"/>
+                        <Setter Property="FontSize" Value="13"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Center" />
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Width="40" HeaderContainerStyle="{StaticResource myHeaderStyle}">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image x:Name="imageLogo" Source="Images/dic.png" ></Image>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Width="110" Header="代码" HeaderContainerStyle="{StaticResource myHeaderStyle}" DisplayMemberBinding="{Binding INFO_CODE}"></GridViewColumn>
+                        <GridViewColumn Width="110" Header="名称" HeaderContainerStyle="{StaticResource myHeaderStyle}" DisplayMemberBinding="{Binding INFO_NAME}"></GridViewColumn>
+                        <GridViewColumn Width="70" Header="是否启用"  HeaderContainerStyle="{StaticResource myHeaderStyle}" DisplayMemberBinding="{Binding INFO_USE}"></GridViewColumn>
+                        <GridViewColumn Width="60" Header="修改"  HeaderContainerStyle="{StaticResource myHeaderStyle}">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate >
+                                    <Button Name="btnModify" Width="20" Height="20"  Style="{StaticResource ListModifyImageButtonTemplate}"  Tag="{Binding NUMB_DATADICT}" Click="btnModify_Click"></Button>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Width="60" Header="删除" HeaderContainerStyle="{StaticResource myHeaderStyle}">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate >
+                                    <Button Name="btnDelete" Width="20" Height="20"  Style="{StaticResource ListDeleteImageButtonTemplate}"  Tag="{Binding NUMB_DATADICT}" Click="btnDelete_Click"></Button>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn HeaderContainerStyle="{StaticResource myHeaderStyle}" DisplayMemberBinding="{Binding INFO_ENNAME}" ></GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <Grid Grid.Row="1"  HorizontalAlignment="Center" VerticalAlignment="Top">
+                <Grid.Background>
+                    <ImageBrush ImageSource="Images/信息栏背body.png" Stretch="Fill"></ImageBrush>
+                </Grid.Background>
+                <Grid  Margin="0,0,15,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30" />
+                        <RowDefinition Height="30" />
+                        <RowDefinition Height="30" />
+                        <RowDefinition Height="30" />
+                        <RowDefinition Height="30" />
+                    </Grid.RowDefinitions>
+                    <StackPanel>
+                        <TextBlock>字典大项：</TextBlock>
+                        <TextBox Name="txtDataDic" Grid.Column="1"  IsEnabled="False" ></TextBox>
+                    </StackPanel>
+                    <StackPanel Grid.Row="1">
+                        <TextBlock Grid.Row="1" Grid.Column="0" >子项代码：</TextBlock>
+                        <TextBox Name="txtCode" Grid.Row="1" Grid.Column="1"  IsEnabled="False"></TextBox>
+                        <TextBlock Grid.Row="1" Grid.Column="2" >子项名称：</TextBlock>
+                        <TextBox Name="txtName" Grid.Row="1" Grid.Column="3" ></TextBox>
+                    </StackPanel>
+                    <StackPanel Grid.Row="2">
+                        <TextBlock Grid.Row="2" Grid.Column="0" >子项备注：</TextBlock>
+                        <TextBox Name="txtNote" Grid.Row="2" Grid.Column="1" ></TextBox>
+                    </StackPanel>
+                    <StackPanel Grid.Row="3">
+                        <TextBlock Grid.Row="3" Grid.Column="0" >是否启用：</TextBlock>
+                        <CheckBox Name="cmbIsEnable" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left">启用</CheckBox>
+                    </StackPanel>
+                    <StackPanel Grid.Row="4">
+                        <TextBlock Name="txtMsg" Foreground="Red" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Center" FontSize="15" FontFamily="宋体" />
+                        <Button Name="btnSave"  Grid.Row="5" Grid.Column="1"   Style="{StaticResource SaveImageButtonTemplate}" Click="btnSave_Click" />
+                        <Button Name="btnCancel"  Grid.Row="5" Grid.Column="2"   Style="{StaticResource CancelImageButtonTemplate}" Click="btnCancel_Click" />
+                    </StackPanel>
+                </Grid>
+            </Grid>
+
+        </Grid>
+    </Grid>
+</UserControl>

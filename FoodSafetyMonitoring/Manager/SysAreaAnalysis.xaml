@@ -1,0 +1,45 @@
+﻿<UserControl x:Class="FoodSafetyMonitoring.Manager.SysAreaAnalysis"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+     xmlns:usercontrols="clr-namespace:FoodSafetyMonitoring.Manager.UserControls"  >
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Themes/ComboBox.xaml"/>
+                <ResourceDictionary Source="Themes/TextBlock.xaml"/>
+                <ResourceDictionary Source="Themes/StackPanel.xaml"/>
+                <ResourceDictionary Source="Themes/ImageButtonStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="13*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Margin="0,10,0,0">
+            <StackPanel>
+                <TextBlock  >选择分析主题:</TextBlock>
+                <ComboBox Name="_analysis_theme" Background="White" MaxDropDownHeight="200" MinWidth="280"/>
+                <TextBlock  xml:space="preserve" MinWidth="10" >设置日期:</TextBlock>
+                <usercontrols:DatePickerControl x:Name="dtpStartDate" VerticalAlignment="Center" Format="ShortDate"/>
+                <TextBlock  xml:space="preserve" MinWidth="10" Margin="5,0,0,0">至</TextBlock>
+                <usercontrols:DatePickerControl x:Name="dtpEndDate"  VerticalAlignment="Center" Format="ShortDate"/>
+                <Button Name="_query" Width="76" Height="30" Style="{StaticResource SelectImageButtonTemplate}" Margin="50,0,0,0" VerticalAlignment="Center"  Click="_query_Click"/>
+                <Button Name="_export" Width="76" Height="30" Style="{StaticResource ExportImageButtonTemplate}" Margin="50,0,0,0" VerticalAlignment="Center" Click="_export_Click"/>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1" Margin="5,5,5,5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <usercontrols:UcTableView x:Name="_tableview" Margin="0,0,5,0"/>
+            <Grid  Grid.Column="1" x:Name="_chart" Margin="5,30,0,0">
+                <Grid.Background>
+                    <ImageBrush ImageSource="Images/middle.png"  Stretch="Fill"></ImageBrush>
+                </Grid.Background>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

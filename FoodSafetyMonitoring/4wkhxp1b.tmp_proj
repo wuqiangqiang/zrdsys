@@ -1,0 +1,462 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{CE73DA63-3B6B-49AF-A31E-70F9BB46B6FF}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FoodSafetyMonitoring</RootNamespace>
+    <AssemblyName>食品安全监测</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <ApplicationIcon>img.ico</ApplicationIcon>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AlarmEngine.cs" />
+    <Compile Include="AniControl.xaml.cs">
+      <DependentUpon>AniControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ChildMenu.xaml.cs">
+      <DependentUpon>ChildMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Common\ComboboxTool.cs" />
+    <Compile Include="Common\ImagePathConverter.cs" />
+    <Compile Include="Common\OperationType.cs" />
+    <Compile Include="Common\SerializerTool.cs" />
+    <Compile Include="Common\SysLogEntry.cs" />
+    <Compile Include="dao\DBOperation_MySQL.cs" />
+    <Compile Include="dao\IDBOperation.cs" />
+    <Compile Include="ExpandDockItemData.cs" />
+    <Compile Include="ExpandDockPanel.cs" />
+    <Compile Include="Frame.xaml.cs">
+      <DependentUpon>Frame.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FullScreenHelper.cs" />
+    <Compile Include="IFrameChild.cs" />
+    <Compile Include="IUserControlClose.cs" />
+    <Compile Include="LoginWindow.xaml.cs">
+      <DependentUpon>LoginWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainMenu.xaml.cs">
+      <DependentUpon>MainMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AlarmData.cs" />
+    <Compile Include="Manager\SysAlarmSetup.xaml.cs">
+      <DependentUpon>SysAlarmSetup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\SysAreaInfoReport.xaml.cs">
+      <DependentUpon>SysAreaInfoReport.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\SysAreaManager.xaml.cs">
+      <DependentUpon>SysAreaManager.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\SysBedManager.xaml.cs">
+      <DependentUpon>SysBedManager.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\SysBedSensorManager.xaml.cs">
+      <DependentUpon>SysBedSensorManager.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\SysCameraManager.xaml.cs">
+      <DependentUpon>SysCameraManager.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\SysDataDicManager.xaml.cs">
+      <DependentUpon>SysDataDicManager.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\SysDeviceManager.xaml.cs">
+      <DependentUpon>SysDeviceManager.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\SysLogManager.xaml.cs">
+      <DependentUpon>SysLogManager.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\SysPensonalReport.xaml.cs">
+      <DependentUpon>SysPensonalReport.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\SysPersonManager.xaml.cs">
+      <DependentUpon>SysPersonManager.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\SysRoleManager.xaml.cs">
+      <DependentUpon>SysRoleManager.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\SysRolePowerManager.xaml.cs">
+      <DependentUpon>SysRolePowerManager.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\SysUserManager.xaml.cs">
+      <DependentUpon>SysUserManager.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\SysVideoLinkageManager.xaml.cs">
+      <DependentUpon>SysVideoLinkageManager.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\Themes\SplitBarControl.xaml.cs">
+      <DependentUpon>SplitBarControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\Themes\UcChooseDataTime.xaml.cs">
+      <DependentUpon>UcChooseDataTime.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\UserControls\TitleBarControl.xaml.cs">
+      <DependentUpon>TitleBarControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\UserControls\ButtonAddControl.xaml.cs">
+      <DependentUpon>ButtonAddControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\UserControls\DatePickerControl.xaml.cs">
+      <DependentUpon>DatePickerControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\UserControls\TextboxSearchControl.xaml.cs">
+      <DependentUpon>TextboxSearchControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\SysDeptManager.xaml.cs">
+      <DependentUpon>SysDeptManager.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\SysAttendanceManager.xaml.cs">
+      <DependentUpon>SysAttendanceManager.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\SysAttendanceReport.xaml.cs">
+      <DependentUpon>SysAttendanceReport.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\SysPensonalAlarmReport.xaml.cs">
+      <DependentUpon>SysPensonalAlarmReport.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\SysHealthReport.xaml.cs">
+      <DependentUpon>SysHealthReport.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="map\UserMessageBox.xaml.cs">
+      <DependentUpon>UserMessageBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="module\UcDataInfoQuery.xaml.cs">
+      <DependentUpon>UcDataInfoQuery.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="module\UcManualDataEntry.xaml.cs">
+      <DependentUpon>UcManualDataEntry.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="module\UcUserManager.xaml.cs">
+      <DependentUpon>UcUserManager.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="TestUserControl1.xaml.cs">
+      <DependentUpon>TestUserControl1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TitleBarControl.xaml.cs">
+      <DependentUpon>TitleBarControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UcHeaderTitle.xaml.cs">
+      <DependentUpon>UcHeaderTitle.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlTemplet.xaml.cs">
+      <DependentUpon>UserControlTemplet.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VerAniControl.xaml.cs">
+      <DependentUpon>VerAniControl.xaml</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\DataSources\System.Data.DataSet.datasource" />
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DBUtility\DBUtility.csproj">
+      <Project>{ECFBE7C4-FFE7-43FB-BA15-684571506039}</Project>
+      <Name>DBUtility</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DLL\ICSharpCode.SharpZipLib.dll" />
+    <Content Include="DLL\MySql.Data.dll" />
+    <Content Include="DLL\NPOI.dll" />
+    <Content Include="DLL\NPOI.OOXML.dll" />
+    <Content Include="DLL\NPOI.OpenXml4Net.dll" />
+    <Content Include="DLL\NPOI.OpenXmlFormats.dll" />
+    <Content Include="DLL\WCFFrameWork.dll" />
+    <Content Include="DLL\WPFToolkit.dll" />
+    <Content Include="DLL\WPFToolkit.Extended.dll" />
+    <Content Include="DLL\WPFVisifire.Charts.dll" />
+    <Content Include="DLL\WWTFrameWork.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ItemGroup>
+    <ReferencePath Include="D:\Java\FoodSafetyMonitoring - 副本\DBUtility\bin\Debug\DBUtility.dll" />
+    <ReferencePath Include="DLL\ICSharpCode.SharpZipLib.dll" />
+    <ReferencePath Include="E:\Program Files (x86)\Microsoft Visual Studio 9.0\Common7\IDE\PublicAssemblies\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll" />
+    <ReferencePath Include="E:\Program Files (x86)\Microsoft Visual Studio 9.0\DBPro\Microsoft.VisualStudio.TeamSystem.Data.UnitTesting.dll" />
+    <ReferencePath Include="DLL\MySql.Data.dll" />
+    <ReferencePath Include="DLL\NPOI.dll" />
+    <ReferencePath Include="DLL\NPOI.OOXML.dll" />
+    <ReferencePath Include="DLL\NPOI.OpenXml4Net.dll" />
+    <ReferencePath Include="DLL\NPOI.OpenXmlFormats.dll" />
+    <ReferencePath Include="E:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\v3.0\PresentationCore.dll" />
+    <ReferencePath Include="E:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\v3.0\PresentationFramework.Aero.dll" />
+    <ReferencePath Include="E:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\v3.0\PresentationFramework.dll" />
+    <ReferencePath Include="E:\Windows\Microsoft.NET\Framework\v2.0.50727\System.Configuration.dll" />
+    <ReferencePath Include="E:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\v3.5\System.Core.dll" />
+    <ReferencePath Include="E:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\v3.5\System.Data.DataSetExtensions.dll" />
+    <ReferencePath Include="E:\Windows\Microsoft.NET\Framework\v2.0.50727\System.Data.dll" />
+    <ReferencePath Include="E:\Windows\Microsoft.NET\Framework\v2.0.50727\System.dll" />
+    <ReferencePath Include="E:\Windows\Microsoft.NET\Framework\v2.0.50727\System.Drawing.dll" />
+    <ReferencePath Include="E:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\v3.0\System.Runtime.Serialization.dll" />
+    <ReferencePath Include="E:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\v3.0\System.ServiceModel.dll" />
+    <ReferencePath Include="E:\Windows\Microsoft.NET\Framework\v2.0.50727\System.Windows.Forms.dll" />
+    <ReferencePath Include="E:\Windows\Microsoft.NET\Framework\v2.0.50727\System.Xml.dll" />
+    <ReferencePath Include="E:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\v3.5\System.Xml.Linq.dll" />
+    <ReferencePath Include="E:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\v3.0\UIAutomationProvider.dll" />
+    <ReferencePath Include="DLL\WCFFrameWork.dll" />
+    <ReferencePath Include="E:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\v3.0\WindowsBase.dll" />
+    <ReferencePath Include="E:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\v3.0\WindowsFormsIntegration.dll" />
+    <ReferencePath Include="DLL\WPFToolkit.dll" />
+    <ReferencePath Include="DLL\WPFToolkit.Extended.dll" />
+    <ReferencePath Include="DLL\WPFVisifire.Charts.dll" />
+    <ReferencePath Include="DLL\WWTFrameWork.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="D:\Java\FoodSafetyMonitoring - 副本\FoodSafetyMonitoring\obj\Debug\AniControl.g.cs" />
+    <Compile Include="D:\Java\FoodSafetyMonitoring - 副本\FoodSafetyMonitoring\obj\Debug\ChildMenu.g.cs" />
+    <Compile Include="D:\Java\FoodSafetyMonitoring - 副本\FoodSafetyMonitoring\obj\Debug\Frame.g.cs" />
+    <Compile Include="D:\Java\FoodSafetyMonitoring - 副本\FoodSafetyMonitoring\obj\Debug\LoginWindow.g.cs" />
+    <Compile Include="D:\Java\FoodSafetyMonitoring - 副本\FoodSafetyMonitoring\obj\Debug\MainMenu.g.cs" />
+    <Compile Include="D:\Java\FoodSafetyMonitoring - 副本\FoodSafetyMonitoring\obj\Debug\Manager\SysAlarmSetup.g.cs" />
+    <Compile Include="D:\Java\FoodSafetyMonitoring - 副本\FoodSafetyMonitoring\obj\Debug\Manager\SysAreaInfoReport.g.cs" />
+    <Compile Include="D:\Java\FoodSafetyMonitoring - 副本\FoodSafetyMonitoring\obj\Debug\Manager\SysAreaManager.g.cs" />
+    <Compile Include="D:\Java\FoodSafetyMonitoring - 副本\FoodSafetyMonitoring\obj\Debug\Manager\SysBedManager.g.cs" />
+    <Compile Include="D:\Java\FoodSafetyMonitoring - 副本\FoodSafetyMonitoring\obj\Debug\Manager\SysBedSensorManager.g.cs" />
+    <Compile Include="D:\Java\FoodSafetyMonitoring - 副本\FoodSafetyMonitoring\obj\Debug\Manager\SysCameraManager.g.cs" />
+    <Compile Include="D:\Java\FoodSafetyMonitoring - 副本\FoodSafetyMonitoring\obj\Debug\Manager\SysDataDicManager.g.cs" />
+    <Compile Include="D:\Java\FoodSafetyMonitoring - 副本\FoodSafetyMonitoring\obj\Debug\Manager\SysDeviceManager.g.cs" />
+    <Compile Include="D:\Java\FoodSafetyMonitoring - 副本\FoodSafetyMonitoring\obj\Debug\Manager\SysLogManager.g.cs" />
+    <Compile Include="D:\Java\FoodSafetyMonitoring - 副本\FoodSafetyMonitoring\obj\Debug\Manager\SysPensonalReport.g.cs" />
+    <Compile Include="D:\Java\FoodSafetyMonitoring - 副本\FoodSafetyMonitoring\obj\Debug\Manager\SysPersonManager.g.cs" />
+    <Compile Include="D:\Java\FoodSafetyMonitoring - 副本\FoodSafetyMonitoring\obj\Debug\Manager\SysRoleManager.g.cs" />
+    <Compile Include="D:\Java\FoodSafetyMonitoring - 副本\FoodSafetyMonitoring\obj\Debug\Manager\SysRolePowerManager.g.cs" />
+    <Compile Include="D:\Java\FoodSafetyMonitoring - 副本\FoodSafetyMonitoring\obj\Debug\Manager\SysUserManager.g.cs" />
+    <Compile Include="D:\Java\FoodSafetyMonitoring - 副本\FoodSafetyMonitoring\obj\Debug\Manager\SysVideoLinkageManager.g.cs" />
+    <Compile Include="D:\Java\FoodSafetyMonitoring - 副本\FoodSafetyMonitoring\obj\Debug\Manager\Themes\SplitBarControl.g.cs" />
+    <Compile Include="D:\Java\FoodSafetyMonitoring - 副本\FoodSafetyMonitoring\obj\Debug\Manager\Themes\UcChooseDataTime.g.cs" />
+    <Compile Include="D:\Java\FoodSafetyMonitoring - 副本\FoodSafetyMonitoring\obj\Debug\Manager\UserControls\TitleBarControl.g.cs" />
+    <Compile Include="D:\Java\FoodSafetyMonitoring - 副本\FoodSafetyMonitoring\obj\Debug\Manager\UserControls\ButtonAddControl.g.cs" />
+    <Compile Include="D:\Java\FoodSafetyMonitoring - 副本\FoodSafetyMonitoring\obj\Debug\Manager\UserControls\DatePickerControl.g.cs" />
+    <Compile Include="D:\Java\FoodSafetyMonitoring - 副本\FoodSafetyMonitoring\obj\Debug\Manager\UserControls\TextboxSearchControl.g.cs" />
+    <Compile Include="D:\Java\FoodSafetyMonitoring - 副本\FoodSafetyMonitoring\obj\Debug\Manager\SysDeptManager.g.cs" />
+    <Compile Include="D:\Java\FoodSafetyMonitoring - 副本\FoodSafetyMonitoring\obj\Debug\Manager\SysAttendanceManager.g.cs" />
+    <Compile Include="D:\Java\FoodSafetyMonitoring - 副本\FoodSafetyMonitoring\obj\Debug\Manager\SysAttendanceReport.g.cs" />
+    <Compile Include="D:\Java\FoodSafetyMonitoring - 副本\FoodSafetyMonitoring\obj\Debug\Manager\SysPensonalAlarmReport.g.cs" />
+    <Compile Include="D:\Java\FoodSafetyMonitoring - 副本\FoodSafetyMonitoring\obj\Debug\Manager\SysHealthReport.g.cs" />
+    <Compile Include="D:\Java\FoodSafetyMonitoring - 副本\FoodSafetyMonitoring\obj\Debug\map\UserMessageBox.g.cs" />
+    <Compile Include="D:\Java\FoodSafetyMonitoring - 副本\FoodSafetyMonitoring\obj\Debug\module\UcDataInfoQuery.g.cs" />
+    <Compile Include="D:\Java\FoodSafetyMonitoring - 副本\FoodSafetyMonitoring\obj\Debug\module\UcManualDataEntry.g.cs" />
+    <Compile Include="D:\Java\FoodSafetyMonitoring - 副本\FoodSafetyMonitoring\obj\Debug\module\UcUserManager.g.cs" />
+    <Compile Include="D:\Java\FoodSafetyMonitoring - 副本\FoodSafetyMonitoring\obj\Debug\TestUserControl1.g.cs" />
+    <Compile Include="D:\Java\FoodSafetyMonitoring - 副本\FoodSafetyMonitoring\obj\Debug\TitleBarControl.g.cs" />
+    <Compile Include="D:\Java\FoodSafetyMonitoring - 副本\FoodSafetyMonitoring\obj\Debug\UcHeaderTitle.g.cs" />
+    <Compile Include="D:\Java\FoodSafetyMonitoring - 副本\FoodSafetyMonitoring\obj\Debug\UserControlTemplet.g.cs" />
+    <Compile Include="D:\Java\FoodSafetyMonitoring - 副本\FoodSafetyMonitoring\obj\Debug\VerAniControl.g.cs" />
+    <Compile Include="D:\Java\FoodSafetyMonitoring - 副本\FoodSafetyMonitoring\obj\Debug\MainWindow.g.cs" />
+    <Compile Include="D:\Java\FoodSafetyMonitoring - 副本\FoodSafetyMonitoring\obj\Debug\App.g.cs" />
+    <Compile Include="D:\Java\FoodSafetyMonitoring - 副本\FoodSafetyMonitoring\obj\Debug\食品安全监测_Content.g.cs" />
+    <Compile Include="D:\Java\FoodSafetyMonitoring - 副本\FoodSafetyMonitoring\obj\Debug\GeneratedInternalTypeHelper.g.cs" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,13 @@
+﻿<UserControl x:Class="FoodSafetyMonitoring.Manager.UserControls.DatePickerControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:toolkitex="http://schemas.microsoft.com/winfx/2006/xaml/presentation/toolkit/extended"
+    Height="Auto" Width="Auto" x:Name="Container">
+    <UserControl.Resources>
+        <Style TargetType="TextBlock">
+        </Style>
+    </UserControl.Resources>
+    <Border CornerRadius="3" Width="{Binding Width,ElementName=Container}" Height="{Binding Height,ElementName=Container}" Background="White" Margin="5,0,5,0">
+        <toolkitex:DateTimePicker x:Name="dtp" Width="{Binding Width,ElementName=Container}" Height="{Binding Height,ElementName=Container}" FontFamily="黑体" FontSize="14" BorderThickness="0.5,0.5,0.5,0.2" Background="Transparent" ValueChanged="dtp_ValueChanged"></toolkitex:DateTimePicker> 
+    </Border>
+</UserControl>

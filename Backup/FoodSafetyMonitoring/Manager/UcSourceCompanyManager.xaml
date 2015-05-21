@@ -1,0 +1,90 @@
+﻿<UserControl x:Class="FoodSafetyMonitoring.Manager.UcSourceCompanyManager"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:control="clr-namespace:FoodSafetyMonitoring.Manager.UserControls">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Themes/ImageButtonStyle.xaml"/>
+                <ResourceDictionary Source="Themes/TextBox.xaml"/>
+                <ResourceDictionary Source="Themes/PasswordBox.xaml"/>
+                <ResourceDictionary Source="Themes/Button.xaml"/>
+                <ResourceDictionary Source="Themes/StackPanel.xaml"/>
+                <ResourceDictionary Source="Themes/ComboBox.xaml"/>
+                <ResourceDictionary Source="Themes/TextBlock.xaml"/>
+                <ResourceDictionary Source="Themes/CheckBox.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="../res/信息栏背body.png"></ImageBrush>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <TabControl Grid.Row="0" x:Name="_tabControl" Background="Transparent">
+            <TabItem Header="添加"  FontSize="16" Width="80" >
+                <Grid Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center" x:Name="_detail_info" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="50"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel>
+                        <TextBlock MinWidth="100">单位名称:</TextBlock>
+                        <TextBox  x:Name="_company_name" MinWidth="290"></TextBox>
+                    </StackPanel>
+                    <StackPanel Grid.Row="1" >
+                        <TextBlock MinWidth="100">单位区域:</TextBlock>
+                        <ComboBox x:Name="_province"  MinWidth="90"></ComboBox>
+                        <ComboBox x:Name="_city"   MinWidth="90"></ComboBox>
+                        <ComboBox x:Name="_region"   MinWidth="90"></ComboBox>
+                    </StackPanel>
+                    <StackPanel Grid.Row="2">
+                        <TextBlock MinWidth="100">单位负责人:</TextBlock>
+                        <TextBox x:Name="_principal_name"  MinWidth="200"></TextBox>
+                    </StackPanel>
+                    <StackPanel Grid.Row="3">
+                        <TextBlock MinWidth="100">单位电话:</TextBlock>
+                        <TextBox   x:Name="_telephone"  MinWidth="200"></TextBox>
+                    </StackPanel>
+                    <StackPanel Grid.Row="4" >
+                        <TextBlock MinWidth="100">单位手机号:</TextBlock>
+                        <TextBox   x:Name="_mobilePhone" MinWidth="200" ></TextBox>
+                    </StackPanel>
+                    <StackPanel Grid.Row="5" >
+                        <TextBlock MinWidth="100">单位传真:</TextBlock>
+                        <TextBox   x:Name="_fax" MinWidth="200" ></TextBox>
+                    </StackPanel>
+                    <StackPanel Grid.Row="6">
+                        <TextBlock MinWidth="100">单位地址:</TextBlock>
+                        <TextBox  x:Name="_address" MinWidth="200"></TextBox>
+                    </StackPanel>
+                    <StackPanel Grid.Row="7">
+                        <TextBlock MinWidth="100">是否启用:</TextBlock>
+                        <ComboBox  x:Name="_isUse" MinWidth="90" SelectedIndex="1">
+                            <ComboBoxItem >停用</ComboBoxItem>
+                            <ComboBoxItem >启用</ComboBoxItem>
+                        </ComboBox>
+                    </StackPanel>
+                    <TextBlock Grid.Row="8" Name="txtMsg"  Foreground="Red" FontSize="15" FontFamily="宋体"   ></TextBlock>
+                    <StackPanel HorizontalAlignment="Center" Grid.Row="9">
+                        <Button Name="btnSave" Style="{StaticResource SaveImageButtonTemplate}"  Click="btnSave_Click"  Margin="10,0,10,0" />
+                        <Button Name="btnCancel" Style="{StaticResource CancelImageButtonTemplate}"  Click="Clear_Click" Margin="10,0,10,0" />
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="列表" GotFocus="TabItem_GotFocus"  FontSize="16" Width="80" >
+                <control:UcTableOperableView x:Name="_tableview" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</UserControl>

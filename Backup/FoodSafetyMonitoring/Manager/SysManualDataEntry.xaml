@@ -1,0 +1,94 @@
+﻿<UserControl x:Class="FoodSafetyMonitoring.Manager.UcManualDataEntry"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <UserControl.Resources> 
+        <ResourceDictionary  >
+            <ResourceDictionary.MergedDictionaries> 
+                <ResourceDictionary Source="Themes/ImageButtonStyle.xaml"/> 
+                <ResourceDictionary Source="Themes/CheckBox.xaml"/>
+                <ResourceDictionary Source="Themes/TextBlock.xaml"/>
+                <ResourceDictionary Source="Themes/TextBox.xaml"/>
+                <ResourceDictionary Source="Themes/Combobox.xaml"/>
+                <ResourceDictionary Source="Themes/StackPanel.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid>
+
+            <TextBlock Foreground="White" FontSize="18" x:Name="_title" Margin="10,0,0,0">人工信息录入</TextBlock>
+        </Grid>
+        <Grid Grid.Row="1" >
+
+            <Grid HorizontalAlignment="Center" VerticalAlignment="Center" > 
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0" Orientation="Horizontal">
+                        <TextBlock >来源产地</TextBlock>
+                        <TextBlock x:Name="_province" MinWidth="20"  ></TextBlock>
+                        <TextBlock MinWidth="20" >省</TextBlock>
+                        <TextBlock x:Name="_city"  MinWidth="20" ></TextBlock>
+                        <TextBlock  MinWidth="20" >市</TextBlock>
+                        <TextBlock x:Name="_region"  MinWidth="20" ></TextBlock>
+                        <TextBlock  >区县</TextBlock>
+                    </StackPanel>
+                    <StackPanel Grid.Row="1" Orientation="Horizontal">
+                        <TextBlock  >来源单位</TextBlock>
+                        <ComboBox Width="200" x:Name="_source_company"></ComboBox>
+                        <TextBlock  >检疫证号</TextBlock>
+                        <TextBox Width="150" x:Name="_detect_number"></TextBox>
+                    </StackPanel>
+                    <StackPanel Grid.Row="2" Orientation="Horizontal">
+                        <TextBlock  >检测项目</TextBlock>
+                        <ComboBox  MinWidth="80" x:Name="_detect_item"></ComboBox>
+                        <TextBlock  >检测方法</TextBlock>
+                        <CheckBox x:Name="_detect_method1" Checked="_detect_method1_Checked">全标检测卡</CheckBox>
+                        <CheckBox x:Name="_detect_method2" Checked="_detect_method1_Checked">ELISA试剂盒</CheckBox>
+                        <CheckBox x:Name="_detect_method3" Checked="_detect_method1_Checked">分析检测</CheckBox>
+                    </StackPanel>
+                    <StackPanel Grid.Row="3" Orientation="Horizontal">
+                        <TextBlock  >检测对象</TextBlock>
+                        <ComboBox  MinWidth="80" x:Name="_detect_object"></ComboBox>
+                        <TextBlock  >检测样本</TextBlock>
+                        <ComboBox  MinWidth="80" x:Name="_detect_sample"></ComboBox>
+                        <TextBlock  >检测灵敏度</TextBlock>
+                        <ComboBox   MinWidth="80" x:Name="_detect_sensitivity"></ComboBox>
+                    </StackPanel>
+                    <StackPanel Grid.Row="4" Orientation="Horizontal">
+                        <TextBlock  >检测结果</TextBlock>
+                        <ComboBox  MinWidth="80" x:Name="_detect_result"></ComboBox>
+                    </StackPanel>
+                    <StackPanel Grid.Row="5" Orientation="Horizontal">
+                        <TextBlock  >检测点:</TextBlock>
+                        <TextBlock  x:Name="_detect_site">郝穴镇检测点</TextBlock>
+                        <TextBlock  MinWidth="40">检测师:</TextBlock>
+                        <TextBox x:Name="_detect_person" >苏承华</TextBox>
+                        <TextBlock   MinWidth="40">录入时间</TextBlock>
+                        <TextBlock  x:Name="_entering_datetime">2014.09.13 12:33</TextBlock>
+                    </StackPanel>
+                    <StackPanel Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Center" >
+                        <TextBlock Name="txtMsg"  Foreground="Red" FontSize="15" FontFamily="宋体"   ></TextBlock>
+                        <Button Name="btnSave" Style="{StaticResource SaveImageButtonTemplate}" Click="btnSave_Click" />
+                        <Button Name="btnCancel" Style="{StaticResource CancelImageButtonTemplate}" Click="Clear_Click" />
+                    </StackPanel>
+
+                </Grid>
+            </Grid>
+        </Grid>
+       
+    </Grid>
+
+
+</UserControl>

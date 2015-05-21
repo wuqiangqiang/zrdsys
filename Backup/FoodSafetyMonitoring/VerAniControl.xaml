@@ -1,0 +1,42 @@
+﻿<UserControl x:Class="FoodSafetyMonitoring.VerAniControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Name="MoveUserControl">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <Style TargetType="{x:Type GridViewColumnHeader}">
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                <Setter Property="FrameworkElement.Visibility" Value="Hidden"/>
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Canvas Name="canvas" Background="Transparent" Height="{Binding ElementName=MoveUserControl,Path=ActualHeight}">
+
+        <ListView  Canvas.Left="0" Canvas.Top="0" Name="listView"                   
+                 Width="{Binding ElementName=MoveUserControl,Path=ActualWidth}"
+                 Background="Transparent" 
+                 BorderThickness="0"
+                 FontFamily="微软雅黑" FontSize="15">
+            <ListView.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform />
+                    <SkewTransform />
+                    <RotateTransform />
+                    <TranslateTransform />
+                </TransformGroup>
+            </ListView.RenderTransform>
+            <ListView.View>
+                <GridView >
+                    <GridViewColumn Width="150" DisplayMemberBinding="{Binding  Department}" />
+                    <GridViewColumn>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding PersonCount}" Foreground="{Binding FontColor}" HorizontalAlignment="Center"></TextBlock>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Canvas>
+</UserControl>

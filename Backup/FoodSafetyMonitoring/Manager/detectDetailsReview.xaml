@@ -1,0 +1,111 @@
+﻿<Window x:Class="FoodSafetyMonitoring.Manager.detectDetailsReview"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Width="720" Height="489" WindowStyle="None" WindowStartupLocation="CenterScreen" BorderBrush="Transparent" ResizeMode="NoResize">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Themes/TextBlock.xaml"/>
+                <ResourceDictionary Source="Themes/Combobox.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="../res/details_big.jpg"/>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Height="30">
+            <Thumb Width="680" Height="30" Background="Transparent" Opacity="0" DragDelta="Thumb_DragDelta" HorizontalAlignment="Left"></Thumb>
+            <TextBlock Height="20" Width="160" HorizontalAlignment="Left" FontSize="16" VerticalAlignment="Center" Foreground="White">样本检测信息详情</TextBlock>
+            <Image  Width="29" Height="26" Source="/res/close.png" x:Name="exit" MouseDown="exit_MouseDown" MouseEnter="exit_MouseEnter" MouseLeave="exit_MouseLeave" ToolTip="关闭"  HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0"/>
+        </Grid>
+        <Grid Grid.Row="1" Margin="0,15,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="350"/>
+                <ColumnDefinition Width="320"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="130"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock  Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center">来源区域:</TextBlock>
+                <TextBlock  Grid.Column="1" Name="_areaName"  FontFamily="黑体" FontSize="14" VerticalAlignment="Center"></TextBlock>
+                <TextBlock  Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center">来源单位:</TextBlock>
+                <TextBlock  Grid.Column="1" Grid.Row="1" Name="_companyName" FontFamily="黑体" FontSize="14" VerticalAlignment="Center"></TextBlock>
+                <TextBlock  Grid.Column="0" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center">检疫证号:</TextBlock>
+                <TextBlock  Grid.Column="1" Grid.Row="2" Name="_cardId"  FontFamily="黑体" FontSize="14" VerticalAlignment="Center"></TextBlock>
+                <TextBlock  Grid.Column="0" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Center">检测项目:</TextBlock>
+                <TextBlock  Grid.Column="1" Grid.Row="3" Name="_itemName"  FontFamily="黑体" FontSize="14" VerticalAlignment="Center"></TextBlock>
+                <TextBlock  Grid.Column="0" Grid.Row="4" HorizontalAlignment="Right" VerticalAlignment="Center">检测对象:</TextBlock>
+                <TextBlock  Grid.Column="1" Grid.Row="4" Name="_objectName"  FontFamily="黑体" FontSize="14" VerticalAlignment="Center"></TextBlock>
+                <TextBlock  Grid.Column="0" Grid.Row="5" HorizontalAlignment="Right" VerticalAlignment="Center">检测样本:</TextBlock>
+                <TextBlock  Grid.Column="1" Grid.Row="5" Name="_sampleName"  FontFamily="黑体" FontSize="14" VerticalAlignment="Center"></TextBlock>
+                <TextBlock  Grid.Column="0" Grid.Row="6" HorizontalAlignment="Right" VerticalAlignment="Center">检测方法:</TextBlock>
+                <TextBlock  Grid.Column="1" Grid.Row="6" Name="_reagentName"  FontFamily="黑体" FontSize="14" VerticalAlignment="Center"></TextBlock>
+                <TextBlock  Grid.Column="0" Grid.Row="7" HorizontalAlignment="Right" VerticalAlignment="Center">检测灵敏度:</TextBlock>
+                <TextBlock  Grid.Column="1" Grid.Row="7" Name="_sensitivityName"  FontFamily="黑体" FontSize="14" VerticalAlignment="Center"></TextBlock>
+                <TextBlock  Grid.Column="0" Grid.Row="8" HorizontalAlignment="Right" VerticalAlignment="Center">检测结果:</TextBlock>
+                <TextBlock  Grid.Column="1" Grid.Row="8" Name="_resultName" FontFamily="黑体" FontSize="14" VerticalAlignment="Center"></TextBlock>
+                <TextBlock  Grid.Column="0" Grid.Row="9" HorizontalAlignment="Right" VerticalAlignment="Center">检测站点:</TextBlock>
+                <TextBlock  Grid.Column="1" Grid.Row="9" Name="_deptName"  FontFamily="黑体" FontSize="14" VerticalAlignment="Center"></TextBlock>
+                <TextBlock  Grid.Column="0" Grid.Row="10" HorizontalAlignment="Right" VerticalAlignment="Center">检测出时间:</TextBlock>
+                <TextBlock  Grid.Column="1" Grid.Row="10" Name="_detectDate"  FontFamily="黑体" FontSize="14" VerticalAlignment="Center"></TextBlock>
+                <TextBlock  Grid.Column="0" Grid.Row="11" HorizontalAlignment="Right" xml:space="preserve" VerticalAlignment="Center">检  测  师:</TextBlock>
+                <TextBlock  Grid.Column="1" Grid.Row="11" Name="_detectUserName"  FontFamily="黑体" FontSize="14" VerticalAlignment="Center"></TextBlock>
+                <TextBlock  Grid.Column="0" Grid.Row="12" HorizontalAlignment="Right" VerticalAlignment="Center">数据来源:</TextBlock>
+                <TextBlock  Grid.Column="1" Grid.Row="12" Name="_detectTypeName"  FontFamily="黑体" FontSize="14" VerticalAlignment="Center"></TextBlock> 
+            </Grid>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="230"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="80"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="130"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock  Grid.Column="0" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center" >复核检测师:</TextBlock>
+                    <TextBlock  Grid.Column="1" Name="_reviewUserid" Grid.Row="0" FontFamily="黑体" FontSize="14" VerticalAlignment="Center"></TextBlock>
+                    <TextBlock  Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center">复核检测方法:</TextBlock>
+                    <TextBlock  Grid.Column="1" Grid.Row="1" Name="_reviewReagent_text" FontFamily="黑体" FontSize="14" VerticalAlignment="Center"></TextBlock>
+                    <TextBlock  Grid.Column="0" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center">复核检测结果:</TextBlock>
+                    <TextBlock  Grid.Column="1" Grid.Row="2" Name="_reviewResult_text"  FontFamily="黑体" FontSize="14" VerticalAlignment="Center"></TextBlock>
+                    <TextBlock  Grid.Column="0" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Center">复核日期:</TextBlock>
+                    <TextBlock  Grid.Column="1" Grid.Row="3" Name="_reviewDate"  FontFamily="黑体" FontSize="14" VerticalAlignment="Center"></TextBlock>
+                    <TextBlock  Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center">原因说明:</TextBlock>
+                    <TextBlock  Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="2" HorizontalAlignment="Center" Name="_reviewBz"  FontFamily="宋体" FontSize="14" VerticalAlignment="Center" Width="130" Height="60" TextWrapping="Wrap" ></TextBlock>
+                </Grid>
+            </Grid>     
+        </Grid>
+    </Grid>
+</Window>

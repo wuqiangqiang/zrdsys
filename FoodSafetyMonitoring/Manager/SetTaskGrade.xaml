@@ -1,0 +1,48 @@
+﻿<Window x:Class="FoodSafetyMonitoring.Manager.SetTaskGrade"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Width="326" Height="166" WindowStyle="None" WindowStartupLocation="CenterScreen" BorderBrush="Transparent" ResizeMode="NoResize">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Themes/TextBlock.xaml"/>
+                <ResourceDictionary Source="Themes/TextBox.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="../res/details_small.jpg"/>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Height="30">
+            <Thumb Width="280" Height="30" Background="Transparent" Opacity="0" DragDelta="Thumb_DragDelta" HorizontalAlignment="Left"></Thumb>
+            <TextBlock Height="20" Width="150" HorizontalAlignment="Left" FontSize="16" VerticalAlignment="Center">参数重置</TextBlock>
+            <Image  Width="29" Height="26" Source="/res/close.png" x:Name="exit" MouseDown="exit_MouseDown" MouseEnter="exit_MouseEnter" MouseLeave="exit_MouseLeave"  ToolTip="关闭"  HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        </Grid>
+        <Grid Grid.Row="1" >
+            <!--<Grid.Background>
+                <ImageBrush ImageSource="../res/信息栏背body.png" Stretch="Fill"></ImageBrush>
+            </Grid.Background>-->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Canvas>
+                    <TextBox x:Name="_grade_down" Width="60" Canvas.Left="30" Canvas.Top="20" InputMethod.IsInputMethodEnabled="False" DataObject.Pasting="Grade_Pasting" PreviewKeyDown="Grade_PreviewKeyDown"  PreviewTextInput="Grade_PreviewTextInput" MaxLength="3" />
+                    <TextBlock  FontFamily="黑体" FontSize="16" Text="%" Width="20" Canvas.Left="115" Canvas.Top="20" Margin="0"></TextBlock>
+                    <TextBlock  FontFamily="宋体" FontSize="16" Text="-" Width="20" VerticalAlignment="Center" Canvas.Left="150" Canvas.Top="20" Margin="0"></TextBlock>
+                    <TextBox x:Name="_grade_up" Width="60" Canvas.Left="175" Canvas.Top="20" InputMethod.IsInputMethodEnabled="False" DataObject.Pasting="Grade_Pasting" PreviewKeyDown="Grade_PreviewKeyDown"  PreviewTextInput="Grade_PreviewTextInput" MaxLength="3" />
+                    <TextBlock  FontFamily="宋体" FontSize="16" Text="%" Width="20" VerticalAlignment="Center" Canvas.Left="260" Canvas.Top="20" Margin="0"></TextBlock>
+                </Canvas>
+            </Grid>
+            <TextBlock  Grid.Row="1" FontFamily="宋体" FontSize="14" x:Name="_txtmsg" Width="200" Foreground="Red" HorizontalAlignment="Center"></TextBlock>
+            <Button  Grid.Row="2" Name="btnSave" Width="80" Height="28"  Click="btnSave_Click" >确定</Button>
+        </Grid>
+    </Grid>
+</Window>
