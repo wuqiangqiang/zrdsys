@@ -8,7 +8,7 @@ using System.Windows;
 namespace FoodSafetyMonitoring
 {
     /// <summary>
-    /// App.xaml 的交互
+    /// App.xaml 的交互//吴强强
     /// </summary>
     public partial class App : Application
     {
