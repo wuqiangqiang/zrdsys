@@ -100,6 +100,7 @@ namespace FoodSafetyMonitoring
             Reset();
         }
 
+//重置
         private void Reset()
         {
 
