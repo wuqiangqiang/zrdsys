@@ -66,7 +66,6 @@ namespace FoodSafetyMonitoring
                 grid.ColumnDefinitions.Add(new ColumnDefinition());
                 grid.ColumnDefinitions[2 * i ].Width = GridLength.Auto;
                 grid.ColumnDefinitions[2 * i + 1].Width = new GridLength(12, GridUnitType.Pixel);
-
                 childMenus[i].btn.SetValue(Grid.ColumnProperty, 2*i);
                 grid.Children.Add(childMenus[i].btn);
 
