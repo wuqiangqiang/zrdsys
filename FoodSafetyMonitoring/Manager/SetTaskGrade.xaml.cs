@@ -76,7 +76,7 @@ namespace FoodSafetyMonitoring.Manager
         {
             if (_grade_down.Text == "" || _grade_up.Text == "") 
             {
-                _txtmsg.Text = "*请输入参数！";
+                _txtmsg.Text = "*请输入参数！*";
                 return;
             }
 
