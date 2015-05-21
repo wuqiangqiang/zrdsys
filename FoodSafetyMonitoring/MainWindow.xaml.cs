@@ -67,6 +67,7 @@ namespace FoodSafetyMonitoring
                 ShowSelectedIMG(img);                //以流的方式显示图片的方法
             }
 
+            //加载父菜单和子菜单
             MainMenu_Load();
             this.SizeChanged += new SizeChangedEventHandler(MainWindow_SizeChanged);
 
