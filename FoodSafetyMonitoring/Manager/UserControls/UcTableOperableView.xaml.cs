@@ -363,6 +363,7 @@ namespace FoodSafetyMonitoring.Manager.UserControls
         //导出文件
         public void ExportExcel(DataTable dt)
         {
+            //查询数据为0时，提示不能导出
             if (dt.Rows.Count == 0) 
             {
                 Toolkit.MessageBox.Show("当前可导出数据为零！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
