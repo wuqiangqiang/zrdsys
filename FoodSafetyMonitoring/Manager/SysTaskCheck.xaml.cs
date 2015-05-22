@@ -126,7 +126,12 @@ namespace FoodSafetyMonitoring.Manager
 
         private void _export_Click(object sender, RoutedEventArgs e)
         {
+            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_task_check('{0}','{1}','{2}',{3},{4})",
+                              (Application.Current.Resources["User"] as UserInfo).ID, _year.Text, _month.Text,
+                              0,
+                              _tableview.RowTotal)).Tables[0];
 
+            _tableview.ExportExcel(table);
         }
 
         private void btnReset_Click(object sender, RoutedEventArgs e)

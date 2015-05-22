@@ -121,6 +121,11 @@ namespace FoodSafetyMonitoring.Manager
 
         private void _query_Click(object sender, RoutedEventArgs e)
         {
+            if (dtpStartDate.Value.Value.Date > dtpEndDate.Value.Value.Date)
+            {
+                Toolkit.MessageBox.Show("开始时间大于结束时间，请重新选择！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
             _tableview.GetDataByPageNumberEvent += new UcTableOperableView.GetDataByPageNumberEventHandler(_tableview_GetDataByPageNumberEvent);
             GetData();
             _tableview.Title = string.Format("数据统计时间:{0}年{1}月{2}日到{3}年{4}月{5}日", dtpStartDate.Value.Value.Year, dtpStartDate.Value.Value.Month, dtpStartDate.Value.Value.Day,
@@ -130,7 +135,7 @@ namespace FoodSafetyMonitoring.Manager
 
         private void GetData()
         {
-            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_query_detect({0},'{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}','{13}','{14}',{15},{16})",
+           DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_query_detect({0},'{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}','{13}','{14}',{15},{16})",
                   (Application.Current.Resources["User"] as UserInfo).ID,
                 //dtpStartDate.Value.ToString() == dtpEndDate.Value.ToString() ? "" : dtpStartDate.Value.ToString(),
                 //dtpStartDate.Value.ToString() == dtpEndDate.Value.ToString() ? "" : dtpEndDate.Value.ToString(),

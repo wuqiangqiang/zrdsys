@@ -88,6 +88,13 @@ namespace FoodSafetyMonitoring.Manager
                 Toolkit.MessageBox.Show("请先选择分析主题!!!");
                 return;
             }
+
+            if (dtpStartDate.Value.Value.Date > dtpEndDate.Value.Value.Date)
+            {
+                Toolkit.MessageBox.Show("开始时间大于结束时间，请重新选择！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+            
             DataTable table = null;
             string userId = (Application.Current.Resources["User"] as UserInfo).ID;
             string function = "";
@@ -222,7 +229,7 @@ namespace FoodSafetyMonitoring.Manager
             _chart.Children.Add(chart);
 
 
-            string table_title = "▪ 数据统计时间:" + dtpStartDate.Value.Value.Year + "年" + dtpStartDate.Value.Value.Month + "月" + dtpStartDate.Value.Value.Day + "日到" + dtpEndDate.Value.Value.Year + "年" + dtpEndDate.Value.Value.Month + "月" + dtpEndDate.Value.Value.Day + "日"; ;
+            string table_title = "数据统计时间:" + dtpStartDate.Value.Value.Year + "年" + dtpStartDate.Value.Value.Month + "月" + dtpStartDate.Value.Value.Day + "日到" + dtpEndDate.Value.Value.Year + "年" + dtpEndDate.Value.Value.Month + "月" + dtpEndDate.Value.Value.Day + "日";
             if (table.Rows.Count != 0)
             {
                 table.Rows.Add(new object[] { "合计", sum, "100%" });

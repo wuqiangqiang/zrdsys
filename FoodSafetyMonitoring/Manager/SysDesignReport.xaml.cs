@@ -15,6 +15,7 @@ using FoodSafetyMonitoring.dao;
 using FoodSafetyMonitoring.Common;
 using System.Data;
 using FoodSafetyMonitoring.Manager.UserControls;
+using Toolkit = Microsoft.Windows.Controls;
 
 namespace FoodSafetyMonitoring.Manager
 {
@@ -94,6 +95,12 @@ namespace FoodSafetyMonitoring.Manager
 
         private void _query_Click(object sender, RoutedEventArgs e)
         {
+            if (reportDate_kssj.Value.Value.Date > reportDate_jssj.Value.Value.Date)
+            {
+                Toolkit.MessageBox.Show("开始时间大于结束时间，请重新选择！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
             _tableview.GetDataByPageNumberEvent += new UcTableOperableView.GetDataByPageNumberEventHandler(_tableview_GetDataByPageNumberEvent);
             GetData();
             _tableview.Title = string.Format("数据统计时间:{0}年{1}月{2}日到{3}年{4}月{5}日", reportDate_kssj.Value.Value.Year, reportDate_kssj.Value.Value.Month, reportDate_kssj.Value.Value.Day,
@@ -125,7 +132,7 @@ namespace FoodSafetyMonitoring.Manager
 
 
         private void GetData()
-        {
+        {      
             DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_report_custom('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}',{8})",
                               (Application.Current.Resources["User"] as UserInfo).ID, reportDate_kssj.Value, reportDate_jssj.Value,
                                _detect_dept.SelectedIndex < 1 ? "" : (_detect_dept.SelectedItem as Label).Tag,

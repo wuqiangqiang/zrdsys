@@ -51,6 +51,12 @@ namespace FoodSafetyMonitoring.Manager
                 return;
             }
 
+            if (dtpStartDate.Value.Value.Date > dtpEndDate.Value.Value.Date)
+            {
+                Toolkit.MessageBox.Show("开始时间大于结束时间，请重新选择！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
             DataTable table = null;
             string userId = (Application.Current.Resources["User"] as UserInfo).ID;
             string function = "";
