@@ -18,7 +18,7 @@ namespace FoodSafetyMonitoring.dao
 
         }
 
-        #region IDBOperation 成员
+        #region IDBOperation
 
         public DbHelperMySQL GetDbHelper()
         {
