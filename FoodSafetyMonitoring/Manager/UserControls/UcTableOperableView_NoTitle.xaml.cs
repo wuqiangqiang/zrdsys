@@ -388,7 +388,8 @@ namespace FoodSafetyMonitoring.Manager.UserControls
                 foreach (DataColumn c in dt.Columns)
                 {
                     GridViewColumn gvc = new GridViewColumn();
-                    if (myColumns[c.ColumnName.ToLower()].BShow)
+                    //总行数不导出
+                    if (myColumns[c.ColumnName.ToLower()].Column_show != "总行数")
                     {
                         tableHeader += myColumns[c.ColumnName.ToLower()].Column_show + ",";
                     }  
@@ -400,7 +401,8 @@ namespace FoodSafetyMonitoring.Manager.UserControls
                 {
                     DataRow row = dt.Rows[j];
                     StringBuilder sb = new StringBuilder();
-                    for (int i = 0; i < dt.Columns.Count; i++)
+                    //总行数在最后一列控制不导出
+                    for (int i = 0; i < dt.Columns.Count - 1; i++)
                     {
                         sb.Append(row[i]);
                         sb.Append(",");
