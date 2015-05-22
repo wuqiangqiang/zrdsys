@@ -222,7 +222,7 @@ namespace FoodSafetyMonitoring.Manager
             _chart.Children.Add(chart);
 
 
-            string table_title = "▪数据统计时间:" + dtpStartDate.Value.Value.Year + "年" + dtpStartDate.Value.Value.Month + "月" + dtpStartDate.Value.Value.Day + "日到" + dtpEndDate.Value.Value.Year + "年" + dtpEndDate.Value.Value.Month + "月" + dtpEndDate.Value.Value.Day + "日"; ;
+            string table_title = "▪ 数据统计时间:" + dtpStartDate.Value.Value.Year + "年" + dtpStartDate.Value.Value.Month + "月" + dtpStartDate.Value.Value.Day + "日到" + dtpEndDate.Value.Value.Year + "年" + dtpEndDate.Value.Value.Month + "月" + dtpEndDate.Value.Value.Day + "日"; ;
             if (table.Rows.Count != 0)
             {
                 table.Rows.Add(new object[] { "合计", sum, "100%" });
