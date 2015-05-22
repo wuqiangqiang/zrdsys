@@ -91,6 +91,7 @@ namespace FoodSafetyMonitoring
             //this.StateChanged += new EventHandler(MainWindow_StateChanged);
         }
 
+        //显示上传的自定义图片
         private void ShowSelectedIMG(byte[] img)
         {
             MemoryStream ms = new MemoryStream(img);//img是从数据库中读取出来的字节数组
