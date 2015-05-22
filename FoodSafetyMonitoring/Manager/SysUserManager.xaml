@@ -64,7 +64,7 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Width="80"   DisplayMemberBinding="{Binding INFO_USER}" ></GridViewColumn>
+                    <GridViewColumn Width="120"   DisplayMemberBinding="{Binding INFO_USER}" ></GridViewColumn>
                     <GridViewColumn Width="180"   DisplayMemberBinding="{Binding INFO_NAME}"></GridViewColumn>
                     <GridViewColumn Width="120"   DisplayMemberBinding="{Binding role_expl}"></GridViewColumn>
                     <GridViewColumn  >
