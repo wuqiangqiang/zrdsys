@@ -207,6 +207,16 @@ namespace FoodSafetyMonitoring.Manager
                     }
                 }
 
+                //保存是否直属信息
+                if(_city_flag.Text == "是")
+                {
+                    row["isdept"] = "1";
+                }
+                else
+                {
+                    row["isdept"] = "0";
+                }
+
                 string lower_area_id = "";
 
                 if (_lower_area.Text != "")
@@ -275,10 +285,10 @@ namespace FoodSafetyMonitoring.Manager
                 newDepartment.Name = _station.Text;
                 newDepartment.Row = row;
 
-                string sql = String.Format("insert into sys_client_sysdept (INFO_CODE,INFO_NAME,FLAG_TIER,FK_CODE_DEPT,PROVINCE,CITY,COUNTRY,ADDRESS,CONTACTER,TEL,PHONE,TYPE,supplierId) values " +
-                    "('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}');"
+                string sql = String.Format("insert into sys_client_sysdept (INFO_CODE,INFO_NAME,FLAG_TIER,FK_CODE_DEPT,PROVINCE,CITY,COUNTRY,ADDRESS,CONTACTER,TEL,PHONE,TYPE,supplierId,isdept) values " +
+                    "('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}','{13}');"
               , row["INFO_CODE"], row["INFO_NAME"], row["FLAG_TIER"], row["FK_CODE_DEPT"]
-              , row["PROVINCE"], row["CITY"], row["COUNTRY"], row["ADDRESS"], row["CONTACTER"], row["TEL"], row["PHONE"], row["TYPE"], row["supplierId"]);
+              , row["PROVINCE"], row["CITY"], row["COUNTRY"], row["ADDRESS"], row["CONTACTER"], row["TEL"], row["PHONE"], row["TYPE"], row["supplierId"], row["isdept"]);
 
                 try
                 {
@@ -328,8 +338,19 @@ namespace FoodSafetyMonitoring.Manager
                     type = "0";
                 }
 
-                string sql = String.Format("UPDATE sys_client_sysdept set INFO_NAME='{0}',ADDRESS='{1}',CONTACTER='{2}',TEL='{3}',PHONE='{4}',TYPE='{5}',supplierId = '{6}'  where INFO_CODE='{7}';"
-                , _station.Text, _address.Text, _principal_name.Text, _phone.Text, _contact_number.Text,type ,(_Supplier.SelectedItem as Label).Tag, department.Row["INFO_CODE"]);
+                //保存是否直属信息
+                string is_dept = "";
+                if (_city_flag.Text == "是")
+                {
+                    is_dept = "1";
+                }
+                else
+                {
+                    is_dept = "0";
+                }
+
+                string sql = String.Format("UPDATE sys_client_sysdept set INFO_NAME='{0}',ADDRESS='{1}',CONTACTER='{2}',TEL='{3}',PHONE='{4}',TYPE='{5}',supplierId = '{6}',isdept = '{7}'  where INFO_CODE='{8}';"
+                , _station.Text, _address.Text, _principal_name.Text, _phone.Text, _contact_number.Text, type, (_Supplier.SelectedItem as Label).Tag, is_dept, department.Row["INFO_CODE"]);
 
                 try
                 {
@@ -360,6 +381,8 @@ namespace FoodSafetyMonitoring.Manager
                 department.Row["contacter"] = _principal_name.Text;
                 department.Row["tel"] = _phone.Text;
                 department.Row["phone"] = _contact_number.Text;
+                department.Row["supplierId"] = (_Supplier.SelectedItem as Label).Tag.ToString();
+                department.Row["isdept"] = is_dept;
                 _edit.IsEnabled = true;
 
 
@@ -453,6 +476,9 @@ namespace FoodSafetyMonitoring.Manager
                 _regional_level.Tag = row["FLAG_TIER"].ToString();
                 _regional_level.Text = cityLevelDictionary[row["FLAG_TIER"].ToString()];
                 _station_property.Visibility = Visibility.Hidden;
+                //隐藏是否直属
+                _is_dept.Visibility = Visibility.Hidden;
+                _city_flag.Visibility = Visibility.Hidden;
                 _lower_area.Visibility = Visibility.Hidden;
                 _edit.IsEnabled = true;
                 _add.IsEnabled = true;
@@ -481,6 +507,9 @@ namespace FoodSafetyMonitoring.Manager
                 {
                     _add.Visibility = Visibility.Hidden;
                     _station_property.Visibility = Visibility.Visible;
+                    //显示是否直属
+                    _is_dept.Visibility = Visibility.Visible;
+                    _city_flag.Visibility = Visibility.Visible;
                 }
 
                 if (user_flag_tier == "0" && row["FLAG_TIER"].ToString() != "0")
@@ -515,8 +544,18 @@ namespace FoodSafetyMonitoring.Manager
                 _contact_number.Text = row["phone"].ToString();
                 _address.Text = row["address"].ToString();
                 _principal_name.Text = row["contacter"].ToString();
-
                 _station.Text = row["INFO_NAME"].ToString();
+
+                //是否直属
+                if (row["isdept"].ToString() == "0")
+                {
+                    _city_flag.SelectedIndex = 1;
+                }
+                else
+                {
+                    _city_flag.SelectedIndex = 0;
+                }
+
                 if (department.Parent != null)
                 {
                     _superior_department.Text = department.Parent.Row["INFO_NAME"].ToString();
@@ -628,6 +667,10 @@ namespace FoodSafetyMonitoring.Manager
                 _add.Visibility = Visibility.Hidden;
                 _station_property.Visibility = Visibility.Visible;
                 _station_property_flag.Text = "(必填)";
+                //显示是否直属
+                _is_dept.Visibility = Visibility.Visible;
+                _city_flag.Visibility = Visibility.Visible;
+                _city_flag.SelectedIndex = 1;
             }
             else
             {

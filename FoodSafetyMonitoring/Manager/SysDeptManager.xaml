@@ -114,6 +114,11 @@
                                 <StackPanel>
                                     <TextBlock    MinWidth="100" Height="19" Width="100">部门级别:</TextBlock>
                                     <TextBlock  x:Name="_regional_level" Margin="5,0,5,0"></TextBlock>
+                                    <TextBlock  x:Name="_is_dept"  Height="19"  Visibility="Hidden">是否直属:</TextBlock>
+                                    <ComboBox x:Name="_city_flag" Visibility="Hidden" MinWidth="50" >
+                                        <ComboBoxItem>是</ComboBoxItem>
+                                        <ComboBoxItem>否</ComboBoxItem>
+                                    </ComboBox>
                                 </StackPanel>
                                 <StackPanel  Grid.Row="1">
                                     <TextBlock   MinWidth="100" x:Name="_station_name">检测点名称:</TextBlock>
