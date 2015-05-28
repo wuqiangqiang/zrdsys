@@ -128,8 +128,8 @@ namespace FoodSafetyMonitoring.Manager
             }
             _tableview.GetDataByPageNumberEvent += new UcTableOperableView.GetDataByPageNumberEventHandler(_tableview_GetDataByPageNumberEvent);
             GetData();
-            _tableview.Title = string.Format("数据统计时间:{0}年{1}月{2}日到{3}年{4}月{5}日", dtpStartDate.Value.Value.Year, dtpStartDate.Value.Value.Month, dtpStartDate.Value.Value.Day,
-                          dtpEndDate.Value.Value.Year, dtpEndDate.Value.Value.Month, dtpEndDate.Value.Value.Day);
+            _tableview.Title = string.Format("数据统计时间:{0}年{1}月{2}日到{3}年{4}月{5}日 合计{6}条数据", dtpStartDate.Value.Value.Year, dtpStartDate.Value.Value.Month, dtpStartDate.Value.Value.Day,
+                          dtpEndDate.Value.Value.Year, dtpEndDate.Value.Value.Month, dtpEndDate.Value.Value.Day,_tableview.RowTotal);
             _tableview.PageIndex = 1;
         }
 

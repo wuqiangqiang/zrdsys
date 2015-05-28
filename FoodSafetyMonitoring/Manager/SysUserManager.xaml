@@ -118,7 +118,7 @@
                 <TextBlock Grid.Row="1" Grid.Column="0"   xml:space="preserve"  >权限描述:</TextBlock>
                 <TextBox Name="_subDetails"  Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="5"  TextWrapping="Wrap" HorizontalAlignment="Left"  MinWidth="500" Height="60" IsEnabled="False"/>
                 <TextBlock Grid.Row="2" Grid.Column="0"  >登录帐号:</TextBlock>
-                <TextBox Grid.Row="2" Grid.Column="1" Name="_loginName" GotFocus="FrameworkElement_GotFocus" VerticalAlignment="Center" Width="180" MaxLength="6" InputMethod.IsInputMethodEnabled="False"  DataObject.Pasting="loginName_Pasting" PreviewKeyDown="loginName_PreviewKeyDown"></TextBox>
+                <TextBox Grid.Row="2" Grid.Column="1" Name="_loginName" GotFocus="FrameworkElement_GotFocus" VerticalAlignment="Center" Width="180" MaxLength="10" InputMethod.IsInputMethodEnabled="False"  DataObject.Pasting="loginName_Pasting" PreviewKeyDown="loginName_PreviewKeyDown"></TextBox>
                 <TextBlock  Grid.Row="2" Grid.Column="2"  MinWidth="20" x:Name="_user_flag" Foreground="Red" Margin="0" ></TextBlock>
                 <TextBlock Grid.Row="2" Grid.Column="3"  >帐号密码:</TextBlock>
                 <PasswordBox Grid.Row="2" Grid.Column="4" Name="_loginPassword" VerticalAlignment="Center" GotFocus="FrameworkElement_GotFocus" Width="180" Height="20" BorderThickness="1,1,1,1"></PasswordBox>
