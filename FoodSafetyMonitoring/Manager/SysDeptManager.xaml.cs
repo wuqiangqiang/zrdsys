@@ -219,10 +219,6 @@ namespace FoodSafetyMonitoring.Manager
 
                 string lower_area_id = "";
 
-                if (_lower_area.Text != "")
-                {
-                    lower_area_id = ProvinceCityTable.Select("name='" + _lower_area.Text + "'")[0]["id"].ToString();
-                }
                 //根据当前部门的级别来赋省，市，区的值
                 switch (row["FLAG_TIER"].ToString())
                 {
@@ -230,15 +226,27 @@ namespace FoodSafetyMonitoring.Manager
                               row["City"] = ""; 
                               row["Country"] = ""; 
                               break;
-                    case "1": row["Province"] = lower_area_id; 
+                    case "1": if (_lower_area.Text != "")
+                              {
+                                  lower_area_id = ProvinceCityTable.Select("name='" + _lower_area.Text + "'")[0]["id"].ToString();
+                              }
+                              row["Province"] = lower_area_id; 
                               row["City"] = ""; 
                               row["Country"] = ""; 
                               break;
-                    case "2": row["Province"] = department.Row["Province"].ToString(); 
+                    case "2": if (_lower_area.Text != "")
+                              {
+                                  lower_area_id = ProvinceCityTable.Select("name='" + _lower_area.Text + "' and pid = '" + department.Row["Province"] + "'")[0]["id"].ToString();
+                              }
+                              row["Province"] = department.Row["Province"].ToString(); 
                               row["City"] = lower_area_id; 
                               row["Country"] = ""; 
                               break;
-                    case "3": row["Province"] = department.Row["Province"].ToString(); 
+                    case "3": if (_lower_area.Text != "")
+                              {
+                                  lower_area_id = ProvinceCityTable.Select("name='" + _lower_area.Text + "' and pid = '" + department.Row["City"] + "'")[0]["id"].ToString();
+                              }
+                              row["Province"] = department.Row["Province"].ToString(); 
                               row["City"] = department.Row["City"].ToString();
                               row["Country"] = lower_area_id;
                               break;

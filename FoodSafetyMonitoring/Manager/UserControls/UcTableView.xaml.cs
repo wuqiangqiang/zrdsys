@@ -165,6 +165,7 @@ namespace FoodSafetyMonitoring.Manager.UserControls
                 }
                 sw.WriteLine(title);
                 sw.WriteLine(tableHeader);
+                
 
                 for (int j = 0; j < dt.Rows.Count; j++)
                 {

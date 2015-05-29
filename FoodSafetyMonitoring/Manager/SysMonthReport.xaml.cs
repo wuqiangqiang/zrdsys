@@ -15,6 +15,8 @@ using FoodSafetyMonitoring.dao;
 using FoodSafetyMonitoring.Common;
 using System.Data;
 using FoodSafetyMonitoring.Manager.UserControls;
+using Toolkit = Microsoft.Windows.Controls;
+using System.IO;
 
 namespace FoodSafetyMonitoring.Manager
 {
@@ -26,6 +28,7 @@ namespace FoodSafetyMonitoring.Manager
         private IDBOperation dbOperation;
         private string user_flag_tier;
         private DataTable currenttable;
+        private DataTable dt;
 
         private List<DeptItemInfo> list = new List<DeptItemInfo>();
 
@@ -216,6 +219,8 @@ namespace FoodSafetyMonitoring.Manager
                 }
             }
 
+            dt = tabledisplay;
+
             //表格的标题
             string title = "";
             title = string.Format("{0}年{1}月  检测数据月报表（单位：份次）", _year.Text, _month.Text);
@@ -242,7 +247,89 @@ namespace FoodSafetyMonitoring.Manager
 
         private void _export_Click(object sender, RoutedEventArgs e)
         {
-            _tableview.ExportExcel();
+            //_tableview.ExportExcel();
+
+            string dept_id;
+            string item_id;
+            string result_id;
+
+            if ((dt == null) || (dt.Rows.Count == 0))
+            {
+                Toolkit.MessageBox.Show("当前可导出数据为零！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+            System.Windows.Forms.SaveFileDialog sfd = new System.Windows.Forms.SaveFileDialog();
+            sfd.Filter = "导出文件 (*.csv)|*.csv";
+            sfd.FilterIndex = 0;
+            sfd.RestoreDirectory = true;
+            sfd.Title = "导出文件保存路径";
+            sfd.ShowDialog();
+            string strFilePath = sfd.FileName;
+            if (strFilePath != "")
+            {
+                if (File.Exists(strFilePath))
+                {
+                    File.Delete(strFilePath);
+                }
+                StreamWriter sw = new StreamWriter(new FileStream(strFilePath, FileMode.CreateNew), Encoding.Default);
+                string tableHeader = " ";
+                foreach (DataColumn c in dt.Columns)
+                {
+                    GridViewColumn gvc = new GridViewColumn();
+                    tableHeader += c.ColumnName + ",";
+                }
+                sw.WriteLine(string.Format("{0}年{1}月  检测数据月报表（单位：份次）", _year.Text, _month.Text));
+                sw.WriteLine(tableHeader);
+
+
+                for (int j = 0; j < dt.Rows.Count - 1; j++)
+                {
+                    DataRow row = dt.Rows[j];
+                    StringBuilder sb = new StringBuilder();
+                    for (int i = 0; i < dt.Columns.Count; i++)
+                    {
+                        sb.Append(row[i]);
+                        sb.Append(",");
+                    }
+                    sw.WriteLine(sb);
+
+                    DataRow[] rows = currenttable.Select("PART_NAME = '" + row[1].ToString() + "'");
+                    dept_id = rows[0]["PART_ID"].ToString();
+                    item_id = _detect_item.SelectedIndex < 1 ? "" : (_detect_dept.SelectedItem as Label).Tag.ToString();
+                    result_id = _detect_result.SelectedIndex < 1 ? "" : (_detect_result.SelectedItem as Label).Tag.ToString();
+
+                    DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_report_month_details_nopages('{0}','{1}','{2}','{3}')",
+                                _year.Text + "-" + _month.Text, dept_id, item_id, result_id)).Tables[0];
+
+                    string header = "检测单编号,信息来源,检测时间,检测站点,检测项目,检测对象,检测样本,检测灵敏度,检测方法,检测结果,检测师,来源区域,来源单位";
+                    sw.WriteLine(header);
+
+                    for (int m = 0; m < table.Rows.Count; m++)
+                    {
+                        DataRow row_new = table.Rows[m];
+                        StringBuilder sb_new = new StringBuilder();
+                        for (int n = 0; n < table.Columns.Count; n++)
+                        {
+                            sb_new.Append(row_new[n]);
+                            sb_new.Append(",");
+                        }
+                        sw.WriteLine(sb_new);
+                    }
+                }
+
+                DataRow row_bottom = dt.Rows[dt.Rows.Count - 1];
+                StringBuilder sb_bottom = new StringBuilder();
+                for (int i = 0; i < dt.Columns.Count; i++)
+                {
+                    sb_bottom.Append(row_bottom[i]);
+                    sb_bottom.Append(",");
+                }
+                sw.WriteLine(sb_bottom);
+
+                sw.Close();
+                Toolkit.MessageBox.Show("导出文件成功！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+
         }
         [Serializable]
         public class DeptItemInfo
