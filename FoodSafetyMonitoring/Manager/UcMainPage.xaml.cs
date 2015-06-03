@@ -24,7 +24,7 @@ namespace FoodSafetyMonitoring.Manager
         public UcMainPage()
         {
             InitializeComponent();
-            _webBrowser.Source = new Uri(string.Format("http://61.183.9.175/ulsocialevent/getMapTesttt.do?user_id={0}", (Application.Current.Resources["User"] as UserInfo).ID));
+            _webBrowser.Source = new Uri(string.Format("http://www.zrodo.com:8040/ulsocialevent/getMapTesttt.do?user_id={0}", (Application.Current.Resources["User"] as UserInfo).ID));
             //_webBrowser.Source = new Uri("http://www.baidu.com");
 
         } 

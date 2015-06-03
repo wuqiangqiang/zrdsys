@@ -106,7 +106,7 @@ namespace AutoUpdate
                 File.Delete(filepath);
             }
 
-            //this.Close();
+            this.Close();
         }
 
         /// <summary>
