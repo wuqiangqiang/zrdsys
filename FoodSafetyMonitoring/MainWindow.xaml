@@ -110,7 +110,7 @@
                 <ImageBrush ImageSource="/res/mainmenu_bar.jpg"></ImageBrush>
             </Grid.Background>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="350"/>
+                <ColumnDefinition Width="410"/>
                 <ColumnDefinition/>
                 <ColumnDefinition Width="89"/>
                 <ColumnDefinition Width="89"/>
