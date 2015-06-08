@@ -63,28 +63,32 @@
                 </StackPanel>
                 <StackPanel Grid.Row="2" Orientation="Horizontal">
                     <TextBlock HorizontalAlignment="Right">来源单位:</TextBlock>
-                    <ComboBox Width="250" x:Name="_source_company" IsEditable="True"></ComboBox>
+                    <ComboBox Width="280" x:Name="_source_company" IsEditable="True"></ComboBox>
                     <TextBlock  >检疫证号:</TextBlock>
-                    <TextBox Width="305" x:Name="_detect_number" MaxLength="50" InputMethod.IsInputMethodEnabled="False" DataObject.Pasting="Detect_Number_Pasting" PreviewKeyDown="Detect_Number_PreviewKeyDown"></TextBox>
+                    <TextBox Width="305" x:Name="_detect_number" MaxLength="20" InputMethod.IsInputMethodEnabled="False" PreviewKeyDown="Detect_Number_PreviewKeyDown"></TextBox>
                 </StackPanel>
                 <StackPanel Grid.Row="3" Orientation="Horizontal">
-                    <TextBlock  >检测项目:</TextBlock>
-                    <ComboBox  Width="100" x:Name="_detect_trade" ></ComboBox>
-                    <ComboBox  Width="140" x:Name="_detect_item" ></ComboBox>
+                    <TextBlock  >批次头数:</TextBlock>
+                    <TextBox Width="60" x:Name="_object_count" MaxLength="5" TextAlignment="Right" InputMethod.IsInputMethodEnabled="False" DataObject.Pasting="Object_Count_Pasting" PreviewKeyDown="Object_Count_PreviewKeyDown"  PreviewTextInput="Object_Count_PreviewTextInput"></TextBox>
+                    <TextBlock Width="40" >耳标号:</TextBlock>
+                    <TextBox Width="100" x:Name="_object_label" MaxLength="15" InputMethod.IsInputMethodEnabled="False" PreviewKeyDown="Object_Lable_PreviewKeyDown"></TextBox>
                     <TextBlock  >检测方法:</TextBlock>
                     <CheckBox x:Name="_detect_method1" Checked="_detect_method1_Checked" >金标检测卡</CheckBox>
                     <CheckBox x:Name="_detect_method2" Checked="_detect_method1_Checked" >ELISA试剂盒</CheckBox>
                     <CheckBox x:Name="_detect_method3" Checked="_detect_method1_Checked" >分析检测</CheckBox>
                 </StackPanel>
                 <StackPanel Grid.Row="4" Orientation="Horizontal">
+                    <TextBlock  >检测项目:</TextBlock>
+                    <ComboBox  Width="100" x:Name="_detect_trade" ></ComboBox>
+                    <ComboBox  Width="140" x:Name="_detect_item" ></ComboBox>
                     <TextBlock  >检测对象:</TextBlock>
-                    <ComboBox  Width="140" x:Name="_detect_object"></ComboBox>
+                    <ComboBox  Width="100" x:Name="_detect_object"></ComboBox>
                     <TextBlock  >检测样本:</TextBlock>
-                    <ComboBox  Width="160" x:Name="_detect_sample"></ComboBox>
-                    <TextBlock  >检测灵敏度:</TextBlock>
-                    <ComboBox   Width="140" x:Name="_detect_sensitivity"></ComboBox>
+                    <ComboBox  Width="120" x:Name="_detect_sample"></ComboBox>
                 </StackPanel>
                 <StackPanel Grid.Row="5" Orientation="Horizontal">
+                    <TextBlock  >检测灵敏度:</TextBlock>
+                    <ComboBox   Width="100" x:Name="_detect_sensitivity"></ComboBox>
                     <TextBlock  >检测结果:</TextBlock>
                     <ComboBox  Width="140" x:Name="_detect_result"></ComboBox>
                 </StackPanel>

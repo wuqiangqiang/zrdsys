@@ -177,6 +177,16 @@ namespace FoodSafetyMonitoring.Manager
             {
                 try
                 {
+                    bool reviewflag = dbOperation.GetDbHelper().Exists(string.Format("select count(id) from t_detect_review where DetectId = '{0}'", id));
+                    if (reviewflag)
+                    {
+                        int result1 = dbOperation.GetDbHelper().ExecuteSql(string.Format("delete from t_detect_review where DetectId ='{0}'", id));
+                        if (result1 <= 0)
+                        {
+                            Toolkit.MessageBox.Show("删除失败！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                            return;
+                        }
+                    }
                     int result = dbOperation.GetDbHelper().ExecuteSql(string.Format("delete from t_detect_report where ORDERID ='{0}'", id));
                     if (result > 0)
                     {

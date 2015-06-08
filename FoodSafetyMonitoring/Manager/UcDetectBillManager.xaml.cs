@@ -71,6 +71,8 @@ namespace FoodSafetyMonitoring.Manager
             this._region.SelectedIndex = 0;
             this._source_company.SelectedIndex = 0;
             this._detect_number.Text = "";
+            this._object_count.Text = "";
+            this._object_label.Text = "";
             this._detect_trade.SelectedIndex = 0;
             this._detect_item.SelectedIndex = 0;
             this._detect_method1.IsChecked = false;
@@ -102,9 +104,13 @@ namespace FoodSafetyMonitoring.Manager
             {
                 msg = "*请选择来源单位";
             }
-            else if (_detect_number.Text.Trim().Length == 0)
+            else if (_detect_number.Text.Trim().Length == 0 && _object_count.Text.Trim().Length != 0)
             {
                 msg = "*检疫证号不能为空";
+            }
+            else if (_detect_number.Text.Trim().Length != 0 && _object_count.Text.Trim().Length == 0)
+            {
+                msg = "*批次头数不能为空";
             }
             else if (_detect_item.SelectedIndex < 1)
             {
@@ -162,7 +168,7 @@ namespace FoodSafetyMonitoring.Manager
                     company_id = dbOperation.GetSingle(string.Format("SELECT COMPANYID from t_company where COMPANYNAME ='{0}' and deptid = '{1}'", _source_company.Text, (Application.Current.Resources["User"] as UserInfo).DepartmentID)).ToString();
                 }
 
-                string sql = string.Format("call p_insert_detect('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}')"
+                string sql = string.Format("call p_insert_detect('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}')"
                               , company_id,
                               _detect_number.Text,
                               (_detect_item.SelectedItem as Label).Tag.ToString(),
@@ -173,7 +179,7 @@ namespace FoodSafetyMonitoring.Manager
                               (_detect_result.SelectedItem as Label).Tag.ToString(),
                               (Application.Current.Resources["User"] as UserInfo).DepartmentID,
                               (Application.Current.Resources["User"] as UserInfo).ID,
-                              System.DateTime.Now);
+                              System.DateTime.Now,_object_count.Text,_object_label.Text);
 
 
                 int i = dbOperation.ExecuteSql(sql);
@@ -330,21 +336,59 @@ namespace FoodSafetyMonitoring.Manager
             }
         }
 
-        private void Detect_Number_Pasting(object sender, DataObjectPastingEventArgs e)
-        {
-            //if (e.DataObject.GetDataPresent(typeof(String)))
-            //{
-            //    String text = (String)e.DataObject.GetData(typeof(String));
-            //    if (!isNumberic(text))
-            //    { e.CancelCommand(); }
-            //}
-            //else { e.CancelCommand(); }
-        }
 
         private void Detect_Number_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Space)
                 e.Handled = true;
+        }
+
+        private void Object_Lable_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+                e.Handled = true;
+        }
+
+        private void Object_Count_Pasting(object sender, DataObjectPastingEventArgs e)
+        {
+            if (e.DataObject.GetDataPresent(typeof(String)))
+            {
+                String text = (String)e.DataObject.GetData(typeof(String));
+                if (!isNumberic(text))
+                { e.CancelCommand(); }
+            }
+            else { e.CancelCommand(); }
+        }
+
+        private void Object_Count_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+                e.Handled = true;
+        }
+
+        private void Object_Count_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (!isNumberic(e.Text))
+            {
+                e.Handled = true;
+            }
+            else
+                e.Handled = false;
+        }
+
+        //isDigit是否是数字
+        public static bool isNumberic(string _string)
+        {
+            if (string.IsNullOrEmpty(_string))
+
+                return false;
+            foreach (char c in _string)
+            {
+                if (!char.IsDigit(c))
+                    //if(c<'0' c="">'9')//最好的方法,在下面测试数据中再加一个0，然后这种方法效率会搞10毫秒左右
+                    return false;
+            }
+            return true;
         }
     }
 }

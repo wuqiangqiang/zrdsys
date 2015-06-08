@@ -43,6 +43,8 @@ namespace FoodSafetyMonitoring.Manager
             _areaName.Text = table.Rows[0][10].ToString();
             _companyName.Text = table.Rows[0][11].ToString();
             _cardId.Text = table.Rows[0][12].ToString();
+            _objectLable.Text = table.Rows[0][21].ToString();
+            _objectCount.Text = table.Rows[0][22].ToString();
             _itemName.Text = table.Rows[0][3].ToString();
             _objectName.Text = table.Rows[0][4].ToString();
             _sampleName.Text = table.Rows[0][5].ToString();

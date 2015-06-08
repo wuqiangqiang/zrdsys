@@ -171,13 +171,13 @@ namespace FoodSafetyMonitoring.Manager
             for (int i = 0; i < table.Rows.Count; i++)
             {
                 DataSeries dataSeries = new DataSeries();
-                dataSeries.RenderAs = RenderAs.Spline;
+                dataSeries.RenderAs = RenderAs.Line;
                 dataSeries.LegendText = table.Rows[i][0].ToString();
                 dataSeries.LabelFontFamily = new FontFamily("楷体");
                 for (int j = 1; j < table.Columns.Count - 1; j++)
                 {
                     DataPoint point = new DataPoint();
-                    point.LabelStyle = LabelStyles.Inside;
+                    point.LabelStyle = LabelStyles.OutSide;
                     point.LabelFontSize = 14;
                     point.AxisXLabel = table.Columns[j].ColumnName;
                     point.YValue = Convert.ToDouble(table.Rows[i][j].ToString());

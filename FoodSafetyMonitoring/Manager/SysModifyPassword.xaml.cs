@@ -82,6 +82,7 @@ namespace FoodSafetyMonitoring.Manager
                     Common.SysLogEntry.WriteLog("系统用户管理", (Application.Current.Resources["User"] as UserInfo).ShowName, OperationType.Add, "修改密码");
                     this._password.Password = "";
                     this._password_2.Password = "";
+                    this._password_old.Password = "";
                 }
                 else
                 {

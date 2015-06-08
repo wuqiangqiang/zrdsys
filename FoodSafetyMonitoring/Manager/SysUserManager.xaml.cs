@@ -175,7 +175,6 @@ namespace FoodSafetyMonitoring.Manager
             btnCancel.Visibility = Visibility.Visible;
             Clear();
             this._department.IsEnabled = true;
-            //this._cmbRoleType.IsEnabled = true;
             this._loginName.IsEnabled = true;
             this._loginPassword.IsEnabled = true;
             this.txtUserName.IsEnabled = true;
@@ -183,7 +182,7 @@ namespace FoodSafetyMonitoring.Manager
             this._user_manger_2.IsEnabled = true;
             this._user_manger.IsChecked = true;
             this._dept_flag.Text = "(必填)";
-            this._role_flag.Text = "(必填)";
+            //this._role_flag.Text = "(必填)";
             this._user_flag.Text = "(必填)";
             this._password_flag.Text = "(必填)";
             this._name_flag.Text = "(必填)";
@@ -218,7 +217,7 @@ namespace FoodSafetyMonitoring.Manager
             this._user_manger_2.IsEnabled = false;
             this.btnSave.Tag = null;
             this._dept_flag.Text = "";
-            this._role_flag.Text = "";
+            //this._role_flag.Text = "";
             this._user_flag.Text = "";
             this._password_flag.Text = "";
             this._name_flag.Text = "";
@@ -416,14 +415,13 @@ namespace FoodSafetyMonitoring.Manager
             btnSave.Visibility = Visibility.Visible;
             btnCancel.Visibility = Visibility.Visible;
             this._department.IsEnabled = true;
-            this._cmbRoleType.IsEnabled = true;
             this._loginName.IsEnabled = true;
             this._loginPassword.IsEnabled = true;
             this.txtUserName.IsEnabled = true;
             this._user_manger.IsEnabled = true;
             this._user_manger_2.IsEnabled = true;
             this._dept_flag.Text = "(必填)";
-            this._role_flag.Text = "(必填)";
+            //this._role_flag.Text = "(必填)";
             this._user_flag.Text = "(必填)";
             this._password_flag.Text = "(必填)";
             this._name_flag.Text = "(必填)";
