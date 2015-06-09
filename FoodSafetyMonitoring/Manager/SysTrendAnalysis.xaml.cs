@@ -140,6 +140,9 @@ namespace FoodSafetyMonitoring.Manager
             }
 
             int sum_column = 0;
+            //计算报表总条数
+            int row_count = 0;
+
             if (table.Rows.Count != 0)
             {
                 table.Rows.Add(table.NewRow()[0] = "合计");
@@ -153,9 +156,15 @@ namespace FoodSafetyMonitoring.Manager
                     sum_column += sum;
                     table.Rows[table.Rows.Count - 1][j] = sum;
                 }
+
+                row_count = table.Rows.Count - 1;
+            }
+            else
+            {
+                row_count = 0;
             }
 
-            _tableview.SetDataTable(table, "数据统计时间:" + _year.Text + "年", new List<int>());
+            _tableview.SetDataTable(table, "数据统计时间:" + _year.Text + "年" + "  合计" + row_count + "条数据", new List<int>());
 
             _chart.Children.Clear(); 
             chart = new Chart();

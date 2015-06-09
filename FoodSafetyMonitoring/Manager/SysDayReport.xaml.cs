@@ -170,6 +170,9 @@ namespace FoodSafetyMonitoring.Manager
                 tabledisplay.Rows.Add(row);
             }
 
+            //计算报表总条数
+            int row_count = 0 ;
+
             if (table.Rows.Count != 0)
             {
                 //表格最后添加合计行
@@ -184,11 +187,19 @@ namespace FoodSafetyMonitoring.Manager
                     //sum_column += sum;
                     tabledisplay.Rows[tabledisplay.Rows.Count - 1][j] = sum;
                 }
+
+                row_count =  tabledisplay.Rows.Count - 1;
             }
+            else
+            {
+                row_count = 0 ;
+            }
+            
+            
 
             //表格的标题
             string title = "";
-            title = string.Format("{0}年{1}月{2}日  检测数据日报表（单位：份次）", reportDate.Value.Value.Year, reportDate.Value.Value.Month, reportDate.Value.Value.Day);
+            title = string.Format("{0}年{1}月{2}日  检测数据日报表（单位：份次） 合计{3}条数据", reportDate.Value.Value.Year, reportDate.Value.Value.Month, reportDate.Value.Value.Day, row_count);
 
             _tableview.BShowDetails = true;
             _title.Text = "▪ " + title;

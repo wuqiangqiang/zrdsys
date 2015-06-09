@@ -451,7 +451,17 @@ namespace FoodSafetyMonitoring.Manager
             show_table.Columns["合计"].SetOrdinal(show_table.Columns.Count - 1);
             _tableview.MyColumns = MyColumns;
             _tableview.Table = show_table;
-            _tableview.Title = DateTime.Now.Year + "年各" + dept_name + "检测任务分配汇总表";
+            //计算报表总条数
+            int row_count = 0 ;
+            if (show_table.Rows.Count != 0)
+            {
+                row_count =  show_table.Rows.Count ;
+            }
+            else
+            {
+                row_count = 0 ;
+            }
+            _tableview.Title = DateTime.Now.Year + "年各" + dept_name + "检测任务分配汇总表" + "  合计" + row_count + "条数据";
         }
 
         void _tableview_DeleteRowEnvent(string id)

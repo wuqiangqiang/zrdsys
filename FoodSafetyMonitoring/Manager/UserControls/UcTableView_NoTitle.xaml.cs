@@ -42,7 +42,14 @@ namespace FoodSafetyMonitoring.Manager.UserControls
             {
                 GridViewColumn gvc = new GridViewColumn();
                 gvc.Header = c.ColumnName;
-                gvc.Width = (_listview.ActualWidth - 40) / dt.Columns.Count - 4;
+                if (BShowDetails)
+                {
+                    gvc.Width = (_listview.ActualWidth - 65) / dt.Columns.Count;
+                }
+                else
+                {
+                    gvc.Width = (_listview.ActualWidth - 25) / dt.Columns.Count;
+                }
                 gvc.SetValue(HorizontalAlignmentProperty, HorizontalAlignment.Center);
                 //gvc.DisplayMemberBinding = (new Binding(c.ColumnName));
                 FrameworkElementFactory text = new FrameworkElementFactory(typeof(TextBlock));
@@ -90,7 +97,14 @@ namespace FoodSafetyMonitoring.Manager.UserControls
             {
                 GridViewColumn gvc = new GridViewColumn();
                 gvc.Header = c.ColumnName;
-                gvc.Width = (_listview.ActualWidth - 40) / dt.Columns.Count - 4;
+                if (BShowDetails)
+                {
+                    gvc.Width = (_listview.ActualWidth - 65) / dt.Columns.Count;
+                }
+                else
+                {
+                    gvc.Width = (_listview.ActualWidth - 25) / dt.Columns.Count;
+                }
                 //gvc.DisplayMemberBinding = (new Binding(c.ColumnName));
                 FrameworkElementFactory text = new FrameworkElementFactory(typeof(TextBlock));
                 text.SetValue(TextBlock.HorizontalAlignmentProperty, HorizontalAlignment.Center);

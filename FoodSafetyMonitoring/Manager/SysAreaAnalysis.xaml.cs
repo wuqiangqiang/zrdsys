@@ -136,12 +136,22 @@ namespace FoodSafetyMonitoring.Manager
             chart.Titles.Add(title);
             _chart.Children.Add(chart);
 
+            //计算报表总条数
+            int row_count = 0;
 
-            string table_title = "数据统计时间:" + dtpStartDate.Value.Value.Year + "年" + dtpStartDate.Value.Value.Month + "月" + dtpStartDate.Value.Value.Day + "日到" + dtpEndDate.Value.Value.Year + "年" + dtpEndDate.Value.Value.Month + "月" + dtpEndDate.Value.Value.Day + "日";
             if (table.Rows.Count != 0)
             {
                 table.Rows.Add(new object[] { "合计", sum, "100%" });
+
+                row_count = table.Rows.Count - 1;
             }
+            else
+            {
+                row_count = 0;
+            }
+
+            string table_title = "数据统计时间:" + dtpStartDate.Value.Value.Year + "年" + dtpStartDate.Value.Value.Month + "月" + dtpStartDate.Value.Value.Day + "日到" + dtpEndDate.Value.Value.Year + "年" + dtpEndDate.Value.Value.Month + "月" + dtpEndDate.Value.Value.Day + "日" + "  合计" + row_count + "条数据";
+            
             _tableview.SetDataTable(table, table_title, new List<int>());
 
         }

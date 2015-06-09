@@ -100,7 +100,7 @@ namespace FoodSafetyMonitoring.Manager
             _tableview.GetDataByPageNumberEvent += new UcTableOperableView.GetDataByPageNumberEventHandler(_tableview_GetDataByPageNumberEvent);
             
             GetData();
-            _tableview.Title = _year.Text + "." + _month.Text + "月 检测任务执行绩效考评结果";
+            _tableview.Title = _year.Text + "." + _month.Text + "月 检测任务执行绩效考评结果" + "  合计" + _tableview.RowTotal + "条数据";
         }
 
         private void GetData()
