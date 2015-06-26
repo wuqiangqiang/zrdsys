@@ -39,7 +39,14 @@ namespace FoodSafetyMonitoring.Manager
             DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_detect_details('{0}')", id)).Tables[0];
 
             //给画面上的控件赋值
-            _img.Source = new BitmapImage(new Uri("http://www.zrodo.com:8040/xmjc/" + table.Rows[0][20].ToString()));
+            //图片地址改为从数据库中获取
+            string picture_url = dbOperation.GetDbHelper().GetSingle("select pictureurl from t_url ").ToString();
+            if (picture_url == "")
+            {
+                picture_url = "http://www.zrodo.com:8080/xmjc/";
+            }
+            _img.Source = new BitmapImage(new Uri(picture_url + table.Rows[0][20].ToString()));
+           // _img.Source = new BitmapImage(new Uri("http://www.zrodo.com:8080/xmjc/" + table.Rows[0][20].ToString()));
             _areaName.Text = table.Rows[0][10].ToString();
             _companyName.Text = table.Rows[0][11].ToString();
             _cardId.Text = table.Rows[0][12].ToString();

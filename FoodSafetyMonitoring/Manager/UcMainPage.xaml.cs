@@ -13,6 +13,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using FoodSafetyMonitoring.dao;
+using DBUtility;
 
 namespace FoodSafetyMonitoring.Manager
 {
@@ -20,12 +21,22 @@ namespace FoodSafetyMonitoring.Manager
     /// UcMainPage.xaml 的交互逻辑
     /// </summary>
     public partial class UcMainPage : UserControl
-    { 
+    {
+        DbHelperMySQL dbOperation;
         public UcMainPage()
         {
             InitializeComponent();
-            _webBrowser.Source = new Uri(string.Format("http://www.zrodo.com:8040/ulsocialevent/getMapTesttt.do?user_id={0}", (Application.Current.Resources["User"] as UserInfo).ID));
-            //_webBrowser.Source = new Uri("http://www.baidu.com");
+
+            dbOperation = DBUtility.DbHelperMySQL.CreateDbHelper();
+            //首页地址改为从数据库中获取
+            string page_url = dbOperation.GetSingle("select firstpageurl from t_url ").ToString();
+            if (page_url == "")
+            {
+                page_url = "http://www.zrodo.com:8040/ulsocialevent/getMapTesttt.do?user_id={0}";
+            }
+            _webBrowser.Source = new Uri(string.Format(page_url, (Application.Current.Resources["User"] as UserInfo).ID));
+
+           // _webBrowser.Source = new Uri(string.Format("http://www.zrodo.com:8040/ulsocialevent/getMapTesttt.do?user_id={0}", (Application.Current.Resources["User"] as UserInfo).ID));
 
         } 
     }

@@ -52,6 +52,7 @@ namespace FoodSafetyMonitoring.Manager
                 ComboboxTool.InitComboboxSource(_detect_trade, "select tradeId,tradeName from t_trade where openFlag = '1'", "lr");
             }
             _detect_trade.SelectionChanged += new SelectionChangedEventHandler(_detect_trade_SelectionChanged);
+            _detect_trade.SelectedIndex = 1;
             //ComboboxTool.InitComboboxSource(_detect_item, "SELECT itemid,ItemNAME FROM v_user_item WHERE userid = " + userId);
             //ComboboxTool.InitComboboxSource(_detect_object, " SELECT objectId,objectName FROM v_user_object WHERE userid = " + userId);
             //ComboboxTool.InitComboboxSource(_detect_sample, "  SELECT sampleId,sampleName FROM v_user_sample WHERE userid = " + userId);
@@ -73,7 +74,7 @@ namespace FoodSafetyMonitoring.Manager
             this._detect_number.Text = "";
             this._object_count.Text = "";
             this._object_label.Text = "";
-            this._detect_trade.SelectedIndex = 0;
+            this._detect_trade.SelectedIndex = 1;
             this._detect_item.SelectedIndex = 0;
             this._detect_method1.IsChecked = false;
             this._detect_method2.IsChecked = false;

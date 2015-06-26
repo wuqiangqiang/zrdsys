@@ -28,8 +28,8 @@
                         <RowDefinition Height="38"/>
                     </Grid.RowDefinitions>
                     <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                        <TextBlock x:Name="_detect_trade_name">选择项目类别:</TextBlock>
-                        <ComboBox Width="80" x:Name="_detect_trade"></ComboBox>
+                        <!--<TextBlock x:Name="_detect_trade_name">选择项目类别:</TextBlock>
+                        <ComboBox Width="80" x:Name="_detect_trade"></ComboBox>-->
                         <TextBlock  x:Name="_dept_name">选择检测站点:</TextBlock>
                         <ComboBox Width="200" x:Name="_detect_station"></ComboBox>
                     </StackPanel>

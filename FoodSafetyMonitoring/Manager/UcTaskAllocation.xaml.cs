@@ -67,12 +67,12 @@ namespace FoodSafetyMonitoring.Manager
         List<string> tableHeaders = new List<string>() { "检测项目", "1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月", "合计" };
         Dictionary<string, TextBox> textBoxs = new Dictionary<string, TextBox>();
 
-        void _detect_trade_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            _detect_station.SelectedIndex = 0;
-            _grid_detail.Children.Clear();
-            btnSave.Visibility = Visibility.Hidden;
-        }
+        //void _detect_trade_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //    _detect_station.SelectedIndex = 0;
+        //    _grid_detail.Children.Clear();
+        //    btnSave.Visibility = Visibility.Hidden;
+        //}
 
         void _detect_station_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -114,7 +114,8 @@ namespace FoodSafetyMonitoring.Manager
                 _grid_detail.Children.Add(border);
             }
 
-            string sql = string.Format("SELECT ItemID,ItemNAME FROM t_det_item WHERE  (tradeId ='{0}'or ifnull(tradeId,'') = '') and OPENFLAG = '1' order by orderId", (_detect_trade.SelectedItem as Label).Tag);
+            //string sql = string.Format("SELECT ItemID,ItemNAME FROM t_det_item WHERE  (tradeId ='{0}'or ifnull(tradeId,'') = '') and OPENFLAG = '1' order by orderId", (_detect_trade.SelectedItem as Label).Tag);
+            string sql = "SELECT ItemID,ItemNAME FROM t_det_item WHERE  (tradeId ='1' or ifnull(tradeId,'') = '') and OPENFLAG = '1' order by orderId";
             DataTable table = dbOperation.GetDataSet(sql).Tables[0];
             _grid_detail.Tag = table;
             for (int i = 0; i < table.Rows.Count; i++)
@@ -354,17 +355,17 @@ namespace FoodSafetyMonitoring.Manager
             else if ((_tabControl.SelectedItem as TabItem).Header.ToString() == "分配检测任务" && _tabControl.Tag.ToString() != "分配检测任务" && btnSave.Tag.ToString() != "修改")
             {
                 _tabControl.Tag = "分配检测任务";
-                _detect_trade.SelectionChanged -= new SelectionChangedEventHandler(_detect_trade_SelectionChanged);
-                if (supplierId == "nkrx")
-                {
-                    ComboboxTool.InitComboboxSource(_detect_trade, "select tradeId,tradeName from t_trade where openFlag = '1' order by orderId", "lr");
-                }
-                else
-                {
-                    ComboboxTool.InitComboboxSource(_detect_trade, "select tradeId,tradeName from t_trade where openFlag = '1'", "lr");
-                }
-                _detect_trade.SelectedIndex = 1;
-                _detect_trade.SelectionChanged += new SelectionChangedEventHandler(_detect_trade_SelectionChanged);
+                //_detect_trade.SelectionChanged -= new SelectionChangedEventHandler(_detect_trade_SelectionChanged);
+                //if (supplierId == "nkrx")
+                //{
+                //    ComboboxTool.InitComboboxSource(_detect_trade, "select tradeId,tradeName from t_trade where openFlag = '1' order by orderId", "lr");
+                //}
+                //else
+                //{
+                //    ComboboxTool.InitComboboxSource(_detect_trade, "select tradeId,tradeName from t_trade where openFlag = '1'", "lr");
+                //}
+                //_detect_trade.SelectedIndex = 1;
+                //_detect_trade.SelectionChanged += new SelectionChangedEventHandler(_detect_trade_SelectionChanged);
 
                 _detect_station.SelectionChanged -= new SelectionChangedEventHandler(_detect_station_SelectionChanged);
                 ComboboxTool.InitComboboxSource(_detect_station, string.Format("call p_user_dept_task('{0}','{1}')", (Application.Current.Resources["User"] as UserInfo).ID, DateTime.Now.Year), "lr");
@@ -495,8 +496,8 @@ namespace FoodSafetyMonitoring.Manager
         {
             btnSave.Tag = "修改";
             btnSave.Visibility = Visibility.Visible;
-            _detect_trade_name.Visibility = Visibility.Hidden;
-            _detect_trade.Visibility = Visibility.Hidden;
+            //_detect_trade_name.Visibility = Visibility.Hidden;
+            //_detect_trade.Visibility = Visibility.Hidden;
             _dept_name.Text = dept_name;
             _detect_station.SelectionChanged -= new SelectionChangedEventHandler(_detect_station_SelectionChanged);
             _tabControl.SelectedIndex = 0;

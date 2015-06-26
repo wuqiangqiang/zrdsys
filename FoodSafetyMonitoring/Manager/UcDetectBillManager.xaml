@@ -79,7 +79,7 @@
                 </StackPanel>
                 <StackPanel Grid.Row="4" Orientation="Horizontal">
                     <TextBlock  >检测项目:</TextBlock>
-                    <ComboBox  Width="100" x:Name="_detect_trade" ></ComboBox>
+                    <ComboBox  Width="100" x:Name="_detect_trade" IsEnabled="False"></ComboBox>
                     <ComboBox  Width="140" x:Name="_detect_item" ></ComboBox>
                     <TextBlock  >检测对象:</TextBlock>
                     <ComboBox  Width="100" x:Name="_detect_object"></ComboBox>
