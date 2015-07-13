@@ -40,7 +40,7 @@ namespace FoodSafetyMonitoring.Manager
             //画面初始化-检测单列表画面
             dtpStartDate.Value = DateTime.Now.AddDays(-1);
             dtpEndDate.Value = DateTime.Now;
-            ComboboxTool.InitComboboxSource(_source_company1, string.Format(" call p_user_company('{0}') ", userId), "cxtj");
+            ComboboxTool.InitComboboxSource(_source_company1, string.Format(" call p_user_company('{0}','') ", userId), "cxtj");
             ComboboxTool.InitComboboxSource(_detect_station, string.Format("call p_user_dept('{0}')", userId), "cxtj");
             ComboboxTool.InitComboboxSource(_detect_item1, "SELECT ItemID,ItemNAME FROM t_det_item WHERE  (tradeId ='1'or tradeId ='2' or tradeId ='3' or ifnull(tradeId,'') = '') and OPENFLAG = '1' order by orderId", "cxtj");
             ComboboxTool.InitComboboxSource(_detect_object1, "SELECT objectId,objectName FROM t_det_object WHERE  (tradeId ='1'or tradeId ='2' or tradeId ='3' or ifnull(tradeId,'') = '') and OPENFLAG = '1'", "cxtj");
@@ -52,6 +52,8 @@ namespace FoodSafetyMonitoring.Manager
 
             ComboboxTool.InitComboboxSource(_province1, rows, "cxtj");
             _province1.SelectionChanged += new SelectionChangedEventHandler(_province1_SelectionChanged);
+            //20150707检测师改为连动（受监测站点影响）
+            _detect_station.SelectionChanged += new SelectionChangedEventHandler(_detect_station_SelectionChanged);
 
             SetColumns();
         }
@@ -105,6 +107,8 @@ namespace FoodSafetyMonitoring.Manager
             {
                 DataRow[] rows = ProvinceCityTable.Select("pid = '" + (_province1.SelectedItem as Label).Tag.ToString() + "'");
                 ComboboxTool.InitComboboxSource(_city1, rows, "cxtj");
+                //20150707来源单位改为连动（受来源区域影响）
+                ComboboxTool.InitComboboxSource(_source_company1, string.Format(" call p_user_company('{0}','{1}') ", userId, (_province1.SelectedItem as Label).Tag.ToString()), "cxtj");
                 _city1.SelectionChanged += new SelectionChangedEventHandler(_city1_SelectionChanged);
             }
         }
@@ -116,6 +120,31 @@ namespace FoodSafetyMonitoring.Manager
             {
                 DataRow[] rows = ProvinceCityTable.Select("pid = '" + (_city1.SelectedItem as Label).Tag.ToString() + "'");
                 ComboboxTool.InitComboboxSource(_region1, rows, "cxtj");
+                //20150707来源单位改为连动（受来源区域影响）
+                ComboboxTool.InitComboboxSource(_source_company1, string.Format(" call p_user_company('{0}','{1}') ", userId, (_city1.SelectedItem as Label).Tag.ToString()), "cxtj");
+                _region1.SelectionChanged += new SelectionChangedEventHandler(_region1_SelectionChanged);
+            }
+        }
+
+        //20150707来源单位改为连动（受来源区域影响）
+        void _region1_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (_region1.SelectedIndex > 0)
+            {
+                ComboboxTool.InitComboboxSource(_source_company1, string.Format("call p_user_company('{0}','{1}')", userId, (_region1.SelectedItem as Label).Tag.ToString()), "cxtj");
+            }
+        }
+
+        //20150707检测师改为连动（受检测站点影响）
+        void _detect_station_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (_detect_station.SelectedIndex > 0)
+            {
+                ComboboxTool.InitComboboxSource(_detect_person1, string.Format("SELECT RECO_PKID,INFO_USER,NUMB_USER FROM sys_client_user where fk_dept = '{0}'", (_detect_station.SelectedItem as Label).Tag.ToString()), "cxtj");
+            }
+            else if(_detect_station.SelectedIndex == 0)
+            {
+                ComboboxTool.InitComboboxSource(_detect_person1, string.Format("call p_user_detuser('{0}')", userId), "cxtj");
             }
         }
 

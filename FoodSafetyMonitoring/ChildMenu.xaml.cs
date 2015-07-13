@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using System.Windows.Interop;
 using System.Windows.Forms.Integration;
 using FoodSafetyMonitoring.Manager;
+using System.Data;
 
 namespace FoodSafetyMonitoring
 {
@@ -27,74 +28,82 @@ namespace FoodSafetyMonitoring
         {
             InitializeComponent();
             this.childMenus = childMenus;
-            if (childMenus.Count != 0)
+            //定义数组存放：二级菜单外部大控件
+            Expander[] expanders = new Expander[] { _expander_0, _expander_1, _expander_2, _expander_3, _expander_4, _expander_5 };
+
+            //先让所有控件都可见
+            for (int i = 0; i < 6; i++)
             {
-                switch (childMenus[0].mainmenu_num)
-                {
-                    case 2:loadMenu(_grid_1);
-                           break;
-                    case 3: _grid_1.HorizontalAlignment = HorizontalAlignment.Center;
-                            loadMenu(_grid_1);
-                            break;
-                    case 4: _grid_1.HorizontalAlignment = HorizontalAlignment.Right;
-                            loadMenu(_grid_1);
-                            break;
-                    case 5: loadMenu(_grid_2);
-                            break;
-                    case 6: _grid_2.HorizontalAlignment = HorizontalAlignment.Center;
-                            loadMenu(_grid_2);
-                            break;
-                    case 7: _grid_2.HorizontalAlignment = HorizontalAlignment.Right;
-                            loadMenu(_grid_2);
-                            break;
-                    case 8: _grid_2.HorizontalAlignment = HorizontalAlignment.Right;
-                            loadMenu(_grid_2);
-                            break;
-                    default: break;
-
-                }
+                expanders[i].Visibility = Visibility.Visible;
             }
-
+            //再根据二级菜单的个数隐藏部门控件
+            for(int i = childMenus.Count; i < 6; i++ )
+            {
+                expanders[i].Visibility = Visibility.Hidden;
+            }
+            //加载二、三级菜单
+            loadMenu();
         }
 
-        public void loadMenu(Grid grid)
+        public void loadMenu()
         {
-            grid.Children.Clear();
+            //定义数组存放：三级菜单的控件
+            Grid[] grids = new Grid[] { _grid_0, _grid_1, _grid_2, _grid_3, _grid_4, _grid_5 };
+            //定义数组存放：二级菜单的控件
+            TextBlock[] texts = new TextBlock[] { _text_0, _text_1, _text_2, _text_3, _text_4, _text_5 };
+            //先将三级菜单控件进行清空
+            for (int i = 0; i < grids.Length; i++)
+            {
+                grids[i].Children.Clear();
+            }
+
             for (int i = 0; i < childMenus.Count; i++)
             {
-                grid.ColumnDefinitions.Add(new ColumnDefinition());
-                grid.ColumnDefinitions.Add(new ColumnDefinition());
-                grid.ColumnDefinitions[2 * i ].Width = GridLength.Auto;
-                grid.ColumnDefinitions[2 * i + 1].Width = new GridLength(12, GridUnitType.Pixel);
-                childMenus[i].btn.SetValue(Grid.ColumnProperty, 2*i);
-                grid.Children.Add(childMenus[i].btn);
+                //二级菜单文字
+                texts[i].Text = childMenus[i].name;
 
-            }
-            
+                //三级菜单
+                int j = 0;
+                foreach (DataRow row in childMenus[i].child_childmenu)
+                {
+                    grids[i].RowDefinitions.Add(new RowDefinition());
+                    grids[i].RowDefinitions[j].Height = new GridLength(25, GridUnitType.Pixel);
+                    childMenus[i].buttons[j].SetValue(Grid.RowProperty, j);
+                    grids[i].Children.Add(childMenus[i].buttons[j]);
+                    j = j + 1;
+                }
+            }    
         }
        
     }
 
     public class MyChildMenu
     {
-        public Button btn;
+        //public Button btn;
+        public List<Button> buttons;
         public string name;
         MainWindow mainWindow;
         public TabControl tab;
-        public int mainmenu_num;
+        public DataRow[] child_childmenu;
         TabItem temptb = null;
 
-        public MyChildMenu(string name, MainWindow mainWindow,int mainmenu_num)
+        public MyChildMenu(string name, MainWindow mainWindow, DataRow[] child_childmenu)
         {
             this.name = name;
             this.mainWindow = mainWindow;
-            this.mainmenu_num = mainmenu_num;
-
-            btn = new Button();
-            btn.Content = name;
-            btn.MinWidth = 30;
+            this.child_childmenu = child_childmenu;
             this.tab = mainWindow._tab;
-            btn.Click += new RoutedEventHandler(this.btn_Click);
+            buttons = new List<Button>();
+
+            foreach (DataRow row in child_childmenu)
+            {
+                Button btn = new Button();
+                btn.Content = row["SUB_NAME"].ToString();
+                btn.MinWidth = 30;
+                btn.Click += new RoutedEventHandler(this.btn_Click);
+
+                buttons.Add(btn);
+            }
         }
 
         private void btn_Click(object sender, System.EventArgs e)
@@ -102,7 +111,7 @@ namespace FoodSafetyMonitoring
             int flag_exits = 0;
             foreach (TabItem item in tab.Items)
             {
-                if (item.Header.ToString() == name)
+                if (item.Header.ToString() == (sender as Button).Content.ToString())
                 {
                     tab.SelectedItem = item;
                     flag_exits = 1;
@@ -112,7 +121,7 @@ namespace FoodSafetyMonitoring
             if (flag_exits == 0)
             {
                 temptb = new TabItem();
-                temptb.Header = name;
+                temptb.Header = (sender as Button).Content.ToString();
                 switch (name)
                 {
                     case "首页": temptb.Content = new UcMainPage();

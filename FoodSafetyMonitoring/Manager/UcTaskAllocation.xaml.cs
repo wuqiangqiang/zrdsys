@@ -201,16 +201,34 @@ namespace FoodSafetyMonitoring.Manager
             int value = 0;
             try
             {
-                value = Convert.ToInt32((sender as TextBox).Text);
+                if ((sender as TextBox).Text == "")
+                {
+                    value = 0 ;
+                }
+                else
+                {
+                    value = Convert.ToInt32((sender as TextBox).Text);
+                }
+                
                 int lastValue = 0;
                 if (lastTextboxValues.ContainsKey((sender as TextBox).Tag.ToString()))
                 {
-                    lastValue = Convert.ToInt32(lastTextboxValues[(sender as TextBox).Tag.ToString()]);
+                    if (lastTextboxValues[(sender as TextBox).Tag.ToString()] != "")
+                    {
+                        lastValue = Convert.ToInt32(lastTextboxValues[(sender as TextBox).Tag.ToString()]);
+                    } 
+                    else
+                    {
+                        lastValue = 0;
+                    }
                     lastTextboxValues[(sender as TextBox).Tag.ToString()] = (sender as TextBox).Text;
                 }
                 else
                 {
-                    lastTextboxValues.Add((sender as TextBox).Tag.ToString(), (sender as TextBox).Text);
+                    if ((sender as TextBox).Text != "")
+                    {
+                        lastTextboxValues.Add((sender as TextBox).Tag.ToString(), (sender as TextBox).Text);
+                    }
                 }
 
                 string[] s = (sender as TextBox).Tag.ToString().Split(new char[] { ',' });

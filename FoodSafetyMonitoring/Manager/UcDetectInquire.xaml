@@ -39,14 +39,14 @@
             <StackPanel Grid.Row="1" VerticalAlignment="Center">
                 <TextBlock MinWidth="50">检测站点:</TextBlock>
                 <ComboBox x:Name="_detect_station" Width="240" HorizontalContentAlignment="Center"/>
+                <TextBlock MinWidth="40" Margin="10,0,0,0">检测师:</TextBlock>
+                <ComboBox Width="120" x:Name="_detect_person1" />
                 <TextBlock MinWidth="50" Margin="30,0,0,0">检测项目:</TextBlock>
                 <ComboBox Width="140" x:Name="_detect_item1" />
                 <TextBlock MinWidth="50" Margin="30,0,0,0">检测对象:</TextBlock>
                 <ComboBox Width="100" x:Name="_detect_object1" />
                 <TextBlock MinWidth="40" Margin="30,0,0,0">检测方法:</TextBlock>
                 <ComboBox Width="140" x:Name="_detect_method" />
-                <TextBlock MinWidth="40" Margin="30,0,0,0">数据来源:</TextBlock>
-                <ComboBox Width="110" x:Name="_detect_type" />
             </StackPanel>
             <Grid  Grid.Row="2" VerticalAlignment="Center">
                 <StackPanel>
@@ -54,8 +54,8 @@
                     <ComboBox Width="120" x:Name="_dept_type" />
                     <TextBlock MinWidth="50">检测结果:</TextBlock>
                     <ComboBox Width="120" x:Name="_detect_result1" />
-                    <TextBlock MinWidth="40" Margin="10,0,0,0">检测师:</TextBlock>
-                    <ComboBox Width="120" x:Name="_detect_person1" />
+                    <TextBlock MinWidth="40" Margin="30,0,0,0">数据来源:</TextBlock>
+                    <ComboBox Width="110" x:Name="_detect_type" />
                 </StackPanel>
                 <Button Name="_query" Width="76" Height="30"  Grid.Row="0" Grid.Column="1" Style="{StaticResource SelectImageButtonTemplate}" Click="_query_Click" Margin="0,0,155,0"  HorizontalAlignment="Right"/>
                 <Button Name="_export" Width="76" Height="30" Grid.Column="1" Grid.Row="1" Style="{StaticResource ExportImageButtonTemplate}" Click="_export_Click" Margin="0,0,15,0" HorizontalAlignment="Right"/>

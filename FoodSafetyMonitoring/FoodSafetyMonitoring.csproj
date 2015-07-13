@@ -352,12 +352,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Manager\Themes\ExpandDockPanel.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Manager\Themes\GridViewColumnHeaderStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -1004,6 +998,18 @@
     <Content Include="DLL\MySql.Data.dll" />
     <Content Include="DLL\NPOI.dll" />
     <Content Include="DLL\NPOI.OOXML.dll" />
+    <Resource Include="res\slaughter_before_normal.jpg" />
+    <Resource Include="res\slaughter_before_select.jpg" />
+    <Resource Include="res\slaughter_before_unpressed.jpg" />
+    <Resource Include="res\culture_normal.jpg" />
+    <Resource Include="res\culture_select.jpg" />
+    <Resource Include="res\culture_unpressed.jpg" />
+    <Resource Include="res\certificate_normal.jpg" />
+    <Resource Include="res\certificate_select.jpg" />
+    <Resource Include="res\certificate_unpressed.jpg" />
+    <Resource Include="res\slaughter_normal.jpg" />
+    <Resource Include="res\slaughter_select.jpg" />
+    <Resource Include="res\slaughter_unpressed.jpg" />
     <Resource Include="res\wdwk.png" />
     <Resource Include="DLL\NPOI.OOXML.XML" />
     <Content Include="DLL\NPOI.OpenXml4Net.dll" />

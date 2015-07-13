@@ -72,15 +72,15 @@ namespace FoodSafetyMonitoring
             this.SizeChanged += new SizeChangedEventHandler(MainWindow_SizeChanged);
 
             //加载主画面
-            if (mainMenus[0].Flag_Exits == 1)
-            {
+            //if (mainMenus[0].Flag_Exits == 1)
+            //{
                 TabItem temptb = new TabItem();
                 temptb.Header = "首页";
                 temptb.Content = new UcMainPage();
 
                 _tab.Items.Add(temptb);
                 _tab.SelectedIndex = _tab.Items.Count - 1;
-            }
+            //}
 
             //if (!FullScreenHelper.IsFullscreen(this))
             //{
@@ -163,118 +163,63 @@ namespace FoodSafetyMonitoring
         //加载父菜单和子菜单
         private void MainMenu_Load()
         {
-            int flag_exits = 0;
+            //int flag_exits = 0;
 
             //用户的查看权限
-            string strSql = "SELECT rp.SUB_ID,s.SUB_NAME,s.SUB_FATHER_ID " +
-                            "FROM sys_sub s ,sys_rolepermission rp , sys_client_user u " +
+            string strSql = "SELECT rp.SUB_ID,s.SUB_NAME,s.SUB_FATHER_ID,s.SUB_NORMAL_URL,s.SUB_SELECT_URL,s.SUB_UNPRESSED_URL " +
+                            "FROM sys_sub_hb s ,sys_rolepermission_hb rp , sys_client_user u " +
                             "WHERE s.SUB_ID = rp.SUB_ID " +
                             "AND rp.ROLE_ID = u.ROLE_ID " +
                             "AND u.RECO_PKID = " + (Application.Current.Resources["User"] as UserInfo).ID +
-                            " order by rp.SUB_ID";
+                            " order by rp.SUB_ID asc";
 
             DataTable table = dbOperation.GetDbHelper().GetDataSet(strSql).Tables[0];
-            DataRow[] row_mainmenu = table.Select("SUB_FATHER_ID = '0'");
+            //一级菜单
+            DataRow[] row_mainmenu = table.Select("SUB_FATHER_ID = '0'", "SUB_ID desc");
+            //定义数组存放：一级菜单图片控件和一级菜单文字控件
+            Image[] images = new Image[] { _image_6,_image_5,_image_4,_image_3,_image_2,_image_1,_image_0};
+            TextBlock[] texts = new TextBlock[] { _text_6, _text_5, _text_4, _text_3, _text_2, _text_1, _text_0 };
+
+            int i = 0;
+            foreach (DataRow row in row_mainmenu )
+            {
+                //二级菜单
+                List<MyChildMenu> childMenus = new List<MyChildMenu>();
+                DataRow[] row_childmenu = table.Select("SUB_FATHER_ID ='" + row["SUB_ID"] + "'","SUB_ID asc");
+                //当一级菜单存在，但二级菜单为空时
+                if( row_childmenu.Count() == 0 )
+                {
+
+                }
+                else
+                {
+                    foreach (DataRow row_child in row_childmenu)
+                    {
+                        DataRow[] row_child_childmenu = table.Select("SUB_FATHER_ID ='" + row_child["SUB_ID"] + "'","SUB_ID asc");
+                        childMenus.Add(new MyChildMenu(row_child["SUB_NAME"].ToString(), this, row_child_childmenu));
+                    }
+                }
+                mainMenus.Add(new MainMenuItem(row["SUB_NAME"].ToString(), images[i], row["SUB_SELECT_URL"].ToString(), row["SUB_NORMAL_URL"].ToString(), row["SUB_UNPRESSED_URL"].ToString(), childMenus, this));
+                texts[i].Text = row["SUB_NAME"].ToString();
+                i = i + 1;
+            }
             
-
-            //首页
-            List<MyChildMenu> childMenus = new List<MyChildMenu>();
-            flag_exits = MainMenu_exits(row_mainmenu, "首页");
-            mainMenus.Add(new MainMenuItem("首页", _first, "/res/firstpage_select.jpg", "/res/firstpage_normal.jpg", "/res/firstpage_unpressed.jpg", childMenus, this, flag_exits));
-
-            //新建检测单
-            childMenus = new List<MyChildMenu>();
-            DataRow[] row_detect = table.Select("SUB_FATHER_ID = '2'");
-            foreach (DataRow row in row_detect)
-            {
-                childMenus.Add(new MyChildMenu(row["SUB_NAME"].ToString(), this, 2));
-            }
-            flag_exits = MainMenu_exits(row_mainmenu, "检测单");
-            mainMenus.Add(new MainMenuItem("检测单", _detect, "/res/detect_select.jpg", "/res/detect_normal.jpg", "/res/detect_unpressed.jpg", childMenus, this, flag_exits));
-
-            //统计报表
-            childMenus = new List<MyChildMenu>();
-            DataRow[] row_report = table.Select("SUB_FATHER_ID = '3'");
-            foreach (DataRow row in row_report)
-            {
-                childMenus.Add(new MyChildMenu(row["SUB_NAME"].ToString(), this, 3));
-            }
-            flag_exits = MainMenu_exits(row_mainmenu, "数据统计");
-            mainMenus.Add(new MainMenuItem("数据统计", _report, "/res/report_select.jpg", "/res/report_normal.jpg", "/res/report_unpressed.jpg", childMenus, this, flag_exits));
-
-
-            //统计分析
-            childMenus = new List<MyChildMenu>();
-            DataRow[] row_analysis = table.Select("SUB_FATHER_ID = '4'");
-            foreach (DataRow row in row_analysis)
-            {
-                childMenus.Add(new MyChildMenu(row["SUB_NAME"].ToString(), this, 4));
-            }
-            flag_exits = MainMenu_exits(row_mainmenu, "数据分析");
-            mainMenus.Add(new MainMenuItem("数据分析", _analysis, "/res/analysis_select.jpg", "/res/analysis_normal.jpg", "/res/analysis_unpressed.jpg", childMenus, this, flag_exits));
-
-
-            //检测任务
-            childMenus = new List<MyChildMenu>();
-            DataRow[] row_task = table.Select("SUB_FATHER_ID = '5'");
-            foreach (DataRow row in row_task)
-            {
-                childMenus.Add(new MyChildMenu(row["SUB_NAME"].ToString(), this, 5));
-            }
-            flag_exits = MainMenu_exits(row_mainmenu, "检测任务");
-            mainMenus.Add(new MainMenuItem("检测任务", _task, "/res/task_select.jpg", "/res/task_normal.jpg", "/res/task_unpressed.jpg", childMenus, this, flag_exits));
-
-
-            //风险预警
-            childMenus = new List<MyChildMenu>();
-            DataRow[] row_warning = table.Select("SUB_FATHER_ID = '6'");
-            foreach (DataRow row in row_warning)
-            {
-                childMenus.Add(new MyChildMenu(row["SUB_NAME"].ToString(), this, 6));
-            }
-            flag_exits = MainMenu_exits(row_mainmenu, "风险预警");
-            mainMenus.Add(new MainMenuItem("风险预警", _warning, "/res/warning_select.jpg", "/res/warning_normal.jpg", "/res/warning_unpressed.jpg", childMenus, this, flag_exits));
-
-
-            //系统管理
-            childMenus = new List<MyChildMenu>();
-            DataRow[] row_system = table.Select("SUB_FATHER_ID = '7'");
-            foreach (DataRow row in row_system)
-            {
-                childMenus.Add(new MyChildMenu(row["SUB_NAME"].ToString(), this, 7));
-            }
-            flag_exits = MainMenu_exits(row_mainmenu, "系统管理");
-            mainMenus.Add(new MainMenuItem("系统管理", _system, "/res/system_select.jpg", "/res/system_normal.jpg", "/res/system_unpressed.jpg", childMenus, this, flag_exits));
-
-
-            //帮助
-            childMenus = new List<MyChildMenu>();
-            DataRow[] row_help = table.Select("SUB_FATHER_ID = '8'");
-            foreach (DataRow row in row_help)
-            {
-                childMenus.Add(new MyChildMenu(row["SUB_NAME"].ToString(), this, 8));
-            }
-            flag_exits = MainMenu_exits(row_mainmenu, "帮助");
-            mainMenus.Add(new MainMenuItem("帮助", _help, "/res/help_select.jpg", "/res/help_normal.jpg", "/res/help_unpressed.jpg", childMenus, this, flag_exits));
-
-            //mainMenus[0].LoadChildMenu();
         }
-
 
         //判断用户的菜单权限
-        private int MainMenu_exits(DataRow[] sub_row, string mainmenu)
-        {
-            int flag_exits = 0;
-            foreach (DataRow row in sub_row)
-            {
-                if (row["SUB_NAME"].ToString() == mainmenu)
-                {
-                    flag_exits = 1;
-                    break;
-                }
-            }
-            return flag_exits;
-        }
+        //private int MainMenu_exits(DataRow[] sub_row, string mainmenu)
+        //{
+        //    int flag_exits = 0;
+        //    foreach (DataRow row in sub_row)
+        //    {
+        //        if (row["SUB_NAME"].ToString() == mainmenu)
+        //        {
+        //            flag_exits = 1;
+        //            break;
+        //        }
+        //    }
+        //    return flag_exits;
+        //}
 
         //关闭子窗口
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -399,9 +344,9 @@ namespace FoodSafetyMonitoring
         public Image img;
         public Grid grid_Menu;
         private MainWindow mainWindow;
-        public int Flag_Exits;
+        //public int Flag_Exits;
 
-        public MainMenuItem(string name, Image img, string mouseEnterBackImgPath, string mouseLeaveBackImgPath, string mouseUnpressedBackImgPath, List<MyChildMenu> childMenus, MainWindow mainWindow, int flag_exits)
+        public MainMenuItem(string name, Image img, string mouseEnterBackImgPath, string mouseLeaveBackImgPath, string mouseUnpressedBackImgPath, List<MyChildMenu> childMenus, MainWindow mainWindow)
         {
             this.Name = name;
             this.childMenus = childMenus;
@@ -410,19 +355,19 @@ namespace FoodSafetyMonitoring
             this.childMenu = new ChildMenu(childMenus);
             this.img = img;
             this.img.Tag = name;
-            this.Flag_Exits = flag_exits;
+            //this.Flag_Exits = flag_exits;
             img_mouseEnter = new BitmapImage(new Uri("pack://application:,," + mouseEnterBackImgPath));
             img_mouseLeave = new BitmapImage(new Uri("pack://application:,," + mouseLeaveBackImgPath));
             img_mouseUnpressed = new BitmapImage(new Uri("pack://application:,," + mouseUnpressedBackImgPath));
-            if (Flag_Exits == 1)
-            {
+            //if (Flag_Exits == 1)
+            //{
                 this.img.Source = img_mouseLeave;
-            }
-            else
-            {
-                this.img.Source = img_mouseUnpressed;
-                this.img.ToolTip = "无操作权限";
-            }
+            //}
+            //else
+            //{
+            //    this.img.Source = img_mouseUnpressed;
+            //    this.img.ToolTip = "无操作权限";
+            //}
 
             this.img.MouseDown += new MouseButtonEventHandler(img_MouseDown);
             this.img.MouseEnter += new MouseEventHandler(img_MouseEnter);
@@ -433,7 +378,8 @@ namespace FoodSafetyMonitoring
 
         void img_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (Name == "首页" && Flag_Exits == 1)
+            //if (Name == "首页" && Flag_Exits == 1)
+            if (Name == "首页" )
             {
                 int flag = 0;
                 foreach (TabItem item in mainWindow._tab.Items)
@@ -456,15 +402,15 @@ namespace FoodSafetyMonitoring
                 }
             }
             //mainWindow.IsEnbleMouseEnterLeave = true;
-            if (Flag_Exits == 1)
-            {
+            //if (Flag_Exits == 1)
+            //{
                 for (int i = 0; i < grid_Menu.Children.Count; i++)
                 {
                     grid_Menu.Children.RemoveAt(i);
                     i--;
                 }
                 this.grid_Menu.Children.Add(childMenu);
-            }
+            //}
         }
 
         //void img_MouseLeave(object sender, MouseEventArgs e)
@@ -491,42 +437,20 @@ namespace FoodSafetyMonitoring
             //一旦鼠标移在主菜单图标上，主菜单的图标变成黄色，其余均为正常色
             for (int i = 0; i < mainWindow.mainMenus.Count; i++)
             {
-                if (mainWindow.mainMenus[i].Flag_Exits == 1)
-                {
+                //if (mainWindow.mainMenus[i].Flag_Exits == 1)
+                //{
                     mainWindow.mainMenus[i].img.Source = mainWindow.mainMenus[i].img_mouseLeave;
-                }
+                //}
             }
             img.Source = img_mouseEnter;
-
-            switch (Name)
-            {
-                case "首页": mainWindow._childmenubar.ImageSource = new BitmapImage(new Uri("pack://application:,," + "/res/firstpage_bar.jpg"));
-                    break;
-                case "检测单": mainWindow._childmenubar.ImageSource = new BitmapImage(new Uri("pack://application:,," + "/res/detect_bar.jpg"));
-                    break;
-                case "数据统计": mainWindow._childmenubar.ImageSource = new BitmapImage(new Uri("pack://application:,," + "/res/report_bar.jpg"));
-                    break;
-                case "数据分析": mainWindow._childmenubar.ImageSource = new BitmapImage(new Uri("pack://application:,," + "/res/analysis_bar.jpg"));
-                    break;
-                case "风险预警": mainWindow._childmenubar.ImageSource = new BitmapImage(new Uri("pack://application:,," + "/res/warning_bar.jpg"));
-                    break;
-                case "检测任务": mainWindow._childmenubar.ImageSource = new BitmapImage(new Uri("pack://application:,," + "/res/task_bar.jpg"));
-                    break;
-                case "系统管理": mainWindow._childmenubar.ImageSource = new BitmapImage(new Uri("pack://application:,," + "/res/system_bar.jpg"));
-                    break;
-                case "帮助": mainWindow._childmenubar.ImageSource = new BitmapImage(new Uri("pack://application:,," + "/res/help_bar.jpg"));
-                    break;
-                default: break;
-
-            }
         }
 
         void img_MouseEnter(object sender, MouseEventArgs e)
         {
-            if (Flag_Exits == 1)
-            {
+            //if (Flag_Exits == 1)
+            //{
                 LoadChildMenu();
-            }
+            //}
         }
 
     }

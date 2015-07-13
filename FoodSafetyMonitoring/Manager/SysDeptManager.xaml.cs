@@ -407,7 +407,9 @@ namespace FoodSafetyMonitoring.Manager
 
         private void Clear_Click(object sender, RoutedEventArgs e)
         {
-
+            _detail_info.IsEnabled = false;
+            _add.IsEnabled = true;
+            _edit.IsEnabled = true;        
         }
 
         //private void txtSearch_ImageClick(object sender, EventArgs e)
