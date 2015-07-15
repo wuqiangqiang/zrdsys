@@ -25,26 +25,26 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="30"/>
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Column="1"  FontSize="22" Text="--------------------------养殖档案录入单--------------------------" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" ></TextBlock>
+                <TextBlock Grid.Column="1"  FontSize="22" Text="---------------------养殖档案录入单-------------------" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" ></TextBlock>
                 <StackPanel Grid.Row="1" Orientation="Horizontal">
                     <TextBlock HorizontalAlignment="Right">圈舍号:</TextBlock>
-                    <ComboBox Width="100" x:Name="_colony_house" IsEditable="True"></ComboBox>
+                    <TextBox Width="100" Height="20" x:Name="_colony_house" MaxLength="10" InputMethod.IsInputMethodEnabled="False" PreviewKeyDown="Colony_House_PreviewKeyDown"></TextBox>
                     <TextBlock  >圈舍养殖品种:</TextBlock>
-                    <!--<TextBox Width="200" x:Name="_object_type" MaxLength="20" InputMethod.IsInputMethodEnabled="False" PreviewKeyDown="Detect_Number_PreviewKeyDown"></TextBox>-->
+                    <ComboBox Width="100" x:Name="_object_type" IsEditable="True"></ComboBox>  
                 </StackPanel>
                 <StackPanel Grid.Row="2" Orientation="Horizontal">
                     <TextBlock  >圈舍养殖数量:</TextBlock>
-                    <!--<TextBox Width="60" x:Name="_object_sum" MaxLength="5" TextAlignment="Right" InputMethod.IsInputMethodEnabled="False" DataObject.Pasting="Object_Count_Pasting" PreviewKeyDown="Object_Count_PreviewKeyDown"  PreviewTextInput="Object_Count_PreviewTextInput"></TextBox>-->
-                    <TextBlock Width="40" >起始档案编号:</TextBlock>
-                    <!--<TextBox Width="100" x:Name="_object_label" MaxLength="15" InputMethod.IsInputMethodEnabled="False" PreviewKeyDown="Object_Lable_PreviewKeyDown"></TextBox>-->
+                    <TextBox Width="90" Height="20" x:Name="_object_sum" MaxLength="5" TextAlignment="Right" InputMethod.IsInputMethodEnabled="False" DataObject.Pasting="Object_Sum_Pasting" PreviewKeyDown="Object_Sum_PreviewKeyDown"  PreviewTextInput="Object_Sum_PreviewTextInput"></TextBox>
+                    <TextBlock Width="90" >起始档案编号:</TextBlock>
+                    <TextBlock Width="100" x:Name="_file_num"></TextBlock>
                 </StackPanel>
                 <StackPanel Grid.Row="3" Orientation="Horizontal">
-                    <TextBlock  MinWidth="40">检测点:</TextBlock>
-                    <TextBlock  x:Name="_detect_site" Margin="5,0,0,0" MinWidth="200" ></TextBlock>
-                    <TextBlock  MinWidth="40">检测师:</TextBlock>
-                    <TextBlock  x:Name="_detect_person" Margin="5,0,0,0" MinWidth="180" ></TextBlock>
-                    <TextBlock  MinWidth="40">录入时间:</TextBlock>
-                    <TextBlock  x:Name="_entering_datetime" Margin="5,0,0,0" MinWidth="150" ></TextBlock>
+                    <TextBlock  MinWidth="40">养殖企业名称:</TextBlock>
+                    <TextBlock  x:Name="_culture_company" Margin="5,0,0,0" MinWidth="180" ></TextBlock>
+                    <TextBlock  MinWidth="40">建档人:</TextBlock>
+                    <TextBlock  x:Name="_file_person" Margin="5,0,0,0" MinWidth="100" ></TextBlock>
+                    <TextBlock  MinWidth="40">建档时间:</TextBlock>
+                    <TextBlock  x:Name="_file_datetime" Margin="5,0,0,0" MinWidth="150" ></TextBlock>
                 </StackPanel>
                 <Grid Grid.Row="4">
                     <Grid.ColumnDefinitions>
@@ -54,8 +54,8 @@
                     </Grid.ColumnDefinitions>
                     <TextBlock Name="txtMsg"  Foreground="Red" FontSize="14" FontFamily="宋体"  HorizontalAlignment="Center" ></TextBlock>
                     <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" >
-                        <!--<Button Name="btnSave" Width="76" Height="30" Style="{StaticResource SaveImageButtonTemplate}" Click="btnSave_Click" Margin="0,0,20,0"/>-->
-                        <!--<Button Name="btnCancel" Width="76" Height="30" Style="{StaticResource CancelImageButtonTemplate}" Click="Clear_Click" Margin="20,0,0,0"  />-->
+                        <Button Name="btnSave" Width="76" Height="30" Style="{StaticResource SaveImageButtonTemplate}" Click="btnSave_Click" Margin="0,0,20,0"/>
+                        <Button Name="btnCancel" Width="76" Height="30" Style="{StaticResource CancelImageButtonTemplate}" Click="Clear_Click" Margin="20,0,0,0"  />
                     </StackPanel>
                 </Grid>
             </Grid>

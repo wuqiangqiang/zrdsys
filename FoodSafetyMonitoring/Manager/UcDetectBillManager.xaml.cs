@@ -48,6 +48,7 @@ namespace FoodSafetyMonitoring.Manager
                 ComboboxTool.InitComboboxSource(_detect_trade, "select tradeId,tradeName from t_trade where openFlag = '1' order by orderId", "lr");
             }
             else
+
             {
                 ComboboxTool.InitComboboxSource(_detect_trade, "select tradeId,tradeName from t_trade where openFlag = '1'", "lr");
             }

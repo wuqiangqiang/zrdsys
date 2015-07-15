@@ -128,10 +128,10 @@ namespace FoodSafetyMonitoring
                     case "1": temptb.Content = new UcMainPage();
                         break;
                     //养殖检测->档案管理->新建档案
-                    case "20101": temptb.Content = new UcUserManager(mainWindow.dbOperation);
+                    case "20101": temptb.Content = new UcCultureFile(mainWindow.dbOperation);
                         break;
                     //养殖检测->档案管理->档案信息查询
-                    case "20102": temptb.Content = new UcDetectBillManager();
+                    case "20102": temptb.Content = new UcQueryCultureFile(mainWindow.dbOperation);
                         break;
                     //养殖检测->检测单管理->新建检测单
                     case "20201": temptb.Content = new UcDetectBillManager();
