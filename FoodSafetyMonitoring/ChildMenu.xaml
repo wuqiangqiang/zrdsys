@@ -54,7 +54,7 @@
                                 <RowDefinition x:Name="gr" Height="0"/>
                             </Grid.RowDefinitions>
                             <Border x:Name="hea" Background="LightBlue" BorderThickness="1,0,1,1" BorderBrush="white" Grid.Row="0">
-                                <BulletDecorator VerticalAlignment="Center"  >
+                                <BulletDecorator VerticalAlignment="Center">
                                     <BulletDecorator.Bullet>
                                         <ToggleButton Margin="1,1,1,1"  Height="18" Width="18" Template="{StaticResource ToggleButtonTemp}"
                                                   IsChecked="{Binding Path=IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
@@ -97,7 +97,7 @@
             </Style.Triggers>
         </Style>
     </UserControl.Resources>
-    <Grid  x:Name="_grid">
+    <Grid  x:Name="_grid" HorizontalAlignment="Left">
         <StackPanel>
             <Expander ExpandDirection="Down" Width="140" x:Name="_expander_0">
                 <Expander.Header>

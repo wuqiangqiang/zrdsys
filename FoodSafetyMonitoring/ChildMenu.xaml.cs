@@ -99,9 +99,9 @@ namespace FoodSafetyMonitoring
             {
                 Button btn = new Button();
                 btn.Content = row["SUB_NAME"].ToString();
+                btn.Tag = row["SUB_ID"].ToString();
                 btn.MinWidth = 30;
                 btn.Click += new RoutedEventHandler(this.btn_Click);
-
                 buttons.Add(btn);
             }
         }
@@ -122,10 +122,48 @@ namespace FoodSafetyMonitoring
             {
                 temptb = new TabItem();
                 temptb.Header = (sender as Button).Content.ToString();
-                switch (name)
+                switch ((sender as Button).Tag.ToString())
                 {
-                    case "首页": temptb.Content = new UcMainPage();
+                    //首页
+                    case "1": temptb.Content = new UcMainPage();
                         break;
+                    //养殖检测->档案管理->新建档案
+                    case "20101": temptb.Content = new UcUserManager(mainWindow.dbOperation);
+                        break;
+                    //养殖检测->档案管理->档案信息查询
+                    case "20102": temptb.Content = new UcDetectBillManager();
+                        break;
+                    //养殖检测->检测单管理->新建检测单
+                    case "20201": temptb.Content = new UcDetectBillManager();
+                        break;
+                    //养殖检测->检测单管理->检测单列表
+                    case "20202": temptb.Content = new UcDetectBillManager();
+                        break;
+                    //出证检测->检测单管理->新建检测单
+                    case "30101": temptb.Content = new UcDetectBillManager();
+                        break;
+                    //出证检测->检测单管理->检测单列表
+                    case "30102": temptb.Content = new UcDetectBillManager();
+                        break;
+                    //出证检测->电子出证单->新建电子出证单
+                    case "30201": temptb.Content = new UcDetectBillManager();
+                        break;
+                    //出证检测->电子出证单->出证单列表
+                    case "30202": temptb.Content = new UcDetectBillManager();
+                        break;
+                    //宰前检测->检测单管理->新建检测单
+                    case "40101": temptb.Content = new UcDetectBillManager();
+                        break;
+                    //宰前检测->检测单管理->检测单列表
+                    case "40102": temptb.Content = new UcDetectBillManager();
+                        break;
+                    //屠宰同步检测->检测单管理->新建检测单
+                    case "50101": temptb.Content = new UcDetectBillManager();
+                        break;
+                    //屠宰同步检测->检测单管理->检测单列表
+                    case "50102": temptb.Content = new UcDetectBillManager();
+                        break;
+                    //养殖检测->检测单管理->新建档案
                     case "新建": temptb.Content = new UcDetectBillManager();
                         break;
                     case "列表": temptb.Content = new UcDetectInquire(mainWindow.dbOperation);
@@ -161,6 +199,9 @@ namespace FoodSafetyMonitoring
                     case "角色管理": temptb.Content = new SysRoleManager();
                         break;
                     case "权限管理": temptb.Content = new SysRolePowerManager();
+                        break;
+                    //系统管理->系统管理->执法队伍
+                    case "60102": temptb.Content = new UcUserManager(mainWindow.dbOperation);
                         break;
                     case "用户管理": temptb.Content = new SysUserManager();
                         break;
