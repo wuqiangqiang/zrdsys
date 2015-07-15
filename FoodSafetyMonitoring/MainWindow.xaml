@@ -145,7 +145,8 @@
         </Grid>
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="150" />
+                <ColumnDefinition MaxWidth="150" />
+                <ColumnDefinition Width="6"/>
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <Grid>
@@ -160,8 +161,8 @@
 
                 </Grid>
             </Grid>
-            
-            <Grid x:Name="grid_Component" Grid.Column="1">
+            <GridSplitter Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Center" Width="6"></GridSplitter>
+            <Grid x:Name="grid_Component" Grid.Column="2">
                 <TabControl x:Name="_tab">
                 </TabControl>
             </Grid>
