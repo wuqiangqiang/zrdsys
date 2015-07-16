@@ -39,6 +39,7 @@ namespace FoodSafetyMonitoring.Manager
             dtpEndDate.Value = DateTime.Now;
             ComboboxTool.InitComboboxSource(_object_type, "SELECT ObjectTypeId,ObjectTypeName FROM t_culture_type where OpenFlag = '1'", "cxtj");
             ComboboxTool.InitComboboxSource(_culture_company, string.Format("call p_user_dept('{0}')", userId), "cxtj");
+            ComboboxTool.InitComboboxSource(_file_cuserid, string.Format("call p_user_detuser('{0}')", userId), "cxtj");
             _culture_company.SelectionChanged += new SelectionChangedEventHandler(_culture_company_SelectionChanged);
 
             SetColumns();
@@ -46,17 +47,17 @@ namespace FoodSafetyMonitoring.Manager
 
         private void SetColumns()
         {
-            MyColumns.Add("createdate", new MyColumn("createdate", "建档时间") { BShow = true, Width = 10 });
-            MyColumns.Add("culturecompany", new MyColumn("culturecompany", "养殖企业名称") { BShow = false });
-            MyColumns.Add("colonyhouse", new MyColumn("colonyhouse", "圈舍号") { BShow = true, Width = 10 });
-            MyColumns.Add("fileno", new MyColumn("fileno", "档案编号") { BShow = true, Width = 18 });
-            MyColumns.Add("objecttype", new MyColumn("objecttype", "养殖品种") { BShow = false });
-            MyColumns.Add("createuser", new MyColumn("createuser", "建档人") { BShow = true, Width = 16 });
+            MyColumns.Add("createdate", new MyColumn("createdate", "建档时间") { BShow = true, Width = 18 });
+            MyColumns.Add("culturecompany", new MyColumn("culturecompany", "养殖企业名称") { BShow = true, Width = 18 });
+            MyColumns.Add("colonyhouse", new MyColumn("colonyhouse", "圈舍号") { BShow = true, Width = 5 });
+            MyColumns.Add("fileno", new MyColumn("fileno", "档案编号") { BShow = true, Width = 15 });
+            MyColumns.Add("objecttype", new MyColumn("objecttype", "养殖品种") { BShow = true, Width = 15 });
+            MyColumns.Add("createuser", new MyColumn("createuser", "建档人") { BShow = true, Width = 10 });
             MyColumns.Add("sum_num", new MyColumn("sum_num", "总行数") { BShow = false });
 
             _tableview.MyColumns = MyColumns;
             _tableview.BShowModify = false;
-            _tableview.BShowDetails = true;
+            _tableview.BShowDetails = false;
 
             if ((Application.Current.Resources["User"] as UserInfo).FlagTier == "0")
             {

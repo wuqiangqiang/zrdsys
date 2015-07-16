@@ -133,11 +133,11 @@ namespace FoodSafetyMonitoring
                     //养殖检测->档案管理->档案信息查询
                     case "20102": temptb.Content = new UcQueryCultureFile(mainWindow.dbOperation);
                         break;
-                    //养殖检测->检测单管理->新建检测单
-                    case "20201": temptb.Content = new UcDetectBillManager();
+                    //养殖检测->检测单管理->新建养殖检测单
+                    case "20201": temptb.Content = new UcCultureDetectManager(mainWindow.dbOperation);
                         break;
-                    //养殖检测->检测单管理->检测单列表
-                    case "20202": temptb.Content = new UcDetectBillManager();
+                    //养殖检测->检测单管理->养殖检测单列表
+                    case "20202": temptb.Content = new UcCultureDetectInquire(mainWindow.dbOperation);
                         break;
                     //出证检测->检测单管理->新建检测单
                     case "30101": temptb.Content = new UcDetectBillManager();
@@ -155,7 +155,7 @@ namespace FoodSafetyMonitoring
                     case "40101": temptb.Content = new UcDetectBillManager();
                         break;
                     //宰前检测->检测单管理->检测单列表
-                    case "40102": temptb.Content = new UcDetectBillManager();
+                    case "40102": temptb.Content = new UcDetectInquire(mainWindow.dbOperation);
                         break;
                     //屠宰同步检测->检测单管理->新建检测单
                     case "50101": temptb.Content = new UcDetectBillManager();
