@@ -184,6 +184,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Manager\Certificate_detectdetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Manager\culture_detectdetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -502,6 +506,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Manager\UcCreateCertificate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Manager\UcCultureDetectInquire.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -785,6 +793,9 @@
       <DependentUpon>AddReviewDetails.xaml</DependentUpon>
     </Compile>
     <Compile Include="Manager\AlarmData.cs" />
+    <Compile Include="Manager\Certificate_detectdetails.xaml.cs">
+      <DependentUpon>Certificate_detectdetails.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Manager\culture_detectdetails.xaml.cs">
       <DependentUpon>culture_detectdetails.xaml</DependentUpon>
     </Compile>
@@ -869,6 +880,9 @@
     </Compile>
     <Compile Include="Manager\UcCertificateInquire.xaml.cs">
       <DependentUpon>UcCertificateInquire.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\UcCreateCertificate.xaml.cs">
+      <DependentUpon>UcCreateCertificate.xaml</DependentUpon>
     </Compile>
     <Compile Include="Manager\UcCultureDetectInquire.xaml.cs">
       <DependentUpon>UcCultureDetectInquire.xaml</DependentUpon>

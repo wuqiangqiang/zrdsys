@@ -139,11 +139,11 @@ namespace FoodSafetyMonitoring
                     //养殖检测->检测单管理->养殖检测单列表
                     case "20202": temptb.Content = new UcCultureDetectInquire(mainWindow.dbOperation);
                         break;
-                    //出证检测->检测单管理->新建检测单
-                    case "30101": temptb.Content = new UcDetectBillManager();
+                    //出证检测->检测单管理->新建出证检测单
+                    case "30101": temptb.Content = new UcCertificateDetectManager(mainWindow.dbOperation);
                         break;
-                    //出证检测->检测单管理->检测单列表
-                    case "30102": temptb.Content = new UcDetectBillManager();
+                    //出证检测->检测单管理->出证检测单列表
+                    case "30102": temptb.Content = new UcCertificateInquire(mainWindow.dbOperation);
                         break;
                     //出证检测->电子出证单->新建电子出证单
                     case "30201": temptb.Content = new UcDetectBillManager();

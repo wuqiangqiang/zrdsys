@@ -73,10 +73,10 @@ namespace FoodSafetyMonitoring.Manager
             {
                 msg = "*请选择来源单位";
             }
-            else if (_phone_number.Text.Trim().Length == 0)
-            {
-                msg = "*联系电话不能为空";
-            }
+            //else if (_phone_number.Text.Trim().Length == 0)
+            //{
+            //    msg = "*联系电话不能为空";
+            //}
             else if (_province.Text.Trim().Length == 0)
             {
                 msg = "*省不能为空";
@@ -126,7 +126,7 @@ namespace FoodSafetyMonitoring.Manager
                 //批次编码为空时，自动生成编码
                 if(_batch_number.Text == "")
                 {
-                    string batch_no = dbOperation.GetDbHelper().GetSingle("").ToString();
+                    string batch_no = dbOperation.GetDbHelper().GetSingle("select f_create_batchno()").ToString();
                     _batch_number.Text = batch_no;
                 }
                 string sql = string.Format("call p_insert_certificate_detect('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}')"
@@ -147,7 +147,7 @@ namespace FoodSafetyMonitoring.Manager
                 if (i == 1)
                 {
                     //Toolkit.MessageBox.Show("添加成功！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
-                    if (Toolkit.MessageBox.Show("添加成功！批次编码为，是否继续录入该批次的检测单?", "系统询问", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                    if (Toolkit.MessageBox.Show("添加成功！批次编码为(" + _batch_number.Text + ")，是否继续录入该批次的检测单?", "系统询问", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                     {
                         this._detect_trade.SelectedIndex = 1;
                         this._detect_item.SelectedIndex = 0;
@@ -164,7 +164,7 @@ namespace FoodSafetyMonitoring.Manager
                     {
                         clear();
                     }
-                    ComboboxTool.InitComboboxSource(_source_company, string.Format("call p_user_dept('{0}')", userId), "lr");
+                    //ComboboxTool.InitComboboxSource(_source_company, string.Format("call p_user_dept('{0}')", userId), "lr");
                 }
                 else
                 {
