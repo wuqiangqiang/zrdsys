@@ -48,9 +48,36 @@
                 <TextBlock  x:Name="_cdatetime" Margin="5,0,0,0" MinWidth="150" ></TextBlock>
             </StackPanel>
         </Grid>
-        <Grid  Grid.Row="1" Margin="5,5,5,5" x:Name="grid_table">
-            <control:UcTableOperableView x:Name="_tableview" Background="Transparent" />
-        </Grid>
+        <!--<Grid  Grid.Row="1" Margin="5,5,5,5" x:Name="grid_table">
+            <control:UcTableOperableView x:Name="_tableview" Background="Transparent" /> 
+        </Grid>-->
+        <ListView Grid.Row="1" Name="lvlist" ItemsSource="{Binding}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" >
+            <ListView.View>
+                <GridView >
+                    <GridViewColumn Width="50" Header="选择">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox x:Name="_chk"></CheckBox>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="100" Header="来源单位" DisplayMemberBinding="{Binding COMPANYNAME}" ></GridViewColumn>
+                    <GridViewColumn Width="100" Header="批次编码" DisplayMemberBinding="{Binding batchno}" ></GridViewColumn>
+                    <GridViewColumn Width="150" Header="检测项目"  DisplayMemberBinding="{Binding ItemNAME}" ></GridViewColumn>
+                    <GridViewColumn Width="100" Header="检测站点"   DisplayMemberBinding="{Binding DeptName}"></GridViewColumn>
+                    <GridViewColumn Width="100" Header="检测师"   DisplayMemberBinding="{Binding DETECTUSERNAME}"></GridViewColumn>
+                    <GridViewColumn Width="100" Header="抽检样本数"   DisplayMemberBinding="{Binding samplingnum}"></GridViewColumn>
+                    <GridViewColumn Width="100" Header="抽检结果"   DisplayMemberBinding="{Binding RESULTNAME}"></GridViewColumn>
+                    <GridViewColumn Width="80" Header="详情">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content=">>" x:Name="_btn_details" Width="60"></Button>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
         <StackPanel Grid.Row="2" HorizontalAlignment="Center">
             <Button Name="btnSave" Width="76" Height="30" Style="{StaticResource SaveImageButtonTemplate}" Click="btnSave_Click" Margin="0,0,20,0"/>
             <Button Name="btnCancel" Width="76" Height="30" Style="{StaticResource CancelImageButtonTemplate}" Click="Clear_Click" Margin="20,0,0,0"  />
