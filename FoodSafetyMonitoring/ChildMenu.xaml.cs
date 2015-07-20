@@ -146,7 +146,7 @@ namespace FoodSafetyMonitoring
                     case "30102": temptb.Content = new UcCertificateInquire(mainWindow.dbOperation);
                         break;
                     //出证检测->电子出证单->新建电子出证单
-                    case "30201": temptb.Content = new UcDetectBillManager();
+                    case "30201": temptb.Content = new UcCreateCertificate(mainWindow.dbOperation);
                         break;
                     //出证检测->电子出证单->出证单列表
                     case "30202": temptb.Content = new UcDetectBillManager();

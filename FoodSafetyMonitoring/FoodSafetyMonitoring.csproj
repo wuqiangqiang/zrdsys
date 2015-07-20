@@ -510,6 +510,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Manager\UcCreateCertificatedetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Manager\UcCultureDetectInquire.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -883,6 +887,9 @@
     </Compile>
     <Compile Include="Manager\UcCreateCertificate.xaml.cs">
       <DependentUpon>UcCreateCertificate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\UcCreateCertificatedetails.xaml.cs">
+      <DependentUpon>UcCreateCertificatedetails.xaml</DependentUpon>
     </Compile>
     <Compile Include="Manager\UcCultureDetectInquire.xaml.cs">
       <DependentUpon>UcCultureDetectInquire.xaml</DependentUpon>
