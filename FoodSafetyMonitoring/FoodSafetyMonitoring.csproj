@@ -514,6 +514,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Manager\UcCreateCertificatequery.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Manager\UcCultureDetectInquire.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -555,6 +559,10 @@
       <Generator>MSBuild:Compile</Generator>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Manager\UcQueryCertificateDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Manager\UcQueryCultureFile.xaml">
       <SubType>Designer</SubType>
@@ -891,6 +899,9 @@
     <Compile Include="Manager\UcCreateCertificatedetails.xaml.cs">
       <DependentUpon>UcCreateCertificatedetails.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Manager\UcCreateCertificatequery.xaml.cs">
+      <DependentUpon>UcCreateCertificatequery.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Manager\UcCultureDetectInquire.xaml.cs">
       <DependentUpon>UcCultureDetectInquire.xaml</DependentUpon>
     </Compile>
@@ -914,6 +925,9 @@
     </Compile>
     <Compile Include="Manager\UcMonthReportDetails.xaml.cs">
       <DependentUpon>UcMonthReportDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\UcQueryCertificateDetails.xaml.cs">
+      <DependentUpon>UcQueryCertificateDetails.xaml</DependentUpon>
     </Compile>
     <Compile Include="Manager\UcQueryCultureFile.xaml.cs">
       <DependentUpon>UcQueryCultureFile.xaml</DependentUpon>

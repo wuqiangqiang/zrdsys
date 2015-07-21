@@ -149,7 +149,7 @@ namespace FoodSafetyMonitoring
                     case "30201": temptb.Content = new UcCreateCertificate(mainWindow.dbOperation);
                         break;
                     //出证检测->电子出证单->出证单列表
-                    case "30202": temptb.Content = new UcDetectBillManager();
+                    case "30202": temptb.Content = new UcCreateCertificatequery(mainWindow.dbOperation);
                         break;
                     //宰前检测->检测单管理->新建检测单
                     case "40101": temptb.Content = new UcDetectBillManager();
@@ -161,7 +161,7 @@ namespace FoodSafetyMonitoring
                     case "50101": temptb.Content = new UcDetectBillManager();
                         break;
                     //屠宰同步检测->检测单管理->检测单列表
-                    case "50102": temptb.Content = new UcDetectBillManager();
+                    case "50102": temptb.Content = new UcDetectInquire(mainWindow.dbOperation);
                         break;
                     //养殖检测->检测单管理->新建档案
                     case "新建": temptb.Content = new UcDetectBillManager();
@@ -194,27 +194,36 @@ namespace FoodSafetyMonitoring
                         break;
                     case "复核日志": temptb.Content = new SysReviewLog(mainWindow.dbOperation);
                         break;
-                    case "部门管理": temptb.Content = new SysDeptManager(mainWindow.dbOperation);
-                        break;
-                    case "角色管理": temptb.Content = new SysRoleManager();
-                        break;
-                    case "权限管理": temptb.Content = new SysRolePowerManager();
+                    //系统管理->系统管理->部门管理
+                    case "60101": temptb.Content = new SysDeptManager(mainWindow.dbOperation);
                         break;
                     //系统管理->系统管理->执法队伍
                     case "60102": temptb.Content = new UcUserManager(mainWindow.dbOperation);
                         break;
-                    case "用户管理": temptb.Content = new SysUserManager();
+                    //系统管理->系统管理->修改密码
+                    case "60104": temptb.Content = new SysModifyPassword();
                         break;
-                    case "系统日志": temptb.Content = new SysLogManager();
+                    //系统管理->系统管理->图片上传
+                    case "60105": temptb.Content = new SysLoadPicture(mainWindow.dbOperation);
                         break;
-                    case "修改密码": temptb.Content = new SysModifyPassword();
+                    //系统管理->系统管理->系统日志
+                    case "60106": temptb.Content = new SysLogManager();
                         break;
-                    case "图片上传": temptb.Content = new SysLoadPicture(mainWindow.dbOperation);
+                    //帮助->帮助->帮助
+                    case "70101": temptb.Content = new UcUnrealizedModul();
                         break;
-                    case "帮助": temptb.Content = new UcUnrealizedModul();
+                    //帮助->帮助->关于
+                    case "70102": temptb.Content = new SysHelp();
                         break;
-                    case "关于": temptb.Content = new SysHelp();
-                        break;
+                    //case "角色管理": temptb.Content = new SysRoleManager();
+                    //    break;
+                    //case "权限管理": temptb.Content = new SysRolePowerManager();
+                    //    break;
+                    //case "用户管理": temptb.Content = new SysUserManager();
+                    //    break;
+
+
+                    
                     default: break;
                 }
                 tab.Items.Add(temptb);

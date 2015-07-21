@@ -28,6 +28,7 @@ namespace FoodSafetyMonitoring.Manager
         private Dictionary<string, MyColumn> MyColumns = new Dictionary<string, MyColumn>();
         string userId = (Application.Current.Resources["User"] as UserInfo).ID;
         private DataTable current_table;
+        private List<string> selectdetect = new List<string>();
 
         public UcCreateCertificate(IDBOperation dbOperation)
         {
@@ -35,6 +36,10 @@ namespace FoodSafetyMonitoring.Manager
             this.dbOperation = dbOperation;
             ComboboxTool.InitComboboxSource(_source_company, string.Format(" call p_user_dept('{0}') ", userId), "lr");
             _source_company.SelectionChanged += new SelectionChangedEventHandler(_source_company_SelectionChanged);
+            _cdatetime.Text = string.Format("{0:g}", System.DateTime.Now);
+            _cperson.Text = (Application.Current.Resources["User"] as UserInfo).ShowName;
+            _cdept.Text = dbOperation.GetDbHelper().GetSingle("SELECT INFO_NAME  from  sys_client_sysdept WHERE INFO_CODE = " + (Application.Current.Resources["User"] as UserInfo).DepartmentID).ToString();
+
         }
 
         void _source_company_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -102,21 +107,72 @@ namespace FoodSafetyMonitoring.Manager
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            foreach (var row in lvlist.Items)
+            if (selectdetect.Count > 0)
             {
-                //CheckBox chkTemp = (CheckBox)row.FindControl("_chk");
-                //if (chkTemp != null)
-                //{
-                //    if (chkTemp.IsChecked == true)
-                //    {
-                //    }
-                //}
+                string msg = "";
+                if (_object_count.Text.Trim().Length == 0)
+                {
+                    msg = "*批次头数不能为空";
+                }
+                else if (_object_label.Text.Trim().Length == 0)
+                {
+                    msg = "*耳标号不能为空";
+                }
+                else
+                {
+                    //生成检疫证号
+                    string card_id = dbOperation.GetDbHelper().GetSingle(string.Format("select f_create_cardid('{0}')", (Application.Current.Resources["User"] as UserInfo).DepartmentID)).ToString();
+                    _cardId.Text = card_id;
+
+                    string detect_id = "";
+                    foreach (var detectid in selectdetect)
+                    {
+                        detect_id = detect_id + "," + detectid;
+                    }
+
+                    string sql = string.Format("call p_insert_certificate('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}')"
+                                  , card_id, (_source_company.SelectedItem as Label).Tag.ToString(),
+                                  _object_count.Text, _object_label.Text,
+                                  (Application.Current.Resources["User"] as UserInfo).DepartmentID,
+                                  (Application.Current.Resources["User"] as UserInfo).ID,
+                                  System.DateTime.Now,
+                                  detect_id);
+
+
+                    int i = dbOperation.GetDbHelper().ExecuteSql(sql);
+                    if (i == 1)
+                    {
+                        Toolkit.MessageBox.Show("电子出证单生成成功！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                        clear();
+                    }
+                    else
+                    {
+                        Toolkit.MessageBox.Show("电子出证单生成失败！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                        return;
+                    }
+                }
+                txtMsg.Text = msg;
+            }  
+            else
+            {
+                Toolkit.MessageBox.Show("请先选择检测数据！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
             }
         }
 
         private void Clear_Click(object sender, RoutedEventArgs e)
         {
+            clear();
+        }
 
+        private void clear()
+        {
+            this._cardId.Text = "";
+            this._object_count.Text = "";
+            this._object_label.Text = "";
+            this._source_company.SelectedIndex = 0;
+            this._cdatetime.Text = string.Format("{0:g}", System.DateTime.Now);
+            this.lvlist.DataContext = null;
         }
 
         private void _btn_details_Click(object sender, RoutedEventArgs e)
@@ -131,6 +187,20 @@ namespace FoodSafetyMonitoring.Manager
 
             grid_info.Children.Add(new UcCreateCertificatedetails(dbOperation, company_id, batch_no, item_id, dept_id,result_id));
 
+        }
+
+        private void _chk_Click(object sender, RoutedEventArgs e)
+        {
+            CheckBox cb = sender as CheckBox;
+            string detectorder = cb.Tag.ToString(); //获取该行detectid   
+            if (cb.IsChecked == true)
+            {
+                selectdetect.Add(detectorder);  //如果选中就保存detectid   
+            }
+            else
+            {
+                selectdetect.Remove(detectorder);   //如果选中取消就删除里面的detectid   
+            }  
         }
 
         
