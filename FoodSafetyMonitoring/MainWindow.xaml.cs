@@ -411,6 +411,16 @@ namespace FoodSafetyMonitoring
                 }
                 this.grid_Menu.Children.Add(childMenu);
             //}
+
+            //一旦鼠标点击在主菜单图标上，主菜单的图标变成黄色，其余均为正常色
+            for (int i = 0; i < mainWindow.mainMenus.Count; i++)
+            {
+                //if (mainWindow.mainMenus[i].Flag_Exits == 1)
+                //{
+                mainWindow.mainMenus[i].img.Source = mainWindow.mainMenus[i].img_mouseLeave;
+                //}
+            }
+            img.Source = img_mouseEnter;
         }
 
         //void img_MouseLeave(object sender, MouseEventArgs e)
@@ -449,7 +459,7 @@ namespace FoodSafetyMonitoring
         {
             //if (Flag_Exits == 1)
             //{
-                LoadChildMenu();
+               // LoadChildMenu();
             //}
         }
 

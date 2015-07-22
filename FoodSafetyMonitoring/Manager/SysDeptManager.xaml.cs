@@ -70,7 +70,17 @@ namespace FoodSafetyMonitoring.Manager
                 DataRow[] rows = table.Select();
                 department.Name = rows[0]["INFO_NAME"].ToString();
                 department.Row = rows[0];
-                rows = table.Select("FK_CODE_DEPT='" + rows[0]["INFO_CODE"].ToString() + "'");
+                //对应湖北省级有3个部门（101 湖北畜安处，102 湖北动监处，103 湖北屠宰办），数据库中存在下级部门的是102
+                string deptId = "";
+                if (rows[0]["INFO_CODE"].ToString() == "101" || rows[0]["INFO_CODE"].ToString() == "103")
+                {
+                    deptId = "102";
+                }
+                else
+                {
+                    deptId = rows[0]["INFO_CODE"].ToString();
+                }
+                rows = table.Select("FK_CODE_DEPT='" + deptId + "'");
                 foreach (DataRow row1 in rows)
                 {
                     Department department1 = new Department();

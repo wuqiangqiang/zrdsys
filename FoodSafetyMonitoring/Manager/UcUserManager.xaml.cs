@@ -38,6 +38,9 @@ namespace FoodSafetyMonitoring.Manager
         private string password_old;
         //private int flag_init = 0;//初始化,0未初始化,1已初始化
 
+        //当前选中的部门id
+        private string dept_id;
+
         public UcUserManager(IDBOperation dbOperation)
         {
             InitializeComponent();
@@ -46,6 +49,10 @@ namespace FoodSafetyMonitoring.Manager
             user_flag_tier = (Application.Current.Resources["User"] as UserInfo).FlagTier.ToString();
             SupplierTable = dbOperation.GetDbHelper().GetDataSet("select supplierId,supplierName from t_supplier").Tables[0];
             this.Loaded += new RoutedEventHandler(Load_DeptManager);
+            //用户管理的初始化
+            ComboboxTool.InitComboboxSource(_department, "select INFO_CODE,INFO_NAME from sys_client_sysdept", "lr");
+            ComboboxTool.InitComboboxSource(_cmbRoleType, "SELECT NUMB_ROLE,INFO_NAME FROM sys_client_role where roletype = '1'", "lr");
+            //_department.SelectionChanged += new SelectionChangedEventHandler(_department_SelectionChanged);
         }
 
         public void Load_DeptManager(object sender, RoutedEventArgs e)
@@ -68,14 +75,34 @@ namespace FoodSafetyMonitoring.Manager
                 DataRow[] rows = table.Select();
                 department.Name = rows[0]["INFO_NAME"].ToString();
                 department.Row = rows[0];
-                rows = table.Select("FK_CODE_DEPT='" + rows[0]["INFO_CODE"].ToString() + "'");
+                //对应湖北省级有3个部门（101 湖北畜安处，102 湖北动监处，103 湖北屠宰办），数据库中存在下级部门的是102
+                string deptId = "";
+                if (rows[0]["INFO_CODE"].ToString() == "101" || rows[0]["INFO_CODE"].ToString() == "103")
+                {
+                    deptId = "102";
+                }
+                else
+                {
+                    deptId = rows[0]["INFO_CODE"].ToString();
+                }
+                rows = table.Select("FK_CODE_DEPT='" + deptId + "'");
                 foreach (DataRow row1 in rows)
                 {
                     Department department1 = new Department();
                     department1.Parent = department;
                     department1.Row = row1;
                     department1.Name = row1["INFO_NAME"].ToString();
-                    rows = table.Select("FK_CODE_DEPT='" + row1["INFO_CODE"].ToString() + "'");
+                    //对应湖北省级有3个部门（101 湖北畜安处，102 湖北动监处，103 湖北屠宰办），数据库中存在下级部门的是102
+                    string deptId2 = "";
+                    if (row1["INFO_CODE"].ToString() == "101" || row1["INFO_CODE"].ToString() == "103")
+                    {
+                        deptId2 = "102";
+                    }
+                    else
+                    {
+                        deptId2 = row1["INFO_CODE"].ToString();
+                    }
+                    rows = table.Select("FK_CODE_DEPT='" + deptId2 + "'");
                     foreach (DataRow row2 in rows)
                     {
                         Department department2 = new Department();
@@ -116,8 +143,9 @@ namespace FoodSafetyMonitoring.Manager
             {
                 Department department = (sender as TextBlock).Tag as Department;
                 DataRow row = department.Row;
-                string dept_id = row["INFO_CODE"].ToString();
+                dept_id = row["INFO_CODE"].ToString();
                 Load_UserManager(dept_id);
+                btnCreate.Visibility = Visibility.Visible;
                 Clear();
             }
         }
@@ -149,14 +177,15 @@ namespace FoodSafetyMonitoring.Manager
             btnSave.Visibility = Visibility.Visible;
             btnCancel.Visibility = Visibility.Visible;
             Clear();
-            this._department.IsEnabled = true;
+            (this._department.SelectedItem as Label).Tag = dept_id;
+            //this._department.IsEnabled = true;
             this._loginName.IsEnabled = true;
             this._loginPassword.IsEnabled = true;
             this.txtUserName.IsEnabled = true;
             this._user_manger.IsEnabled = true;
             this._user_manger_2.IsEnabled = true;
             this._user_manger.IsChecked = true;
-            this._dept_flag.Text = "(必填)";
+            //this._dept_flag.Text = "(必填)";
             //this._role_flag.Text = "(必填)";
             this._user_flag.Text = "(必填)";
             this._password_flag.Text = "(必填)";
@@ -184,7 +213,7 @@ namespace FoodSafetyMonitoring.Manager
             this._user_manger.IsEnabled = false;
             this._user_manger_2.IsEnabled = false;
             this.btnSave.Tag = null;
-            this._dept_flag.Text = "";
+            //this._dept_flag.Text = "";
             //this._role_flag.Text = "";
             this._user_flag.Text = "";
             this._password_flag.Text = "";
@@ -197,7 +226,6 @@ namespace FoodSafetyMonitoring.Manager
         {
             if (Toolkit.MessageBox.Show("确定要删除该用户吗？", "系统询问", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
-                string dept_id = (_department.SelectedItem as Label).Tag.ToString();
                 string id = (sender as Button).Tag.ToString();
                 if (DeleteUser(id))
                 {
@@ -247,7 +275,7 @@ namespace FoodSafetyMonitoring.Manager
             this.txtUserName.IsEnabled = true;
             this._user_manger.IsEnabled = true;
             this._user_manger_2.IsEnabled = true;
-            this._dept_flag.Text = "(必填)";
+            //this._dept_flag.Text = "(必填)";
             //this._role_flag.Text = "(必填)";
             this._user_flag.Text = "(必填)";
             this._password_flag.Text = "(必填)";

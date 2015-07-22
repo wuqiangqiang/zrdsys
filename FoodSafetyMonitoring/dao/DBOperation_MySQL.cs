@@ -60,7 +60,7 @@ namespace FoodSafetyMonitoring.dao
         //根据用户ID获取树型部门列表
         public DataTable GetDepartment()
         {
-            string sql = string.Format("SELECT * from sys_client_sysdept where INFO_CODE like concat((select FK_dept from sys_client_user where reco_pkid='{0}'),'%')", userId);
+            string sql = string.Format("call p_get_department('{0}')", userId);
             try
             {
                 return dbHelper.GetDataSet(sql).Tables[0];

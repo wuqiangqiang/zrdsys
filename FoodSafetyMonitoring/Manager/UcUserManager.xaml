@@ -103,7 +103,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Name="btnCreate"  Width="95" Height="30" Grid.Row="2" Grid.Column="1"  Style="{StaticResource CreateImageButtonTemplate}" Click="btnCreate_Click" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+        <Button Name="btnCreate"  Width="95" Height="30" Grid.Row="2" Grid.Column="1"  Style="{StaticResource CreateImageButtonTemplate}" Click="btnCreate_Click" VerticalAlignment="Top" HorizontalAlignment="Center" Visibility="Hidden"/>
         <Grid Background="LightGray" Grid.Column="2" Grid.Row="0">
             <TextBlock  FontFamily="黑体" FontWeight="300" Margin="10,0,0,0"  Text="账号信息" />
         </Grid>
@@ -111,45 +111,46 @@
             <Grid.Background>
                 <ImageBrush ImageSource="/Manager/Images/content_back.png" Stretch="Fill"></ImageBrush>
             </Grid.Background>
-            <Grid Margin="40,20,60,20">
+            <Grid Margin="20,20,40,20">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="2*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="4*" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="80"/>
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition />
-                    <ColumnDefinition Width="20"/>
-                    <ColumnDefinition Width="80"/>
-                    <ColumnDefinition />
-                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="40"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Row="0" Grid.Column="0"   VerticalAlignment="Center">帐号使用单位:</TextBlock>
-                <ComboBox Name="_department" Grid.Row="0" Grid.Column="1" Background="White" MaxDropDownHeight="200" GotFocus="FrameworkElement_GotFocus" BorderThickness="1,1,1,1"/>
-                <TextBlock  Grid.Row="0" Grid.Column="2"  MinWidth="20" x:Name="_dept_flag" Foreground="Red" Margin="0" ></TextBlock>
-                <TextBlock Grid.Row="0" Grid.Column="3"  VerticalAlignment="Center">帐号权限:</TextBlock>
-                <ComboBox Name="_cmbRoleType" Grid.Row="0" Grid.Column="4" Background="White" MaxDropDownHeight="200" BorderThickness="1,1,1,1" IsEnabled="False"/>
-                <TextBlock Grid.Row="1" Grid.Column="0"   xml:space="preserve"  >权限描述:</TextBlock>
-                <TextBox Name="_subDetails"  Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="5"  TextWrapping="Wrap" HorizontalAlignment="Left"  MinWidth="470" Height="60" IsEnabled="False"/>
-                <TextBlock Grid.Row="2" Grid.Column="0"  >登录帐号:</TextBlock>
-                <TextBox Grid.Row="2" Grid.Column="1" Name="_loginName" GotFocus="FrameworkElement_GotFocus" VerticalAlignment="Center" Width="180" MaxLength="10" InputMethod.IsInputMethodEnabled="False"  DataObject.Pasting="loginName_Pasting" PreviewKeyDown="loginName_PreviewKeyDown"></TextBox>
-                <TextBlock  Grid.Row="2" Grid.Column="2"  MinWidth="20" x:Name="_user_flag" Foreground="Red" Margin="0" ></TextBlock>
-                <TextBlock Grid.Row="2" Grid.Column="3"  >帐号密码:</TextBlock>
-                <PasswordBox Grid.Row="2" Grid.Column="4" Name="_loginPassword" VerticalAlignment="Center" GotFocus="FrameworkElement_GotFocus" Width="180" Height="20" BorderThickness="1,1,1,1"></PasswordBox>
-                <TextBlock  Grid.Row="2" Grid.Column="5"  MinWidth="20" x:Name="_password_flag" Foreground="Red" Margin="0" ></TextBlock>
-                <TextBlock Grid.Row="3"  Grid.Column="0" >帐号使用人姓名:</TextBlock>
-                <TextBox Grid.Row="3"  Grid.Column="1" Name="txtUserName" GotFocus="FrameworkElement_GotFocus" VerticalAlignment="Center" Width="180" MaxLength="10"></TextBox>
-                <TextBlock  Grid.Row="3" Grid.Column="2"  MinWidth="20" x:Name="_name_flag" Foreground="Red" Margin="0" ></TextBlock>
-                <TextBlock Grid.Row="3"  Grid.Column="3" >帐号管理:</TextBlock>
-                <StackPanel Grid.Row="3"  Grid.Column="4" VerticalAlignment="Center">
+                <ComboBox Name="_department" Grid.Row="0" Grid.Column="1" Background="White" MaxDropDownHeight="200" GotFocus="FrameworkElement_GotFocus" BorderThickness="1,1,1,1" IsEnabled="False"/>
+                <!--<TextBlock  Grid.Row="0" Grid.Column="2"  MinWidth="20" x:Name="_dept_flag" Foreground="Red" Margin="0" ></TextBlock>-->
+                <!--<TextBlock  Grid.Row="0" Grid.Column="1"  MinWidth="200" x:Name="_department" ></TextBlock>-->
+                <TextBlock Grid.Row="1" Grid.Column="0"  VerticalAlignment="Center">帐号权限:</TextBlock>
+                <ComboBox Name="_cmbRoleType" Grid.Row="1" Grid.Column="1" Background="White" MaxDropDownHeight="200" BorderThickness="1,1,1,1" IsEnabled="False"/>
+                <TextBlock Grid.Row="2" Grid.Column="0"   xml:space="preserve"  >权限描述:</TextBlock>
+                <TextBox Name="_subDetails"  Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="5"  TextWrapping="Wrap" HorizontalAlignment="Left"  MinWidth="470" Height="60" IsEnabled="False"/>
+                <TextBlock Grid.Row="3" Grid.Column="0"  >登录帐号:</TextBlock>
+                <TextBox Grid.Row="3" Grid.Column="1" Name="_loginName" GotFocus="FrameworkElement_GotFocus" VerticalAlignment="Center" Width="180" MaxLength="10" InputMethod.IsInputMethodEnabled="False"  DataObject.Pasting="loginName_Pasting" PreviewKeyDown="loginName_PreviewKeyDown"></TextBox>
+                <TextBlock  Grid.Row="3" Grid.Column="2"  MinWidth="20" x:Name="_user_flag" Foreground="Red" Margin="0" ></TextBlock>
+                <TextBlock Grid.Row="4" Grid.Column="0"  >帐号密码:</TextBlock>
+                <PasswordBox Grid.Row="4" Grid.Column="1" Name="_loginPassword" VerticalAlignment="Center" GotFocus="FrameworkElement_GotFocus" Width="180" Height="20" BorderThickness="1,1,1,1"></PasswordBox>
+                <TextBlock  Grid.Row="4" Grid.Column="2"  MinWidth="20" x:Name="_password_flag" Foreground="Red" Margin="0" ></TextBlock>
+                <TextBlock Grid.Row="5"  Grid.Column="0" >帐号使用人姓名:</TextBlock>
+                <TextBox Grid.Row="5"  Grid.Column="1" Name="txtUserName" GotFocus="FrameworkElement_GotFocus" VerticalAlignment="Center" Width="180" MaxLength="10"></TextBox>
+                <TextBlock  Grid.Row="5" Grid.Column="2"  MinWidth="20" x:Name="_name_flag" Foreground="Red" Margin="0" ></TextBlock>
+                <TextBlock Grid.Row="6"  Grid.Column="0" >帐号管理:</TextBlock>
+                <StackPanel Grid.Row="6"  Grid.Column="1" VerticalAlignment="Center">
                     <CheckBox   x:Name="_user_manger"  Checked="_user_manger_Checked" Margin="20,0,0,0">启用</CheckBox>
                     <CheckBox   x:Name="_user_manger_2"  Checked="_user_manger_Checked" Margin="20,0,0,0">禁用</CheckBox>
                 </StackPanel>
-                <TextBlock  Grid.Row="3" Grid.Column="5"  MinWidth="20" x:Name="_manager_flag" Foreground="Red" Margin="0" ></TextBlock>
-                <TextBlock Name="txtMsg"   Grid.Row="4" Grid.ColumnSpan="4"  Foreground="Red" FontSize="14" FontFamily="宋体"  ></TextBlock>
+                <TextBlock  Grid.Row="6" Grid.Column="2"  MinWidth="20" x:Name="_manager_flag" Foreground="Red" Margin="0" ></TextBlock>
+                <TextBlock Name="txtMsg"   Grid.Row="7" Grid.ColumnSpan="3"  Foreground="Red" FontSize="14" FontFamily="宋体"  ></TextBlock>
             </Grid>
         </Grid>
         <StackPanel Grid.Row="2" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top">
