@@ -27,6 +27,8 @@ namespace FoodSafetyMonitoring.Manager
         private IDBOperation dbOperation;
         private string user_flag_tier;
         private DataTable currenttable;
+        private string depttype;
+        private string detecttype;
 
         private List<DeptItemInfo> list = new List<DeptItemInfo>();
 
@@ -35,6 +37,8 @@ namespace FoodSafetyMonitoring.Manager
             InitializeComponent();
 
             this.dbOperation = dbOperation;
+            this.depttype = dept_type;
+            this.detecttype = detect_type;
             user_flag_tier = (Application.Current.Resources["User"] as UserInfo).FlagTier;
 
             reportDate.Value = DateTime.Now.AddDays(-1);
@@ -53,7 +57,7 @@ namespace FoodSafetyMonitoring.Manager
                 default: break;
             }
             //检测站点
-            ComboboxTool.InitComboboxSource(_detect_dept, string.Format("call p_dept_cxtj({0},'{1}')", (Application.Current.Resources["User"] as UserInfo).ID, dept_type), "cxtj");
+            ComboboxTool.InitComboboxSource(_detect_dept, string.Format("call p_dept_cxtj_hb({0},'{1}')", (Application.Current.Resources["User"] as UserInfo).ID, depttype), "cxtj");
             //检测项目
             ComboboxTool.InitComboboxSource(_detect_item, "SELECT ItemID,ItemNAME FROM t_det_item WHERE  (tradeId ='1'or tradeId ='2' or tradeId ='3' or ifnull(tradeId,'') = '') and OPENFLAG = '1' order by orderId", "cxtj");
             //检测结果
@@ -86,11 +90,12 @@ namespace FoodSafetyMonitoring.Manager
 
         private void _query_Click(object sender, RoutedEventArgs e)
         {
-            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_report_day_hb('{0}','{1}','{2}','{3}','{4}')",
+            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_report_day_hb('{0}','{1}','{2}','{3}','{4}','{5}','{6}')",
                               (Application.Current.Resources["User"] as UserInfo).ID, reportDate.Value,
                                _detect_dept.SelectedIndex < 1 ? "" : (_detect_dept.SelectedItem as Label).Tag,
                                _detect_item.SelectedIndex < 1 ? "" : (_detect_item.SelectedItem as Label).Tag,
-                               _detect_result.SelectedIndex < 1 ? "" : (_detect_result.SelectedItem as Label).Tag)).Tables[0];
+                               _detect_result.SelectedIndex < 1 ? "" : (_detect_result.SelectedItem as Label).Tag,
+                               depttype, detecttype)).Tables[0];
 
             currenttable = table;
             list.Clear();
@@ -218,7 +223,7 @@ namespace FoodSafetyMonitoring.Manager
             item_id = _detect_item.SelectedIndex < 1 ? "" : (_detect_dept.SelectedItem as Label).Tag.ToString();
             result_id = _detect_result.SelectedIndex < 1 ? "" : (_detect_result.SelectedItem as Label).Tag.ToString();
 
-            grid_info.Children.Add(new UcDayReportDetails(dbOperation, reportDate.Value.ToString(),dept_id, item_id, result_id));
+            grid_info.Children.Add(new UcDayReportDetails(dbOperation, reportDate.Value.ToString(), dept_id, item_id, result_id, detecttype));
         }
 
         private void _export_Click(object sender, RoutedEventArgs e)
