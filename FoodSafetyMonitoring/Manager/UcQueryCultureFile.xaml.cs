@@ -38,8 +38,8 @@ namespace FoodSafetyMonitoring.Manager
             dtpStartDate.Value = DateTime.Now.AddDays(-1);
             dtpEndDate.Value = DateTime.Now;
             ComboboxTool.InitComboboxSource(_object_type, "SELECT ObjectTypeId,ObjectTypeName FROM t_culture_type where OpenFlag = '1'", "cxtj");
-            ComboboxTool.InitComboboxSource(_culture_company, string.Format("call p_user_dept('{0}')", userId), "cxtj");
-            ComboboxTool.InitComboboxSource(_file_cuserid, string.Format("call p_user_detuser('{0}')", userId), "cxtj");
+            ComboboxTool.InitComboboxSource(_culture_company, string.Format("call p_user_dept_hb('{0}','yz')", userId), "cxtj");
+            ComboboxTool.InitComboboxSource(_file_cuserid, string.Format("call p_user_detuser_hb('{0}','yz')", userId), "cxtj");
             _culture_company.SelectionChanged += new SelectionChangedEventHandler(_culture_company_SelectionChanged);
 
             SetColumns();
@@ -79,7 +79,7 @@ namespace FoodSafetyMonitoring.Manager
             }
             else if (_culture_company.SelectedIndex == 0)
             {
-                ComboboxTool.InitComboboxSource(_file_cuserid, string.Format("call p_user_detuser('{0}')", userId), "cxtj");
+                ComboboxTool.InitComboboxSource(_file_cuserid, string.Format("call p_user_detuser_hb('{0}','yz')", userId), "cxtj");
             }
         }
 

@@ -38,8 +38,10 @@ namespace FoodSafetyMonitoring.Manager
         private string password_old;
         //private int flag_init = 0;//初始化,0未初始化,1已初始化
 
-        //当前选中的部门id
+        //当前选中的部门id,名称,部门等级
         private string dept_id;
+        private string dept_name;
+        private string dept_flag;
 
         public UcUserManager(IDBOperation dbOperation)
         {
@@ -52,7 +54,7 @@ namespace FoodSafetyMonitoring.Manager
             //用户管理的初始化
             ComboboxTool.InitComboboxSource(_department, "select INFO_CODE,INFO_NAME from sys_client_sysdept", "lr");
             ComboboxTool.InitComboboxSource(_cmbRoleType, "SELECT NUMB_ROLE,INFO_NAME FROM sys_client_role where roletype = '1'", "lr");
-            //_department.SelectionChanged += new SelectionChangedEventHandler(_department_SelectionChanged);
+            _department.SelectionChanged += new SelectionChangedEventHandler(_department_SelectionChanged);
         }
 
         public void Load_DeptManager(object sender, RoutedEventArgs e)
@@ -141,9 +143,12 @@ namespace FoodSafetyMonitoring.Manager
         {
             if (e.ClickCount > 0)
             {
+                //获取当前部门树形菜单上选中的部门id和名称
                 Department department = (sender as TextBlock).Tag as Department;
                 DataRow row = department.Row;
                 dept_id = row["INFO_CODE"].ToString();
+                dept_name = row["INFO_NAME"].ToString();
+                dept_flag = row["FLAG_TIER"].ToString();
                 Load_UserManager(dept_id);
                 btnCreate.Visibility = Visibility.Visible;
                 Clear();
@@ -171,13 +176,48 @@ namespace FoodSafetyMonitoring.Manager
             }
         }
 
+        void _department_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (_department.SelectedIndex > 0)
+            {
+                switch (dept_flag)
+                {
+                    case "0": _cmbRoleType.IsEnabled = true;
+                        ComboboxTool.InitComboboxSource(_cmbRoleType, "SELECT NUMB_ROLE,INFO_NAME FROM sys_client_role where NUMB_ROLE =1", "lr");
+                        break;
+                    case "1": _cmbRoleType.IsEnabled = true;
+                        ComboboxTool.InitComboboxSource(_cmbRoleType, "SELECT NUMB_ROLE,INFO_NAME FROM sys_client_role where roletype = '1' and FLAG_TIER = 1", "lr");
+                        break;
+                    case "2": _cmbRoleType.IsEnabled = true;
+                        ComboboxTool.InitComboboxSource(_cmbRoleType, "SELECT NUMB_ROLE,INFO_NAME FROM sys_client_role where roletype = '1' and FLAG_TIER = 2", "lr");
+                        break;
+                    case "3": _cmbRoleType.IsEnabled = true;
+                        ComboboxTool.InitComboboxSource(_cmbRoleType, "SELECT NUMB_ROLE,INFO_NAME FROM sys_client_role where roletype = '1' and FLAG_TIER = 3", "lr");
+                        break;
+                    case "4": _cmbRoleType.IsEnabled = true;
+                        ComboboxTool.InitComboboxSource(_cmbRoleType, "SELECT NUMB_ROLE,INFO_NAME FROM sys_client_role where roletype = '1' and FLAG_TIER = 4", "lr");
+                        break;
+                    default: break;
+                }
+                _cmbRoleType.SelectionChanged += new SelectionChangedEventHandler(_cmbRoleType_SelectionChanged);
+            }
+        }
+
+        void _cmbRoleType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (_cmbRoleType.SelectedIndex > 0)
+            {
+                _subDetails.Text = dbOperation.GetDbHelper().GetSingle(string.Format("select GROUP_CONCAT(SUB_NAME) as SUB_NAME from v_sub_details_hb where ROLE_ID = '{0}' and SUB_FATHER_ID = '0'", (_cmbRoleType.SelectedItem as Label).Tag.ToString())).ToString();
+            }
+        }
+
         private void btnCreate_Click(object sender, RoutedEventArgs e)
         {
             user_details.Visibility = Visibility.Visible;
             btnSave.Visibility = Visibility.Visible;
             btnCancel.Visibility = Visibility.Visible;
             Clear();
-            (this._department.SelectedItem as Label).Tag = dept_id;
+            this._department.Text = dept_name;
             //this._department.IsEnabled = true;
             this._loginName.IsEnabled = true;
             this._loginPassword.IsEnabled = true;
@@ -186,7 +226,7 @@ namespace FoodSafetyMonitoring.Manager
             this._user_manger_2.IsEnabled = true;
             this._user_manger.IsChecked = true;
             //this._dept_flag.Text = "(必填)";
-            //this._role_flag.Text = "(必填)";
+            this._role_flag.Text = "(必填)";
             this._user_flag.Text = "(必填)";
             this._password_flag.Text = "(必填)";
             this._name_flag.Text = "(必填)";
@@ -214,7 +254,7 @@ namespace FoodSafetyMonitoring.Manager
             this._user_manger_2.IsEnabled = false;
             this.btnSave.Tag = null;
             //this._dept_flag.Text = "";
-            //this._role_flag.Text = "";
+            this._role_flag.Text = "";
             this._user_flag.Text = "";
             this._password_flag.Text = "";
             this._name_flag.Text = "";
@@ -269,14 +309,14 @@ namespace FoodSafetyMonitoring.Manager
             user_details.Visibility = Visibility.Visible;
             btnSave.Visibility = Visibility.Visible;
             btnCancel.Visibility = Visibility.Visible;
-            this._department.IsEnabled = true;
+            //this._department.IsEnabled = true;
             this._loginName.IsEnabled = true;
             this._loginPassword.IsEnabled = true;
             this.txtUserName.IsEnabled = true;
             this._user_manger.IsEnabled = true;
             this._user_manger_2.IsEnabled = true;
             //this._dept_flag.Text = "(必填)";
-            //this._role_flag.Text = "(必填)";
+            this._role_flag.Text = "(必填)";
             this._user_flag.Text = "(必填)";
             this._password_flag.Text = "(必填)";
             this._name_flag.Text = "(必填)";
@@ -458,7 +498,7 @@ namespace FoodSafetyMonitoring.Manager
                         Common.SysLogEntry.WriteLog("系统用户管理", (Application.Current.Resources["User"] as UserInfo).ShowName, OperationType.Modify, "修改系统用户");
                     }
                     Clear();
-                    Load_UserManager((_department.SelectedItem as Label).Tag.ToString());
+                    Load_UserManager(dept_id);
                 }
                 else
                 {

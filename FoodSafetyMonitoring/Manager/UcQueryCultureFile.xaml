@@ -37,8 +37,12 @@
             <ComboBox Width="120" x:Name="_detect_person1" />-->
             </StackPanel>
             <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="710*"/>
+                    <ColumnDefinition Width="309*"/>
+                </Grid.ColumnDefinitions>
                 <Button Name="_query" Width="76" Height="30"  Grid.Row="0" Grid.Column="1" Style="{StaticResource SelectImageButtonTemplate}" Click="_query_Click" Margin="0,0,155,0"  HorizontalAlignment="Right"/>
-                <Button Name="_export" Width="76" Height="30" Grid.Column="1" Grid.Row="1" Style="{StaticResource ExportImageButtonTemplate}" Click="_export_Click" Margin="0,0,15,0" HorizontalAlignment="Right"/>
+                <Button Name="_export" Width="76" Height="30" Grid.Column="1" Style="{StaticResource ExportImageButtonTemplate}" Click="_export_Click" Margin="0,0,15,0" HorizontalAlignment="Right"/>
             </Grid>
         </Grid>
         <Grid  Grid.Row="1" Margin="5,5,5,5" x:Name="grid_table">

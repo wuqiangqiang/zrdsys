@@ -514,7 +514,7 @@ namespace FoodSafetyMonitoring.Manager
                 {
                     _add.Visibility = Visibility.Visible;
                     _delete.Visibility = Visibility.Hidden;
-                    _edit.Visibility = Visibility.Hidden;
+                    _edit.Visibility = Visibility.Visible;
                 }
                 else
                 {
@@ -626,7 +626,17 @@ namespace FoodSafetyMonitoring.Manager
             _edit.IsEnabled = false;
 
             Department department = _edit.Tag as Department;
-            bool result = dbOperation.GetDbHelper().Exists(string.Format("select count(INFO_CODE) from sys_client_sysdept where FK_CODE_DEPT ='{0}'", department.Row["INFO_CODE"]));
+            //对应湖北省级有3个部门（101 湖北畜安处，102 湖北动监处，103 湖北屠宰办），数据库中存在下级部门的是102
+            string deptId = "";
+            if (department.Row["INFO_CODE"].ToString() == "101" || department.Row["INFO_CODE"].ToString() == "103")
+            {
+                deptId = "102";
+            }
+            else
+            {
+                deptId = department.Row["INFO_CODE"].ToString();
+            }
+            bool result = dbOperation.GetDbHelper().Exists(string.Format("select count(INFO_CODE) from sys_client_sysdept where FK_CODE_DEPT ='{0}'", deptId));
             if (result)
             {
                 _Supplier.IsEnabled = false;

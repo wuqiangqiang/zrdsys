@@ -35,10 +35,10 @@ namespace FoodSafetyMonitoring.Manager
             this.dbOperation = dbOperation;
             dtpStartDate.Value = DateTime.Now.AddDays(-1);
             dtpEndDate.Value = DateTime.Now;
-            ComboboxTool.InitComboboxSource(_source_company1, string.Format(" call p_user_dept('{0}') ", userId), "cxtj");
-            ComboboxTool.InitComboboxSource(_certificate_station, string.Format("call p_user_dept('{0}')", userId), "cxtj");
+            ComboboxTool.InitComboboxSource(_source_company1, string.Format(" call p_provice_dept_hb('{0}','yz') ", userId), "cxtj");
+            ComboboxTool.InitComboboxSource(_certificate_station, string.Format("call p_user_dept_hb('{0}','cz')", userId), "cxtj");
             _certificate_station.SelectionChanged += new SelectionChangedEventHandler(_certificate_station_SelectionChanged);
-            ComboboxTool.InitComboboxSource(_detect_person1, string.Format("call p_user_detuser('{0}')", userId), "cxtj");
+            ComboboxTool.InitComboboxSource(_detect_person1, string.Format("call p_user_detuser_hb('{0}','cz')", userId), "cxtj");
 
             SetColumns();
         }
@@ -70,7 +70,7 @@ namespace FoodSafetyMonitoring.Manager
             }
             else if (_certificate_station.SelectedIndex == 0)
             {
-                ComboboxTool.InitComboboxSource(_detect_person1, string.Format("call p_user_detuser('{0}')", userId), "cxtj");
+                ComboboxTool.InitComboboxSource(_detect_person1, string.Format("call p_user_detuser_hb('{0}','cz')", userId), "cxtj");
             }
         }
 

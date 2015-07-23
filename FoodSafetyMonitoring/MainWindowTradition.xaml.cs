@@ -174,36 +174,36 @@ namespace FoodSafetyMonitoring
             //}
             //else
             //{
-                switch (menuTitle)
-                {
-                    case "首页": break;
-                    case "新建检测单": moduleMap.Add(menuTitle, new UserControlTemplet(menuTitle, new UcDetectBillManager())); break;
-                    case "统计报表": break;
-                    case "日报表": moduleMap.Add(menuTitle, new UserControlTemplet(menuTitle, new SysDayReport(dbOperation))); break;
-                    case "月报表": moduleMap.Add(menuTitle, new UserControlTemplet(menuTitle, new SysMonthReport(dbOperation))); break;
-                    case "年报表": moduleMap.Add(menuTitle, new UserControlTemplet(menuTitle, new SysYearReport(dbOperation))); break;
-                    case "自定义报表": moduleMap.Add(menuTitle, new UserControlTemplet(menuTitle, new SysDesignReport(dbOperation))); break;
-                    case "统计分析": break;
-                    case "对比分析": moduleMap.Add(menuTitle, new UserControlTemplet(menuTitle, new SysComparisonAndAnalysis(dbOperation))); break;
-                    case "趋势分析": moduleMap.Add(menuTitle, new UserControlTemplet(menuTitle, new SysTrendAnalysis(dbOperation))); break;
-                    case "区域分析": moduleMap.Add(menuTitle, new UserControlTemplet(menuTitle, new SysAreaAnalysis(dbOperation))); break;
-                    case "检测任务": break;
-                    case "任务分配": moduleMap.Add(menuTitle, new UserControlTemplet(menuTitle, new UcTaskAllocation())); break;
-                    case "任务考评": moduleMap.Add(menuTitle, new UserControlTemplet(menuTitle, new SysTaskCheck(dbOperation))); break;
-                    case "风险预警": break;
-                    case "实时风险": moduleMap.Add(menuTitle, new UserControlTemplet(menuTitle, new SysWarningInfo(dbOperation))); break;
-                    case "预警复核": moduleMap.Add(menuTitle, new UserControlTemplet(menuTitle, new SysReviewInfo(dbOperation))); break;
-                    case "系统管理": break;
-                    case "部门管理": moduleMap.Add(menuTitle, new UserControlTemplet(menuTitle, new SysDeptManager(dbOperation))); break;
-                    case "角色管理": moduleMap.Add(menuTitle, new UserControlTemplet(menuTitle, new SysRoleManager())); break;
-                    case "权限管理": moduleMap.Add(menuTitle, new UserControlTemplet(menuTitle, new SysRolePowerManager())); break;
-                    case "用户管理": moduleMap.Add(menuTitle, new UserControlTemplet(menuTitle, new SysUserManager())); break;
-                    //case "来源单位管理": moduleMap.Add(menuTitle, new UserControlTemplet(menuTitle, new UcSourceCompanyManager(dbOperation))); break;
-                    case "系统日志": moduleMap.Add(menuTitle, new UserControlTemplet(menuTitle, new SysLogManager())); break;
-                    case "帮助": moduleMap.Add(menuTitle, new UserControlTemplet(menuTitle, new UcUnrealizedModul())); break;
-                    case "关于": moduleMap.Add(menuTitle, new UserControlTemplet(menuTitle, new UcUnrealizedModul())); break;
-                    default: return;
-                }
+                //switch (menuTitle)
+                //{
+                //    case "首页": break;
+                //    case "新建检测单": moduleMap.Add(menuTitle, new UserControlTemplet(menuTitle, new UcDetectBillManager())); break;
+                //    case "统计报表": break;
+                //    case "日报表": moduleMap.Add(menuTitle, new UserControlTemplet(menuTitle, new SysDayReport(dbOperation))); break;
+                //    case "月报表": moduleMap.Add(menuTitle, new UserControlTemplet(menuTitle, new SysMonthReport(dbOperation))); break;
+                //    case "年报表": moduleMap.Add(menuTitle, new UserControlTemplet(menuTitle, new SysYearReport(dbOperation))); break;
+                //    case "自定义报表": moduleMap.Add(menuTitle, new UserControlTemplet(menuTitle, new SysDesignReport(dbOperation))); break;
+                //    case "统计分析": break;
+                //    case "对比分析": moduleMap.Add(menuTitle, new UserControlTemplet(menuTitle, new SysComparisonAndAnalysis(dbOperation))); break;
+                //    case "趋势分析": moduleMap.Add(menuTitle, new UserControlTemplet(menuTitle, new SysTrendAnalysis(dbOperation))); break;
+                //    case "区域分析": moduleMap.Add(menuTitle, new UserControlTemplet(menuTitle, new SysAreaAnalysis(dbOperation))); break;
+                //    case "检测任务": break;
+                //    case "任务分配": moduleMap.Add(menuTitle, new UserControlTemplet(menuTitle, new UcTaskAllocation())); break;
+                //    case "任务考评": moduleMap.Add(menuTitle, new UserControlTemplet(menuTitle, new SysTaskCheck(dbOperation))); break;
+                //    case "风险预警": break;
+                //    case "实时风险": moduleMap.Add(menuTitle, new UserControlTemplet(menuTitle, new SysWarningInfo(dbOperation))); break;
+                //    case "预警复核": moduleMap.Add(menuTitle, new UserControlTemplet(menuTitle, new SysReviewInfo(dbOperation))); break;
+                //    case "系统管理": break;
+                //    case "部门管理": moduleMap.Add(menuTitle, new UserControlTemplet(menuTitle, new SysDeptManager(dbOperation))); break;
+                //    case "角色管理": moduleMap.Add(menuTitle, new UserControlTemplet(menuTitle, new SysRoleManager())); break;
+                //    case "权限管理": moduleMap.Add(menuTitle, new UserControlTemplet(menuTitle, new SysRolePowerManager())); break;
+                //    case "用户管理": moduleMap.Add(menuTitle, new UserControlTemplet(menuTitle, new SysUserManager())); break;
+                //    //case "来源单位管理": moduleMap.Add(menuTitle, new UserControlTemplet(menuTitle, new UcSourceCompanyManager(dbOperation))); break;
+                //    case "系统日志": moduleMap.Add(menuTitle, new UserControlTemplet(menuTitle, new SysLogManager())); break;
+                //    case "帮助": moduleMap.Add(menuTitle, new UserControlTemplet(menuTitle, new UcUnrealizedModul())); break;
+                //    case "关于": moduleMap.Add(menuTitle, new UserControlTemplet(menuTitle, new UcUnrealizedModul())); break;
+                //    default: return;
+                //}
                 if (moduleMap.ContainsKey(menuTitle))
                 {
                     moduleMap[menuTitle].CloseUserControlEvent += new UserControlTemplet.CloseUserControlEventHandler(MainWindowTradition_CloseUserControlEvent);

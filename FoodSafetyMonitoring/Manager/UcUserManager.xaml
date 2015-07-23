@@ -83,9 +83,9 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Width="120"   DisplayMemberBinding="{Binding INFO_USER}" ></GridViewColumn>
+                    <GridViewColumn Width="100"   DisplayMemberBinding="{Binding INFO_USER}" ></GridViewColumn>
                     <!--<GridViewColumn Width="180"   DisplayMemberBinding="{Binding INFO_NAME}"></GridViewColumn>-->
-                    <GridViewColumn Width="120"   DisplayMemberBinding="{Binding role_expl}"></GridViewColumn>
+                    <GridViewColumn Width="150"   DisplayMemberBinding="{Binding role_expl}"></GridViewColumn>
                     <GridViewColumn  >
                         <GridViewColumn.CellTemplate>
                             <DataTemplate >
@@ -133,6 +133,7 @@
                 <!--<TextBlock  Grid.Row="0" Grid.Column="1"  MinWidth="200" x:Name="_department" ></TextBlock>-->
                 <TextBlock Grid.Row="1" Grid.Column="0"  VerticalAlignment="Center">帐号权限:</TextBlock>
                 <ComboBox Name="_cmbRoleType" Grid.Row="1" Grid.Column="1" Background="White" MaxDropDownHeight="200" BorderThickness="1,1,1,1" IsEnabled="False"/>
+                <TextBlock  Grid.Row="1" Grid.Column="2"  MinWidth="20" x:Name="_role_flag" Foreground="Red" Margin="0" ></TextBlock>
                 <TextBlock Grid.Row="2" Grid.Column="0"   xml:space="preserve"  >权限描述:</TextBlock>
                 <TextBox Name="_subDetails"  Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="5"  TextWrapping="Wrap" HorizontalAlignment="Left"  MinWidth="470" Height="60" IsEnabled="False"/>
                 <TextBlock Grid.Row="3" Grid.Column="0"  >登录帐号:</TextBlock>

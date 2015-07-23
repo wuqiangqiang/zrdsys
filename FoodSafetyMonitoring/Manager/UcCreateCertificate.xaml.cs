@@ -34,7 +34,7 @@ namespace FoodSafetyMonitoring.Manager
         {
             InitializeComponent();
             this.dbOperation = dbOperation;
-            ComboboxTool.InitComboboxSource(_source_company, string.Format(" call p_user_dept('{0}') ", userId), "lr");
+            ComboboxTool.InitComboboxSource(_source_company, string.Format(" call p_provice_dept_hb('{0}','yz') ", userId), "lr");
             _source_company.SelectionChanged += new SelectionChangedEventHandler(_source_company_SelectionChanged);
             _cdatetime.Text = string.Format("{0:g}", System.DateTime.Now);
             _cperson.Text = (Application.Current.Resources["User"] as UserInfo).ShowName;

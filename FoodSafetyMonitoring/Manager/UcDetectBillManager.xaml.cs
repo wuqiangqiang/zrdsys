@@ -106,13 +106,17 @@ namespace FoodSafetyMonitoring.Manager
             {
                 msg = "*请选择来源单位";
             }
-            else if (_detect_number.Text.Trim().Length == 0 && _object_count.Text.Trim().Length != 0)
+            else if (_detect_number.Text.Trim().Length == 0 )
             {
                 msg = "*检疫证号不能为空";
             }
-            else if (_detect_number.Text.Trim().Length != 0 && _object_count.Text.Trim().Length == 0)
+            else if (_object_count.Text.Trim().Length == 0)
             {
                 msg = "*批次头数不能为空";
+            }
+            else if (_object_label.Text.Trim().Length == 0)
+            {
+                msg = "*耳标号不能为空";
             }
             else if (_detect_item.SelectedIndex < 1)
             {
@@ -170,7 +174,7 @@ namespace FoodSafetyMonitoring.Manager
                     company_id = dbOperation.GetSingle(string.Format("SELECT COMPANYID from t_company where COMPANYNAME ='{0}' and deptid = '{1}'", _source_company.Text, (Application.Current.Resources["User"] as UserInfo).DepartmentID)).ToString();
                 }
 
-                string sql = string.Format("call p_insert_detect_new('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}')"
+                string sql = string.Format("call p_insert_detect_hb('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}')"
                               , company_id,
                               _detect_number.Text,
                               (_detect_item.SelectedItem as Label).Tag.ToString(),

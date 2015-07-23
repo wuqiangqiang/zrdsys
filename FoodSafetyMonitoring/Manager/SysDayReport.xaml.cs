@@ -30,7 +30,7 @@ namespace FoodSafetyMonitoring.Manager
 
         private List<DeptItemInfo> list = new List<DeptItemInfo>();
 
-        public SysDayReport(IDBOperation dbOperation)
+        public SysDayReport(IDBOperation dbOperation,string dept_type,string detect_type)
         {
             InitializeComponent();
 
@@ -53,7 +53,7 @@ namespace FoodSafetyMonitoring.Manager
                 default: break;
             }
             //检测站点
-            ComboboxTool.InitComboboxSource(_detect_dept, "call p_dept_cxtj(" + (Application.Current.Resources["User"] as UserInfo).ID + ")", "cxtj");
+            ComboboxTool.InitComboboxSource(_detect_dept, string.Format("call p_dept_cxtj({0},'{1}')", (Application.Current.Resources["User"] as UserInfo).ID, dept_type), "cxtj");
             //检测项目
             ComboboxTool.InitComboboxSource(_detect_item, "SELECT ItemID,ItemNAME FROM t_det_item WHERE  (tradeId ='1'or tradeId ='2' or tradeId ='3' or ifnull(tradeId,'') = '') and OPENFLAG = '1' order by orderId", "cxtj");
             //检测结果
@@ -86,7 +86,7 @@ namespace FoodSafetyMonitoring.Manager
 
         private void _query_Click(object sender, RoutedEventArgs e)
         {
-            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_report_day('{0}','{1}','{2}','{3}','{4}')",
+            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_report_day_hb('{0}','{1}','{2}','{3}','{4}')",
                               (Application.Current.Resources["User"] as UserInfo).ID, reportDate.Value,
                                _detect_dept.SelectedIndex < 1 ? "" : (_detect_dept.SelectedItem as Label).Tag,
                                _detect_item.SelectedIndex < 1 ? "" : (_detect_item.SelectedItem as Label).Tag,

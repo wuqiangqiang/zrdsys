@@ -50,8 +50,8 @@
             </StackPanel>
             <Grid  Grid.Row="2" VerticalAlignment="Center">
                 <StackPanel>
-                    <TextBlock MinWidth="50">检测站点性质:</TextBlock>
-                    <ComboBox Width="120" x:Name="_dept_type" />
+                    <!--<TextBlock MinWidth="50">检测站点性质:</TextBlock>
+                    <ComboBox Width="120" x:Name="_dept_type" />-->
                     <TextBlock MinWidth="50">检测结果:</TextBlock>
                     <ComboBox Width="120" x:Name="_detect_result1" />
                     <TextBlock MinWidth="40" Margin="30,0,0,0">数据来源:</TextBlock>

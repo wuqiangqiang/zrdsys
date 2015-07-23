@@ -62,7 +62,7 @@
                     <TextBlock  Margin="10,0,0,0" >区（县）</TextBlock>
                 </StackPanel>
                 <StackPanel Grid.Row="2" Orientation="Horizontal">
-                    <TextBlock HorizontalAlignment="Right">来源单位:</TextBlock>
+                    <TextBlock HorizontalAlignment="Right">来源:</TextBlock>
                     <ComboBox Width="280" x:Name="_source_company" IsEditable="True"></ComboBox>
                     <TextBlock  >检疫证号:</TextBlock>
                     <TextBox Width="305" x:Name="_detect_number" MaxLength="20" InputMethod.IsInputMethodEnabled="False" PreviewKeyDown="Detect_Number_PreviewKeyDown"></TextBox>

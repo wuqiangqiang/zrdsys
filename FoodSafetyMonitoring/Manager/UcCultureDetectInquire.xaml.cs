@@ -37,11 +37,11 @@ namespace FoodSafetyMonitoring.Manager
             //画面初始化-检测单列表画面
             dtpStartDate.Value = DateTime.Now.AddDays(-1);
             dtpEndDate.Value = DateTime.Now;
-            ComboboxTool.InitComboboxSource(_culture_company, string.Format("call p_user_dept('{0}')", userId), "cxtj");
+            ComboboxTool.InitComboboxSource(_culture_company, string.Format("call p_user_dept_hb('{0}','yz')", userId), "cxtj");
             ComboboxTool.InitComboboxSource(_detect_item1, "SELECT ItemID,ItemNAME FROM t_det_item WHERE  (tradeId ='1'or tradeId ='2' or tradeId ='3' or ifnull(tradeId,'') = '') and OPENFLAG = '1' order by orderId", "cxtj");
             ComboboxTool.InitComboboxSource(_detect_object1, "SELECT objectId,objectName FROM t_det_object WHERE  (tradeId ='1'or tradeId ='2' or tradeId ='3' or ifnull(tradeId,'') = '') and OPENFLAG = '1'", "cxtj");
             ComboboxTool.InitComboboxSource(_detect_result1, "SELECT resultId,resultName FROM t_det_result where openFlag = '1' ORDER BY id", "cxtj");
-            ComboboxTool.InitComboboxSource(_detect_person1, string.Format("call p_user_detuser('{0}')", userId), "cxtj");
+            ComboboxTool.InitComboboxSource(_detect_person1, string.Format("call p_user_detuser_hb('{0}','yz')", userId), "cxtj");
             ComboboxTool.InitComboboxSource(_detect_method, "select reagentId,reagentName from t_det_reagent where openFlag = '1'", "cxtj");
             ComboboxTool.InitComboboxSource(_detect_type, "SELECT sourceId,sourceName FROM t_det_source where openFlag = '1'", "cxtj");
 

@@ -33,7 +33,7 @@ namespace FoodSafetyMonitoring.Manager
             InitializeComponent();
             this.dbOperation = dbOperation;
 
-            ComboboxTool.InitComboboxSource(_source_company, string.Format("call p_user_dept('{0}')", userId), "lr");
+            ComboboxTool.InitComboboxSource(_source_company, string.Format("call p_provice_dept_hb('{0}','yz')", userId), "lr");
             _source_company.SelectionChanged += new SelectionChangedEventHandler(_source_company_SelectionChanged);
             ComboboxTool.InitComboboxSource(_detect_trade, "select tradeId,tradeName from t_trade where openFlag = '1'", "lr");
             _detect_trade.SelectionChanged += new SelectionChangedEventHandler(_detect_trade_SelectionChanged);
