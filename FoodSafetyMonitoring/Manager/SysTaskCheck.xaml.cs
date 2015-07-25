@@ -50,7 +50,7 @@ namespace FoodSafetyMonitoring.Manager
             "11",
             "12"};//初始化变量
 
-        public SysTaskCheck(IDBOperation dbOperation)
+        public SysTaskCheck(IDBOperation dbOperation, string dept_type)
         {
             this.dbOperation = dbOperation;
 

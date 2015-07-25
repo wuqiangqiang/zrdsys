@@ -30,11 +30,13 @@ namespace FoodSafetyMonitoring.Manager
         private string user_flag_tier;
         private string dept_name;
         private string supplierId;
+        private string depttype;
 
-        public UcTaskAllocation()
+        public UcTaskAllocation(string dept_type)
         {
             InitializeComponent();
             dbOperation = DBUtility.DbHelperMySQL.CreateDbHelper();
+            this.depttype = dept_type;
             btnSave.Tag = "新增";
             user_flag_tier = (Application.Current.Resources["User"] as UserInfo).FlagTier;
             supplierId = (Application.Current.Resources["User"] as UserInfo).SupplierId;
@@ -64,15 +66,8 @@ namespace FoodSafetyMonitoring.Manager
 
         }
 
-        List<string> tableHeaders = new List<string>() { "检测项目", "1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月", "合计" };
+        List<string> tableHeaders = new List<string>() { "检测项目", DateTime.Now.Year + "年"};
         Dictionary<string, TextBox> textBoxs = new Dictionary<string, TextBox>();
-
-        //void _detect_trade_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        //{
-        //    _detect_station.SelectedIndex = 0;
-        //    _grid_detail.Children.Clear();
-        //    btnSave.Visibility = Visibility.Hidden;
-        //}
 
         void _detect_station_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -84,16 +79,8 @@ namespace FoodSafetyMonitoring.Manager
 
             for (int i = 0; i < tableHeaders.Count; i++)
             {
-
                 _grid_detail.ColumnDefinitions.Add(new ColumnDefinition());
-                if (i == 0)
-                {
-                    _grid_detail.ColumnDefinitions[0].Width = new GridLength(2, GridUnitType.Star);
-                }
-                else
-                {
-                    _grid_detail.ColumnDefinitions[0].Width = new GridLength(1, GridUnitType.Star);
-                }
+                _grid_detail.ColumnDefinitions[i].Width = new GridLength(100, GridUnitType.Pixel);
             }
             _grid_detail.RowDefinitions.Add(new RowDefinition());
             for (int i = 0; i < tableHeaders.Count; i++)
@@ -139,17 +126,9 @@ namespace FoodSafetyMonitoring.Manager
                     {
                         textBox.Text = "0";
                         textBox.MaxLength = 5;
-                        if (j == tableHeaders.Count - 1)
-                        {
-                            textBox.IsReadOnly = true;
-                            textBoxs.Add("行合计" + (_grid_detail.RowDefinitions.Count - 1), textBox);
-                        }
-                        else
-                        {
-                            textBox.TextChanged += new TextChangedEventHandler(textBox_TextChanged);
-                            textBox.Tag = (i + 1) + "," + j;
-                            textBoxs.Add((i + 1) + "," + j, textBox);
-                        }
+                        textBox.TextChanged += new TextChangedEventHandler(textBox_TextChanged);
+                        textBox.Tag = (i + 1) + "," + j;
+                        textBoxs.Add((i + 1) + "," + j, textBox);
                     }
                     textBox.HorizontalAlignment = HorizontalAlignment.Center;
                     textBox.HorizontalContentAlignment = HorizontalAlignment.Center;
@@ -232,9 +211,9 @@ namespace FoodSafetyMonitoring.Manager
                 }
 
                 string[] s = (sender as TextBox).Tag.ToString().Split(new char[] { ',' });
-                textBoxs["行合计" + s[0]].Text = (Convert.ToInt32(textBoxs["行合计" + s[0]].Text) - lastValue + value).ToString();
+                //textBoxs["行合计" + s[0]].Text = (Convert.ToInt32(textBoxs["行合计" + s[0]].Text) - lastValue + value).ToString();
                 textBoxs["列合计" + s[1]].Text = (Convert.ToInt32(textBoxs["列合计" + s[1]].Text) - lastValue + value).ToString();
-                textBoxs["列合计" + (tableHeaders.Count - 1)].Text = (Convert.ToInt32(textBoxs["列合计" + (tableHeaders.Count - 1)].Text) - lastValue + value).ToString();
+                //textBoxs["列合计" + (tableHeaders.Count - 1)].Text = (Convert.ToInt32(textBoxs["列合计" + (tableHeaders.Count - 1)].Text) - lastValue + value).ToString();
 
             }
             catch
@@ -269,10 +248,10 @@ namespace FoodSafetyMonitoring.Manager
             for (int i = 0; i < table.Rows.Count; i++)
             {
                 sb.Append(table.Rows[i][0].ToString() + ",");
-                for (int j = 1; j < tableHeaders.Count - 1; j++)
+                for (int j = 1; j < tableHeaders.Count; j++)
                 {
                     sb.Append(textBoxs[(i + 1) + "," + j].Text);
-                    if (j != tableHeaders.Count - 2)
+                    if (j != tableHeaders.Count - 1)
                     {
                         sb.Append(",");
                     }
@@ -291,13 +270,13 @@ namespace FoodSafetyMonitoring.Manager
 
                 if (btnSave.Tag.ToString() == "新增")
                 {
-                    function = "p_insert_task";
+                    function = "p_insert_task_hb";
                     tipInfo_success = "添加成功!";
                     tipInfo_fail = "添加失败!";
                 }
                 if (btnSave.Tag.ToString() == "修改")
                 {
-                    function = "p_update_task";
+                    function = "p_update_task_hb";
                     btnSave.Tag = "新增";
                     tipInfo_success = "修改成功!";
                     tipInfo_fail = "修改失败!";
@@ -306,7 +285,9 @@ namespace FoodSafetyMonitoring.Manager
                 {
                     return;
                 }
-                int result = dbOperation.ExecuteSql(string.Format("call " + function + " ('{0}','{1}','{2}')", (_detect_station.SelectedItem as Label).Tag, DateTime.Now.Year, sb.ToString()));
+                int result = dbOperation.ExecuteSql(string.Format("call " + function + " ('{0}','{1}','{2}','{3}')", 
+                                                    (_detect_station.SelectedItem as Label).Tag, DateTime.Now.Year, sb.ToString(),
+                                                     depttype));
 
                 if (result == 1)
                 {
@@ -386,18 +367,18 @@ namespace FoodSafetyMonitoring.Manager
                 //_detect_trade.SelectionChanged += new SelectionChangedEventHandler(_detect_trade_SelectionChanged);
 
                 _detect_station.SelectionChanged -= new SelectionChangedEventHandler(_detect_station_SelectionChanged);
-                ComboboxTool.InitComboboxSource(_detect_station, string.Format("call p_user_dept_task('{0}','{1}')", (Application.Current.Resources["User"] as UserInfo).ID, DateTime.Now.Year), "lr");
+                ComboboxTool.InitComboboxSource(_detect_station, string.Format("call p_user_dept_task_hb('{0}','{1}','{2}')", (Application.Current.Resources["User"] as UserInfo).ID, DateTime.Now.Year, depttype), "lr");
                 _detect_station.SelectionChanged += new SelectionChangedEventHandler(_detect_station_SelectionChanged);
             }
         }
 
         private void loadTableView()
         {
-            DataTable table = dbOperation.GetDataSet(string.Format("call p_query_task({0},{1})", (Application.Current.Resources["User"] as UserInfo).ID, DateTime.Now.Year)).Tables[0];
+            DataTable table = dbOperation.GetDataSet(string.Format("call p_query_task_hb({0},{1},'{2}')", (Application.Current.Resources["User"] as UserInfo).ID, DateTime.Now.Year, depttype)).Tables[0];
             Dictionary<string, DetectTask> DetectTasks = new Dictionary<string, DetectTask>();
             for (int i = 0; i < table.Rows.Count; i++)
             {
-                string deptment_id = table.Rows[i]["dept_id"].ToString();
+                string deptment_id = table.Rows[i]["dept_no"].ToString();
                 string deptment_name = table.Rows[i]["dept_name"].ToString();
                 string detect_item = table.Rows[i]["item_name"].ToString();
                 int detect_count = Convert.ToInt32(table.Rows[i]["task_sum"].ToString());
@@ -520,10 +501,10 @@ namespace FoodSafetyMonitoring.Manager
             _detect_station.SelectionChanged -= new SelectionChangedEventHandler(_detect_station_SelectionChanged);
             _tabControl.SelectedIndex = 0;
             _detect_station.IsEnabled = false;
-            string sql = string.Format("select iid,ItemNAME,task_jan,task_feb,task_mar,task_apr,task_may,task_jun,task_jul,task_aug,task_sep,task_oct,task_nov,task_dec" +
-                                        " from t_task_assign ,t_det_item" +
-                                        " where t_task_assign.iid = t_det_item.ItemID" +
-                                        " and  did = '{0}' and nian='{1}'", id, DateTime.Now.Year);
+            string sql = string.Format("select iid,ItemNAME,task" +
+                                        " from t_task_assign_hb ,t_det_item" +
+                                        " where t_task_assign_hb.iid = t_det_item.ItemID" +
+                                        " and  did = '{0}' and nian='{1}' and depttype = '{2}'", id, DateTime.Now.Year, depttype);
             string deptment_name = "";
             for (int i = 0; i < _tableview.Table.Rows.Count; i++)
             {
@@ -550,14 +531,7 @@ namespace FoodSafetyMonitoring.Manager
             {
 
                 _grid_detail.ColumnDefinitions.Add(new ColumnDefinition());
-                if (i == 0)
-                {
-                    _grid_detail.ColumnDefinitions[0].Width = new GridLength(2, GridUnitType.Star);
-                }
-                else
-                {
-                    _grid_detail.ColumnDefinitions[0].Width = new GridLength(1, GridUnitType.Star);
-                }
+                _grid_detail.ColumnDefinitions[i].Width = new GridLength(150, GridUnitType.Pixel);
             }
             _grid_detail.RowDefinitions.Add(new RowDefinition());
             for (int i = 0; i < tableHeaders.Count; i++)
@@ -601,17 +575,9 @@ namespace FoodSafetyMonitoring.Manager
                     {
                         textBox.Text = "0";
                         textBox.MaxLength = 5;
-                        if (j == tableHeaders.Count - 1)
-                        {
-                            textBox.IsReadOnly = true;
-                            textBoxs.Add("行合计" + (_grid_detail.RowDefinitions.Count - 1), textBox);
-                        }
-                        else
-                        {
-                            textBox.TextChanged += new TextChangedEventHandler(textBox_TextChanged);
-                            textBox.Tag = (i + 1) + "," + j;
-                            textBoxs.Add((i + 1) + "," + j, textBox);
-                        }
+                        textBox.TextChanged += new TextChangedEventHandler(textBox_TextChanged);
+                        textBox.Tag = (i + 1) + "," + j;
+                        textBoxs.Add((i + 1) + "," + j, textBox);
                     }
                     textBox.HorizontalAlignment = HorizontalAlignment.Center;
                     textBox.HorizontalContentAlignment = HorizontalAlignment.Center;
@@ -658,12 +624,8 @@ namespace FoodSafetyMonitoring.Manager
                     {
                         textBoxs[(i + 1) + "," + (j - 1)].Text = table.Rows[i][j].ToString().Length == 0 ? "0" : table.Rows[i][j].ToString();
                     }
-
                 }
-            }
-
-          
+            }    
         }
-
     }
 }

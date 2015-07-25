@@ -25,10 +25,14 @@ namespace FoodSafetyMonitoring.Manager
     public partial class SysTrendAnalysis : UserControl
     {
         IDBOperation dbOperation;
-        public SysTrendAnalysis(IDBOperation dbOperation)
+        private string depttype;
+        private string detecttype;
+        public SysTrendAnalysis(IDBOperation dbOperation, string dept_type, string detect_type)
         {
             InitializeComponent();
             this.dbOperation = dbOperation;
+            this.depttype = dept_type;
+            this.detecttype = detect_type;
             DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_year_count({0})", (Application.Current.Resources["User"] as UserInfo).ID)).Tables[0];
             List<string> years = new List<string>();
             years.Add("-请选择-");
@@ -70,15 +74,15 @@ namespace FoodSafetyMonitoring.Manager
             {
                 if (_analysis_theme.SelectedIndex > 0 && _analysis_theme.Text == "年度各项目检测执行趋势分析")
                 {
-                    return dbOperation.GetDbHelper().GetDataSet(string.Format("call sp_ndxmqs('{0}','{1}')", (Application.Current.Resources["User"] as UserInfo).ID, year)).Tables[0];
+                    return dbOperation.GetDbHelper().GetDataSet(string.Format("call sp_ndxmqs_hb('{0}','{1}','{2}','{3}')", (Application.Current.Resources["User"] as UserInfo).ID, year, depttype, detecttype)).Tables[0];
                 }
                 else if (_analysis_theme.SelectedIndex > 0 && _analysis_theme.Text == "年度各检测项目阳性样本检出趋势分析")
                 {
-                    return dbOperation.GetDbHelper().GetDataSet(string.Format("call sp_ndyxqs('{0}','{1}')", (Application.Current.Resources["User"] as UserInfo).ID, year)).Tables[0];
+                    return dbOperation.GetDbHelper().GetDataSet(string.Format("call sp_ndyxqs_hb('{0}','{1}','{2}','{3}')", (Application.Current.Resources["User"] as UserInfo).ID, year, depttype, detecttype)).Tables[0];
                 }
                 else if (_analysis_theme.SelectedIndex > 0 && _analysis_theme.Text == "年度各检测项目疑似阳性样本检出趋势分析")
                 {
-                    return dbOperation.GetDbHelper().GetDataSet(string.Format("call sp_ndyxqs_like('{0}','{1}')", (Application.Current.Resources["User"] as UserInfo).ID, year)).Tables[0];
+                    return dbOperation.GetDbHelper().GetDataSet(string.Format("call sp_ndyxqs_like_hb('{0}','{1}','{2}','{3}')", (Application.Current.Resources["User"] as UserInfo).ID, year, depttype, detecttype)).Tables[0];
                 }
                 else
                 {

@@ -32,12 +32,16 @@ namespace FoodSafetyMonitoring.Manager
         private string dept_name_2;
         private string dept_name_3;
         private readonly List<string> analysisThemes;
+        private string depttype;
+        private string detecttype;
 
 
-        public SysComparisonAndAnalysis(IDBOperation dbOperation)
+        public SysComparisonAndAnalysis(IDBOperation dbOperation, string dept_type, string detect_type)
         {
             InitializeComponent();
             this.dbOperation = dbOperation;
+            this.depttype = dept_type;
+            this.detecttype = detect_type;
             user_flag_tier = (Application.Current.Resources["User"] as UserInfo).FlagTier;
             dtpStartDate.Value = DateTime.Now;
             dtpEndDate.Value = DateTime.Now;
@@ -69,9 +73,9 @@ namespace FoodSafetyMonitoring.Manager
             dept_name, 
             dept_name_2,
             dept_name_3,
-            "直属与企业检测点检测总量比较分析",
-            "直属与企业检测点阳性样本检出比较分析",
-            "直属与企业检测点疑似阳性样本检出比较分析",
+            //"直属与企业检测点检测总量比较分析",
+            //"直属与企业检测点阳性样本检出比较分析",
+            //"直属与企业检测点疑似阳性样本检出比较分析",
             "不同检测项目检测量占比分析",
             "不同检测项目阳性样本检测占比分析",
             "不同检测项目疑似阳性样本检测占比分析",
@@ -100,29 +104,29 @@ namespace FoodSafetyMonitoring.Manager
             string function = "";
             switch (_analysis_theme.Text)
             {
-                case "各省检测总量占比分析": function = "p_dbfx_jczl"; break;
-                case "各地市检测总量占比分析": function = "p_dbfx_jczl"; break;
-                case "各区县检测总量占比分析": function = "p_dbfx_jczl"; break;
-                case "各检测站点检测总量占比分析": function = "p_dbfx_jczl"; break;
-                case "各省阳性样本检出量占比分析": function = "p_dbfx_jczl_yang"; break;
-                case "各地市阳性样本检出量占比分析": function = "p_dbfx_jczl_yang"; break;
-                case "各区县阳性样本检出量占比分析": function = "p_dbfx_jczl_yang"; break;
-                case "各检测站点阳性样本检出量占比分析": function = "p_dbfx_jczl_yang"; break;
-                case "各省疑似阳性样本检出量占比分析": function = "p_dbfx_jczl_like_yang"; break;
-                case "各地市疑似阳性样本检出量占比分析": function = "p_dbfx_jczl_like_yang"; break;
-                case "各区县疑似阳性样本检出量占比分析": function = "p_dbfx_jczl_like_yang"; break;
-                case "各检测站点疑似阳性样本检出量占比分析": function = "p_dbfx_jczl_like_yang"; break;
-                case "直属与企业检测点检测总量比较分析": function = "p_dbfx_jcdfx"; break;
-                case "直属与企业检测点阳性样本检出比较分析": function = "p_dbfx_jcdyxfx"; break;
-                case "直属与企业检测点疑似阳性样本检出比较分析": function = "p_dbfx_jcdyxfx_like"; break;
-                case "不同检测项目检测量占比分析": function = "p_dbfx_jcxm"; break;
-                case "不同检测项目阳性样本检测占比分析": function = "p_dbfx_jcxmyx"; break;
-                case "不同检测项目疑似阳性样本检测占比分析": function = "p_dbfx_jcxmyx_like"; break;
-                case "疑似阳性/阳性样本检出总量占比分析": function = "p_dbfx_yxyx"; break;
+                case "各省检测总量占比分析": function = "p_dbfx_jczl_hb"; break;
+                case "各地市检测总量占比分析": function = "p_dbfx_jczl_hb"; break;
+                case "各区县检测总量占比分析": function = "p_dbfx_jczl_hb"; break;
+                case "各检测站点检测总量占比分析": function = "p_dbfx_jczl_hb"; break;
+                case "各省阳性样本检出量占比分析": function = "p_dbfx_jczl_yang_hb"; break;
+                case "各地市阳性样本检出量占比分析": function = "p_dbfx_jczl_yang_hb"; break;
+                case "各区县阳性样本检出量占比分析": function = "p_dbfx_jczl_yang_hb"; break;
+                case "各检测站点阳性样本检出量占比分析": function = "p_dbfx_jczl_yang_hb"; break;
+                case "各省疑似阳性样本检出量占比分析": function = "p_dbfx_jczl_like_yang_hb"; break;
+                case "各地市疑似阳性样本检出量占比分析": function = "p_dbfx_jczl_like_yang_hb"; break;
+                case "各区县疑似阳性样本检出量占比分析": function = "p_dbfx_jczl_like_yang_hb"; break;
+                case "各检测站点疑似阳性样本检出量占比分析": function = "p_dbfx_jczl_like_yang_hb"; break;
+                //case "直属与企业检测点检测总量比较分析": function = "p_dbfx_jcdfx"; break;
+                //case "直属与企业检测点阳性样本检出比较分析": function = "p_dbfx_jcdyxfx"; break;
+                //case "直属与企业检测点疑似阳性样本检出比较分析": function = "p_dbfx_jcdyxfx_like"; break;
+                case "不同检测项目检测量占比分析": function = "p_dbfx_jcxm_hb"; break;
+                case "不同检测项目阳性样本检测占比分析": function = "p_dbfx_jcxmyx_hb"; break;
+                case "不同检测项目疑似阳性样本检测占比分析": function = "p_dbfx_jcxmyx_like_hb"; break;
+                case "疑似阳性/阳性样本检出总量占比分析": function = "p_dbfx_yxyx_hb"; break;
                 default: break;
             }
 
-            table = dbOperation.GetDbHelper().GetDataSet(string.Format("call {0}({1},'{2}','{3}')", function, userId, (DateTime)dtpStartDate.Value, (DateTime)dtpEndDate.Value)).Tables[0];
+            table = dbOperation.GetDbHelper().GetDataSet(string.Format("call {0}({1},'{2}','{3}','{4}','{5}')", function, userId, (DateTime)dtpStartDate.Value, (DateTime)dtpEndDate.Value, depttype, detecttype)).Tables[0];
 
 
             switch (_analysis_theme.Text)
@@ -163,15 +167,15 @@ namespace FoodSafetyMonitoring.Manager
                 case "各检测站点疑似阳性样本检出量占比分析": table.Columns[0].ColumnName = "检测站点名称";
                     table.Columns[1].ColumnName = "疑似阳性样本数量";
                     break;
-                case "直属与企业检测点检测总量比较分析": table.Columns[0].ColumnName = "检测站点性质";
-                    table.Columns[1].ColumnName = "检测数量";
-                    break;
-                case "直属与企业检测点阳性样本检出比较分析": table.Columns[0].ColumnName = "检测站点性质";
-                    table.Columns[1].ColumnName = "阳性样本数量";
-                    break;
-                case "直属与企业检测点疑似阳性样本检出比较分析": table.Columns[0].ColumnName = "检测站点性质";
-                    table.Columns[1].ColumnName = "疑似阳性样本数量";
-                    break;
+                //case "直属与企业检测点检测总量比较分析": table.Columns[0].ColumnName = "检测站点性质";
+                //    table.Columns[1].ColumnName = "检测数量";
+                //    break;
+                //case "直属与企业检测点阳性样本检出比较分析": table.Columns[0].ColumnName = "检测站点性质";
+                //    table.Columns[1].ColumnName = "阳性样本数量";
+                //    break;
+                //case "直属与企业检测点疑似阳性样本检出比较分析": table.Columns[0].ColumnName = "检测站点性质";
+                //    table.Columns[1].ColumnName = "疑似阳性样本数量";
+                //    break;
                 case "不同检测项目检测量占比分析": table.Columns.Remove("ItemID");
                     table.Columns[0].ColumnName = "检测项目";
                     table.Columns[1].ColumnName = "检测数量";

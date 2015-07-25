@@ -66,8 +66,8 @@ namespace FoodSafetyMonitoring.Manager
 
         private void GetData()
         {
-            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_report_day_details('{0}','{1}','{2}','{3}',{4},{5})",
-                                Sj, DeptId, ItemId, ResultId,
+            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_report_day_details_hb('{0}','{1}','{2}','{3}','{4}',{5},{6})",
+                                Sj, DeptId, ItemId, ResultId, DetectType,
                               (_tableview.PageIndex - 1) * _tableview.RowMax,
                               _tableview.RowMax)).Tables[0];
 

@@ -28,12 +28,16 @@ namespace FoodSafetyMonitoring.Manager
         private Dictionary<string, MyColumn> MyColumns = new Dictionary<string, MyColumn>();
         private string user_flag_tier;
         private string dept_name;
+        private string depttype;
+        private string detecttype;
 
-        public SysDesignReport(IDBOperation dbOperation)
+        public SysDesignReport(IDBOperation dbOperation, string dept_type, string detect_type)
         {
             InitializeComponent();
 
             this.dbOperation = dbOperation;
+            this.depttype = dept_type;
+            this.detecttype = detect_type;
             user_flag_tier = (Application.Current.Resources["User"] as UserInfo).FlagTier;
 
             reportDate_kssj.Value = DateTime.Now.AddDays(-1);
@@ -58,7 +62,7 @@ namespace FoodSafetyMonitoring.Manager
                     break;
                 default: break;
             }
-            ComboboxTool.InitComboboxSource(_detect_dept, "call p_dept_cxtj(" + (Application.Current.Resources["User"] as UserInfo).ID + ")", "cxtj");
+            ComboboxTool.InitComboboxSource(_detect_dept, string.Format("call p_dept_cxtj_hb({0},'{1}')", (Application.Current.Resources["User"] as UserInfo).ID, depttype), "cxtj");
             //检测点属性
             //ComboboxTool.InitComboboxSource(_detect_type, "SELECT typeId,typeName FROM t_dept_type where openFlag = '1'", "cxtj");
             //检测项目
@@ -132,13 +136,14 @@ namespace FoodSafetyMonitoring.Manager
 
 
         private void GetData()
-        {      
-            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_report_custom('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}',{8})",
+        {
+            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_report_custom_hb('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}',{9},{10})",
                               (Application.Current.Resources["User"] as UserInfo).ID, reportDate_kssj.Value, reportDate_jssj.Value,
                                _detect_dept.SelectedIndex < 1 ? "" : (_detect_dept.SelectedItem as Label).Tag,
                                _detect_item.SelectedIndex < 1 ? "" : (_detect_item.SelectedItem as Label).Tag,
                                _detect_object.SelectedIndex < 1 ? "" : (_detect_object.SelectedItem as Label).Tag,
                                _detect_result.SelectedIndex < 1 ? "" : (_detect_result.SelectedItem as Label).Tag,
+                               depttype, detecttype,
                                (_tableview.PageIndex - 1) * _tableview.RowMax,
                                _tableview.RowMax)).Tables[0];
              
@@ -182,12 +187,13 @@ namespace FoodSafetyMonitoring.Manager
 
         private void _export_Click(object sender, RoutedEventArgs e)
         {
-            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_report_custom('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}',{8})",
+            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_report_custom_hb('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}',{9},{10})",
                               (Application.Current.Resources["User"] as UserInfo).ID, reportDate_kssj.Value, reportDate_jssj.Value,
                                _detect_dept.SelectedIndex < 1 ? "" : (_detect_dept.SelectedItem as Label).Tag,
                                _detect_item.SelectedIndex < 1 ? "" : (_detect_item.SelectedItem as Label).Tag,
                                _detect_object.SelectedIndex < 1 ? "" : (_detect_object.SelectedItem as Label).Tag,
                                _detect_result.SelectedIndex < 1 ? "" : (_detect_result.SelectedItem as Label).Tag,
+                               depttype, detecttype,
                                0,
                                _tableview.RowTotal)).Tables[0];
 

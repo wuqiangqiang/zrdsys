@@ -28,8 +28,9 @@ namespace FoodSafetyMonitoring.Manager
         public string DeptId { get; set; }
         public string ItemId { get; set; }
         public string ResultId { get; set; }
+        public string DetectType { get; set; }
 
-        public UcYearReportDetails(IDBOperation dbOperation, string sj, string deptId, string itemId, string resultId)
+        public UcYearReportDetails(IDBOperation dbOperation, string sj, string deptId, string itemId, string resultId, string detecttype)
         {
             InitializeComponent();
 
@@ -38,6 +39,7 @@ namespace FoodSafetyMonitoring.Manager
             this.DeptId = deptId;
             this.ItemId = itemId;
             this.ResultId = resultId;
+            this.DetectType = detecttype;
 
             MyColumns.Add("orderid", new MyColumn("orderid", "检测单编号") { BShow = true, Width = 8 });
             MyColumns.Add("detecttypename", new MyColumn("detecttypename", "信息来源") { BShow = true, Width = 8 });
@@ -64,8 +66,8 @@ namespace FoodSafetyMonitoring.Manager
 
         private void GetData()
         {
-            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_report_year_details('{0}','{1}','{2}','{3}',{4},{5})",
-                                Sj, DeptId, ItemId, ResultId,
+            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_report_year_details_hb('{0}','{1}','{2}','{3}','{4}',{5},{6})",
+                                Sj, DeptId, ItemId, ResultId, DetectType,
                               (_tableview.PageIndex - 1) * _tableview.RowMax,
                               _tableview.RowMax)).Tables[0];
 
@@ -85,8 +87,25 @@ namespace FoodSafetyMonitoring.Manager
         void _tableview_DetailsRowEnvent(string id)
         {
             int orderid = int.Parse(id);
-            detectdetails det = new detectdetails(dbOperation, orderid);
-            det.ShowDialog();
+            if (DetectType == "0")
+            {
+                culture_detectdetails det = new culture_detectdetails(dbOperation, orderid);
+                det.ShowDialog();
+            }
+            else if (DetectType == "1")
+            {
+                Certificate_detectdetails det = new Certificate_detectdetails(dbOperation, orderid);
+                det.ShowDialog();
+            }
+            else if (DetectType == "2")
+            {
+
+            }
+            else if (DetectType == "")
+            {
+                detectdetails det = new detectdetails(dbOperation, orderid);
+                det.ShowDialog();
+            }       
         }
     }
 }

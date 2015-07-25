@@ -24,6 +24,8 @@ namespace FoodSafetyMonitoring.Manager
     public partial class SysAreaAnalysis : UserControl
     {
         private IDBOperation dbOperation;
+        private string depttype;
+        private string detecttype;
 
         private readonly List<string> analysisThemes = new List<string>() { "-请选择-",
             "检测样本来源区域分布(全国)分析", 
@@ -33,10 +35,12 @@ namespace FoodSafetyMonitoring.Manager
             "疑似阳性样本检出来源区域分布(全国)分析",
             "疑似阳性样本检出来源区域分布(省内)分析"};//初始化变量
 
-        public SysAreaAnalysis(IDBOperation dbOperation)
+        public SysAreaAnalysis(IDBOperation dbOperation, string dept_type, string detect_type)
         {
             InitializeComponent();
             this.dbOperation = dbOperation;
+            this.depttype = dept_type;
+            this.detecttype = detect_type;
             _analysis_theme.ItemsSource = analysisThemes;
             _analysis_theme.SelectedIndex = 0;
             dtpStartDate.Value = DateTime.Now;
@@ -63,16 +67,16 @@ namespace FoodSafetyMonitoring.Manager
 
             switch (_analysis_theme.Text)
             {
-                case "检测样本来源区域分布(全国)分析": function = "p_qyfx_provice"; break;
-                case "检测样本来源区域分布(省内)分析": function = "p_qyfx_city"; break;
-                case "阳性样本检出来源区域分布(全国)分析": function = "p_qyfx_provice_yang"; break;
-                case "阳性样本检出来源区域分布(省内)分析": function = "p_qyfx_city_yang"; break;
-                case "疑似阳性样本检出来源区域分布(全国)分析": function = "p_qyfx_provice_like_yang"; break;
-                case "疑似阳性样本检出来源区域分布(省内)分析": function = "p_qyfx_city_like_yang"; break;
+                case "检测样本来源区域分布(全国)分析": function = "p_qyfx_provice_hb"; break;
+                case "检测样本来源区域分布(省内)分析": function = "p_qyfx_city_hb"; break;
+                case "阳性样本检出来源区域分布(全国)分析": function = "p_qyfx_provice_yang_hb"; break;
+                case "阳性样本检出来源区域分布(省内)分析": function = "p_qyfx_city_yang_hb"; break;
+                case "疑似阳性样本检出来源区域分布(全国)分析": function = "p_qyfx_provice_like_yang_hb"; break;
+                case "疑似阳性样本检出来源区域分布(省内)分析": function = "p_qyfx_city_like_yang_hb"; break;
                 default: break;
             }
 
-            table = dbOperation.GetDbHelper().GetDataSet(string.Format("call {0}({1},'{2}','{3}')", function, userId, (DateTime)dtpStartDate.Value, (DateTime)dtpEndDate.Value)).Tables[0];
+            table = dbOperation.GetDbHelper().GetDataSet(string.Format("call {0}({1},'{2}','{3}','{4}','{5}')", function, userId, (DateTime)dtpStartDate.Value, (DateTime)dtpEndDate.Value, depttype, detecttype)).Tables[0];
 
             switch (_analysis_theme.Text)
             {
