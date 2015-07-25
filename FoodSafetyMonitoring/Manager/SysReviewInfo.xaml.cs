@@ -27,18 +27,22 @@ namespace FoodSafetyMonitoring.Manager
         private IDBOperation dbOperation;
         private DataTable current_table;
         private Dictionary<string, MyColumn> MyColumns = new Dictionary<string, MyColumn>();
+        private string depttype;
+        private string detecttype;
 
-        public SysReviewInfo(IDBOperation dbOperation)
+        public SysReviewInfo(IDBOperation dbOperation, string dept_type, string detect_type)
         {
             InitializeComponent();
 
             this.dbOperation = dbOperation;
+            this.depttype = dept_type;
+            this.detecttype = detect_type;
 
             //初始化查询条件
             reportDate_kssj.Value = DateTime.Now.AddDays(-1);
             reportDate_jssj.Value = DateTime.Now;
             //检测站点
-            ComboboxTool.InitComboboxSource(_detect_dept, "call p_user_dept(" + (Application.Current.Resources["User"] as UserInfo).ID + ")", "cxtj");
+            ComboboxTool.InitComboboxSource(_detect_dept, string.Format("call p_user_dept_hb({0},'{1}')", (Application.Current.Resources["User"] as UserInfo).ID, depttype), "cxtj");
             //检测项目
             ComboboxTool.InitComboboxSource(_detect_item, "SELECT ItemID,ItemNAME FROM t_det_item WHERE  (tradeId ='1'or tradeId ='2' or tradeId ='3' or ifnull(tradeId,'') = '') and OPENFLAG = '1' order by orderId", "cxtj");
             ////检测结果
@@ -110,10 +114,11 @@ namespace FoodSafetyMonitoring.Manager
             //                  (_tableview.PageIndex - 1) * _tableview.RowMax,
             //                  _tableview.RowMax)).Tables[0];
 
-            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_review_details('{0}','{1}','{2}','{3}','{4}',{5},{6})",
+            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_review_details_hb('{0}','{1}','{2}','{3}','{4}','{5}','{6}',{7},{8})",
                                (Application.Current.Resources["User"] as UserInfo).ID, reportDate_kssj.Value, reportDate_jssj.Value,
                                _detect_dept.SelectedIndex < 1 ? "" : (_detect_dept.SelectedItem as Label).Tag,
                                _detect_item.SelectedIndex < 1 ? "" : (_detect_item.SelectedItem as Label).Tag,
+                               depttype,detecttype,
                               (_tableview.PageIndex - 1) * _tableview.RowMax,
                               _tableview.RowMax)).Tables[0];
 
@@ -142,18 +147,36 @@ namespace FoodSafetyMonitoring.Manager
         void _tableview_StateRowEnvent(string id)
         {
             int orderid = int.Parse(id);
-            AddReviewDetails det = new AddReviewDetails(dbOperation, orderid,this);
-            det.ShowDialog();
+            if (detecttype == "0")
+            {
+                Culture_AddReviewDetails det = new Culture_AddReviewDetails(dbOperation, orderid,this);
+                det.ShowDialog();
+            }
+            else if (detecttype == "1")
+            {
+                Certificate_AddReviewDetails det = new Certificate_AddReviewDetails(dbOperation, orderid,this);
+                det.ShowDialog();
+            }
+            else if (detecttype == "2")
+            {
+
+            }
+            else if (detecttype == "")
+            {
+                AddReviewDetails det = new AddReviewDetails(dbOperation, orderid, this);
+                det.ShowDialog();
+            }       
 
         }
 
         private void _export_Click(object sender, RoutedEventArgs e)
         {
-            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_review_details('{0}','{1}','{2}','{3}','{4}',{5},{6})",
+            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_review_details_hb('{0}','{1}','{2}','{3}','{4}','{5}','{6}',{7},{8})",
                                (Application.Current.Resources["User"] as UserInfo).ID, reportDate_kssj.Value, reportDate_jssj.Value,
                                _detect_dept.SelectedIndex < 1 ? "" : (_detect_dept.SelectedItem as Label).Tag,
                                _detect_item.SelectedIndex < 1 ? "" : (_detect_item.SelectedItem as Label).Tag,
-                              0,
+                               depttype, detecttype,
+                               0,
                               _tableview.RowTotal)).Tables[0];
 
             _tableview.ExportExcel(table);

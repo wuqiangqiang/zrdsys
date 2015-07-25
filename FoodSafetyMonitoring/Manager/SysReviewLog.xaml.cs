@@ -26,12 +26,16 @@ namespace FoodSafetyMonitoring.Manager
     {
         private IDBOperation dbOperation;
         private Dictionary<string, MyColumn> MyColumns = new Dictionary<string, MyColumn>();
+        private string depttype;
+        private string detecttype;
 
-        public SysReviewLog(IDBOperation dbOperation)
+        public SysReviewLog(IDBOperation dbOperation, string dept_type, string detect_type)
         {
             InitializeComponent();
 
             this.dbOperation = dbOperation;
+            this.depttype = dept_type;
+            this.detecttype = detect_type;
 
             //初始化查询条件
             reportDate_kssj.Value = DateTime.Now.AddDays(-1);
@@ -70,9 +74,10 @@ namespace FoodSafetyMonitoring.Manager
 
         private void GetData()
         {
-            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_review_log('{0}','{1}','{2}','{3}','{4}','{5}')",
+            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_review_log_hb('{0}','{1}','{2}','{3}','{4}','{5}',{6},{7})",
                               (Application.Current.Resources["User"] as UserInfo).ID, reportDate_kssj.Value, reportDate_jssj.Value,
                                _detect_item.SelectedIndex < 1 ? "" : (_detect_item.SelectedItem as Label).Tag,
+                               depttype, detecttype,
                               (_tableview.PageIndex - 1) * _tableview.RowMax,
                               _tableview.RowMax)).Tables[0];
             _tableview.Table = table;
@@ -86,15 +91,33 @@ namespace FoodSafetyMonitoring.Manager
         void _tableview_DetailsRowEnvent(string id)
         {
             int orderid = int.Parse(id);
-            detectDetailsReview det = new detectDetailsReview(dbOperation, orderid);
-            det.ShowDialog();
+            if (detecttype == "0")
+            {
+                Culture_DetectDetailsReview det = new Culture_DetectDetailsReview(dbOperation, orderid);
+                det.ShowDialog();
+            }
+            else if (detecttype == "1")
+            {
+                Certificate_DetectDetailsReview det = new Certificate_DetectDetailsReview(dbOperation, orderid);
+                det.ShowDialog();
+            }
+            else if (detecttype == "2")
+            {
+
+            }
+            else if (detecttype == "")
+            {
+                detectDetailsReview det = new detectDetailsReview(dbOperation, orderid);
+                det.ShowDialog();
+            } 
         }
 
         private void _export_Click(object sender, RoutedEventArgs e)
         {
-            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_review_log('{0}','{1}','{2}','{3}','{4}','{5}')",
+            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_review_log_hb('{0}','{1}','{2}','{3}','{4}','{5}',{6},{7})",
                               (Application.Current.Resources["User"] as UserInfo).ID, reportDate_kssj.Value, reportDate_jssj.Value,
                                _detect_item.SelectedIndex < 1 ? "" : (_detect_item.SelectedItem as Label).Tag,
+                               depttype, detecttype,
                               0,
                               _tableview.RowTotal)).Tables[0];
 

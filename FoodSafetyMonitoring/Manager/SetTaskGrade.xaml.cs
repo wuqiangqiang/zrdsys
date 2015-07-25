@@ -27,14 +27,17 @@ namespace FoodSafetyMonitoring.Manager
         private string deptId;
         private DataTable currentTable;
         private SysTaskCheck systaskcheck;
+        private string depttype;
 
-        public SetTaskGrade(IDBOperation dbOperation, string grade_id, string dept_id, DataTable current_table,SysTaskCheck systaskcheck)
+        public SetTaskGrade(IDBOperation dbOperation, string grade_id, string dept_id, DataTable current_table,SysTaskCheck systaskcheck,string dept_type)
         {
             InitializeComponent();
 
             this.dbOperation = dbOperation;
 
-            this.systaskcheck = systaskcheck; 
+            this.systaskcheck = systaskcheck;
+
+            this.depttype = dept_type;
 
             gradeId = grade_id;
 
@@ -50,18 +53,18 @@ namespace FoodSafetyMonitoring.Manager
                 case "1": _grade_up.Text = "100";
                     _grade_up.IsEnabled = false;
                     break;
-                case "2": grade_up = dbOperation.GetDbHelper().GetSingle(string.Format("select parameterDown from t_city_grade where cityId = '{0}' and gradeId = '{1}'", (Application.Current.Resources["User"] as UserInfo).DepartmentID,"1")).ToString();
-                    grade_down = dbOperation.GetDbHelper().GetSingle(string.Format("select parameterUp from t_city_grade where cityId = '{0}' and gradeId = '{1}'", (Application.Current.Resources["User"] as UserInfo).DepartmentID, "3")).ToString();
+                case "2": grade_up = dbOperation.GetDbHelper().GetSingle(string.Format("select parameterDown from t_city_grade_hb where cityId = '{0}' and gradeId = '{1}' and depttype = '{2}'", (Application.Current.Resources["User"] as UserInfo).DepartmentID,"1",depttype)).ToString();
+                    grade_down = dbOperation.GetDbHelper().GetSingle(string.Format("select parameterUp from t_city_grade_hb where cityId = '{0}' and gradeId = '{1}' and depttype = '{2}'", (Application.Current.Resources["User"] as UserInfo).DepartmentID, "3", depttype)).ToString();
                     _grade_up.Text = grade_up;
                     _grade_down.Text = grade_down;
                     break;
-                case "3": grade_up = dbOperation.GetDbHelper().GetSingle(string.Format("select parameterDown from t_city_grade where cityId = '{0}' and gradeId = '{1}'", (Application.Current.Resources["User"] as UserInfo).DepartmentID, "2")).ToString();
-                    grade_down = dbOperation.GetDbHelper().GetSingle(string.Format("select parameterUp from t_city_grade where cityId = '{0}' and gradeId = '{1}'", (Application.Current.Resources["User"] as UserInfo).DepartmentID, "4")).ToString();
+                case "3": grade_up = dbOperation.GetDbHelper().GetSingle(string.Format("select parameterDown from t_city_grade_hb where cityId = '{0}' and gradeId = '{1}' and depttype = '{2}'", (Application.Current.Resources["User"] as UserInfo).DepartmentID, "2", depttype)).ToString();
+                    grade_down = dbOperation.GetDbHelper().GetSingle(string.Format("select parameterUp from t_city_grade_hb where cityId = '{0}' and gradeId = '{1}' and depttype = '{2}'", (Application.Current.Resources["User"] as UserInfo).DepartmentID, "4", depttype)).ToString();
                     _grade_up.Text = grade_up;
                     _grade_down.Text = grade_down;
                     break;
-                case "4": grade_up = dbOperation.GetDbHelper().GetSingle(string.Format("select parameterDown from t_city_grade where cityId = '{0}' and gradeId = '{1}'", (Application.Current.Resources["User"] as UserInfo).DepartmentID, "3")).ToString();
-                    grade_down = dbOperation.GetDbHelper().GetSingle(string.Format("select parameterUp from t_city_grade where cityId = '{0}' and gradeId = '{1}'", (Application.Current.Resources["User"] as UserInfo).DepartmentID, "5")).ToString();
+                case "4": grade_up = dbOperation.GetDbHelper().GetSingle(string.Format("select parameterDown from t_city_grade_hb where cityId = '{0}' and gradeId = '{1}' and depttype = '{2}'", (Application.Current.Resources["User"] as UserInfo).DepartmentID, "3", depttype)).ToString();
+                    grade_down = dbOperation.GetDbHelper().GetSingle(string.Format("select parameterUp from t_city_grade_hb where cityId = '{0}' and gradeId = '{1}' and depttype = '{2}'", (Application.Current.Resources["User"] as UserInfo).DepartmentID, "5", depttype)).ToString();
                     _grade_up.Text = grade_up;
                     _grade_down.Text = grade_down;
                     break;
@@ -92,14 +95,14 @@ namespace FoodSafetyMonitoring.Manager
                 return;
             }
 
-            bool exit_flag = dbOperation.GetDbHelper().Exists(string.Format("select count(gradeId) from t_city_grade where cityId = '{0}' and gradeId = '{1}'", deptId, gradeId));
+            bool exit_flag = dbOperation.GetDbHelper().Exists(string.Format("select count(gradeId) from t_city_grade_hb where cityId = '{0}' and gradeId = '{1}' and depttype = '{2}'", deptId, gradeId,depttype));
 
             if (exit_flag)
             {
-                int n = dbOperation.GetDbHelper().ExecuteSql(string.Format("update t_city_grade set parameterDown='{0}',parameterUp = '{1}',createUserid='{2}',createDate='{3}' where cityId = '{4}' and gradeId = '{5}' ",
+                int n = dbOperation.GetDbHelper().ExecuteSql(string.Format("update t_city_grade_hb set parameterDown='{0}',parameterUp = '{1}',createUserid='{2}',createDate='{3}' where cityId = '{4}' and gradeId = '{5}' and depttype = '{6}'",
                                                                   _grade_down.Text, _grade_up.Text,
                                                                   (Application.Current.Resources["User"] as UserInfo).ID,
-                                                                  DateTime.Now, deptId, gradeId));
+                                                                  DateTime.Now, deptId, gradeId, depttype));
                 if (n == 1)
                 {
                     Toolkit.MessageBox.Show("检测任务指标更新成功！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -114,8 +117,8 @@ namespace FoodSafetyMonitoring.Manager
             }
             else
             {
-                int n = dbOperation.GetDbHelper().ExecuteSql(string.Format("insert into t_city_grade(cityId,gradeId,parameterDown,parameterUp,createUserid,createDate) values('{0}','{1}','{2}','{3}','{4}', '{5}')",
-                                                                 deptId, gradeId, _grade_down.Text, _grade_up.Text,
+                int n = dbOperation.GetDbHelper().ExecuteSql(string.Format("insert into t_city_grade_hb(cityId,gradeId,depttype,parameterDown,parameterUp,createUserid,createDate) values('{0}','{1}','{2}','{3}','{4}', '{5}', '{6}')",
+                                                                 deptId, gradeId,depttype, _grade_down.Text, _grade_up.Text,
                                                                  (Application.Current.Resources["User"] as UserInfo).ID,
                                                                  DateTime.Now));
                 if (n == 1)

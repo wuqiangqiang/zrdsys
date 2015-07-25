@@ -27,6 +27,8 @@ namespace FoodSafetyMonitoring.Manager
         private Dictionary<string, MyColumn> MyColumns = new Dictionary<string, MyColumn>();
         private string user_flag_tier;
         private string dept_name;
+        private string depttype;
+        private string detecttype;
 
         private readonly List<string> year = new List<string>() { "2010",
             "2011", 
@@ -37,32 +39,35 @@ namespace FoodSafetyMonitoring.Manager
             "2016",
             "2017"};//初始化变量
 
-        private readonly List<string> month = new List<string>() { "01",
-            "02", 
-            "03",
-            "04",
-            "05",
-            "06",
-            "07",
-            "08",
-            "09",
-            "10",
-            "11",
-            "12"};//初始化变量
+        //private readonly List<string> month = new List<string>() { "01",
+        //    "02", 
+        //    "03",
+        //    "04",
+        //    "05",
+        //    "06",
+        //    "07",
+        //    "08",
+        //    "09",
+        //    "10",
+        //    "11",
+        //    "12"};//初始化变量
 
-        public SysTaskCheck(IDBOperation dbOperation, string dept_type)
+        public SysTaskCheck(IDBOperation dbOperation, string dept_type, string detect_type)
         {
             this.dbOperation = dbOperation;
 
             InitializeComponent();
+
+            this.depttype = dept_type;
+            this.detecttype = detect_type;
 
             user_flag_tier = (Application.Current.Resources["User"] as UserInfo).FlagTier;
 
             _year.ItemsSource = year;
             _year.SelectedIndex = 5;
 
-            _month.ItemsSource = month;
-            _month.SelectedIndex = 4;
+            //_month.ItemsSource = month;
+            //_month.SelectedIndex = 4;
 
             loadTaskGrade();
 
@@ -83,9 +88,9 @@ namespace FoodSafetyMonitoring.Manager
 
             MyColumns.Add("part_id", new MyColumn("part_id", "检测站点id") { BShow = false });
             MyColumns.Add("part_name", new MyColumn("part_name", dept_name) { BShow = true, Width = 16 });
-            MyColumns.Add("task_theory", new MyColumn("task_theory", "月度任务量") { BShow = true, Width = 14 });
-            MyColumns.Add("task_actual", new MyColumn("task_actual", "月度实际完成量") { BShow = true, Width = 14 });
-            MyColumns.Add("task_percent", new MyColumn("task_percent", "月度任务完成率") { BShow = true, Width = 14 });
+            MyColumns.Add("task_theory", new MyColumn("task_theory", "年度任务量") { BShow = true, Width = 14 });
+            MyColumns.Add("task_actual", new MyColumn("task_actual", "年度实际完成量") { BShow = true, Width = 14 });
+            MyColumns.Add("task_percent", new MyColumn("task_percent", "年度任务完成率") { BShow = true, Width = 14 });
             MyColumns.Add("task_gradename", new MyColumn("task_gradename", "评级") { BShow = true, Width = 10 });
             MyColumns.Add("sum_num", new MyColumn("sum_num", "总行数") { BShow = false });
 
@@ -100,13 +105,13 @@ namespace FoodSafetyMonitoring.Manager
             _tableview.GetDataByPageNumberEvent += new UcTableOperableView.GetDataByPageNumberEventHandler(_tableview_GetDataByPageNumberEvent);
             
             GetData();
-            _tableview.Title = _year.Text + "." + _month.Text + "月 检测任务执行绩效考评结果" + "  合计" + _tableview.RowTotal + "条数据";
+            _tableview.Title = _year.Text + "年 检测任务执行绩效考评结果" + "  合计" + _tableview.RowTotal + "条数据";
         }
 
         private void GetData()
         {
-            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_task_check('{0}','{1}','{2}',{3},{4})",
-                              (Application.Current.Resources["User"] as UserInfo).ID, _year.Text, _month.Text,
+            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_task_check_hb('{0}','{1}','{2}','{3}',{4},{5})",
+                              (Application.Current.Resources["User"] as UserInfo).ID, _year.Text, depttype,detecttype,
                               (_tableview.PageIndex - 1) * _tableview.RowMax,
                               _tableview.RowMax)).Tables[0];
 
@@ -126,8 +131,8 @@ namespace FoodSafetyMonitoring.Manager
 
         private void _export_Click(object sender, RoutedEventArgs e)
         {
-            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_task_check('{0}','{1}','{2}',{3},{4})",
-                              (Application.Current.Resources["User"] as UserInfo).ID, _year.Text, _month.Text,
+            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_task_check_hb('{0}','{1}','{2}','{3}',{4},{5})",
+                              (Application.Current.Resources["User"] as UserInfo).ID, _year.Text, depttype, detecttype,
                               0,
                               _tableview.RowTotal)).Tables[0];
 
@@ -137,15 +142,15 @@ namespace FoodSafetyMonitoring.Manager
         private void btnReset_Click(object sender, RoutedEventArgs e)
         {
             string grade_id = (sender as Button).Tag.ToString();
-            SetTaskGrade setgrade = new SetTaskGrade(dbOperation, grade_id, (Application.Current.Resources["User"] as UserInfo).DepartmentID, currenttable,this);
+            SetTaskGrade setgrade = new SetTaskGrade(dbOperation, grade_id, (Application.Current.Resources["User"] as UserInfo).DepartmentID, currenttable, this, depttype);
             setgrade.ShowDialog();
         }
 
         //加载考评参数设置值
         public void loadTaskGrade()
         {
-            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_task_grade('{0}')",
-                             (Application.Current.Resources["User"] as UserInfo).ID)).Tables[0];
+            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_task_grade_hb('{0}','{1}')",
+                             (Application.Current.Resources["User"] as UserInfo).ID,depttype)).Tables[0];
 
             lvlist2.DataContext = null;
             lvlist2.DataContext = table;

@@ -189,10 +189,10 @@ namespace FoodSafetyMonitoring.Manager
                         ComboboxTool.InitComboboxSource(_cmbRoleType, "SELECT NUMB_ROLE,INFO_NAME FROM sys_client_role where roletype = '1' and FLAG_TIER = 1", "lr");
                         break;
                     case "2": _cmbRoleType.IsEnabled = true;
-                        ComboboxTool.InitComboboxSource(_cmbRoleType, "SELECT NUMB_ROLE,INFO_NAME FROM sys_client_role where roletype = '1' and FLAG_TIER = 2", "lr");
+                        ComboboxTool.InitComboboxSource(_cmbRoleType, "SELECT NUMB_ROLE,INFO_NAME FROM sys_client_role where roletype = '1' and (FLAG_TIER = 2 or FLAG_TIER = 5)", "lr");
                         break;
                     case "3": _cmbRoleType.IsEnabled = true;
-                        ComboboxTool.InitComboboxSource(_cmbRoleType, "SELECT NUMB_ROLE,INFO_NAME FROM sys_client_role where roletype = '1' and FLAG_TIER = 3", "lr");
+                        ComboboxTool.InitComboboxSource(_cmbRoleType, "SELECT NUMB_ROLE,INFO_NAME FROM sys_client_role where roletype = '1' and (FLAG_TIER = 3 or FLAG_TIER = 5)", "lr");
                         break;
                     case "4": _cmbRoleType.IsEnabled = true;
                         ComboboxTool.InitComboboxSource(_cmbRoleType, "SELECT NUMB_ROLE,INFO_NAME FROM sys_client_role where roletype = '1' and FLAG_TIER = 4", "lr");

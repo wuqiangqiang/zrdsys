@@ -30,8 +30,9 @@ namespace FoodSafetyMonitoring.Manager
         public string DeptName { get; set; }
         public string ItemId { get; set; }
         public string ReviewFlag { get; set; }
+        public string DetectType { get; set; }
 
-        public UcWarningReportDetails(IDBOperation dbOperation, string kssj, string jssj, string dept_id, string item_id, string review_id, string dept_name)
+        public UcWarningReportDetails(IDBOperation dbOperation, string kssj, string jssj, string dept_id, string item_id, string review_id, string dept_name, string detecttype)
         {
             InitializeComponent();
 
@@ -43,6 +44,7 @@ namespace FoodSafetyMonitoring.Manager
             this.ItemId = item_id;
             this.ReviewFlag = review_id;
             this.DeptName = dept_name;
+            this.DetectType = detecttype;
 
             MyColumns.Add("orderid", new MyColumn("orderid", "检测单编号") { BShow = true, Width = 8 });
             MyColumns.Add("reviewflagname", new MyColumn("reviewflagname", "复核标志") { BShow = false, Width = 8 });
@@ -70,8 +72,8 @@ namespace FoodSafetyMonitoring.Manager
 
         private void GetData()
         {
-            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_warning_report_details('{0}','{1}','{2}','{3}','{4}','{5}','{6}')",
-                               Kssj, Jssj, DeptId, ItemId, ReviewFlag,
+            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_warning_report_details_hb('{0}','{1}','{2}','{3}','{4}','{5}',{6},{7})",
+                               Kssj, Jssj, DeptId, ItemId, ReviewFlag, DetectType,
                               (_tableview.PageIndex - 1) * _tableview.RowMax,
                               _tableview.RowMax)).Tables[0];
 
@@ -94,13 +96,47 @@ namespace FoodSafetyMonitoring.Manager
             string reviewflag = dbOperation.GetDbHelper().GetSingle(string.Format("select ReviewFlag from t_detect_report where ORDERID = '{0}'", orderid)).ToString();
             if (reviewflag == "1")
             {
-                detectDetailsReview det = new detectDetailsReview(dbOperation, orderid);
-                det.ShowDialog();
+                if (DetectType == "0")
+                {
+                    Culture_DetectDetailsReview det = new Culture_DetectDetailsReview(dbOperation, orderid);
+                    det.ShowDialog();
+                }
+                else if (DetectType == "1")
+                {
+                    Certificate_DetectDetailsReview det = new Certificate_DetectDetailsReview(dbOperation, orderid);
+                    det.ShowDialog();
+                }
+                else if (DetectType == "2")
+                {
+
+                }
+                else if (DetectType == "")
+                {
+                    detectDetailsReview det = new detectDetailsReview(dbOperation, orderid);
+                    det.ShowDialog();
+                }      
             }
             else
-            {
-                detectdetails det = new detectdetails(dbOperation, orderid);
-                det.ShowDialog();
+            { 
+                if (DetectType == "0")
+                {
+                    culture_detectdetails det = new culture_detectdetails(dbOperation, orderid);
+                    det.ShowDialog();
+                }
+                else if (DetectType == "1")
+                {
+                    Certificate_detectdetails det = new Certificate_detectdetails(dbOperation, orderid);
+                    det.ShowDialog();
+                }
+                else if (DetectType == "2")
+                {
+
+                }
+                else if (DetectType == "")
+                {
+                    detectdetails det = new detectdetails(dbOperation, orderid);
+                    det.ShowDialog();
+                }      
             }
             
         }

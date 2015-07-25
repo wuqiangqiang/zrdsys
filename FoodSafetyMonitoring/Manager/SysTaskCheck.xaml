@@ -36,7 +36,7 @@
                     <StackPanel Grid.Row="0" Margin="0,10,0,0">
                         <TextBlock  >选择日期:</TextBlock>
                         <ComboBox x:Name="_year" Grid.Column="3" Background="White" MinWidth="80"  MaxDropDownHeight="200" />
-                        <ComboBox x:Name="_month" Grid.Column="3" Background="White" MinWidth="60"  MaxDropDownHeight="200"/>
+                        <!--<ComboBox x:Name="_month" Grid.Column="3" Background="White" MinWidth="60"  MaxDropDownHeight="200"/>-->
                         <Button Name="_query" Width="76" Height="30" Style="{StaticResource SelectImageButtonTemplate}" Margin="50,0,0,0" VerticalAlignment="Center"  Click="_query_Click"/>
                         <Button Name="_export" Width="76" Height="30" Style="{StaticResource ExportImageButtonTemplate}" Margin="50,0,0,0" VerticalAlignment="Center" Click="_export_Click"/>
                     </StackPanel>

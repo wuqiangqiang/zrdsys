@@ -184,11 +184,27 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Manager\Certificate_AddReviewDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Manager\Certificate_detectdetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Manager\Certificate_DetectDetailsReview.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\Culture_AddReviewDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Manager\culture_detectdetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\Culture_DetectDetailsReview.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -805,11 +821,23 @@
       <DependentUpon>AddReviewDetails.xaml</DependentUpon>
     </Compile>
     <Compile Include="Manager\AlarmData.cs" />
+    <Compile Include="Manager\Certificate_AddReviewDetails.xaml.cs">
+      <DependentUpon>Certificate_AddReviewDetails.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Manager\Certificate_detectdetails.xaml.cs">
       <DependentUpon>Certificate_detectdetails.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Manager\Certificate_DetectDetailsReview.xaml.cs">
+      <DependentUpon>Certificate_DetectDetailsReview.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\Culture_AddReviewDetails.xaml.cs">
+      <DependentUpon>Culture_AddReviewDetails.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Manager\culture_detectdetails.xaml.cs">
       <DependentUpon>culture_detectdetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\Culture_DetectDetailsReview.xaml.cs">
+      <DependentUpon>Culture_DetectDetailsReview.xaml</DependentUpon>
     </Compile>
     <Compile Include="Manager\detectdetails.xaml.cs">
       <DependentUpon>detectdetails.xaml</DependentUpon>
