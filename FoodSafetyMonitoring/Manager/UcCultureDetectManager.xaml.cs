@@ -179,7 +179,7 @@ namespace FoodSafetyMonitoring.Manager
                 culture_no = _culture_file.Text;
             }
 
-            if (_culture_file.SelectedIndex > 0 || (_culture_file.SelectedIndex < 0 && _culture_file.Text != "" && _culture_file.Text != "请选择"))
+            if (_culture_file.SelectedIndex > 0 || (_culture_file.SelectedIndex < 0 && _culture_file.Text != "" && _culture_file.Text != "-请选择-"))
             {
                 DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_culturefile('{0}')", culture_no)).Tables[0];
                 if (table.Rows.Count == 0)

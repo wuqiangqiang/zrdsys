@@ -45,7 +45,7 @@ namespace FoodSafetyMonitoring.Manager
             {
                 picture_url = "http://www.zrodo.com:8080/xmjc/";
             }
-            _img.Source = new BitmapImage(new Uri(picture_url + table.Rows[0][20].ToString()));
+            _img.Source = new BitmapImage(new Uri(picture_url + table.Rows[0][17].ToString()));
             // _img.Source = new BitmapImage(new Uri("http://www.zrodo.com:8080/xmjc/" + table.Rows[0][20].ToString()));
             _culture_fileno.Text = table.Rows[0][10].ToString();
             _itemName.Text = table.Rows[0][3].ToString();

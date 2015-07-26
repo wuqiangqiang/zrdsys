@@ -22,6 +22,7 @@ namespace FoodSafetyMonitoring.Manager
         public UcUnrealizedModul()
         {
             InitializeComponent();
+            _webBrowser.Source = new Uri("http://www.zrodo.com/a/xuchanpinshuoming/");
         }
     }
 }

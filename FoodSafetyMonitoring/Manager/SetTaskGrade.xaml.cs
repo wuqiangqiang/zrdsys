@@ -68,7 +68,9 @@ namespace FoodSafetyMonitoring.Manager
                     _grade_up.Text = grade_up;
                     _grade_down.Text = grade_down;
                     break;
-                case "5": _grade_down.Text = "0";
+                case "5": grade_up = dbOperation.GetDbHelper().GetSingle(string.Format("select parameterDown from t_city_grade_hb where cityId = '{0}' and gradeId = '{1}' and depttype = '{2}'", (Application.Current.Resources["User"] as UserInfo).DepartmentID, "4", depttype)).ToString();
+                    _grade_up.Text = grade_up;
+                    _grade_down.Text = "0";
                     _grade_down.IsEnabled = false;
                     break;
                 default: break;

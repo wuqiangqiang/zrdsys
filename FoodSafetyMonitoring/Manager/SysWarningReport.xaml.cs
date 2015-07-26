@@ -110,7 +110,7 @@ namespace FoodSafetyMonitoring.Manager
         private void GetData()
         {
 
-            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_warning_report_hb('{0}','{1}','{2}','{3}','{4}','{5}',{6},{7},{8},{9})",
+            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_warning_report_hb('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}',{8},{9})",
                              (Application.Current.Resources["User"] as UserInfo).ID, reportDate_kssj.Value, reportDate_jssj.Value,
                               _detect_dept.SelectedIndex < 1 ? "" : (_detect_dept.SelectedItem as Label).Tag,
                               _detect_item.SelectedIndex < 1 ? "" : (_detect_item.SelectedItem as Label).Tag,
@@ -142,7 +142,7 @@ namespace FoodSafetyMonitoring.Manager
 
         private void _export_Click(object sender, RoutedEventArgs e)
         {
-            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_warning_report_hb('{0}','{1}','{2}','{3}','{4}','{5}',{6},{7},{8},{9})",
+            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_warning_report_hb('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}',{8},{9})",
                              (Application.Current.Resources["User"] as UserInfo).ID, reportDate_kssj.Value, reportDate_jssj.Value,
                               _detect_dept.SelectedIndex < 1 ? "" : (_detect_dept.SelectedItem as Label).Tag,
                               _detect_item.SelectedIndex < 1 ? "" : (_detect_item.SelectedItem as Label).Tag,

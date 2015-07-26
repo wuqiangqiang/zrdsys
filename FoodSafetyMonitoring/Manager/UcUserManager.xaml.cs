@@ -38,10 +38,11 @@ namespace FoodSafetyMonitoring.Manager
         private string password_old;
         //private int flag_init = 0;//初始化,0未初始化,1已初始化
 
-        //当前选中的部门id,名称,部门等级
+        //当前选中的部门id,名称,部门等级,检测站点的类别
         private string dept_id;
         private string dept_name;
         private string dept_flag;
+        private string dept_type;
 
         public UcUserManager(IDBOperation dbOperation)
         {
@@ -149,6 +150,7 @@ namespace FoodSafetyMonitoring.Manager
                 dept_id = row["INFO_CODE"].ToString();
                 dept_name = row["INFO_NAME"].ToString();
                 dept_flag = row["FLAG_TIER"].ToString();
+                dept_type = row["type"].ToString();
                 Load_UserManager(dept_id);
                 btnCreate.Visibility = Visibility.Visible;
                 Clear();
@@ -195,7 +197,19 @@ namespace FoodSafetyMonitoring.Manager
                         ComboboxTool.InitComboboxSource(_cmbRoleType, "SELECT NUMB_ROLE,INFO_NAME FROM sys_client_role where roletype = '1' and (FLAG_TIER = 3 or FLAG_TIER = 5)", "lr");
                         break;
                     case "4": _cmbRoleType.IsEnabled = true;
-                        ComboboxTool.InitComboboxSource(_cmbRoleType, "SELECT NUMB_ROLE,INFO_NAME FROM sys_client_role where roletype = '1' and FLAG_TIER = 4", "lr");
+                        string type = dbOperation.GetDbHelper().GetSingle(string.Format("select typeflag from t_dept_type where typeId = '{0}'", dept_type)).ToString();
+                        if (type == "yz")
+                        {
+                            ComboboxTool.InitComboboxSource(_cmbRoleType, "SELECT NUMB_ROLE,INFO_NAME FROM sys_client_role where NUMB_ROLE = 502", "lr");
+                        }
+                        else if (type == "cz")
+                        {
+                            ComboboxTool.InitComboboxSource(_cmbRoleType, "SELECT NUMB_ROLE,INFO_NAME FROM sys_client_role where NUMB_ROLE = 503", "lr");
+                        }
+                        else if (type == "tz")
+                        {
+                            ComboboxTool.InitComboboxSource(_cmbRoleType, "SELECT NUMB_ROLE,INFO_NAME FROM sys_client_role where (NUMB_ROLE = 504 or NUMB_ROLE = 505)", "lr");
+                        }
                         break;
                     default: break;
                 }

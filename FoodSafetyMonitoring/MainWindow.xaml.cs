@@ -76,7 +76,7 @@ namespace FoodSafetyMonitoring
             //{
                 TabItem temptb = new TabItem();
                 temptb.Header = "首页";
-                temptb.Tag= "首页";
+                temptb.Tag= "1";
                 temptb.Content = new UcMainPage();
 
                 _tab.Items.Add(temptb);
@@ -385,7 +385,7 @@ namespace FoodSafetyMonitoring
                 int flag = 0;
                 foreach (TabItem item in mainWindow._tab.Items)
                 {
-                    if (item.Tag.ToString() == Name)
+                    if (item.Tag.ToString() == "1")
                     {
                         mainWindow._tab.SelectedItem = item;
                         flag = 1;
@@ -396,7 +396,7 @@ namespace FoodSafetyMonitoring
                 {
                     TabItem temptb = new TabItem();
                     temptb.Header = Name;
-                    temptb.Tag = Name;
+                    temptb.Tag = "1";
                     temptb.Content = new UcMainPage();
 
                     mainWindow._tab.Items.Add(temptb);

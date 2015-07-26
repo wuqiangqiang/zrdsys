@@ -111,7 +111,7 @@ namespace FoodSafetyMonitoring
             int flag_exits = 0;
             foreach (TabItem item in tab.Items)
             {
-                if (item.Tag.ToString() == (sender as Button).Content.ToString())
+                if (item.Tag.ToString() == (sender as Button).Tag.ToString())
                 {
                     tab.SelectedItem = item;
                     flag_exits = 1;
@@ -121,7 +121,7 @@ namespace FoodSafetyMonitoring
             if (flag_exits == 0)
             {
                 temptb = new TabItem();
-                temptb.Tag = (sender as Button).Content.ToString();
+                temptb.Tag = (sender as Button).Tag.ToString();
                 switch ((sender as Button).Tag.ToString())
                 {
                     //首页

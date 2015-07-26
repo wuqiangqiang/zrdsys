@@ -531,7 +531,7 @@ namespace FoodSafetyMonitoring.Manager
             {
 
                 _grid_detail.ColumnDefinitions.Add(new ColumnDefinition());
-                _grid_detail.ColumnDefinitions[i].Width = new GridLength(150, GridUnitType.Pixel);
+                _grid_detail.ColumnDefinitions[i].Width = new GridLength(100, GridUnitType.Pixel);
             }
             _grid_detail.RowDefinitions.Add(new RowDefinition());
             for (int i = 0; i < tableHeaders.Count; i++)

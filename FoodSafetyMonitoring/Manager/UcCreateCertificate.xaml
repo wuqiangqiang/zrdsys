@@ -68,7 +68,7 @@
                         <GridViewColumn Width="100" Header="检测站点"   DisplayMemberBinding="{Binding DeptName}"></GridViewColumn>
                         <GridViewColumn Width="100" Header="检测师"   DisplayMemberBinding="{Binding DETECTUSERNAME}"></GridViewColumn>
                         <GridViewColumn Width="100" Header="抽检样本数"   DisplayMemberBinding="{Binding samplingnum}"></GridViewColumn>
-                        <GridViewColumn Width="100" Header="抽检结果"   DisplayMemberBinding="{Binding RESULTNAME}"></GridViewColumn>
+                        <GridViewColumn Width="100" Header="抽检结果"   DisplayMemberBinding="{Binding RESULTNAME}" ></GridViewColumn>
                         <GridViewColumn Width="90" Header="详情">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>

@@ -110,9 +110,8 @@ namespace FoodSafetyMonitoring.Manager
 
         void _tableview_DetailsRowEnvent(string id)
         {
-            int orderid = int.Parse(id);
-            detectdetails det = new detectdetails(dbOperation, orderid);
-            det.ShowDialog();
+            string cardid = id;
+            grid_table.Children.Add(new UcCreateCertificateQueryDetails(dbOperation, cardid));
         }
 
         private void _export_Click(object sender, RoutedEventArgs e)
