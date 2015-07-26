@@ -33,7 +33,7 @@
                 <TextBlock Grid.Column="1"  FontSize="22" Text="--------------------------养殖检测信息录入单--------------------------" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" ></TextBlock>
                 <StackPanel Grid.Row="1" Orientation="Horizontal">
                     <TextBlock HorizontalAlignment="Right">档案编号:</TextBlock>
-                    <ComboBox Width="150" x:Name="_culture_file" IsEditable="True"></ComboBox>
+                    <ComboBox Width="150" x:Name="_culture_file"></ComboBox>
                     <TextBlock  >建档时间:</TextBlock>
                     <TextBlock Width="200" x:Name="_file_cdate"></TextBlock>
                     <TextBlock  >圈舍号:</TextBlock>

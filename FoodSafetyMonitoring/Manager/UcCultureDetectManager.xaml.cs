@@ -170,30 +170,33 @@ namespace FoodSafetyMonitoring.Manager
         void _culture_file_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             string culture_no;
+            //if (_culture_file.SelectedIndex > 0)
+            //{
+            //    culture_no = (_culture_file.SelectedItem as Label).Tag.ToString();
+            //}
+            //else
+            //{
+            //    culture_no = _culture_file.Text;
+            //}
+
             if (_culture_file.SelectedIndex > 0)
+            //if (_culture_file.SelectedIndex > 0 || (_culture_file.SelectedIndex < 0 && _culture_file.Text != "" && _culture_file.Text != "-请选择-"))
             {
                 culture_no = (_culture_file.SelectedItem as Label).Tag.ToString();
-            }
-            else
-            {
-                culture_no = _culture_file.Text;
-            }
 
-            if (_culture_file.SelectedIndex > 0 || (_culture_file.SelectedIndex < 0 && _culture_file.Text != "" && _culture_file.Text != "-请选择-"))
-            {
                 DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_culturefile('{0}')", culture_no)).Tables[0];
-                if (table.Rows.Count == 0)
-                {
-                    Toolkit.MessageBox.Show("档案编码输入有误！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
-                    return;
-                }
-                else
-                {
+                //if (table.Rows.Count == 0)
+                //{
+                //    Toolkit.MessageBox.Show("档案编码输入有误！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                //    return;
+                //}
+                //else
+                //{
                     this._file_cdate.Text = table.Rows[0][0].ToString();
                     this._colony_no.Text = table.Rows[0][1].ToString(); 
                     this._detect_site.Text = table.Rows[0][3].ToString();
                     dept_id = table.Rows[0][2].ToString(); 
-                }
+                //}
             }
             else if (_culture_file.SelectedIndex == 0)
             {

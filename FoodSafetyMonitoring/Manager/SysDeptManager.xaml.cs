@@ -418,7 +418,7 @@ namespace FoodSafetyMonitoring.Manager
         private void Clear_Click(object sender, RoutedEventArgs e)
         {
             _detail_info.IsEnabled = false;
-            _add.IsEnabled = true;
+            //_add.IsEnabled = true;
             _edit.IsEnabled = true;        
         }
 
@@ -661,6 +661,7 @@ namespace FoodSafetyMonitoring.Manager
             state = "add";
             
             _add.IsEnabled = false;
+            _edit.Visibility = Visibility.Hidden;
             _detail_info.IsEnabled = true;
             Department department = _add.Tag as Department;
 
