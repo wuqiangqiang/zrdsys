@@ -406,7 +406,8 @@ namespace FoodSafetyMonitoring
                         break;
                     //帮助->帮助->帮助
                     case "70101": temptb.Header = (sender as Button).Content.ToString();
-                        temptb.Content = new UcUnrealizedModul();
+                        //temptb.Content = new UcUnrealizedModul();
+                        temptb.Content = new SysRolePowerManager();
                         break;
                     //帮助->帮助->关于
                     case "70102": temptb.Header = (sender as Button).Content.ToString();

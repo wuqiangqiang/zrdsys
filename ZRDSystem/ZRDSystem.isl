@@ -2728,7 +2728,7 @@
 		<col def="S0">Comment</col>
 		<col def="I4">TimeStamp</col>
 		<row><td>COMPANY_NAME</td><td>1033</td><td>ZRD</td><td>0</td><td/><td>-1700587510</td></row>
-		<row><td>COMPANY_NAME</td><td>2052</td><td>ZRD</td><td>0</td><td/><td>-1021087216</td></row>
+		<row><td>COMPANY_NAME</td><td>2052</td><td>ZRD</td><td>0</td><td/><td>-475809078</td></row>
 		<row><td>DN_AlwaysInstall</td><td>1033</td><td>始终安装</td><td>0</td><td/><td>-1700587510</td></row>
 		<row><td>DN_AlwaysInstall</td><td>2052</td><td>始终安装</td><td>0</td><td/><td>-1700583414</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_COLOR</td><td>1033</td><td>系统颜色设置不足以运行 [ProductName]。</td><td>0</td><td/><td>-1700587510</td></row>
@@ -4996,7 +4996,7 @@
 		<row><td>IDS__TargetReq_DESC_RESOLUTION</td><td>1033</td><td>对于运行 [ProductName] 屏幕分辨率不足。</td><td>0</td><td/><td>-1700585462</td></row>
 		<row><td>IDS__TargetReq_DESC_RESOLUTION</td><td>2052</td><td>对于运行 [ProductName] 屏幕分辨率不足。</td><td>0</td><td/><td>-1700583414</td></row>
 		<row><td>ID_STRING1</td><td>1033</td><td>http://www.ZRD.com</td><td>0</td><td/><td>-1700585462</td></row>
-		<row><td>ID_STRING1</td><td>2052</td><td>http://www.ZRD.com</td><td>0</td><td/><td>-1021087216</td></row>
+		<row><td>ID_STRING1</td><td>2052</td><td>http://www.ZRD.com</td><td>0</td><td/><td>-475809078</td></row>
 		<row><td>ID_STRING10</td><td>1028</td><td>检测监管系统</td><td>0</td><td/><td>-1566345680</td></row>
 		<row><td>ID_STRING10</td><td>1033</td><td>检测监管系统</td><td>0</td><td/><td>-1566345680</td></row>
 		<row><td>ID_STRING10</td><td>2052</td><td>检测监管系统</td><td>0</td><td/><td>-1566345680</td></row>
@@ -5004,7 +5004,7 @@
 		<row><td>ID_STRING11</td><td>1033</td><td>检测监管系统</td><td>0</td><td/><td>321118573</td></row>
 		<row><td>ID_STRING11</td><td>2052</td><td>检测监管系统</td><td>0</td><td/><td>321118573</td></row>
 		<row><td>ID_STRING2</td><td>1033</td><td>ZRD</td><td>0</td><td/><td>-1700585462</td></row>
-		<row><td>ID_STRING2</td><td>2052</td><td>ZRD</td><td>0</td><td/><td>-1021087216</td></row>
+		<row><td>ID_STRING2</td><td>2052</td><td>ZRD</td><td>0</td><td/><td>-475809078</td></row>
 		<row><td>ID_STRING3</td><td>1033</td><td>ZRDSystem</td><td>0</td><td/><td>-1834798639</td></row>
 		<row><td>ID_STRING3</td><td>2052</td><td>ZRDSystem</td><td>0</td><td/><td>-1700583414</td></row>
 		<row><td>ID_STRING4</td><td>1033</td><td>检测监管系统</td><td>0</td><td/><td>-1834782159</td></row>

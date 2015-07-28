@@ -176,17 +176,19 @@ namespace FoodSafetyMonitoring
 
             DataTable table = dbOperation.GetDbHelper().GetDataSet(strSql).Tables[0];
             //一级菜单
-            DataRow[] row_mainmenu = table.Select("SUB_FATHER_ID = '0'", "SUB_ID desc");
+            DataRow[] row_mainmenu = table.Select("SUB_FATHER_ID = '0'");
             //定义数组存放：一级菜单图片控件和一级菜单文字控件
-            Image[] images = new Image[] { _image_6,_image_5,_image_4,_image_3,_image_2,_image_1,_image_0};
-            TextBlock[] texts = new TextBlock[] { _text_6, _text_5, _text_4, _text_3, _text_2, _text_1, _text_0 };
+            Image[] images = new Image[] { _image_0,_image_1,_image_2,_image_3,_image_4,_image_5,_image_6,
+                                           _image_7,_image_8,_image_9,_image_10,_image_11,_image_12};
+            TextBlock[] texts = new TextBlock[] { _text_0, _text_1, _text_2, _text_3, _text_4, _text_5, _text_6,
+                                                  _text_7, _text_8, _text_9, _text_10, _text_11, _text_12};
 
             int i = 0;
             foreach (DataRow row in row_mainmenu )
             {
                 //二级菜单
                 List<MyChildMenu> childMenus = new List<MyChildMenu>();
-                DataRow[] row_childmenu = table.Select("SUB_FATHER_ID ='" + row["SUB_ID"] + "'","SUB_ID asc");
+                DataRow[] row_childmenu = table.Select("SUB_FATHER_ID ='" + row["SUB_ID"] + "'");
                 //当一级菜单存在，但二级菜单为空时
                 if( row_childmenu.Count() == 0 )
                 {
@@ -196,7 +198,7 @@ namespace FoodSafetyMonitoring
                 {
                     foreach (DataRow row_child in row_childmenu)
                     {
-                        DataRow[] row_child_childmenu = table.Select("SUB_FATHER_ID ='" + row_child["SUB_ID"] + "'","SUB_ID asc");
+                        DataRow[] row_child_childmenu = table.Select("SUB_FATHER_ID ='" + row_child["SUB_ID"] + "'");
                         childMenus.Add(new MyChildMenu(row_child["SUB_NAME"].ToString(), this, row_child_childmenu));
                     }
                 }

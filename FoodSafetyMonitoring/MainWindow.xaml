@@ -79,10 +79,10 @@
             <ImageBrush ImageSource="/res/background.jpg"></ImageBrush>
         </Grid.Background>-->
         <Grid.RowDefinitions>
-            <RowDefinition  Height="28"/> 
-            <RowDefinition  Height="94"/>
+            <RowDefinition  Height="70"/> 
+            <RowDefinition  Height="120"/>
             <RowDefinition  Height="*"/>
-            <RowDefinition  Height="33"/>
+            <RowDefinition  Height="35"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" x:Name="grid_header">
             <Grid.Background>
@@ -94,6 +94,9 @@
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="20,0,5,0">
+                <Image x:Name="_logo" Source="/res/title_logo.png" Margin="32,13,0,13" Width="68" Height="68" HorizontalAlignment="Left"/>
+                <TextBlock x:Name="_title_dept" FontFamily="楷体" FontSize="22" FontWeight="600" HorizontalAlignment="Center" VerticalAlignment="Bottom"  Foreground="White" Margin="100,0,0,50"></TextBlock>
+                <TextBlock  FontFamily="楷体" FontSize="30" FontWeight="600" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Margin="100,30,0,0">检测监管系统</TextBlock>
                 <TextBlock x:Name="_date" FontFamily="黑体" FontSize="14" VerticalAlignment="Center"  Foreground="Black" HorizontalAlignment="Center" Margin="0,0,20,0"></TextBlock>
                 <TextBlock x:Name="_user" FontFamily="黑体" FontSize="14" VerticalAlignment="Center"  Foreground="Black" HorizontalAlignment="Center" Margin="0,0,20,0">加载中……</TextBlock>
             </StackPanel>
@@ -106,46 +109,54 @@
         </Grid>
         <Grid Grid.Row="1" x:Name="grid_MainMenu">
             <Grid.Background>
-                <ImageBrush ImageSource="/res/mainmenu_bar.jpg"></ImageBrush>
+                <SolidColorBrush Color="#003e8c" /> 
             </Grid.Background>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="298"/>
-                <ColumnDefinition/>
-                <ColumnDefinition Width="89"/>
-                <ColumnDefinition Width="89"/>
-                <ColumnDefinition Width="89"/>
-                <ColumnDefinition Width="89"/>
-                <ColumnDefinition Width="89"/>
-                <ColumnDefinition Width="89"/>
-                <ColumnDefinition Width="89"/>
-                <ColumnDefinition Width="89"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <Grid>
-                <Grid.Background>
-                    <ImageBrush ImageSource="/res/title.jpg"/>
-                </Grid.Background>
-                <Image x:Name="_logo" Source="/res/title_logo.png" Margin="32,13,0,13" Width="68" Height="68" HorizontalAlignment="Left"/>
-                <TextBlock x:Name="_title_dept" FontFamily="楷体" FontSize="22" FontWeight="600" HorizontalAlignment="Center" VerticalAlignment="Bottom"  Foreground="White" Margin="100,0,0,50"></TextBlock>
-                <TextBlock  FontFamily="楷体" FontSize="30" FontWeight="600" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Margin="100,30,0,0">检测监管系统</TextBlock>
-            </Grid>
-            <Image x:Name="_image_0" Grid.Column="2"/>
-            <TextBlock x:Name="_text_0" Grid.Column="2" FontFamily="黑体"  Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,5"/>
-            <Image x:Name="_image_1" Grid.Column="3"/>
-            <TextBlock x:Name="_text_1" Grid.Column="3" FontFamily="黑体"  Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,5"/>
-            <Image x:Name="_image_2" Grid.Column="4" />
-            <TextBlock x:Name="_text_2" Grid.Column="4" FontFamily="黑体"  Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,5"/>
-            <Image x:Name="_image_3" Grid.Column="5" />
-            <TextBlock x:Name="_text_3" Grid.Column="5" FontFamily="黑体"  Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,5"/>
-            <Image x:Name="_image_4" Grid.Column="6"/>
-            <TextBlock x:Name="_text_4" Grid.Column="6" FontFamily="黑体"  Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,5"/>
-            <Image x:Name="_image_5" Grid.Column="7" />
-            <TextBlock x:Name="_text_5" Grid.Column="7" FontFamily="黑体"  Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,5"/>
-            <Image x:Name="_image_6" Grid.Column="8" />
-            <TextBlock x:Name="_text_6" Grid.Column="8" FontFamily="黑体"  Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,5"/>
+            <Image x:Name="_image_0" Grid.Column="0"/>
+            <TextBlock x:Name="_text_0" Grid.Column="0" FontFamily="黑体"  Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,5"/>
+            <Image x:Name="_image_1" Grid.Column="1"/>
+            <TextBlock x:Name="_text_1" Grid.Column="1" FontFamily="黑体"  Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,5"/>
+            <Image x:Name="_image_2" Grid.Column="2"/>
+            <TextBlock x:Name="_text_2" Grid.Column="2" FontFamily="黑体"  Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,5"/>
+            <Image x:Name="_image_3" Grid.Column="3"/>
+            <TextBlock x:Name="_text_3" Grid.Column="3" FontFamily="黑体"  Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,5"/>
+            <Image x:Name="_image_4" Grid.Column="4" />
+            <TextBlock x:Name="_text_4" Grid.Column="4" FontFamily="黑体"  Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,5"/>
+            <Image x:Name="_image_5" Grid.Column="5" />
+            <TextBlock x:Name="_text_5" Grid.Column="5" FontFamily="黑体"  Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,5"/>
+            <Image x:Name="_image_6" Grid.Column="6"/>
+            <TextBlock x:Name="_text_6" Grid.Column="6" FontFamily="黑体"  Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,5"/>
+            <Image x:Name="_image_7" Grid.Column="7" />
+            <TextBlock x:Name="_text_7" Grid.Column="7" FontFamily="黑体"  Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,5"/>
+            <Image x:Name="_image_8" Grid.Column="8" />
+            <TextBlock x:Name="_text_8" Grid.Column="8" FontFamily="黑体"  Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,5"/>
+            <Image x:Name="_image_9" Grid.Column="9" />
+            <TextBlock x:Name="_text_9" Grid.Column="9" FontFamily="黑体"  Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,5"/>
+            <Image x:Name="_image_10" Grid.Column="10" />
+            <TextBlock x:Name="_text_10" Grid.Column="10" FontFamily="黑体"  Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,5"/>
+            <Image x:Name="_image_11" Grid.Column="11" />
+            <TextBlock x:Name="_text_11" Grid.Column="11" FontFamily="黑体"  Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,5"/>
+            <Image x:Name="_image_12" Grid.Column="12" />
+            <TextBlock x:Name="_text_12" Grid.Column="12" FontFamily="黑体"  Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,5"/>
         </Grid>
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition MaxWidth="150" />
+                <ColumnDefinition MaxWidth="210" />
                 <ColumnDefinition Width="6"/>
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>

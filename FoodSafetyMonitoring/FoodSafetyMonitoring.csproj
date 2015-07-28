@@ -568,6 +568,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Manager\UcFeedDetectInquire.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\UcFeedDetectManager.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Manager\UcMainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -593,6 +601,14 @@
       <Generator>MSBuild:Compile</Generator>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Manager\UcSlaughterDetectInquier.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\UcSlaughterDetectManager.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Manager\UcSourceCompanyManager.xaml">
       <SubType>Designer</SubType>
@@ -955,6 +971,12 @@
     <Compile Include="Manager\UcDetectInquire.xaml.cs">
       <DependentUpon>UcDetectInquire.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Manager\UcFeedDetectInquire.xaml.cs">
+      <DependentUpon>UcFeedDetectInquire.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\UcFeedDetectManager.xaml.cs">
+      <DependentUpon>UcFeedDetectManager.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Manager\UcMainPage.xaml.cs">
       <DependentUpon>UcMainPage.xaml</DependentUpon>
     </Compile>
@@ -969,6 +991,12 @@
     </Compile>
     <Compile Include="Manager\UcReviewdetails.xaml.cs">
       <DependentUpon>UcReviewdetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\UcSlaughterDetectInquier.xaml.cs">
+      <DependentUpon>UcSlaughterDetectInquier.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\UcSlaughterDetectManager.xaml.cs">
+      <DependentUpon>UcSlaughterDetectManager.xaml</DependentUpon>
     </Compile>
     <Compile Include="Manager\UcSourceCompanyManager.xaml.cs">
       <DependentUpon>UcSourceCompanyManager.xaml</DependentUpon>
@@ -1117,18 +1145,18 @@
     <Content Include="DLL\MySql.Data.dll" />
     <Content Include="DLL\NPOI.dll" />
     <Content Include="DLL\NPOI.OOXML.dll" />
-    <Resource Include="res\slaughter_before_normal.jpg" />
-    <Resource Include="res\slaughter_before_select.jpg" />
-    <Resource Include="res\slaughter_before_unpressed.jpg" />
-    <Resource Include="res\culture_normal.jpg" />
-    <Resource Include="res\culture_select.jpg" />
-    <Resource Include="res\culture_unpressed.jpg" />
-    <Resource Include="res\certificate_normal.jpg" />
-    <Resource Include="res\certificate_select.jpg" />
-    <Resource Include="res\certificate_unpressed.jpg" />
-    <Resource Include="res\slaughter_normal.jpg" />
-    <Resource Include="res\slaughter_select.jpg" />
-    <Resource Include="res\slaughter_unpressed.jpg" />
+    <Resource Include="res\slaughter_before_normal.png" />
+    <Resource Include="res\slaughter_normal.png" />
+    <Resource Include="res\system_normal.png" />
+    <Resource Include="res\analysis_normal.png" />
+    <Resource Include="res\certificate_normal.png" />
+    <Resource Include="res\check_normal.png" />
+    <Resource Include="res\createcertificate_normal.png" />
+    <Resource Include="res\culture_normal.png" />
+    <Resource Include="res\feed_normal.png" />
+    <Resource Include="res\firstpage_normal.png" />
+    <Resource Include="res\retroactive_normal.png" />
+    <Resource Include="res\search_normal.png" />
     <Resource Include="res\wdwk.png" />
     <Resource Include="DLL\NPOI.OOXML.XML" />
     <Content Include="DLL\NPOI.OpenXml4Net.dll" />
@@ -1156,9 +1184,6 @@
     <Resource Include="Manager\Images\btn_back2.png" />
     <Resource Include="Manager\Images\btn_back3.png" />
     <Resource Include="res\help.png" />
-    <Resource Include="res\mainmenu_bar.jpg" />
-    <Resource Include="res\bottom_bar.jpg" />
-    <Resource Include="res\title_bar.jpg" />
     <Resource Include="Manager\Images\detail_close.png" />
     <Resource Include="Manager\Images\all.png" />
     <Resource Include="Manager\Images\country.png" />
@@ -1179,14 +1204,6 @@
     <Resource Include="Manager\Images\delete.png" />
     <Resource Include="Manager\Images\details.png" />
     <Resource Include="Manager\Images\modify.png" />
-    <Resource Include="res\analysis_bar.jpg" />
-    <Resource Include="res\detect_bar.jpg" />
-    <Resource Include="res\firstpage_bar.jpg" />
-    <Resource Include="res\help_bar.jpg" />
-    <Resource Include="res\report_bar.jpg" />
-    <Resource Include="res\system_bar.jpg" />
-    <Resource Include="res\task_bar.jpg" />
-    <Resource Include="res\warning_bar.jpg" />
     <Resource Include="res\shut.png" />
     <Resource Include="res\max.png" />
     <Resource Include="res\min.png" />
@@ -1194,32 +1211,7 @@
     <Resource Include="res\header.png" />
     <Resource Include="res\detect_back.png" />
     <Resource Include="res\title.jpg" />
-    <Resource Include="res\childmenu_bar.jpg" />
-    <Resource Include="res\analysis_unpressed.jpg" />
-    <Resource Include="res\detect_unpressed.jpg" />
-    <Resource Include="res\firstpage_unpressed.jpg" />
-    <Resource Include="res\help_unpressed.jpg" />
-    <Resource Include="res\report_unpressed.jpg" />
-    <Resource Include="res\system_unpressed.jpg" />
-    <Resource Include="res\task_unpressed.jpg" />
-    <Resource Include="res\warning_unpressed.jpg" />
-    <Resource Include="res\detect_normal.jpg" />
-    <Resource Include="res\detect_select.jpg" />
-    <Resource Include="res\firstpage_normal.jpg" />
-    <Resource Include="res\firstpage_select.jpg" />
-    <Resource Include="res\help_select.jpg" />
-    <Resource Include="res\report_normal.jpg" />
-    <Resource Include="res\report_select.jpg" />
-    <Resource Include="res\system_normal.jpg" />
-    <Resource Include="res\system_select.jpg" />
-    <Resource Include="res\task_normal.jpg" />
-    <Resource Include="res\task_select.jpg" />
-    <Resource Include="res\warning_normal.jpg" />
-    <Resource Include="res\warning_select.jpg" />
-    <Resource Include="res\analysis_normal.jpg" />
-    <Resource Include="res\analysis_select.jpg" />
     <Resource Include="res\background.jpg" />
-    <Resource Include="res\help_normal.jpg" />
     <Resource Include="res\small.png" />
     <Resource Include="res\login.jpg" />
     <Resource Include="res\logo.ico" />
