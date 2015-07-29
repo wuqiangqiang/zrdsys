@@ -29,15 +29,15 @@ namespace FoodSafetyMonitoring
             InitializeComponent();
             this.childMenus = childMenus;
             //定义数组存放：二级菜单外部大控件
-            Expander[] expanders = new Expander[] { _expander_0, _expander_1, _expander_2, _expander_3, _expander_4, _expander_5 };
+            Expander[] expanders = new Expander[] { _expander_0, _expander_1, _expander_2, _expander_3, _expander_4, _expander_5, _expander_6 };
 
             //先让所有控件都可见
-            for (int i = 0; i < 6; i++)
+            for (int i = 0; i < 7; i++)
             {
                 expanders[i].Visibility = Visibility.Visible;
             }
             //再根据二级菜单的个数隐藏部门控件
-            for(int i = childMenus.Count; i < 6; i++ )
+            for(int i = childMenus.Count; i < 7; i++ )
             {
                 expanders[i].Visibility = Visibility.Hidden;
             }
@@ -48,9 +48,9 @@ namespace FoodSafetyMonitoring
         public void loadMenu()
         {
             //定义数组存放：三级菜单的控件
-            Grid[] grids = new Grid[] { _grid_0, _grid_1, _grid_2, _grid_3, _grid_4, _grid_5 };
+            Grid[] grids = new Grid[] { _grid_0, _grid_1, _grid_2, _grid_3, _grid_4, _grid_5, _grid_6 };
             //定义数组存放：二级菜单的控件
-            TextBlock[] texts = new TextBlock[] { _text_0, _text_1, _text_2, _text_3, _text_4, _text_5 };
+            TextBlock[] texts = new TextBlock[] { _text_0, _text_1, _text_2, _text_3, _text_4, _text_5, _text_6 };
             //先将三级菜单控件进行清空
             for (int i = 0; i < grids.Length; i++)
             {
@@ -66,10 +66,31 @@ namespace FoodSafetyMonitoring
                 int j = 0;
                 foreach (DataRow row in childMenus[i].child_childmenu)
                 {
+                    //插入一行两列
                     grids[i].RowDefinitions.Add(new RowDefinition());
-                    grids[i].RowDefinitions[j].Height = new GridLength(25, GridUnitType.Pixel);
+                    grids[i].RowDefinitions[j].Height = new GridLength(35, GridUnitType.Pixel);
+                    grids[i].ColumnDefinitions.Add(new ColumnDefinition());
+                    grids[i].ColumnDefinitions.Add(new ColumnDefinition());
+                    grids[i].ColumnDefinitions[0].Width = new GridLength(65, GridUnitType.Pixel);
+                    grids[i].ColumnDefinitions[1].Width = new GridLength(145, GridUnitType.Pixel);
+                    //第一列插入图片
+                    Image img = new Image();
+                    img.Source = new BitmapImage(new Uri("pack://application:,," + "/res/file_2.png"));
+                    img.Width = 14;
+                    img.Height = 19;
+                    Thickness thick = new Thickness(35, 0, 5, 0);
+                    img.Margin = thick;
+                    img.SetValue(Grid.RowProperty, j);
+                    img.SetValue(Grid.ColumnProperty, 0);
+                    grids[i].Children.Add(img);
+
+                    //第二列插入button
                     childMenus[i].buttons[j].SetValue(Grid.RowProperty, j);
+                    childMenus[i].buttons[j].SetValue(Grid.ColumnProperty, 1);
                     grids[i].Children.Add(childMenus[i].buttons[j]);
+
+                    //grids[i].RowDefinitions[j].SetBinding(Grid.BackgroundProperty, new Binding(childMenus[i].buttons[j].Foreground.ToString()));
+
                     j = j + 1;
                 }
             }    
@@ -100,7 +121,9 @@ namespace FoodSafetyMonitoring
                 Button btn = new Button();
                 btn.Content = row["SUB_NAME"].ToString();
                 btn.Tag = row["SUB_ID"].ToString();
-                btn.MinWidth = 30;
+                //btn.Foreground = Brushes.Black;
+                btn.MinWidth = 120;
+                btn.VerticalAlignment = VerticalAlignment.Center;
                 btn.Click += new RoutedEventHandler(this.btn_Click);
                 buttons.Add(btn);
             }
@@ -108,6 +131,7 @@ namespace FoodSafetyMonitoring
 
         private void btn_Click(object sender, System.EventArgs e)
         {
+            //(sender as Button).Foreground = Brushes.White;
             int flag_exits = 0;
             foreach (TabItem item in tab.Items)
             {

@@ -5,6 +5,7 @@
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Manager/Themes/ImageButtonStyle.xaml"/>
                 <ResourceDictionary Source="Manager/Themes/combobox_login.xaml"/>
                 <ResourceDictionary Source="Manager/Themes/ImageLabel.xaml"/>
                 <ResourceDictionary Source="Manager/Themes/Shared.xaml" />
@@ -12,22 +13,18 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-        <Canvas Width="430" Height="315">
-            <Canvas.Background>
-                <ImageBrush ImageSource="/res/login.jpg"></ImageBrush>
-            </Canvas.Background>
-            <Thumb Width="438" Height="80" Background="Transparent" Opacity="0" DragDelta="Thumb_DragDelta" ></Thumb>
-            <Image  Width="15" Height="15" Source="/res/small.png" x:Name="min" MouseDown="min_MouseDown" ToolTip="最小化"   VerticalAlignment="Top"  Canvas.Left="390" Canvas.Top="1"/>
-            <Image  Width="15" Height="15" Source="/res/shut.png" x:Name="exit" MouseDown="exit_MouseDown" ToolTip="关闭"  HorizontalAlignment="Right" VerticalAlignment="Top"  Canvas.Left="410" Canvas.Top="1"/>
-            
-            <!--<TextBox x:Name="_name" VerticalContentAlignment="Center" Height="22" Width="150" HorizontalAlignment="Left" Canvas.Left="189" Canvas.Top="116" Foreground="White"  BorderBrush="Transparent"  Background="Transparent" BorderThickness="0" TextChanged="_name_TextChanged" GotFocus="_name_GotFocus">-->
-         <ComboBox Name="cmbName" Height="25" Width="192" Canvas.Left="141" Canvas.Top="169" BorderThickness="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" BorderBrush="Transparent" SelectionChanged="cmbName_SelectionChanged" IsEditable="True" GotFocus="_name_GotFocus" TextBoxBase.TextChanged="cmbName_TextChanged" SelectedIndex="0">
-         </ComboBox>
-            <!--</TextBox>-->
-            <PasswordBox x:Name="_password" Height="20" VerticalContentAlignment="Center"  Width="187" HorizontalAlignment="Left" Canvas.Left="148" Canvas.Top="207" Foreground="{StaticResource DisabledForegroundBrush}" BorderBrush="Transparent"  BorderThickness="0" GotFocus="_password_GotFocus">
-               
-            </PasswordBox>
-            <Image x:Name="_login" Source="/res/loginButton.png" Height="30" Width="159" Canvas.Left="153" Canvas.Top="270" MouseDown="Image_MouseDown" Cursor="Hand" Stretch="Fill">
+    <Canvas Width="432" Height="334">
+        <Canvas.Background>
+            <ImageBrush ImageSource="/res/login.jpg"></ImageBrush>
+        </Canvas.Background>
+        <Thumb Width="438" Height="80" Background="Transparent" Opacity="0" DragDelta="Thumb_DragDelta" ></Thumb>
+        <Image  Width="15" Height="15" Source="/res/small.png" x:Name="min" MouseDown="min_MouseDown" ToolTip="最小化"   VerticalAlignment="Top"  Canvas.Left="390" Canvas.Top="1"/>
+        <Image  Width="15" Height="15" Source="/res/shut.png" x:Name="exit" MouseDown="exit_MouseDown" ToolTip="关闭"  HorizontalAlignment="Right" VerticalAlignment="Top"  Canvas.Left="410" Canvas.Top="1"/>
+        <Image Source="/res/username_selected.png" Canvas.Left="96" Canvas.Top="162" Width="245" Height="41"></Image>
+        <Image Source="/res/password_selected.png" Canvas.Left="96" Canvas.Top="211" Width="245" Height="40"></Image>
+        <ComboBox Name="cmbName" Height="32" Width="198" Canvas.Left="138" Canvas.Top="167" BorderThickness="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" BorderBrush="Transparent" SelectionChanged="cmbName_SelectionChanged" IsEditable="True" GotFocus="_name_GotFocus" TextBoxBase.TextChanged="cmbName_TextChanged" SelectedIndex="0" Margin="0"/>
+        <PasswordBox x:Name="_password" Width="198" Height="32" VerticalContentAlignment="Center" HorizontalAlignment="Left" Canvas.Left="138" Canvas.Top="215" Foreground="{StaticResource DisabledForegroundBrush}" BorderBrush="Transparent"  BorderThickness="0" GotFocus="_password_GotFocus"/>
+        <!--<Image x:Name="_login" Source="/res/loginButton.png" Height="38" Width="243" Canvas.Left="96" Canvas.Top="278" MouseDown="Image_MouseDown" Cursor="Hand" Stretch="Fill">
             <Image.Style>
                 <Style TargetType="Image">
                     <Setter Property="HorizontalAlignment" Value="Center"></Setter>
@@ -51,9 +48,10 @@
                     </Style.Triggers>
                 </Style>
             </Image.Style>
-        </Image>
-            <TextBlock Canvas.Left="269" Canvas.Top="241" Height="21" Name="txtMsg" Width="162" Foreground="Red"  FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            <!--<CheckBox Name="_style" Height="16" Canvas.Left="291" Canvas.Top="241" Width="41" Checked="_style_Checked" Visibility="Visible">经典</CheckBox>-->
-            <CheckBox Name="_rememberPassword" Height="16" Canvas.Left="190" Canvas.Top="241" Width="80" >记住密码</CheckBox>
+        </Image>-->
+        <Button Name="_login" Width="243" Height="38" Canvas.Left="96" Canvas.Top="278" Style="{StaticResource LoginImageButtonTemplate}" Click="Login_Click"/>
+        <TextBlock Canvas.Left="186" Canvas.Top="252" Height="21" Name="txtMsg" Width="219" Foreground="Red"  FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <!--<CheckBox Name="_style" Height="16" Canvas.Left="291" Canvas.Top="241" Width="41" Checked="_style_Checked" Visibility="Visible">经典</CheckBox>-->
+        <CheckBox Name="_rememberPassword" Height="16" Canvas.Left="96" Canvas.Top="255" Width="80" >记住我</CheckBox>
     </Canvas>
 </Window>

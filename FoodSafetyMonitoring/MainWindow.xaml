@@ -1,7 +1,7 @@
 ﻿<Window x:Class="FoodSafetyMonitoring.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
-    Title="MainWindow"   AllowsTransparency="False"  WindowStartupLocation="CenterScreen" WindowStyle="None" WindowState="Normal" BorderBrush="Transparent" Icon="/logo.ico" ResizeMode="NoResize"> 
+    Title="MainWindow"   AllowsTransparency="False"  WindowStartupLocation="CenterScreen" WindowStyle="None" WindowState="Normal" BorderBrush="Transparent" Icon="/logo.ico" ResizeMode="NoResize">
     <Window.Resources>
         <Style TargetType="{x:Type TabItem}">
             <Setter  Property="Template">
@@ -16,33 +16,33 @@
                                 </Grid.ColumnDefinitions>
                                 <TextBlock  TextAlignment="Center" Text="{TemplateBinding Header}" Grid.Column="0" Margin="4,0,3,0" FontFamily="黑体" 
 					        VerticalAlignment="Center"	HorizontalAlignment="Center" FontSize="14"/>
-						    <Button Content="X" Grid.Column="1"  Height="8" Width="8" Margin="4,1,3,2" 
+                                <Button Content="X" Grid.Column="1"  Height="8" Width="8" Margin="4,1,3,2" 
 						    Tag="{TemplateBinding Header}" Click="Button_Click"
 						    Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Center">
-						    <Button.Template>
-							    <ControlTemplate >
-								    <Grid>
-									    <Rectangle>
-										    <Rectangle.Fill>
-											    <VisualBrush>
-												    <VisualBrush.Visual>
-													    <Path x:Name="btnPath" 
+                                    <Button.Template>
+                                        <ControlTemplate >
+                                            <Grid>
+                                                <Rectangle>
+                                                    <Rectangle.Fill>
+                                                        <VisualBrush>
+                                                            <VisualBrush.Visual>
+                                                                <Path x:Name="btnPath" 
 													    Data="M0 0L10 10M0 10L10 0" Stroke="Gray"
 													    StrokeThickness="1"/>
-												    </VisualBrush.Visual>
-											    </VisualBrush>
-										    </Rectangle.Fill>
-									    </Rectangle>
-								    </Grid>
-								    <ControlTemplate.Triggers>
-									    <Trigger Property="IsMouseOver" Value="True">
-										    <Setter TargetName="btnPath" Property="Stroke" Value="Red"/>
-									    </Trigger>
-								    </ControlTemplate.Triggers>
-							    </ControlTemplate>
-						    </Button.Template>
-						    </Button>
-					    </Grid>
+                                                            </VisualBrush.Visual>
+                                                        </VisualBrush>
+                                                    </Rectangle.Fill>
+                                                </Rectangle>
+                                            </Grid>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter TargetName="btnPath" Property="Stroke" Value="Red"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                            </Grid>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsSelected" Value="True">
@@ -79,29 +79,38 @@
             <ImageBrush ImageSource="/res/background.jpg"></ImageBrush>
         </Grid.Background>-->
         <Grid.RowDefinitions>
-            <RowDefinition  Height="70"/> 
+            <RowDefinition  Height="40"/>
             <RowDefinition  Height="120"/>
             <RowDefinition  Height="*"/>
             <RowDefinition  Height="35"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" x:Name="grid_header">
             <Grid.Background>
-                <ImageBrush ImageSource="/res/title_bar.jpg"></ImageBrush>
+                <!--<ImageBrush ImageSource="/res/title_bar.jpg"></ImageBrush>-->
+                <SolidColorBrush Color="White" />
             </Grid.Background>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition />
                 <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="20,0,5,0">
-                <Image x:Name="_logo" Source="/res/title_logo.png" Margin="32,13,0,13" Width="68" Height="68" HorizontalAlignment="Left"/>
-                <TextBlock x:Name="_title_dept" FontFamily="楷体" FontSize="22" FontWeight="600" HorizontalAlignment="Center" VerticalAlignment="Bottom"  Foreground="White" Margin="100,0,0,50"></TextBlock>
-                <TextBlock  FontFamily="楷体" FontSize="30" FontWeight="600" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Margin="100,30,0,0">检测监管系统</TextBlock>
-                <TextBlock x:Name="_date" FontFamily="黑体" FontSize="14" VerticalAlignment="Center"  Foreground="Black" HorizontalAlignment="Center" Margin="0,0,20,0"></TextBlock>
-                <TextBlock x:Name="_user" FontFamily="黑体" FontSize="14" VerticalAlignment="Center"  Foreground="Black" HorizontalAlignment="Center" Margin="0,0,20,0">加载中……</TextBlock>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,5,0">
+                <Image x:Name="_logo" Source="/res/title_logo.png" Margin="20,0,0,0" Width="40" Height="40" HorizontalAlignment="Left"/>
+                <TextBlock x:Name="_title_dept" FontFamily="微软雅黑" FontSize="22" FontWeight="400" HorizontalAlignment="Left" VerticalAlignment="Center"  Foreground="#003e8c" Margin="8,0,0,0"></TextBlock>
+                <TextBlock  FontFamily="微软雅黑" FontSize="22" FontWeight="400" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="#003e8c">检测监管系统</TextBlock>
             </StackPanel>
             <Thumb Grid.Column="1" DragDelta="Thumb_DragDelta" Background="Transparent" Opacity="0"></Thumb>
-            <StackPanel Orientation="Horizontal"  Grid.Column="2" HorizontalAlignment="Right"  VerticalAlignment="Top">
+            <StackPanel Orientation="Horizontal" Grid.Column="2" HorizontalAlignment="Right"  VerticalAlignment="Bottom">
+                <Image Width="14" Height="20" Source="/res/user.png"/>
+                <TextBlock x:Name="_user" FontFamily="微软雅黑" FontSize="12"  Foreground="Black" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="8,0,8,2">加载中……</TextBlock>
+            </StackPanel>
+            <Grid x:Name="_grid_13" Grid.Column="3" HorizontalAlignment="Right"  VerticalAlignment="Bottom">
+                <Image x:Name="_image_13" Width="50" Height="20" Source="/res/help_normal.png"/>
+                <TextBlock x:Name="_text_13" FontFamily="微软雅黑" FontSize="12" VerticalAlignment="Bottom" HorizontalAlignment="Right"  Foreground="Black" Margin="0,0,5,2">帮助</TextBlock>
+            </Grid>
+            <StackPanel Orientation="Horizontal"  Grid.Column="4" HorizontalAlignment="Right"  VerticalAlignment="Top">
                 <Image Width="29" Height="26" MouseEnter ="min_MouseEnter" MouseLeave="all_MouseLeave" Source="/res/min.png" x:Name="min" MouseDown="min_MouseDown" ToolTip="缩小" />
                 <Image Width="29" Height="26" MouseEnter ="max_MouseEnter" MouseLeave="all_MouseLeave"  Source="/res/max.png" x:Name="max" MouseDown="max_MouseDown" ToolTip="最大化"/>
                 <Image Width="29" Height="26" MouseEnter ="exit_MouseEnter" MouseLeave="all_MouseLeave"  Source="/res/close.png" x:Name="exit" MouseDown="exit_MouseDown" ToolTip="关闭"/>
@@ -109,7 +118,7 @@
         </Grid>
         <Grid Grid.Row="1" x:Name="grid_MainMenu">
             <Grid.Background>
-                <SolidColorBrush Color="#003e8c" /> 
+                <SolidColorBrush Color="#003e8c" />
             </Grid.Background>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="100"/>
@@ -127,32 +136,58 @@
                 <ColumnDefinition Width="100"/>
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <Image x:Name="_image_0" Grid.Column="0"/>
-            <TextBlock x:Name="_text_0" Grid.Column="0" FontFamily="黑体"  Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,5"/>
-            <Image x:Name="_image_1" Grid.Column="1"/>
-            <TextBlock x:Name="_text_1" Grid.Column="1" FontFamily="黑体"  Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,5"/>
-            <Image x:Name="_image_2" Grid.Column="2"/>
-            <TextBlock x:Name="_text_2" Grid.Column="2" FontFamily="黑体"  Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,5"/>
-            <Image x:Name="_image_3" Grid.Column="3"/>
-            <TextBlock x:Name="_text_3" Grid.Column="3" FontFamily="黑体"  Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,5"/>
-            <Image x:Name="_image_4" Grid.Column="4" />
-            <TextBlock x:Name="_text_4" Grid.Column="4" FontFamily="黑体"  Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,5"/>
-            <Image x:Name="_image_5" Grid.Column="5" />
-            <TextBlock x:Name="_text_5" Grid.Column="5" FontFamily="黑体"  Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,5"/>
-            <Image x:Name="_image_6" Grid.Column="6"/>
-            <TextBlock x:Name="_text_6" Grid.Column="6" FontFamily="黑体"  Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,5"/>
-            <Image x:Name="_image_7" Grid.Column="7" />
-            <TextBlock x:Name="_text_7" Grid.Column="7" FontFamily="黑体"  Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,5"/>
-            <Image x:Name="_image_8" Grid.Column="8" />
-            <TextBlock x:Name="_text_8" Grid.Column="8" FontFamily="黑体"  Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,5"/>
-            <Image x:Name="_image_9" Grid.Column="9" />
-            <TextBlock x:Name="_text_9" Grid.Column="9" FontFamily="黑体"  Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,5"/>
-            <Image x:Name="_image_10" Grid.Column="10" />
-            <TextBlock x:Name="_text_10" Grid.Column="10" FontFamily="黑体"  Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,5"/>
-            <Image x:Name="_image_11" Grid.Column="11" />
-            <TextBlock x:Name="_text_11" Grid.Column="11" FontFamily="黑体"  Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,5"/>
-            <Image x:Name="_image_12" Grid.Column="12" />
-            <TextBlock x:Name="_text_12" Grid.Column="12" FontFamily="黑体"  Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,5"/>
+            <Grid Grid.Column="0" x:Name="_grid_0">
+                <Image x:Name="_image_0" />
+                <TextBlock x:Name="_text_0" FontFamily="微软雅黑"  Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,22"/>
+            </Grid>
+            <Grid Grid.Column="1" x:Name="_grid_1">
+                <Image x:Name="_image_1" />
+                <TextBlock x:Name="_text_1" FontFamily="微软雅黑"  Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,22"/>
+            </Grid>
+            <Grid Grid.Column="2" x:Name="_grid_2">
+                <Image x:Name="_image_2" />
+                <TextBlock x:Name="_text_2" FontFamily="微软雅黑"  Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,22"/>
+            </Grid>
+            <Grid Grid.Column="3" x:Name="_grid_3">
+                <Image x:Name="_image_3" />
+                <TextBlock x:Name="_text_3" FontFamily="微软雅黑"  Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,22"/>
+            </Grid>
+            <Grid Grid.Column="4" x:Name="_grid_4">
+                <Image x:Name="_image_4" />
+                <TextBlock x:Name="_text_4" FontFamily="微软雅黑"  Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,22"/>
+            </Grid>
+            <Grid Grid.Column="5" x:Name="_grid_5">
+                <Image x:Name="_image_5" />
+                <TextBlock x:Name="_text_5" FontFamily="微软雅黑"  Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,22"/>
+            </Grid>
+            <Grid Grid.Column="6" x:Name="_grid_6">
+                <Image x:Name="_image_6" />
+                <TextBlock x:Name="_text_6" FontFamily="微软雅黑"  Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,22"/>
+            </Grid>
+            <Grid Grid.Column="7" x:Name="_grid_7">
+                <Image x:Name="_image_7" />
+                <TextBlock x:Name="_text_7" FontFamily="微软雅黑"  Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,22"/>
+            </Grid>
+            <Grid Grid.Column="8" x:Name="_grid_8">
+                <Image x:Name="_image_8" />
+                <TextBlock x:Name="_text_8" FontFamily="微软雅黑"  Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,22"/>
+            </Grid>
+            <Grid Grid.Column="9" x:Name="_grid_9">
+                <Image x:Name="_image_9" />
+                <TextBlock x:Name="_text_9" FontFamily="微软雅黑"  Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,22"/>
+            </Grid>
+            <Grid Grid.Column="10" x:Name="_grid_10">
+                <Image x:Name="_image_10" />
+                <TextBlock x:Name="_text_10" FontFamily="微软雅黑"  Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,22"/>
+            </Grid>
+            <Grid Grid.Column="11" x:Name="_grid_11">
+                <Image x:Name="_image_11" />
+                <TextBlock x:Name="_text_11" FontFamily="微软雅黑"  Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,22"/>
+            </Grid>
+            <Grid Grid.Column="12" x:Name="_grid_12">
+                <Image x:Name="_image_12" />
+                <TextBlock x:Name="_text_12" FontFamily="微软雅黑"  Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,22"/>
+            </Grid>
         </Grid>
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
@@ -160,8 +195,8 @@
                 <ColumnDefinition Width="6"/>
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <Grid>
-                <Grid.RowDefinitions>
+            <Grid x:Name="grid_Menu" Background="#f2f1f1">
+                <!--<Grid.RowDefinitions>
                     <RowDefinition Height="30" />
                     <RowDefinition />
                 </Grid.RowDefinitions>
@@ -170,7 +205,7 @@
                 </Grid>
                 <Grid x:Name="grid_Menu" Background="WhiteSmoke" Grid.Row="1">
 
-                </Grid>
+                </Grid>-->
             </Grid>
             <GridSplitter Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Center" Width="6"></GridSplitter>
             <Grid x:Name="grid_Component" Grid.Column="2">
@@ -180,9 +215,9 @@
         </Grid>
         <Grid x:Name="grid_bottom" Grid.Row="3">
             <Grid.Background>
-                <ImageBrush ImageSource="/res/bottom_bar.jpg"></ImageBrush>
+                <SolidColorBrush Color="#5d5d5d" />
             </Grid.Background>
-            <TextBlock  xml:space="preserve" FontFamily="黑体"  FontSize="14" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="_bottom"></TextBlock>
+            <TextBlock  xml:space="preserve" FontFamily="宋体"  FontSize="14" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="_bottom"></TextBlock>
         </Grid>
     </Grid>
 </Window>

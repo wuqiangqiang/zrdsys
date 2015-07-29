@@ -1145,6 +1145,12 @@
     <Content Include="DLL\MySql.Data.dll" />
     <Content Include="DLL\NPOI.dll" />
     <Content Include="DLL\NPOI.OOXML.dll" />
+    <Resource Include="res\loginButton_selected.png" />
+    <Resource Include="res\file_1.png" />
+    <Resource Include="res\file_2.png" />
+    <Resource Include="res\user.png" />
+    <Resource Include="res\help_normal.png" />
+    <Resource Include="res\warning_normal.png" />
     <Resource Include="res\slaughter_before_normal.png" />
     <Resource Include="res\slaughter_normal.png" />
     <Resource Include="res\system_normal.png" />
@@ -1210,7 +1216,6 @@
     <Resource Include="logo.ico" />
     <Resource Include="res\header.png" />
     <Resource Include="res\detect_back.png" />
-    <Resource Include="res\title.jpg" />
     <Resource Include="res\background.jpg" />
     <Resource Include="res\small.png" />
     <Resource Include="res\login.jpg" />

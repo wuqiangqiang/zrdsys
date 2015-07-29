@@ -54,7 +54,7 @@ namespace FoodSafetyMonitoring
             //加载标题
             this._user.Text = this.userName;
             //this._date.Text = DateTime.Now.ToLongDateString().ToString() +  DateTime.Now.ToString("dddd");
-            this._date.Text = DateTime.Now.ToLongDateString().ToString();
+            //this._date.Text = DateTime.Now.ToLongDateString().ToString();
 
             DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("select companyName,phone from t_supplier where supplierId ='{0}'", (Application.Current.Resources["User"] as UserInfo).SupplierId == "" ? "zrd" : (Application.Current.Resources["User"] as UserInfo).SupplierId)).Tables[0];
             this._bottom.Text = table.Rows[0][0].ToString() + "    版本号：" + ConfigurationManager.AppSettings["version"] + "    技术服务热线：" + table.Rows[0][1].ToString();
@@ -167,7 +167,7 @@ namespace FoodSafetyMonitoring
             //int flag_exits = 0;
 
             //用户的查看权限
-            string strSql = "SELECT rp.SUB_ID,s.SUB_NAME,s.SUB_FATHER_ID,s.SUB_NORMAL_URL,s.SUB_SELECT_URL,s.SUB_UNPRESSED_URL " +
+            string strSql = "SELECT rp.SUB_ID,s.SUB_NAME,s.SUB_FATHER_ID,s.SUB_NORMAL_URL " +
                             "FROM sys_sub_hb s ,sys_rolepermission_hb rp , sys_client_user u " +
                             "WHERE s.SUB_ID = rp.SUB_ID " +
                             "AND rp.ROLE_ID = u.ROLE_ID " +
@@ -179,9 +179,11 @@ namespace FoodSafetyMonitoring
             DataRow[] row_mainmenu = table.Select("SUB_FATHER_ID = '0'");
             //定义数组存放：一级菜单图片控件和一级菜单文字控件
             Image[] images = new Image[] { _image_0,_image_1,_image_2,_image_3,_image_4,_image_5,_image_6,
-                                           _image_7,_image_8,_image_9,_image_10,_image_11,_image_12};
+                                           _image_7,_image_8,_image_9,_image_10,_image_11,_image_12,_image_13};
             TextBlock[] texts = new TextBlock[] { _text_0, _text_1, _text_2, _text_3, _text_4, _text_5, _text_6,
-                                                  _text_7, _text_8, _text_9, _text_10, _text_11, _text_12};
+                                                  _text_7, _text_8, _text_9, _text_10, _text_11, _text_12, _text_13};
+            Grid[] grids = new Grid[] { _grid_0, _grid_1, _grid_2, _grid_3, _grid_4, _grid_5, _grid_6,
+                                                  _grid_7, _grid_8, _grid_9, _grid_10, _grid_11, _grid_12, _grid_13};
 
             int i = 0;
             foreach (DataRow row in row_mainmenu )
@@ -202,8 +204,17 @@ namespace FoodSafetyMonitoring
                         childMenus.Add(new MyChildMenu(row_child["SUB_NAME"].ToString(), this, row_child_childmenu));
                     }
                 }
-                mainMenus.Add(new MainMenuItem(row["SUB_NAME"].ToString(), images[i], row["SUB_SELECT_URL"].ToString(), row["SUB_NORMAL_URL"].ToString(), row["SUB_UNPRESSED_URL"].ToString(), childMenus, this));
-                texts[i].Text = row["SUB_NAME"].ToString();
+                //鉴于帮助是最后一个菜单，帮助又必须显示在_grid_13区域内，所以特殊处理如下
+                if (row["SUB_NAME"].ToString() == "帮助")
+                {
+                    mainMenus.Add(new MainMenuItem(row["SUB_NAME"].ToString(), images[13], grids[13], row["SUB_NORMAL_URL"].ToString(), childMenus, this));
+                    texts[13].Text = row["SUB_NAME"].ToString();
+                }
+                else
+                {
+                    mainMenus.Add(new MainMenuItem(row["SUB_NAME"].ToString(), images[i], grids[i], row["SUB_NORMAL_URL"].ToString(), childMenus, this));
+                    texts[i].Text = row["SUB_NAME"].ToString();
+                } 
                 i = i + 1;
             }
             
@@ -339,17 +350,18 @@ namespace FoodSafetyMonitoring
     public class MainMenuItem
     {
         public string Name;
-        public BitmapImage img_mouseEnter;
+        //public BitmapImage img_mouseEnter;
         public BitmapImage img_mouseLeave;
-        public BitmapImage img_mouseUnpressed;
+        //public BitmapImage img_mouseUnpressed;
         public List<MyChildMenu> childMenus;
         public ChildMenu childMenu;
         public Image img;
         public Grid grid_Menu;
         private MainWindow mainWindow;
+        public Grid grid;
         //public int Flag_Exits;
 
-        public MainMenuItem(string name, Image img, string mouseEnterBackImgPath, string mouseLeaveBackImgPath, string mouseUnpressedBackImgPath, List<MyChildMenu> childMenus, MainWindow mainWindow)
+        public MainMenuItem(string name, Image img,Grid grid, string mouseLeaveBackImgPath, List<MyChildMenu> childMenus, MainWindow mainWindow)
         {
             this.Name = name;
             this.childMenus = childMenus;
@@ -357,11 +369,12 @@ namespace FoodSafetyMonitoring
             grid_Menu = mainWindow.grid_Menu;
             this.childMenu = new ChildMenu(childMenus);
             this.img = img;
+            this.grid = grid;
             this.img.Tag = name;
             //this.Flag_Exits = flag_exits;
-            img_mouseEnter = new BitmapImage(new Uri("pack://application:,," + mouseEnterBackImgPath));
+            //img_mouseEnter = new BitmapImage(new Uri("pack://application:,," + mouseEnterBackImgPath));
             img_mouseLeave = new BitmapImage(new Uri("pack://application:,," + mouseLeaveBackImgPath));
-            img_mouseUnpressed = new BitmapImage(new Uri("pack://application:,," + mouseUnpressedBackImgPath));
+            //img_mouseUnpressed = new BitmapImage(new Uri("pack://application:,," + mouseUnpressedBackImgPath));
             //if (Flag_Exits == 1)
             //{
                 this.img.Source = img_mouseLeave;
@@ -416,15 +429,24 @@ namespace FoodSafetyMonitoring
                 this.grid_Menu.Children.Add(childMenu);
             //}
 
-            //一旦鼠标点击在主菜单图标上，主菜单的图标变成黄色，其余均为正常色
+            //if (Name == "首页")
+            //{
+
+            //}
+            //else
+            //{
+
+            //}
+            //一旦鼠标点击在主菜单图标上，主菜单的背景色颜色加深
             for (int i = 0; i < mainWindow.mainMenus.Count; i++)
             {
                 //if (mainWindow.mainMenus[i].Flag_Exits == 1)
                 //{
-                mainWindow.mainMenus[i].img.Source = mainWindow.mainMenus[i].img_mouseLeave;
+                //mainWindow.mainMenus[i].img.Source = mainWindow.mainMenus[i].img_mouseLeave;
+                mainWindow.mainMenus[i].grid.Background = new SolidColorBrush(Color.FromRgb(0, 62, 140));
                 //}
             }
-            img.Source = img_mouseEnter;
+            grid.Background = new SolidColorBrush(Color.FromRgb(25, 49, 115));
         }
 
         //void img_MouseLeave(object sender, MouseEventArgs e)
@@ -456,7 +478,7 @@ namespace FoodSafetyMonitoring
                     mainWindow.mainMenus[i].img.Source = mainWindow.mainMenus[i].img_mouseLeave;
                 //}
             }
-            img.Source = img_mouseEnter;
+            //img.Source = img_mouseEnter;
         }
 
         void img_MouseEnter(object sender, MouseEventArgs e)

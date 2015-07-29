@@ -4,7 +4,7 @@
     <UserControl.Resources>
         <!--ToogleButton的模板，因为要进和状态切换，故要用到ToggleButton控件-->
         <ControlTemplate x:Key="ToggleButtonTemp" TargetType="{x:Type ToggleButton}">
-            <Border x:Name="bd" BorderThickness="1"  CornerRadius="1,1,1,1">
+            <!--<Border x:Name="bd" BorderThickness="1"  CornerRadius="1,1,1,1">
                 <Border.Background>
                     <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
                         <GradientStop Color="LightGray" Offset="0"/>
@@ -21,8 +21,10 @@
                       Data="M 0,0 L 4,5 L8,0 Z"
                       HorizontalAlignment="Center"
                       VerticalAlignment="Center"/>
-            </Border>
-            <ControlTemplate.Triggers>
+                
+            </Border>-->
+            <Image Source="/res/file_1.png"></Image>
+            <!--<ControlTemplate.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter TargetName="bd" Property="Background">
                         <Setter.Value>
@@ -41,7 +43,7 @@
                     <Setter TargetName="bd" Property="BorderBrush" Value="Gray"/>
                     <Setter TargetName="p" Property="Fill" Value="Gray"/>
                 </Trigger>
-            </ControlTemplate.Triggers>
+            </ControlTemplate.Triggers>-->
         </ControlTemplate>
         <!-- Expnder的样式-->
         <Style TargetType="{x:Type Expander}">
@@ -50,27 +52,30 @@
                     <ControlTemplate TargetType="{x:Type Expander}">
                         <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="35"/>
+                                <RowDefinition Height="3"/>
                                 <RowDefinition x:Name="gr" Height="0"/>
                             </Grid.RowDefinitions>
-                            <Border x:Name="hea" Background="LightBlue" BorderThickness="1,0,1,1" BorderBrush="white" Grid.Row="0">
+                            <Border x:Name="hea" Background="#f2f1f1" BorderThickness="0" BorderBrush="white" Grid.Row="0">
                                 <BulletDecorator VerticalAlignment="Center">
                                     <BulletDecorator.Bullet>
-                                        <ToggleButton Margin="1,1,1,1"  Height="18" Width="18" Template="{StaticResource ToggleButtonTemp}"
+                                        <ToggleButton Margin="5,1,1,1"  Height="22" Width="24" Template="{StaticResource ToggleButtonTemp}"
                                                   IsChecked="{Binding Path=IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
                                                   OverridesDefaultStyle="True"/>
                                     </BulletDecorator.Bullet>
-                                    <ContentPresenter HorizontalAlignment="Left" Margin="1,1,1,1" ContentSource="Header"/>
+                                    <ContentPresenter HorizontalAlignment="Left" Margin="10,0,0,0" ContentSource="Header" VerticalAlignment="Center"/>
                                 </BulletDecorator>
                             </Border>
-                            <Border x:Name="scv" Background="LightGray" BorderThickness="1" BorderBrush="Gray" Grid.Row="1" >
+                            <Image Source="/res/line.png" Grid.Row="1"></Image>
+                            <Border x:Name="scv" Background="#f2f1f1" BorderThickness="0" BorderBrush="Gray" Grid.Row="2" >
                                 <ContentPresenter Margin="0" ContentSource="Content"/>
                             </Border>
                         </Grid>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsExpanded" Value="True">
                                 <Setter TargetName="gr" Property="Height" Value="{Binding Path=DesiredSize/Height,ElementName=scv}"/>
-                                <Setter TargetName="hea" Property="Background" Value="Blue"/>
+                                <!--<Setter TargetName="scv" Property="Background" Value="#f2f1f1"/>-->
+                                <!--<Setter TargetName="hea" Property="Background" Value="Blue"/>-->
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -80,7 +85,7 @@
         <Style TargetType="Button">
             <Setter Property="FontSize" Value="12"/>
             <Setter Property="Foreground" Value="Black"/>
-            <Setter Property="FontFamily" Value="黑体"/>
+            <Setter Property="FontFamily" Value="微软雅黑"/>
             <Setter Property="Padding" Value="0"/>
             <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
             <Setter Property="Template">
@@ -94,62 +99,77 @@
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Foreground" Value="Gold"/>
                 </Trigger>
+                <!--<Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Foreground" Value="White"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="false">
+                    <Setter Property="Foreground" Value="Black"/>
+                </Trigger>-->
             </Style.Triggers>
         </Style>
     </UserControl.Resources>
     <Grid  x:Name="_grid" HorizontalAlignment="Left">
         <StackPanel>
-            <Expander ExpandDirection="Down" Width="140" x:Name="_expander_0">
+            <Expander ExpandDirection="Down" Width="210" x:Name="_expander_0">
                 <Expander.Header>
-                    <TextBlock x:Name="_text_0" FontWeight="Bold" Margin="10,0,0,0" FontSize="14" />
+                    <TextBlock x:Name="_text_0" FontFamily="微软雅黑" FontSize="12"/>
                 </Expander.Header>
                 <Expander.Content>
-                    <Grid x:Name="_grid_0" Margin="30,0,0,0">    
+                    <Grid x:Name="_grid_0" >          
                     </Grid>
                 </Expander.Content>
             </Expander>
-            <Expander ExpandDirection="Down" Width="140" x:Name="_expander_1">
+            <Expander ExpandDirection="Down" Width="210" x:Name="_expander_1">
                 <Expander.Header>
-                    <TextBlock x:Name="_text_1" FontWeight="Bold" Margin="10,0,0,0" FontSize="14" />
+                    <TextBlock x:Name="_text_1" FontFamily="微软雅黑" FontSize="12" />
                 </Expander.Header>
                 <Expander.Content>
-                    <Grid x:Name="_grid_1" Margin="30,0,0,0">
+                    <Grid x:Name="_grid_1">
                     </Grid>
                 </Expander.Content>
             </Expander>
-            <Expander ExpandDirection="Down" Width="140" x:Name="_expander_2">
+            <Expander ExpandDirection="Down" Width="210" x:Name="_expander_2">
                 <Expander.Header>
-                    <TextBlock x:Name="_text_2" FontWeight="Bold" Margin="10,0,0,0" FontSize="14"/>
+                    <TextBlock x:Name="_text_2" FontFamily="微软雅黑" FontSize="12"/>
                 </Expander.Header>
                 <Expander.Content>
-                    <Grid x:Name="_grid_2" Margin="30,0,0,0">
+                    <Grid x:Name="_grid_2">
                     </Grid>
                 </Expander.Content>
             </Expander>
-            <Expander ExpandDirection="Down" Width="140" x:Name="_expander_3">
+            <Expander ExpandDirection="Down" Width="210" x:Name="_expander_3">
                 <Expander.Header>
-                    <TextBlock x:Name="_text_3" FontWeight="Bold" Margin="10,0,0,0" FontSize="14" />
+                    <TextBlock x:Name="_text_3" FontFamily="微软雅黑" FontSize="12" />
                 </Expander.Header>
                 <Expander.Content>
-                    <Grid x:Name="_grid_3" Margin="30,0,0,0">
+                    <Grid x:Name="_grid_3">
                     </Grid>
                 </Expander.Content>
             </Expander>
-            <Expander ExpandDirection="Down" Width="140" x:Name="_expander_4">
+            <Expander ExpandDirection="Down" Width="210" x:Name="_expander_4">
                 <Expander.Header >
-                    <TextBlock x:Name="_text_4" FontWeight="Bold" Margin="10,0,0,0" FontSize="14" />
+                    <TextBlock x:Name="_text_4" FontFamily="微软雅黑" FontSize="12" />
                 </Expander.Header>
                 <Expander.Content>
-                    <Grid x:Name="_grid_4" Margin="30,0,0,0">
+                    <Grid x:Name="_grid_4">
                     </Grid>
                 </Expander.Content>
             </Expander>
-            <Expander ExpandDirection="Down" Width="140" x:Name="_expander_5">
+            <Expander ExpandDirection="Down" Width="210" x:Name="_expander_5">
                 <Expander.Header>
-                    <TextBlock x:Name="_text_5" FontWeight="Bold" Margin="10,0,0,0" FontSize="14"/>
+                    <TextBlock x:Name="_text_5" FontFamily="微软雅黑" FontSize="12"/>
                 </Expander.Header>
                 <Expander.Content>
-                    <Grid x:Name="_grid_5" Margin="30,0,0,0">
+                    <Grid x:Name="_grid_5">
+                    </Grid>
+                </Expander.Content>
+            </Expander>
+            <Expander ExpandDirection="Down" Width="210" x:Name="_expander_6">
+                <Expander.Header>
+                    <TextBlock x:Name="_text_6" FontFamily="微软雅黑" Margin="10,0,0,0" FontSize="12"/>
+                </Expander.Header>
+                <Expander.Content>
+                    <Grid x:Name="_grid_6">
                     </Grid>
                 </Expander.Content>
             </Expander>

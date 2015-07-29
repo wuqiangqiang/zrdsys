@@ -22,6 +22,20 @@
         </Style.Triggers>
     </Style>
 
+    <!--登陆按钮-->
+    <Style x:Key="LoginImageButtonTemplate" TargetType="Button"  BasedOn="{StaticResource ButtonBase}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid>
+                        <Image x:Name="login" Source="/res/loginButton.png"></Image>
+                        <TextBlock FontFamily="黑体" FontSize="14"  HorizontalAlignment="Center" VerticalAlignment="Center" Text="登录" Foreground="White"></TextBlock>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <!--重置密码按钮-->
     <Style x:Key="ResetImageButtonTemplate" TargetType="Button"  BasedOn="{StaticResource ButtonBase}">
         <Setter Property="Template">

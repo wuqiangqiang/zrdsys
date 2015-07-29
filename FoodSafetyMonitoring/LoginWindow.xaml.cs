@@ -114,12 +114,17 @@ namespace FoodSafetyMonitoring
             }
         }
 
-        private void Image_MouseDown(object sender, MouseButtonEventArgs e)
+        //private void Image_MouseDown(object sender, MouseButtonEventArgs e)
+        //{
+        //    if (e.LeftButton == MouseButtonState.Pressed)
+        //    {
+        //        Login();
+        //    }
+        //}
+
+        private void Login_Click(object sender, RoutedEventArgs e)
         {
-            if (e.LeftButton == MouseButtonState.Pressed)
-            {
-                Login();
-            }
+            Login();
         }
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
@@ -300,6 +305,7 @@ namespace FoodSafetyMonitoring
             errorlog.Flush();
             errorlog.Close();
         }
+
     }
 
     [Serializable]
