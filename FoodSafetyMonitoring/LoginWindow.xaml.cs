@@ -106,6 +106,16 @@ namespace FoodSafetyMonitoring
             }
         }
 
+        //鼠标点击最小化按钮时触发
+        private void min_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                this.WindowState = System.Windows.WindowState.Minimized;
+            }
+        }
+
+        //鼠标点击关闭按钮时触发
         private void exit_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
@@ -114,19 +124,30 @@ namespace FoodSafetyMonitoring
             }
         }
 
-        //private void Image_MouseDown(object sender, MouseButtonEventArgs e)
-        //{
-        //    if (e.LeftButton == MouseButtonState.Pressed)
-        //    {
-        //        Login();
-        //    }
-        //}
-
-        private void Login_Click(object sender, RoutedEventArgs e)
+        //鼠标点击登录按钮触发
+        private void Image_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            Login();
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                _login.Source = new BitmapImage(new Uri("pack://application:,," + "/res/loginButton_selected.png"));
+                Login();
+            }
+
         }
 
+        //鼠标移到登录按钮上触发
+        private void Image_MouseEnter(object sender, MouseEventArgs e)
+        {
+            _login.Source = new BitmapImage(new Uri("pack://application:,," + "/res/loginButton_selected.png"));
+        }
+
+        //鼠标离开登录按钮时触发
+        private void Image_MouseLeave(object sender, MouseEventArgs e)
+        {
+            _login.Source = new BitmapImage(new Uri("pack://application:,," + "/res/loginButton.png"));
+        }
+
+        //按下enter键时触发
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
@@ -214,8 +235,6 @@ namespace FoodSafetyMonitoring
                                 //openupdatedexe.Start();
                                 ProcessStartInfo info = new ProcessStartInfo("AutoUpdate.exe", new_version);
                                 Process.Start(info);
-                                
-
                             }
                             else
                             {
@@ -255,19 +274,33 @@ namespace FoodSafetyMonitoring
             }
         }
 
+        //用户名获取焦点时触发
         private void _name_GotFocus(object sender, RoutedEventArgs e)
         {
+            _img_user.Source = new BitmapImage(new Uri("pack://application:,," + "/res/username_selected.png"));
             txtMsg.Text = "";
         }
 
+        //用户名失去焦点时触发
+        private void _name_LostFocus(object sender, RoutedEventArgs e)
+        {
+            _img_user.Source = new BitmapImage(new Uri("pack://application:,," + "/res/username.png"));
+            txtMsg.Text = "";
+        }
 
+        //密码获取焦点时触发
         private void _password_GotFocus(object sender, RoutedEventArgs e)
         {
+            _img_password.Source = new BitmapImage(new Uri("pack://application:,," + "/res/password_selected.png"));
             txtMsg.Text = "";
         }
 
-
-
+        //密码失去焦点时触发
+        private void _password_LostFocus(object sender, RoutedEventArgs e)
+        {
+            _img_password.Source = new BitmapImage(new Uri("pack://application:,," + "/res/password.png"));
+            txtMsg.Text = "";
+        }
 
         private void cmbName_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -282,19 +315,7 @@ namespace FoodSafetyMonitoring
             }
         }
 
-        private void min_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.LeftButton == MouseButtonState.Pressed)
-            {
-                this.WindowState = System.Windows.WindowState.Minimized;
-            }
-        }
-
-        private void _style_Checked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
+       
         private void writeLog(string str)
         {
 
@@ -305,7 +326,6 @@ namespace FoodSafetyMonitoring
             errorlog.Flush();
             errorlog.Close();
         }
-
     }
 
     [Serializable]

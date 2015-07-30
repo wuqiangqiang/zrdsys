@@ -29,18 +29,20 @@
                 <control:DatePickerControl x:Name="dtpStartDate" VerticalAlignment="Center"/>
                 <TextBlock xml:space="preserve" MinWidth="10" Margin="5,0,5,0">至</TextBlock>
                 <control:DatePickerControl x:Name="dtpEndDate" VerticalAlignment="Center" />
-                <TextBlock MinWidth="50" Margin="30,0,0,0">来源区域:</TextBlock>
+                <!--<TextBlock MinWidth="50" Margin="30,0,0,0">来源区域:</TextBlock>
                 <ComboBox x:Name="_province1" Width="130" Text="省"></ComboBox>
                 <ComboBox x:Name="_city1" Width="130" Text="地市"></ComboBox>
                 <ComboBox x:Name="_region1" Width="120" Text="区县"></ComboBox>
                 <TextBlock MinWidth="50" Margin="30,0,0,0">来源单位:</TextBlock>
-                <ComboBox x:Name="_source_company1" Width="300"></ComboBox>
-            </StackPanel>
-            <StackPanel Grid.Row="1" VerticalAlignment="Center">
+                <ComboBox x:Name="_source_company1" Width="300"></ComboBox>-->
                 <TextBlock MinWidth="50">检测站点:</TextBlock>
                 <ComboBox x:Name="_detect_station" Width="240" HorizontalContentAlignment="Center"/>
                 <TextBlock MinWidth="40" Margin="10,0,0,0">检测师:</TextBlock>
                 <ComboBox Width="120" x:Name="_detect_person1" />
+            </StackPanel>
+            <StackPanel Grid.Row="1" VerticalAlignment="Center">
+                <TextBlock MinWidth="50" Margin="20,0,0,0">饲料名称:</TextBlock>
+                <ComboBox Width="140" x:Name="_detect_feed" />
                 <TextBlock MinWidth="50" Margin="30,0,0,0">检测项目:</TextBlock>
                 <ComboBox Width="140" x:Name="_detect_item1" />
                 <TextBlock MinWidth="50" Margin="30,0,0,0">检测对象:</TextBlock>

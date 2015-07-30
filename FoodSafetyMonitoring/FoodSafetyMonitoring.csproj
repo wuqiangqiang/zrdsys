@@ -220,6 +220,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Manager\LoadWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Manager\SetTaskGrade.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -866,6 +870,9 @@
       <DependentUpon>detectDetailsReview.xaml</DependentUpon>
     </Compile>
     <Compile Include="Manager\IClickChildMenuInitUserControlUI.cs" />
+    <Compile Include="Manager\LoadWindow.xaml.cs">
+      <DependentUpon>LoadWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Manager\SetTaskGrade.xaml.cs">
       <DependentUpon>SetTaskGrade.xaml</DependentUpon>
     </Compile>
@@ -1145,6 +1152,10 @@
     <Content Include="DLL\MySql.Data.dll" />
     <Content Include="DLL\NPOI.dll" />
     <Content Include="DLL\NPOI.OOXML.dll" />
+    <Resource Include="res\password.png" />
+    <Resource Include="res\password_selected.png" />
+    <Resource Include="res\username.png" />
+    <Resource Include="res\username_selected.png" />
     <Resource Include="res\loginButton_selected.png" />
     <Resource Include="res\file_1.png" />
     <Resource Include="res\file_2.png" />

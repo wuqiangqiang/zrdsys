@@ -31,7 +31,7 @@ namespace FoodSafetyMonitoring
     /// </summary>
     public partial class MainWindow : Window
     {
-        //private DispatcherTimer timer;
+        private DispatcherTimer timer;
         public delegate void UserControlCloseEventHandler();
         //public bool IsEnbleMouseEnterLeave = true;
         private string userName;
@@ -39,80 +39,31 @@ namespace FoodSafetyMonitoring
         public List<MainMenuItem> mainMenus = new List<MainMenuItem>();
         private Rect rcnormal;//定义一个全局rect记录还原状态下窗口的位置和大小。
 
-
         public MainWindow(IDBOperation dbOperation)
         {
             //Rect rc = SystemParameters.WorkArea;//获取工作区大小
             this.Width = 1366;
             this.Height = 766;
             InitializeComponent();
-            this.dbOperation = dbOperation;
-            UserInfo userInfo = Application.Current.Resources["User"] as UserInfo;
-            this.userName = userInfo.ShowName;
-            Application.Current.Resources.Add("省市表", dbOperation.GetProvinceCity());
-
-            //加载标题
-            this._user.Text = this.userName;
-            //this._date.Text = DateTime.Now.ToLongDateString().ToString() +  DateTime.Now.ToString("dddd");
-            //this._date.Text = DateTime.Now.ToLongDateString().ToString();
-
-            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("select companyName,phone from t_supplier where supplierId ='{0}'", (Application.Current.Resources["User"] as UserInfo).SupplierId == "" ? "zrd" : (Application.Current.Resources["User"] as UserInfo).SupplierId)).Tables[0];
-            this._bottom.Text = table.Rows[0][0].ToString() + "    版本号：" + ConfigurationManager.AppSettings["version"] + "    技术服务热线：" + table.Rows[0][1].ToString();
-
-            DataTable dt= dbOperation.GetDbHelper().GetDataSet(string.Format("SELECT INFO_NAME,image from sys_client_sysdept where INFO_CODE ='{0}'", (Application.Current.Resources["User"] as UserInfo).DepartmentID)).Tables[0];
-            this._title_dept.Text = dt.Rows[0][0].ToString();
-            if (dt.Rows[0][1].ToString() != null && dt.Rows[0][1].ToString() != "")
-            {
-                byte[] img = (byte[])dt.Rows[0][1];
-                ShowSelectedIMG(img);                //以流的方式显示图片的方法
-            }
-
-            //加载父菜单和子菜单
-            MainMenu_Load();
-            this.SizeChanged += new SizeChangedEventHandler(MainWindow_SizeChanged);
-
-            //加载主画面
-            //if (mainMenus[0].Flag_Exits == 1)
-            //{
-                TabItem temptb = new TabItem();
-                temptb.Header = "首页";
-                temptb.Tag= "1";
-                temptb.Content = new UcMainPage();
-
-                _tab.Items.Add(temptb);
-                _tab.SelectedIndex = _tab.Items.Count - 1;
-            //}
+            this.dbOperation = dbOperation;          
 
             //if (!FullScreenHelper.IsFullscreen(this))
             //{
             //    FullScreenHelper.GoFullscreen(this);
             //}
-            //this.Loaded += new RoutedEventHandler(MainWindow_Loaded);
+            this.Loaded += new RoutedEventHandler(MainWindow_Loaded);
             //this.KeyDown += new KeyEventHandler(MainWindow_KeyDown);
             //this.StateChanged += new EventHandler(MainWindow_StateChanged);
         }
 
-        //显示上传的自定义图片
-        private void ShowSelectedIMG(byte[] img)
+
+        void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            MemoryStream ms = new MemoryStream(img);//img是从数据库中读取出来的字节数组
-            ms.Seek(0, System.IO.SeekOrigin.Begin);
-
-            BitmapImage newBitmapImage = new BitmapImage();
-            newBitmapImage.BeginInit();
-            newBitmapImage.StreamSource = ms;
-            newBitmapImage.EndInit();
-            _logo.Source = newBitmapImage;
+            timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromMilliseconds(1);
+            timer.Tick += new EventHandler(timer_Tick);
+            timer.Start();
         }
-
-
-        //void MainWindow_Loaded(object sender, RoutedEventArgs e)
-        //{
-        //    timer = new DispatcherTimer();
-        //    timer.Interval = TimeSpan.FromMilliseconds(1);
-        //    timer.Tick += new EventHandler(timer_Tick);
-        //    timer.Start();  
-        //}
 
         //void MainWindow_StateChanged(object sender, EventArgs e)
         //{
@@ -138,27 +89,54 @@ namespace FoodSafetyMonitoring
         //    //}
         //}
 
-        //private int flag = 0;
-        //void timer_Tick(object sender, EventArgs e)
-        //{
-        //    if (flag == 0)
-        //    {
-        //        Application.Current.Resources.Add("省市表", dbOperation.GetProvinceCity());
-        //        //header = new UcHeaderTitle(this);
-        //        //grid_header.Children.Add(header);
-        //        //header.SetUserName(this.userName);
-        //        //header.SetDate(DateTime.Now);
-        //        //mainMenu = new MainMenu(this);
-        //        //grid_MainMenu.Children.Add(mainMenu);
-        //        //加载菜单
-        //        MainMenu_Load();
-        //        this.SizeChanged += new SizeChangedEventHandler(MainWindow_SizeChanged);
-        //        flag = 1;
-        //        timer.Interval = new TimeSpan(1000);
+        private int flag = 0;
+        void timer_Tick(object sender, EventArgs e)
+        {
+            if (flag == 0)
+            {
+                LoadWindow load = new LoadWindow();
+                load.Show();
 
-        //    }
-        //    //header.UpdateTime();
-        //}
+                Application.Current.Resources.Add("省市表", dbOperation.GetProvinceCity());
+                UserInfo userInfo = Application.Current.Resources["User"] as UserInfo;
+                this.userName = userInfo.ShowName;
+                
+                //加载标题
+                this._user.Text = this.userName;
+                //this._date.Text = DateTime.Now.ToLongDateString().ToString() +  DateTime.Now.ToString("dddd");
+                //this._date.Text = DateTime.Now.ToLongDateString().ToString();
+
+                DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("select companyName,phone from t_supplier where supplierId ='{0}'", (Application.Current.Resources["User"] as UserInfo).SupplierId == "" ? "zrd" : (Application.Current.Resources["User"] as UserInfo).SupplierId)).Tables[0];
+                this._bottom.Text = table.Rows[0][0].ToString() + "    版本号：" + ConfigurationManager.AppSettings["version"] + "    技术服务热线：" + table.Rows[0][1].ToString();
+
+                DataTable dt = dbOperation.GetDbHelper().GetDataSet(string.Format("SELECT INFO_NAME,image from sys_client_sysdept where INFO_CODE ='{0}'", (Application.Current.Resources["User"] as UserInfo).DepartmentID)).Tables[0];
+                this._title_dept.Text = dt.Rows[0][0].ToString();
+                if (dt.Rows[0][1].ToString() != null && dt.Rows[0][1].ToString() != "")
+                {
+                    byte[] img = (byte[])dt.Rows[0][1];
+                    ShowSelectedIMG(img);                //以流的方式显示图片的方法
+                }
+
+                //加载父菜单和子菜单
+                MainMenu_Load();
+                this.SizeChanged += new SizeChangedEventHandler(MainWindow_SizeChanged);
+
+                //加载主画面
+                TabItem temptb = new TabItem();
+                temptb.Header = "首页";
+                temptb.Tag = "1";
+                temptb.Content = new UcMainPage();
+                _tab.Items.Add(temptb);
+                _tab.SelectedIndex = _tab.Items.Count - 1;
+
+                flag = 1;
+                timer.Interval = new TimeSpan(1000);
+
+                load.Close();
+
+            }
+            //header.UpdateTime();
+        }
 
 
         //加载父菜单和子菜单
@@ -216,8 +194,20 @@ namespace FoodSafetyMonitoring
                     texts[i].Text = row["SUB_NAME"].ToString();
                 } 
                 i = i + 1;
-            }
-            
+            }       
+        }
+
+        //显示上传的自定义图片
+        private void ShowSelectedIMG(byte[] img)
+        {
+            MemoryStream ms = new MemoryStream(img);//img是从数据库中读取出来的字节数组
+            ms.Seek(0, System.IO.SeekOrigin.Begin);
+
+            BitmapImage newBitmapImage = new BitmapImage();
+            newBitmapImage.BeginInit();
+            newBitmapImage.StreamSource = ms;
+            newBitmapImage.EndInit();
+            _logo.Source = newBitmapImage;
         }
 
         //判断用户的菜单权限

@@ -38,8 +38,8 @@ namespace FoodSafetyMonitoring.Manager
             DataRow[] rows = ProvinceCityTable.Select("pid = '0001'");
 
             //画面初始化-新增检测单画面
-            ComboboxTool.InitComboboxSource(_feed_name, string.Format("call p_user_feed ('{0}')", userId), "lr");
-            _feed_name.SelectionChanged += new SelectionChangedEventHandler(_feed_name_SelectionChanged);
+            ComboboxTool.InitComboboxSource(_feed_name, "select feedid,feedname from t_feed where openflag = '1'", "lr");
+            //_feed_name.SelectionChanged += new SelectionChangedEventHandler(_feed_name_SelectionChanged);
     
             ComboboxTool.InitComboboxSource(_detect_trade, "select tradeId,tradeName from t_trade where openFlag = '1'", "lr");           
             _detect_trade.SelectionChanged += new SelectionChangedEventHandler(_detect_trade_SelectionChanged);
@@ -112,8 +112,24 @@ namespace FoodSafetyMonitoring.Manager
             }
             else
             {
-                string sql = string.Format("call p_insert_feed_detect('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}')"
-                              , (_feed_name.SelectedItem as Label).Tag.ToString(),
+                string feed_info_id;
+                int n = dbOperation.ExecuteSql(string.Format("INSERT INTO t_feed_info (feedid,feedbrand,producecompany,producebatchno,batchnum,buydate,createuserid,createdate) VALUES('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}')",
+                                                               (_feed_name.SelectedItem as Label).Tag.ToString(),
+                                                                _feed_brand.Text, _produce_company.Text,_produce_batchno.Text,
+                                                                _batch_num.Text,_buy_date.Text,
+                                                                userId, DateTime.Now));
+                if (n == 1)
+                {
+                    feed_info_id = dbOperation.GetSingle(string.Format("SELECT max(id) from t_feed_info where feedid ='{0}' and createuserid = '{1}'", (_feed_name.SelectedItem as Label).Tag.ToString(), userId)).ToString();
+                }
+                else
+                {
+                    Toolkit.MessageBox.Show("饲料信息添加失败！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                    return;
+                }
+
+                string sql = string.Format("call p_insert_feed_detect('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}')"
+                              , (_feed_name.SelectedItem as Label).Tag.ToString(), feed_info_id,
                               (_detect_item.SelectedItem as Label).Tag.ToString(),
                               (_detect_method1.IsChecked == true ? 1 : 0) + (_detect_method2.IsChecked == true ? 2 : 0) + (_detect_method3.IsChecked == true ? 3 : 0),
                               (_detect_object.SelectedItem as Label).Tag.ToString(),
@@ -166,21 +182,21 @@ namespace FoodSafetyMonitoring.Manager
         }
 
 
-        void _feed_name_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
+        //void _feed_name_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
 
-            //饲料名称下拉选择的是有效内容
-            if (_feed_name.SelectedIndex > 0)
-            {
-                DataTable table = dbOperation.GetDataSet(string.Format("select feedbrand,producecompany,producebatchno,batchnum,buydate from t_feed_info where id = '{0}'", (_feed_name.SelectedItem as Label).Tag.ToString())).Tables[0];
+        //    //饲料名称下拉选择的是有效内容
+        //    if (_feed_name.SelectedIndex > 0)
+        //    {
+        //        DataTable table = dbOperation.GetDataSet(string.Format("select feedbrand,producecompany,producebatchno,batchnum,buydate from t_feed_info where id = '{0}'", (_feed_name.SelectedItem as Label).Tag.ToString())).Tables[0];
 
-                this._feed_brand.Text = table.Rows[0][0].ToString();
-                this._produce_company.Text = table.Rows[0][1].ToString();
-                this._produce_batchno.Text = table.Rows[0][2].ToString();
-                this._batch_num.Text = table.Rows[0][3].ToString();
-                this._buy_date.Text = table.Rows[0][4].ToString();
-            }
-        }
+        //        this._feed_brand.Text = table.Rows[0][0].ToString();
+        //        this._produce_company.Text = table.Rows[0][1].ToString();
+        //        this._produce_batchno.Text = table.Rows[0][2].ToString();
+        //        this._batch_num.Text = table.Rows[0][3].ToString();
+        //        this._buy_date.Text = table.Rows[0][4].ToString();
+        //    }
+        //}
 
 
         void _detect_trade_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -226,6 +242,48 @@ namespace FoodSafetyMonitoring.Manager
             {
                 ComboboxTool.InitComboboxSource(_detect_sensitivity, string.Format("call p_detect_sensitivity( '{0}','{1}')", (_detect_item.SelectedItem as Label).Tag, (_detect_object.SelectedItem as Label).Tag), "lr");
             }
+        }
+
+        private void batch_num_Pasting(object sender, DataObjectPastingEventArgs e)
+        {
+            if (e.DataObject.GetDataPresent(typeof(String)))
+            {
+                String text = (String)e.DataObject.GetData(typeof(String));
+                if (!isNumberic(text))
+                { e.CancelCommand(); }
+            }
+            else { e.CancelCommand(); }
+        }
+
+        private void batch_num_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+                e.Handled = true;
+        }
+
+        private void batch_num_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (!isNumberic(e.Text))
+            {
+                e.Handled = true;
+            }
+            else
+                e.Handled = false;
+        }
+
+        //isDigit是否是数字
+        public static bool isNumberic(string _string)
+        {
+            if (string.IsNullOrEmpty(_string))
+
+                return false;
+            foreach (char c in _string)
+            {
+                if (!char.IsDigit(c))
+                    //if(c<'0' c="">'9')//最好的方法,在下面测试数据中再加一个0，然后这种方法效率会搞10毫秒左右
+                    return false;
+            }
+            return true;
         }
     }
 }

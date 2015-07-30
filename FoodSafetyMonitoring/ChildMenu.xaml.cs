@@ -69,10 +69,17 @@ namespace FoodSafetyMonitoring
                     //插入一行两列
                     grids[i].RowDefinitions.Add(new RowDefinition());
                     grids[i].RowDefinitions[j].Height = new GridLength(35, GridUnitType.Pixel);
+                    
                     grids[i].ColumnDefinitions.Add(new ColumnDefinition());
                     grids[i].ColumnDefinitions.Add(new ColumnDefinition());
                     grids[i].ColumnDefinitions[0].Width = new GridLength(65, GridUnitType.Pixel);
                     grids[i].ColumnDefinitions[1].Width = new GridLength(145, GridUnitType.Pixel);
+                    //Grid grid = new Grid();
+                    //grid.SetValue(Grid.RowProperty, j);
+                    //grid.SetValue(Grid.ColumnSpanProperty, 2);
+                    //grid.SetBinding(Grid.BackgroundProperty, new Binding("IsPressed"));
+                    //grids[i].Children.Add(grid);
+                    
                     //第一列插入图片
                     Image img = new Image();
                     img.Source = new BitmapImage(new Uri("pack://application:,," + "/res/file_2.png"));
@@ -88,8 +95,6 @@ namespace FoodSafetyMonitoring
                     childMenus[i].buttons[j].SetValue(Grid.RowProperty, j);
                     childMenus[i].buttons[j].SetValue(Grid.ColumnProperty, 1);
                     grids[i].Children.Add(childMenus[i].buttons[j]);
-
-                    //grids[i].RowDefinitions[j].SetBinding(Grid.BackgroundProperty, new Binding(childMenus[i].buttons[j].Foreground.ToString()));
 
                     j = j + 1;
                 }
@@ -116,12 +121,12 @@ namespace FoodSafetyMonitoring
             this.tab = mainWindow._tab;
             buttons = new List<Button>();
 
+            
             foreach (DataRow row in child_childmenu)
             {
                 Button btn = new Button();
                 btn.Content = row["SUB_NAME"].ToString();
                 btn.Tag = row["SUB_ID"].ToString();
-                //btn.Foreground = Brushes.Black;
                 btn.MinWidth = 120;
                 btn.VerticalAlignment = VerticalAlignment.Center;
                 btn.Click += new RoutedEventHandler(this.btn_Click);
@@ -152,289 +157,369 @@ namespace FoodSafetyMonitoring
                     case "1": temptb.Header = (sender as Button).Content.ToString();
                         temptb.Content = new UcMainPage();
                         break;
+                    //饲料检测->检测单管理->新建饲料检测单
+                    case "20101": temptb.Header = (sender as Button).Content.ToString() + "(饲料)";
+                        temptb.Content = new UcFeedDetectManager();
+                        break;
+                    //饲料检测->检测单管理->饲料检测单列表
+                    case "20102": temptb.Header = (sender as Button).Content.ToString() + "(饲料)";
+                        temptb.Content = new UcDetectInquire(mainWindow.dbOperation);
+                        break;
                     //养殖检测->档案管理->新建档案
-                    case "20101": temptb.Header = (sender as Button).Content.ToString();
+                    case "30101": temptb.Header = (sender as Button).Content.ToString();
                         temptb.Content = new UcCultureFile(mainWindow.dbOperation);
                         break;
                     //养殖检测->档案管理->档案信息查询
-                    case "20102": temptb.Header = (sender as Button).Content.ToString();
+                    case "30102": temptb.Header = (sender as Button).Content.ToString();
                         temptb.Content = new UcQueryCultureFile(mainWindow.dbOperation);
                         break;
                     //养殖检测->检测单管理->新建养殖检测单
-                    case "20201": temptb.Header = (sender as Button).Content.ToString();
+                    case "30201": temptb.Header = (sender as Button).Content.ToString() + "(养殖)";
                         temptb.Content = new UcCultureDetectManager(mainWindow.dbOperation);
                         break;
                     //养殖检测->检测单管理->养殖检测单列表
-                    case "20202": temptb.Header = (sender as Button).Content.ToString();
+                    case "30202": temptb.Header = (sender as Button).Content.ToString() + "(养殖)";
                         temptb.Content = new UcCultureDetectInquire(mainWindow.dbOperation);
                         break;
                     //出证检测->检测单管理->新建出证检测单
-                    case "30101": temptb.Header = (sender as Button).Content.ToString();
+                    case "40101": temptb.Header = (sender as Button).Content.ToString() + "(出证)";
                         temptb.Content = new UcCertificateDetectManager(mainWindow.dbOperation);
                         break;
                     //出证检测->检测单管理->出证检测单列表
-                    case "30102": temptb.Header = (sender as Button).Content.ToString();
+                    case "40102": temptb.Header = (sender as Button).Content.ToString() + "(出证)";
                         temptb.Content = new UcCertificateInquire(mainWindow.dbOperation);
                         break;
-                    //出证检测->电子出证单->新建电子出证单
-                    case "30201": temptb.Header = (sender as Button).Content.ToString();
-                        temptb.Content = new UcCreateCertificate(mainWindow.dbOperation);
-                        break;
-                    //出证检测->电子出证单->出证单列表
-                    case "30202": temptb.Header = (sender as Button).Content.ToString();
-                        temptb.Content = new UcCreateCertificatequery(mainWindow.dbOperation);
-                        break;
                     //宰前检测->检测单管理->新建宰前检测单
-                    case "40101": temptb.Header = (sender as Button).Content.ToString();
+                    case "50101": temptb.Header = (sender as Button).Content.ToString() + "(宰前)";
                         temptb.Content = new UcDetectBillManager();
                         break;
                     //宰前检测->检测单管理->宰前检测单列表
-                    case "40102": temptb.Header = (sender as Button).Content.ToString();
+                    case "50102": temptb.Header = (sender as Button).Content.ToString() + "(宰前)";
                         temptb.Content = new UcDetectInquire(mainWindow.dbOperation);
                         break;
                     //屠宰同步检测->检测单管理->新建屠宰同步检测单
-                    case "50101": temptb.Header = (sender as Button).Content.ToString();
+                    case "60101": temptb.Header = (sender as Button).Content.ToString() + "(屠宰同步)";
                         temptb.Content = new UcDetectBillManager();
                         break;
                     //屠宰同步检测->检测单管理->屠宰同步检测单列表
-                    case "50102": temptb.Header = (sender as Button).Content.ToString();
+                    case "60102": temptb.Header = (sender as Button).Content.ToString() + "(屠宰同步)";
                         temptb.Content = new UcDetectInquire(mainWindow.dbOperation);
                         break;
+                    //电子出证->电子出证->新建检疫证单
+                    case "70101": temptb.Header = (sender as Button).Content.ToString();
+                        temptb.Content = new UcCreateCertificate(mainWindow.dbOperation);
+                        break;
+                    //出证检测->电子出证->电子证查询
+                    case "70102": temptb.Header = (sender as Button).Content.ToString();
+                        temptb.Content = new UcCreateCertificatequery(mainWindow.dbOperation);
+                        break;
+                    //饲料检测->数据统计->日报表
+                    case "20201": temptb.Header = (sender as Button).Content.ToString() + "(饲料)";
+                        temptb.Content = new SysDayReport(mainWindow.dbOperation, "yz", "3"); //传入检测站点的类型和检测单的类型
+                        break;
+                    //饲料检测->数据统计->月报表
+                    case "20202": temptb.Header = (sender as Button).Content.ToString() + "(饲料)";
+                        temptb.Content = new SysMonthReport(mainWindow.dbOperation, "yz", "3"); //传入检测站点的类型和检测单的类型
+                        break;
+                    ////饲料检测->数据统计->年报表
+                    //case "20303": temptb.Header = (sender as Button).Content.ToString() + "(饲料)";
+                    //    temptb.Content = new SysYearReport(mainWindow.dbOperation, "yz", "3"); //传入检测站点的类型和检测单的类型
+                    //    break;
+                    //饲料检测->数据统计->自定义报表
+                    case "20203": temptb.Header = (sender as Button).Content.ToString() + "(饲料)";
+                        temptb.Content = new SysDesignReport(mainWindow.dbOperation, "yz", "3"); //传入检测站点的类型和检测单的类型
+                        break;
                     //养殖检测->数据统计->日报表
-                    case "20301": temptb.Header = (sender as Button).Content.ToString() + "(养殖)";
+                    case "30301": temptb.Header = (sender as Button).Content.ToString() + "(养殖)";
                         temptb.Content = new SysDayReport(mainWindow.dbOperation,"yz","0"); //传入检测站点的类型和检测单的类型
                         break;
                     //养殖检测->数据统计->月报表
-                    case "20302": temptb.Header = (sender as Button).Content.ToString() + "(养殖)";
+                    case "30302": temptb.Header = (sender as Button).Content.ToString() + "(养殖)";
                         temptb.Content = new SysMonthReport(mainWindow.dbOperation, "yz", "0"); //传入检测站点的类型和检测单的类型
                         break;
-                    //养殖检测->数据统计->年报表
-                    case "20303": temptb.Header = (sender as Button).Content.ToString() + "(养殖)";
-                        temptb.Content = new SysYearReport(mainWindow.dbOperation, "yz", "0"); //传入检测站点的类型和检测单的类型
-                        break;
+                    ////养殖检测->数据统计->年报表
+                    //case "20303": temptb.Header = (sender as Button).Content.ToString() + "(养殖)";
+                    //    temptb.Content = new SysYearReport(mainWindow.dbOperation, "yz", "0"); //传入检测站点的类型和检测单的类型
+                    //    break;
                     //养殖检测->数据统计->自定义报表
-                    case "20304": temptb.Header = (sender as Button).Content.ToString() + "(养殖)";
+                    case "30303": temptb.Header = (sender as Button).Content.ToString() + "(养殖)";
                         temptb.Content = new SysDesignReport(mainWindow.dbOperation, "yz", "0"); //传入检测站点的类型和检测单的类型
                         break;
                     //出证检测->数据统计->日报表
-                    case "30301": temptb.Header = (sender as Button).Content.ToString() + "(出证)";
+                    case "40201": temptb.Header = (sender as Button).Content.ToString() + "(出证)";
                         temptb.Content = new SysDayReport(mainWindow.dbOperation, "cz", "1"); //传入检测站点的类型和检测单的类型
                         break;
                     //出证检测->数据统计->月报表
-                    case "30302": temptb.Header = (sender as Button).Content.ToString() + "(出证)";
+                    case "40202": temptb.Header = (sender as Button).Content.ToString() + "(出证)";
                         temptb.Content = new SysMonthReport(mainWindow.dbOperation, "cz", "1"); //传入检测站点的类型和检测单的类型
                         break;
-                    //出证检测->数据统计->年报表
-                    case "30303": temptb.Header = (sender as Button).Content.ToString() + "(出证)";
-                        temptb.Content = new SysYearReport(mainWindow.dbOperation, "cz", "1"); //传入检测站点的类型和检测单的类型
-                        break;
+                    ////出证检测->数据统计->年报表
+                    //case "30303": temptb.Header = (sender as Button).Content.ToString() + "(出证)";
+                    //    temptb.Content = new SysYearReport(mainWindow.dbOperation, "cz", "1"); //传入检测站点的类型和检测单的类型
+                    //    break;
                     //出证检测->数据统计->自定义报表
-                    case "30304": temptb.Header = (sender as Button).Content.ToString() + "(出证)";
+                    case "40203": temptb.Header = (sender as Button).Content.ToString() + "(出证)";
                         temptb.Content = new SysDesignReport(mainWindow.dbOperation, "cz", "1"); //传入检测站点的类型和检测单的类型
                         break;
                     //宰前检测->数据统计->日报表
-                    case "40201": temptb.Header = (sender as Button).Content.ToString() + "(宰前)";
+                    case "50201": temptb.Header = (sender as Button).Content.ToString() + "(宰前)";
                         temptb.Content = new SysDayReport(mainWindow.dbOperation, "tz", ""); //传入检测站点的类型和检测单的类型
                         break;
                     //宰前检测->数据统计->月报表
-                    case "40202": temptb.Header = (sender as Button).Content.ToString() + "(宰前)";
+                    case "50202": temptb.Header = (sender as Button).Content.ToString() + "(宰前)";
                         temptb.Content = new SysMonthReport(mainWindow.dbOperation, "tz", ""); //传入检测站点的类型和检测单的类型
                         break;
-                    //宰前检测->数据统计->年报表
-                    case "40203": temptb.Header = (sender as Button).Content.ToString() + "(宰前)";
-                        temptb.Content = new SysYearReport(mainWindow.dbOperation, "tz", ""); //传入检测站点的类型和检测单的类型
-                        break;
+                    ////宰前检测->数据统计->年报表
+                    //case "40203": temptb.Header = (sender as Button).Content.ToString() + "(宰前)";
+                    //    temptb.Content = new SysYearReport(mainWindow.dbOperation, "tz", ""); //传入检测站点的类型和检测单的类型
+                    //    break;
                     //宰前检测->数据统计->自定义报表
-                    case "40204": temptb.Header = (sender as Button).Content.ToString() + "(宰前)";
+                    case "50203": temptb.Header = (sender as Button).Content.ToString() + "(宰前)";
                         temptb.Content = new SysDesignReport(mainWindow.dbOperation, "tz", ""); //传入检测站点的类型和检测单的类型
                         break;
                     //屠宰同步检测->数据统计->日报表
-                    case "50201": temptb.Header = (sender as Button).Content.ToString() + "(屠宰同步)";
+                    case "60201": temptb.Header = (sender as Button).Content.ToString() + "(屠宰同步)";
                         temptb.Content = new SysDayReport(mainWindow.dbOperation, "tz", "2"); //传入检测站点的类型和检测单的类型
                         break;
                     //屠宰同步检测->数据统计->月报表
-                    case "50202": temptb.Header = (sender as Button).Content.ToString() + "(屠宰同步)";
+                    case "60202": temptb.Header = (sender as Button).Content.ToString() + "(屠宰同步)";
                         temptb.Content = new SysMonthReport(mainWindow.dbOperation, "tz", "2"); //传入检测站点的类型和检测单的类型
                         break;
-                    //屠宰同步检测->数据统计->年报表
-                    case "50203": temptb.Header = (sender as Button).Content.ToString() + "(屠宰同步)";
-                        temptb.Content = new SysYearReport(mainWindow.dbOperation, "tz", "2"); //传入检测站点的类型和检测单的类型
-                        break;
+                    ////屠宰同步检测->数据统计->年报表
+                    //case "50203": temptb.Header = (sender as Button).Content.ToString() + "(屠宰同步)";
+                    //    temptb.Content = new SysYearReport(mainWindow.dbOperation, "tz", "2"); //传入检测站点的类型和检测单的类型
+                    //    break;
                     //屠宰同步检测->数据统计->自定义报表
-                    case "50204": temptb.Header = (sender as Button).Content.ToString() + "(屠宰同步)";
+                    case "60203": temptb.Header = (sender as Button).Content.ToString() + "(屠宰同步)";
                         temptb.Content = new SysDesignReport(mainWindow.dbOperation, "tz", "2"); //传入检测站点的类型和检测单的类型
                         break;
+                    //饲料检测->数据分析->对比分析
+                    case "20301": temptb.Header = (sender as Button).Content.ToString() + "(饲料)";
+                        temptb.Content = new SysComparisonAndAnalysis(mainWindow.dbOperation, "yz", "3"); //传入检测站点的类型和检测单的类型
+                        break;
+                    //饲料检测->数据分析->趋势分析
+                    case "20302": temptb.Header = (sender as Button).Content.ToString() + "(饲料)";
+                        temptb.Content = new SysTrendAnalysis(mainWindow.dbOperation, "yz", "3"); //传入检测站点的类型和检测单的类型
+                        break;
+                    //饲料检测->数据分析->区域分析
+                    case "20303": temptb.Header = (sender as Button).Content.ToString() + "(饲料)";
+                        temptb.Content = new SysAreaAnalysis(mainWindow.dbOperation, "yz", "3"); //传入检测站点的类型和检测单的类型
+                        break;
                     //养殖检测->数据分析->对比分析
-                    case "20401": temptb.Header = (sender as Button).Content.ToString() + "(养殖)";
+                    case "30401": temptb.Header = (sender as Button).Content.ToString() + "(养殖)";
                         temptb.Content = new SysComparisonAndAnalysis(mainWindow.dbOperation, "yz", "0"); //传入检测站点的类型和检测单的类型
                         break;
                     //养殖检测->数据分析->趋势分析
-                    case "20402": temptb.Header = (sender as Button).Content.ToString() + "(养殖)";
+                    case "30402": temptb.Header = (sender as Button).Content.ToString() + "(养殖)";
                         temptb.Content = new SysTrendAnalysis(mainWindow.dbOperation, "yz", "0"); //传入检测站点的类型和检测单的类型
                         break;
                     //养殖检测->数据分析->区域分析
-                    case "20403": temptb.Header = (sender as Button).Content.ToString() + "(养殖)";
+                    case "30403": temptb.Header = (sender as Button).Content.ToString() + "(养殖)";
+                        temptb.Content = new SysAreaAnalysis(mainWindow.dbOperation, "yz", "0"); //传入检测站点的类型和检测单的类型
+                        break;
+                    //养殖检测->数据分析->抽检率分析
+                    case "30404": temptb.Header = (sender as Button).Content.ToString() + "(养殖)";
                         temptb.Content = new SysAreaAnalysis(mainWindow.dbOperation, "yz", "0"); //传入检测站点的类型和检测单的类型
                         break;
                     //出证检测->数据分析->对比分析
-                    case "30401": temptb.Header = (sender as Button).Content.ToString() + "(出证)";
+                    case "40301": temptb.Header = (sender as Button).Content.ToString() + "(出证)";
                         temptb.Content = new SysComparisonAndAnalysis(mainWindow.dbOperation, "cz", "1"); //传入检测站点的类型和检测单的类型
                         break;
                     //出证检测->数据分析->趋势分析
-                    case "30402": temptb.Header = (sender as Button).Content.ToString() + "(出证)";
+                    case "40302": temptb.Header = (sender as Button).Content.ToString() + "(出证)";
                         temptb.Content = new SysTrendAnalysis(mainWindow.dbOperation, "cz", "1"); //传入检测站点的类型和检测单的类型
                         break;
                     //出证检测->数据分析->区域分析
-                    case "30403": temptb.Header = (sender as Button).Content.ToString() + "(出证)";
+                    case "40303": temptb.Header = (sender as Button).Content.ToString() + "(出证)";
+                        temptb.Content = new SysAreaAnalysis(mainWindow.dbOperation, "cz", "1"); //传入检测站点的类型和检测单的类型
+                        break;
+                    //出证检测->数据分析->抽检率分析
+                    case "40304": temptb.Header = (sender as Button).Content.ToString() + "(出证)";
                         temptb.Content = new SysAreaAnalysis(mainWindow.dbOperation, "cz", "1"); //传入检测站点的类型和检测单的类型
                         break;
                     //宰前检测->数据分析->对比分析
-                    case "40301": temptb.Header = (sender as Button).Content.ToString() + "(宰前)";
+                    case "50301": temptb.Header = (sender as Button).Content.ToString() + "(宰前)";
                         temptb.Content = new SysComparisonAndAnalysis(mainWindow.dbOperation, "tz", ""); //传入检测站点的类型和检测单的类型
                         break;
                     //宰前检测->数据分析->趋势分析
-                    case "40302": temptb.Header = (sender as Button).Content.ToString() + "(宰前)";
+                    case "50302": temptb.Header = (sender as Button).Content.ToString() + "(宰前)";
                         temptb.Content = new SysTrendAnalysis(mainWindow.dbOperation, "tz", ""); //传入检测站点的类型和检测单的类型
                         break;
                     //宰前检测->数据分析->区域分析
-                    case "40303": temptb.Header = (sender as Button).Content.ToString() + "(宰前)";
+                    case "50303": temptb.Header = (sender as Button).Content.ToString() + "(宰前)";
+                        temptb.Content = new SysAreaAnalysis(mainWindow.dbOperation, "tz", ""); //传入检测站点的类型和检测单的类型
+                        break;
+                    //宰前检测->数据分析->抽检率分析
+                    case "50304": temptb.Header = (sender as Button).Content.ToString() + "(宰前)";
                         temptb.Content = new SysAreaAnalysis(mainWindow.dbOperation, "tz", ""); //传入检测站点的类型和检测单的类型
                         break;
                     //屠宰同步检测->数据分析->对比分析
-                    case "50301": temptb.Header = (sender as Button).Content.ToString() + "(屠宰同步)";
+                    case "60301": temptb.Header = (sender as Button).Content.ToString() + "(屠宰同步)";
                         temptb.Content = new SysComparisonAndAnalysis(mainWindow.dbOperation, "tz", "2"); //传入检测站点的类型和检测单的类型
                         break;
                     //屠宰同步检测->数据分析->趋势分析
-                    case "50302": temptb.Header = (sender as Button).Content.ToString() + "(屠宰同步)";
+                    case "60302": temptb.Header = (sender as Button).Content.ToString() + "(屠宰同步)";
                         temptb.Content = new SysTrendAnalysis(mainWindow.dbOperation, "tz", "2"); //传入检测站点的类型和检测单的类型
                         break;
                     //屠宰同步检测->数据分析->区域分析
-                    case "50303": temptb.Header = (sender as Button).Content.ToString() + "(屠宰同步)";
+                    case "60303": temptb.Header = (sender as Button).Content.ToString() + "(屠宰同步)";
                         temptb.Content = new SysAreaAnalysis(mainWindow.dbOperation, "tz", "2"); //传入检测站点的类型和检测单的类型
                         break;
                     //养殖检测->检测任务->任务分配
-                    case "20501": temptb.Header = (sender as Button).Content.ToString() + "(养殖)";
+                    case "30501": temptb.Header = (sender as Button).Content.ToString() + "(养殖)";
                         temptb.Content = new UcTaskAllocation("yz"); //传入检测站点的类型
                         break;
                     //养殖检测->检测任务->任务考评
-                    case "20502": temptb.Header = (sender as Button).Content.ToString() + "(养殖)";
+                    case "30502": temptb.Header = (sender as Button).Content.ToString() + "(养殖)";
                         temptb.Content = new SysTaskCheck(mainWindow.dbOperation,"yz", "0"); //传入检测站点的类型和检测单的类型
                         break;
+                    //养殖检测->检测任务->抽检率设置
+                    case "30503": temptb.Header = (sender as Button).Content.ToString() + "(养殖)";
+                        temptb.Content = new SysTaskCheck(mainWindow.dbOperation, "yz", "0"); //传入检测站点的类型和检测单的类型
+                        break;
                     //出证检测->检测任务->任务分配
-                    case "30501": temptb.Header = (sender as Button).Content.ToString() + "(出证)";
+                    case "40401": temptb.Header = (sender as Button).Content.ToString() + "(出证)";
                         temptb.Content = new UcTaskAllocation("cz"); //传入检测站点的类型
                         break;
                     //出证检测->检测任务->任务考评
-                    case "30502": temptb.Header = (sender as Button).Content.ToString() + "(出证)";
+                    case "40402": temptb.Header = (sender as Button).Content.ToString() + "(出证)";
                         temptb.Content = new SysTaskCheck(mainWindow.dbOperation,"cz", "1"); //传入检测站点的类型和检测单的类型
                         break;
+                    //出证检测->检测任务->抽检率设置
+                    case "40403": temptb.Header = (sender as Button).Content.ToString() + "(出证)";
+                        temptb.Content = new SysTaskCheck(mainWindow.dbOperation, "cz", "1"); //传入检测站点的类型和检测单的类型
+                        break;
                     //宰前检测->检测任务->任务分配
-                    case "40401": temptb.Header = (sender as Button).Content.ToString() + "(宰前)";
+                    case "50401": temptb.Header = (sender as Button).Content.ToString() + "(宰前)";
                         temptb.Content = new UcTaskAllocation("tz"); //传入检测站点的类型
                         break;
                     //宰前检测->检测任务->任务考评
-                    case "40402": temptb.Header = (sender as Button).Content.ToString() + "(宰前)";
+                    case "50402": temptb.Header = (sender as Button).Content.ToString() + "(宰前)";
                         temptb.Content = new SysTaskCheck(mainWindow.dbOperation,"tz", ""); //传入检测站点的类型和检测单的类型
                         break;
-                    //屠宰同步检测->检测任务->任务分配
-                    case "50401": temptb.Header = (sender as Button).Content.ToString() + "(屠宰同步)";
-                        temptb.Content = new UcTaskAllocation("tz"); //传入检测站点的类型
+                    //宰前检测->检测任务->抽检率设置
+                    case "50403": temptb.Header = (sender as Button).Content.ToString() + "(宰前)";
+                        temptb.Content = new SysTaskCheck(mainWindow.dbOperation, "tz", ""); //传入检测站点的类型和检测单的类型
                         break;
-                    //屠宰同步检测->检测任务->任务考评
-                    case "50402": temptb.Header = (sender as Button).Content.ToString() + "(屠宰同步)";
-                        temptb.Content = new SysTaskCheck(mainWindow.dbOperation,"tz", "2"); //传入检测站点的类型和检测单的类型
+                    ////屠宰同步检测->检测任务->任务分配
+                    //case "50401": temptb.Header = (sender as Button).Content.ToString() + "(屠宰同步)";
+                    //    temptb.Content = new UcTaskAllocation("tz"); //传入检测站点的类型
+                    //    break;
+                    ////屠宰同步检测->检测任务->任务考评
+                    //case "50402": temptb.Header = (sender as Button).Content.ToString() + "(屠宰同步)";
+                    //    temptb.Content = new SysTaskCheck(mainWindow.dbOperation,"tz", "2"); //传入检测站点的类型和检测单的类型
+                    //    break;
+                    //饲料检测->风险预警->实时风险
+                    case "90101": temptb.Header = (sender as Button).Content.ToString() + "(饲料)";
+                        temptb.Content = new SysWarningInfo(mainWindow.dbOperation, "yz", "3"); //传入检测站点的类型和检测单的类型
+                        break;
+                    //饲料检测->风险预警->预警复核
+                    case "90102": temptb.Header = (sender as Button).Content.ToString() + "(饲料)";
+                        temptb.Content = new SysReviewInfo(mainWindow.dbOperation, "yz", "3"); //传入检测站点的类型和检测单的类型
+                        break;
+                    //饲料检测->风险预警->复核日志
+                    case "90103": temptb.Header = (sender as Button).Content.ToString() + "(饲料)";
+                        temptb.Content = new SysWarningReport(mainWindow.dbOperation, "yz", "3"); //传入检测站点的类型和检测单的类型
                         break;
                     //养殖检测->风险预警->实时风险
-                    case "20601": temptb.Header = (sender as Button).Content.ToString() + "(养殖)";
+                    case "90201": temptb.Header = (sender as Button).Content.ToString() + "(养殖)";
                         temptb.Content = new SysWarningInfo(mainWindow.dbOperation,"yz","0"); //传入检测站点的类型和检测单的类型
                         break;
                     //养殖检测->风险预警->预警复核
-                    case "20602": temptb.Header = (sender as Button).Content.ToString() + "(养殖)";
+                    case "90202": temptb.Header = (sender as Button).Content.ToString() + "(养殖)";
                         temptb.Content = new SysReviewInfo(mainWindow.dbOperation, "yz", "0"); //传入检测站点的类型和检测单的类型
                         break;
                     //养殖检测->风险预警->复核日志
-                    case "20603": temptb.Header = (sender as Button).Content.ToString() + "(养殖)";
+                    case "90203": temptb.Header = (sender as Button).Content.ToString() + "(养殖)";
                         temptb.Content = new SysWarningReport(mainWindow.dbOperation, "yz", "0"); //传入检测站点的类型和检测单的类型
                         break;
-                    //养殖检测->风险预警->预警数据统计
-                    case "20604": temptb.Header = (sender as Button).Content.ToString() + "(养殖)";
-                        temptb.Content = new SysReviewLog(mainWindow.dbOperation, "yz", "0"); //传入检测站点的类型和检测单的类型
-                        break;
                     //出证检测->风险预警->实时风险
-                    case "30601": temptb.Header = (sender as Button).Content.ToString() + "(出证)";
+                    case "90301": temptb.Header = (sender as Button).Content.ToString() + "(出证)";
                         temptb.Content = new SysWarningInfo(mainWindow.dbOperation, "cz", "1"); //传入检测站点的类型和检测单的类型
                         break;
                     //出证检测->风险预警->预警复核
-                    case "30602": temptb.Header = (sender as Button).Content.ToString() + "(出证)";
+                    case "90302": temptb.Header = (sender as Button).Content.ToString() + "(出证)";
                         temptb.Content = new SysReviewInfo(mainWindow.dbOperation, "cz", "1"); //传入检测站点的类型和检测单的类型
                         break;
                     //出证检测->风险预警->复核日志
-                    case "30603": temptb.Header = (sender as Button).Content.ToString() + "(出证)";
+                    case "90303": temptb.Header = (sender as Button).Content.ToString() + "(出证)";
                         temptb.Content = new SysWarningReport(mainWindow.dbOperation, "cz", "1"); //传入检测站点的类型和检测单的类型
-                        break;
-                    //出证检测->风险预警->预警数据统计
-                    case "30604": temptb.Header = (sender as Button).Content.ToString() + "(出证)";
-                        temptb.Content = new SysReviewLog(mainWindow.dbOperation, "cz", "1"); //传入检测站点的类型和检测单的类型
-                        break;
+                        break; 
                     //宰前检测->风险预警->实时风险
-                    case "40501": temptb.Header = (sender as Button).Content.ToString() + "(宰前)";
+                    case "90401": temptb.Header = (sender as Button).Content.ToString() + "(宰前)";
                         temptb.Content = new SysWarningInfo(mainWindow.dbOperation, "tz", ""); //传入检测站点的类型和检测单的类型
                         break;
                     //宰前检测->风险预警->预警复核
-                    case "40502": temptb.Header = (sender as Button).Content.ToString() + "(宰前)";
+                    case "90402": temptb.Header = (sender as Button).Content.ToString() + "(宰前)";
                         temptb.Content = new SysReviewInfo(mainWindow.dbOperation, "tz", ""); //传入检测站点的类型和检测单的类型
                         break;
                     //宰前检测->风险预警->复核日志
-                    case "40503": temptb.Header = (sender as Button).Content.ToString() + "(宰前)";
+                    case "90403": temptb.Header = (sender as Button).Content.ToString() + "(宰前)";
                         temptb.Content = new SysWarningReport(mainWindow.dbOperation, "tz", ""); //传入检测站点的类型和检测单的类型
                         break;
-                    //宰前检测->风险预警->预警数据统计
-                    case "40504": temptb.Header = (sender as Button).Content.ToString() + "(宰前)";
-                        temptb.Content = new SysReviewLog(mainWindow.dbOperation, "tz", ""); //传入检测站点的类型和检测单的类型
-                        break;
                     //屠宰同步检测->风险预警->实时风险
-                    case "50501": temptb.Header = (sender as Button).Content.ToString() + "(屠宰同步)";
+                    case "90501": temptb.Header = (sender as Button).Content.ToString() + "(屠宰同步)";
                         temptb.Content = new SysWarningInfo(mainWindow.dbOperation, "tz", "2"); //传入检测站点的类型和检测单的类型
                         break;
                     //屠宰同步检测->风险预警->预警复核
-                    case "50502": temptb.Header = (sender as Button).Content.ToString() + "(屠宰同步)";
+                    case "90502": temptb.Header = (sender as Button).Content.ToString() + "(屠宰同步)";
                         temptb.Content = new SysReviewInfo(mainWindow.dbOperation, "tz", "2"); //传入检测站点的类型和检测单的类型
                         break;
                     //屠宰同步检测->风险预警->复核日志
-                    case "50503": temptb.Header = (sender as Button).Content.ToString() + "(屠宰同步)";
+                    case "90503": temptb.Header = (sender as Button).Content.ToString() + "(屠宰同步)";
                         temptb.Content = new SysWarningReport(mainWindow.dbOperation, "tz", "2"); //传入检测站点的类型和检测单的类型
                         break;
-                    //屠宰同步检测->风险预警->预警数据统计
-                    case "50504": temptb.Header = (sender as Button).Content.ToString() + "(屠宰同步)";
-                        temptb.Content = new SysReviewLog(mainWindow.dbOperation, "tz", "2"); //传入检测站点的类型和检测单的类型
+                    ////养殖检测->风险预警->预警数据统计
+                    //case "20604": temptb.Header = (sender as Button).Content.ToString() + "(养殖)";
+                    //    temptb.Content = new SysReviewLog(mainWindow.dbOperation, "yz", "0"); //传入检测站点的类型和检测单的类型
+                    //    break;
+                    ////出证检测->风险预警->预警数据统计
+                    //case "30604": temptb.Header = (sender as Button).Content.ToString() + "(出证)";
+                    //    temptb.Content = new SysReviewLog(mainWindow.dbOperation, "cz", "1"); //传入检测站点的类型和检测单的类型
+                    //    break;
+                    ////宰前检测->风险预警->预警数据统计
+                    //case "40504": temptb.Header = (sender as Button).Content.ToString() + "(宰前)";
+                    //    temptb.Content = new SysReviewLog(mainWindow.dbOperation, "tz", ""); //传入检测站点的类型和检测单的类型
+                    //    break;
+                    ////屠宰同步检测->风险预警->预警数据统计
+                    //case "50504": temptb.Header = (sender as Button).Content.ToString() + "(屠宰同步)";
+                    //    temptb.Content = new SysReviewLog(mainWindow.dbOperation, "tz", "2"); //传入检测站点的类型和检测单的类型
+                    //    break;
+                    //风险预警->预警数据统计
+                    case "90601": temptb.Header = (sender as Button).Content.ToString();
+                        temptb.Content = new SysReviewLog(mainWindow.dbOperation, "yz", "0"); //传入检测站点的类型和检测单的类型
+                        break;
+                    //风险预警->预警数据分析
+                    case "90701": temptb.Header = (sender as Button).Content.ToString();
+                        temptb.Content = new SysReviewLog(mainWindow.dbOperation, "cz", "1"); //传入检测站点的类型和检测单的类型
                         break;
                     //系统管理->系统管理->部门管理
-                    case "60101": temptb.Header = (sender as Button).Content.ToString();
+                    case "D0101": temptb.Header = (sender as Button).Content.ToString();
                         temptb.Content = new SysDeptManager(mainWindow.dbOperation);
                         break;
                     //系统管理->系统管理->执法队伍
-                    case "60102": temptb.Header = (sender as Button).Content.ToString();
+                    case "D0102": temptb.Header = (sender as Button).Content.ToString();
                         temptb.Content = new UcUserManager(mainWindow.dbOperation);
                         break;
                     //系统管理->系统管理->修改密码
-                    case "60104": temptb.Header = (sender as Button).Content.ToString();
+                    case "D0104": temptb.Header = (sender as Button).Content.ToString();
                         temptb.Content = new SysModifyPassword();
                         break;
                     //系统管理->系统管理->图片上传
-                    case "60105": temptb.Header = (sender as Button).Content.ToString();
+                    case "D0105": temptb.Header = (sender as Button).Content.ToString();
                         temptb.Content = new SysLoadPicture(mainWindow.dbOperation);
                         break;
                     //系统管理->系统管理->系统日志
-                    case "60106": temptb.Header = (sender as Button).Content.ToString();
+                    case "D0106": temptb.Header = (sender as Button).Content.ToString();
                         temptb.Content = new SysLogManager();
                         break;
                     //帮助->帮助->帮助
-                    case "70101": temptb.Header = (sender as Button).Content.ToString();
+                    case "E0101": temptb.Header = (sender as Button).Content.ToString();
                         //temptb.Content = new UcUnrealizedModul();
                         temptb.Content = new SysRolePowerManager();
                         break;
                     //帮助->帮助->关于
-                    case "70102": temptb.Header = (sender as Button).Content.ToString();
+                    case "E0102": temptb.Header = (sender as Button).Content.ToString();
                         temptb.Content = new SysHelp();
                         break;
                     //case "角色管理": temptb.Content = new SysRoleManager();

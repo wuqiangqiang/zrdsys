@@ -38,19 +38,19 @@ xmlns:control="clr-namespace:FoodSafetyMonitoring.Manager.UserControls">
                     <TextBlock HorizontalAlignment="Right">饲料名称:</TextBlock>
                     <ComboBox Width="100" x:Name="_feed_name" ></ComboBox>
                     <TextBlock >饲料品牌:</TextBlock>
-                    <TextBlock x:Name="_feed_brand" Width="100"></TextBlock>
+                    <TextBox x:Name="_feed_brand" Width="100"></TextBox>
                     <TextBlock >生产企业名称:</TextBlock>
-                    <TextBlock x:Name="_produce_company" Width="200"></TextBlock>
+                    <TextBox x:Name="_produce_company" Width="200"></TextBox>
                 </StackPanel>
                 <StackPanel Grid.Row="2" Orientation="Horizontal">
                     <TextBlock HorizontalAlignment="Right">生产批次号:</TextBlock>
-                    <TextBlock x:Name="_produce_batchno" Width="200"></TextBlock>
+                    <TextBox x:Name="_produce_batchno" Width="200"></TextBox>
                     <TextBlock  >批次采购数量:</TextBlock>
-                    <TextBlock x:Name="_batch_num" Width="200"></TextBlock>
+                    <TextBox x:Name="_batch_num" Width="200" MaxLength="5" TextAlignment="Right" InputMethod.IsInputMethodEnabled="False" DataObject.Pasting="batch_num_Pasting" PreviewKeyDown="batch_num_PreviewKeyDown"  PreviewTextInput="batch_num_PreviewTextInput"></TextBox>
                 </StackPanel>
                 <StackPanel Grid.Row="3" Orientation="Horizontal">
                     <TextBlock Width="40" >采购时间:</TextBlock>
-                    <TextBlock x:Name="_buy_date" Width="200"></TextBlock>
+                    <TextBox x:Name="_buy_date" Width="200"></TextBox>
                     <TextBlock  >检测方法:</TextBlock>
                     <CheckBox x:Name="_detect_method1" Checked="_detect_method1_Checked" >金标检测卡</CheckBox>
                     <CheckBox x:Name="_detect_method2" Checked="_detect_method1_Checked" >ELISA试剂盒</CheckBox>
