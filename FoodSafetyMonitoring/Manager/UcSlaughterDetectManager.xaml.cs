@@ -175,7 +175,7 @@ namespace FoodSafetyMonitoring.Manager
                     company_id = dbOperation.GetSingle(string.Format("SELECT COMPANYID from t_company where COMPANYNAME ='{0}' and deptid = '{1}'", _source_company.Text, (Application.Current.Resources["User"] as UserInfo).DepartmentID)).ToString();
                 }
 
-                string sql = string.Format("call p_insert_detect_hb('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}')"
+                string sql = string.Format("call p_insert_slaughter_detect('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}')"
                               , company_id,
                               _detect_number.Text,
                               (_detect_item.SelectedItem as Label).Tag.ToString(),

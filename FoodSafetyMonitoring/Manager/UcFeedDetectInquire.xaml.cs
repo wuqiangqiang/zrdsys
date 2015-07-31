@@ -80,9 +80,10 @@ namespace FoodSafetyMonitoring.Manager
             MyColumns.Add("resultid", new MyColumn("resultid", "检测结果id") { BShow = false });
             MyColumns.Add("resultname", new MyColumn("resultname", "检测结果") { BShow = true, Width = 10 });
             MyColumns.Add("detectuserid", new MyColumn("detectuserid", "检测师id") { BShow = false });
-            MyColumns.Add("areaname", new MyColumn("areaname", "来源产地") { BShow = false });
-            MyColumns.Add("companyid", new MyColumn("companyid", "来源单位id") { BShow = false });
-            MyColumns.Add("companyname", new MyColumn("companyname", "来源单位") { BShow = true, Width = 18 });
+            //MyColumns.Add("areaname", new MyColumn("areaname", "来源产地") { BShow = false });
+            //MyColumns.Add("companyid", new MyColumn("companyid", "来源单位id") { BShow = false });
+            //MyColumns.Add("companyname", new MyColumn("companyname", "来源单位") { BShow = true, Width = 18 });
+            MyColumns.Add("feedname", new MyColumn("feedname", "饲料名称") { BShow = true, Width = 10 });
             MyColumns.Add("sum_num", new MyColumn("sum_num", "总行数") { BShow = false });
 
             _tableview.MyColumns = MyColumns;
@@ -193,7 +194,7 @@ namespace FoodSafetyMonitoring.Manager
         void _tableview_DetailsRowEnvent(string id)
         {
             int orderid = int.Parse(id);
-            detectdetails det = new detectdetails(dbOperation, orderid);
+            Feed_detectdetails det = new Feed_detectdetails(dbOperation, orderid);
             det.ShowDialog();
         }
 

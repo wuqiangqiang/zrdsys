@@ -17,13 +17,13 @@
             <Border
         x:Name="Border" 
         Grid.ColumnSpan="2"
-        CornerRadius="2"
+        CornerRadius="0"
         Background="{StaticResource DarkBrush}"
         BorderBrush="{StaticResource NormalBorderBrush}"
         BorderThickness="0" />
             <Border 
         Grid.Column="0"
-        CornerRadius="2,0,0,2" 
+        CornerRadius="0,0,0,0" 
         Margin="1" 
         Background="{StaticResource WindowBackgroundBrush}" 
         BorderBrush="{StaticResource NormalBorderBrush}"

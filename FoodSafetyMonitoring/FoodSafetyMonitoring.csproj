@@ -43,6 +43,7 @@
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -106,6 +107,7 @@
     </Reference>
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -220,6 +222,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Manager\Feed_AddReviewDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\Feed_detectdetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\Feed_DetectDetailsReview.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Manager\LoadWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -229,6 +243,18 @@
       <Generator>MSBuild:Compile</Generator>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Manager\Slaughter_AddReviewDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\Slaughter_detectdetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\Slaughter_DetectDetailsReview.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Manager\SysAreaAnalysis.xaml">
       <SubType>Designer</SubType>
@@ -869,12 +895,30 @@
     <Compile Include="Manager\detectDetailsReview.xaml.cs">
       <DependentUpon>detectDetailsReview.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Manager\Feed_AddReviewDetails.xaml.cs">
+      <DependentUpon>Feed_AddReviewDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\Feed_detectdetails.xaml.cs">
+      <DependentUpon>Feed_detectdetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\Feed_DetectDetailsReview.xaml.cs">
+      <DependentUpon>Feed_DetectDetailsReview.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Manager\IClickChildMenuInitUserControlUI.cs" />
     <Compile Include="Manager\LoadWindow.xaml.cs">
       <DependentUpon>LoadWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Manager\SetTaskGrade.xaml.cs">
       <DependentUpon>SetTaskGrade.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\Slaughter_AddReviewDetails.xaml.cs">
+      <DependentUpon>Slaughter_AddReviewDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\Slaughter_detectdetails.xaml.cs">
+      <DependentUpon>Slaughter_detectdetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\Slaughter_DetectDetailsReview.xaml.cs">
+      <DependentUpon>Slaughter_DetectDetailsReview.xaml</DependentUpon>
     </Compile>
     <Compile Include="Manager\SysAreaAnalysis.xaml.cs">
       <DependentUpon>SysAreaAnalysis.xaml</DependentUpon>
@@ -1152,6 +1196,7 @@
     <Content Include="DLL\MySql.Data.dll" />
     <Content Include="DLL\NPOI.dll" />
     <Content Include="DLL\NPOI.OOXML.dll" />
+    <Resource Include="res\query_title.png" />
     <Resource Include="res\password.png" />
     <Resource Include="res\password_selected.png" />
     <Resource Include="res\username.png" />

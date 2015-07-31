@@ -46,12 +46,12 @@
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsSelected" Value="True">
-                                <Setter Property="Background" Value="LightGray"/>
+                                <Setter Property="Background" Value="#c5cacf"/>
                                 <Setter TargetName="layout" Property="Margin" Value="2,0,2,-1"/>
                                 <Setter TargetName="_tabtxt" Property="Foreground" Value="White"/>
                             </Trigger>
                             <Trigger Property="IsSelected" Value="false">
-                                <Setter Property="Background" Value="White"/>
+                                <Setter Property="Background" Value="#fbfbfc"/>
                                 <Setter TargetName="_tabtxt" Property="Foreground" Value="Black"/>
                             </Trigger>
                         </ControlTemplate.Triggers>

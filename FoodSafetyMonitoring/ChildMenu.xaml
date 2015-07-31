@@ -108,7 +108,7 @@
             </Style.Triggers>
         </Style>
     </UserControl.Resources>
-    <Grid  x:Name="_grid" HorizontalAlignment="Left">
+    <Grid  x:Name="_grid" HorizontalAlignment="Left" >
         <StackPanel>
             <Expander ExpandDirection="Down" Width="210" x:Name="_expander_0">
                 <Expander.Header>

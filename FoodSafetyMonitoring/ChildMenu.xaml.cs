@@ -163,7 +163,7 @@ namespace FoodSafetyMonitoring
                         break;
                     //饲料检测->检测单管理->饲料检测单列表
                     case "20102": temptb.Header = (sender as Button).Content.ToString() + "(饲料)";
-                        temptb.Content = new UcDetectInquire(mainWindow.dbOperation);
+                        temptb.Content = new UcFeedDetectInquire(mainWindow.dbOperation);
                         break;
                     //养殖检测->档案管理->新建档案
                     case "30101": temptb.Header = (sender as Button).Content.ToString();
@@ -199,11 +199,11 @@ namespace FoodSafetyMonitoring
                         break;
                     //屠宰同步检测->检测单管理->新建屠宰同步检测单
                     case "60101": temptb.Header = (sender as Button).Content.ToString() + "(屠宰同步)";
-                        temptb.Content = new UcDetectBillManager();
+                        temptb.Content = new UcSlaughterDetectManager();
                         break;
                     //屠宰同步检测->检测单管理->屠宰同步检测单列表
                     case "60102": temptb.Header = (sender as Button).Content.ToString() + "(屠宰同步)";
-                        temptb.Content = new UcDetectInquire(mainWindow.dbOperation);
+                        temptb.Content = new UcSlaughterDetectInquier(mainWindow.dbOperation);
                         break;
                     //电子出证->电子出证->新建检疫证单
                     case "70101": temptb.Header = (sender as Button).Content.ToString();
