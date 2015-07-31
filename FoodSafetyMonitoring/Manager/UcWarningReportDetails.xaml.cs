@@ -108,7 +108,13 @@ namespace FoodSafetyMonitoring.Manager
                 }
                 else if (DetectType == "2")
                 {
-
+                    Slaughter_DetectDetailsReview det = new Slaughter_DetectDetailsReview(dbOperation, orderid);
+                    det.ShowDialog();
+                }
+                else if (DetectType == "3")
+                {
+                    Feed_DetectDetailsReview det = new Feed_DetectDetailsReview(dbOperation, orderid);
+                    det.ShowDialog();
                 }
                 else if (DetectType == "")
                 {
@@ -130,7 +136,13 @@ namespace FoodSafetyMonitoring.Manager
                 }
                 else if (DetectType == "2")
                 {
-
+                    Slaughter_detectdetails det = new Slaughter_detectdetails(dbOperation, orderid);
+                    det.ShowDialog();
+                }
+                else if (DetectType == "3")
+                {
+                    Feed_detectdetails det = new Feed_detectdetails(dbOperation, orderid);
+                    det.ShowDialog();
                 }
                 else if (DetectType == "")
                 {

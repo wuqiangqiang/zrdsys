@@ -2,12 +2,12 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Style TargetType="TextBlock"  >
         <Setter Property="Background" Value="transparent" />
-        <Setter Property="FontFamily" Value="黑体"/>
-        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontFamily" Value="微软雅黑"/>
+        <Setter Property="FontSize" Value="12"/>
         <Setter Property="Foreground" Value="Black"/>
         <!--<Setter Property="FontWeight" Value="Bold"/>-->
         <Setter Property="VerticalAlignment" Value="center"/> 
-        <Setter Property="Margin" Value="20,0,0,0"></Setter>
-        <Setter Property="MinWidth" Value="80"></Setter>
+        <Setter Property="Margin" Value="20,0,10,0"></Setter>
+        <!--<Setter Property="MinWidth" Value="80"></Setter>-->
     </Style>
 </ResourceDictionary>

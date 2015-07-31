@@ -1,0 +1,22 @@
+﻿<UserControl x:Class="FoodSafetyMonitoring.Manager.UserControls.DatePicker"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:toolkit ="http://schemas.microsoft.com/wpf/2008/toolkit"
+             Height="Auto" Width="Auto">
+    <UserControl.Resources>
+        <Style x:Key="styleCalendar" TargetType="toolkit:Calendar" >
+            <Setter Property="Height" Value="Auto" />
+            <Setter Property="Width" Value="Auto" />
+            <Setter Property="LayoutTransform">
+                <Setter.Value>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="1.3" ScaleY="1.3"/>
+                    </TransformGroup>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <Border>
+        <toolkit:DatePicker x:Name="dtp" Width="120" Height="26" BorderBrush="#699ed4" CalendarStyle="{StaticResource styleCalendar}"></toolkit:DatePicker>
+    </Border>
+</UserControl>

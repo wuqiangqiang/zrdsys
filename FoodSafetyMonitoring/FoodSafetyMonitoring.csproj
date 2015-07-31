@@ -406,6 +406,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Manager\Themes\DatePicker.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Manager\Themes\GridViewColumnHeaderStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -699,6 +703,10 @@
       <Generator>MSBuild:Compile</Generator>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Manager\UserControls\DatePicker.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Manager\UserControls\TitleBarControl.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -1079,6 +1087,9 @@
     <Compile Include="Manager\UcYearReportDetails.xaml.cs">
       <DependentUpon>UcYearReportDetails.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Manager\UserControls\DatePicker.xaml.cs">
+      <DependentUpon>DatePicker.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Manager\UserControls\TitleBarControl.xaml.cs">
       <DependentUpon>TitleBarControl.xaml</DependentUpon>
     </Compile>
@@ -1196,6 +1207,11 @@
     <Content Include="DLL\MySql.Data.dll" />
     <Content Include="DLL\NPOI.dll" />
     <Content Include="DLL\NPOI.OOXML.dll" />
+    <Resource Include="res\title.png" />
+    <Resource Include="Manager\Images\btn_normal.png" />
+    <Resource Include="Manager\Images\btn_pressed.png" />
+    <Resource Include="res\result_title.png" />
+    <Resource Include="res\title_right.png" />
     <Resource Include="res\query_title.png" />
     <Resource Include="res\password.png" />
     <Resource Include="res\password_selected.png" />

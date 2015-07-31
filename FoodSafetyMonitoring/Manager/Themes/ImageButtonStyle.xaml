@@ -3,9 +3,9 @@
 
     <!--按钮样式继承-->
     <Style x:Key="ButtonBase" TargetType="Button">
-        <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+        <!--<Setter Property="HorizontalAlignment" Value="Center"></Setter>
         <Setter Property="RenderTransformOrigin" Value="0.5,0.5"></Setter>
-        <!--<Setter Property="Opacity" Value="0.7"></Setter>-->
+        --><!--<Setter Property="Opacity" Value="0.7"></Setter>--><!--
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Cursor" Value="Hand"/>
@@ -19,7 +19,7 @@
                 <Setter Property="Opacity" Value="1">
                 </Setter>
             </Trigger>
-        </Style.Triggers>
+        </Style.Triggers>-->
     </Style>
 
     <!--登陆按钮-->
@@ -83,13 +83,23 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <Grid>
-                        <Image x:Name="save" Source="/Manager/Images/btn_back1.png"></Image>
+                    <Grid >
+                        <Image x:Name="save" Source="/Manager/Images/btn_normal.png"></Image>
                         <TextBlock FontFamily="黑体" FontSize="14"  HorizontalAlignment="Center" VerticalAlignment="Center" Text="查询" Foreground="White"></TextBlock>
-                    </Grid> 
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="save" Property="Source" Value="/Manager/Images/btn_pressed.png"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="false">
+                            <Setter TargetName="save" Property="Source" Value="/Manager/Images/btn_normal.png"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
+            
         </Setter>
+        
     </Style>
 
     <!--导出按钮-->
@@ -98,9 +108,17 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Grid>
-                        <Image x:Name="save" Source="/Manager/Images/btn_back1.png"></Image>
+                        <Image x:Name="save" Source="/Manager/Images/btn_normal.png"></Image>
                         <TextBlock FontFamily="黑体" FontSize="14"  HorizontalAlignment="Center" VerticalAlignment="Center" Text="导出" Foreground="White"></TextBlock>
-                    </Grid> 
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="save" Property="Source" Value="/Manager/Images/btn_pressed.png"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="false">
+                            <Setter TargetName="save" Property="Source" Value="/Manager/Images/btn_normal.png"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
