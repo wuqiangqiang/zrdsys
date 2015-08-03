@@ -120,7 +120,7 @@
         </Grid>
         <Grid Grid.Row="1" x:Name="grid_MainMenu">
             <Grid.Background>
-                <SolidColorBrush Color="#003e8c" />
+                <SolidColorBrush Color="#1956a2" />
             </Grid.Background>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="100"/>

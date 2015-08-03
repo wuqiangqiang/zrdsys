@@ -433,7 +433,7 @@ namespace FoodSafetyMonitoring
                 //if (mainWindow.mainMenus[i].Flag_Exits == 1)
                 //{
                 //mainWindow.mainMenus[i].img.Source = mainWindow.mainMenus[i].img_mouseLeave;
-                mainWindow.mainMenus[i].grid.Background = new SolidColorBrush(Color.FromRgb(0, 62, 140));
+                mainWindow.mainMenus[i].grid.Background = new SolidColorBrush(Color.FromRgb(25, 86, 162));
                 //}
             }
             grid.Background = new SolidColorBrush(Color.FromRgb(25, 49, 115));
