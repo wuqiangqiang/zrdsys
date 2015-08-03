@@ -24,18 +24,20 @@ namespace FoodSafetyMonitoring.Manager
     {
         private IDBOperation dbOperation;
         private Dictionary<string, MyColumn> MyColumns = new Dictionary<string, MyColumn>();
-        public string Sj { get; set; }
+        public string Kssj { get; set; }
+        public string Jssj { get; set; }
         public string DeptId { get; set; }
         public string ItemId { get; set; }
         public string ResultId { get; set; }
         public string DetectType { get; set; }
 
-        public UcYearReportDetails(IDBOperation dbOperation, string sj, string deptId, string itemId, string resultId, string detecttype)
+        public UcYearReportDetails(IDBOperation dbOperation, string kssj,string jssj, string deptId, string itemId, string resultId, string detecttype)
         {
             InitializeComponent();
 
             this.dbOperation = dbOperation;
-            this.Sj = sj;
+            this.Kssj = kssj;
+            this.Jssj = jssj;
             this.DeptId = deptId;
             this.ItemId = itemId;
             this.ResultId = resultId;
@@ -66,8 +68,8 @@ namespace FoodSafetyMonitoring.Manager
 
         private void GetData()
         {
-            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_report_year_details_hb('{0}','{1}','{2}','{3}','{4}',{5},{6})",
-                                Sj, DeptId, ItemId, ResultId, DetectType,
+            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_report_year_details_hb('{0}','{1}','{2}','{3}','{4}','{5}',{6},{7})",
+                                Kssj,Jssj, DeptId, ItemId, ResultId, DetectType,
                               (_tableview.PageIndex - 1) * _tableview.RowMax,
                               _tableview.RowMax)).Tables[0];
 

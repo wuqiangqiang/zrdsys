@@ -39,8 +39,8 @@ namespace FoodSafetyMonitoring.Manager
             DataRow[] rows = ProvinceCityTable.Select("pid = '0001'");
 
             //画面初始化-检测单列表画面
-            dtpStartDate.Value = DateTime.Now.AddDays(-1);
-            dtpEndDate.Value = DateTime.Now;
+            dtpStartDate.SelectedDate = DateTime.Now.AddDays(-1);
+            dtpEndDate.SelectedDate = DateTime.Now;
             ComboboxTool.InitComboboxSource(_source_company1, string.Format(" call p_user_company('{0}','') ", userId), "cxtj");
             ComboboxTool.InitComboboxSource(_detect_station, string.Format("call p_user_dept_hb('{0}','tz')", userId), "cxtj");
             ComboboxTool.InitComboboxSource(_detect_item1, "SELECT ItemID,ItemNAME FROM t_det_item WHERE  (tradeId ='1'or tradeId ='2' or tradeId ='3' or ifnull(tradeId,'') = '') and OPENFLAG = '1' order by orderId", "cxtj");
@@ -98,8 +98,8 @@ namespace FoodSafetyMonitoring.Manager
                 _tableview.BShowDelete = false;
             }
 
-            _tableview.DetailsRowEnvent += new UcTableOperableView.DetailsRowEventHandler(_tableview_DetailsRowEnvent);
-            _tableview.DeleteRowEnvent += new UcTableOperableView.DeleteRowEventHandler(_tableview_DeleteRowEnvent);
+            _tableview.DetailsRowEnvent += new UcTableOperableView_NoTitle.DetailsRowEventHandler(_tableview_DetailsRowEnvent);
+            _tableview.DeleteRowEnvent += new UcTableOperableView_NoTitle.DeleteRowEventHandler(_tableview_DeleteRowEnvent);
         }
 
         void _province1_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -151,15 +151,16 @@ namespace FoodSafetyMonitoring.Manager
 
         private void _query_Click(object sender, RoutedEventArgs e)
         {
-            if (dtpStartDate.Value.Value.Date > dtpEndDate.Value.Value.Date)
+            if (dtpStartDate.SelectedDate.Value.Date > dtpEndDate.SelectedDate.Value.Date)
             {
                 Toolkit.MessageBox.Show("开始时间大于结束时间，请重新选择！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
-            _tableview.GetDataByPageNumberEvent += new UcTableOperableView.GetDataByPageNumberEventHandler(_tableview_GetDataByPageNumberEvent);
+            _tableview.GetDataByPageNumberEvent += new UcTableOperableView_NoTitle.GetDataByPageNumberEventHandler(_tableview_GetDataByPageNumberEvent);
             GetData();
-            _tableview.Title = string.Format("数据统计时间:{0}年{1}月{2}日到{3}年{4}月{5}日 合计{6}条数据", dtpStartDate.Value.Value.Year, dtpStartDate.Value.Value.Month, dtpStartDate.Value.Value.Day,
-                          dtpEndDate.Value.Value.Year, dtpEndDate.Value.Value.Month, dtpEndDate.Value.Value.Day, _tableview.RowTotal);
+            //_tableview.Title = string.Format("数据统计时间:{0}年{1}月{2}日到{3}年{4}月{5}日 合计{6}条数据", dtpStartDate.Value.Value.Year, dtpStartDate.Value.Value.Month, dtpStartDate.Value.Value.Day,
+            //              dtpEndDate.Value.Value.Year, dtpEndDate.Value.Value.Month, dtpEndDate.Value.Value.Day, _tableview.RowTotal);
+            _title.Text = string.Format("合计{0}条数据", _tableview.RowTotal);
             _tableview.PageIndex = 1;
         }
 
@@ -169,8 +170,8 @@ namespace FoodSafetyMonitoring.Manager
                   (Application.Current.Resources["User"] as UserInfo).ID,
                 //dtpStartDate.Value.ToString() == dtpEndDate.Value.ToString() ? "" : dtpStartDate.Value.ToString(),
                 //dtpStartDate.Value.ToString() == dtpEndDate.Value.ToString() ? "" : dtpEndDate.Value.ToString(),
-                  ((DateTime)dtpStartDate.Value).ToShortDateString(),
-                  ((DateTime)dtpEndDate.Value).ToShortDateString(),
+                  ((DateTime)dtpStartDate.SelectedDate).ToShortDateString(),
+                  ((DateTime)dtpEndDate.SelectedDate).ToShortDateString(),
                   _province1.SelectedIndex < 1 ? "" : (_province1.SelectedItem as Label).Tag,
                   _city1.SelectedIndex < 1 ? "" : (_city1.SelectedItem as Label).Tag,
                   _region1.SelectedIndex < 1 ? "" : (_region1.SelectedItem as Label).Tag,
@@ -242,8 +243,8 @@ namespace FoodSafetyMonitoring.Manager
                   (Application.Current.Resources["User"] as UserInfo).ID,
                 //dtpStartDate.Value.ToString() == dtpEndDate.Value.ToString() ? "" : dtpStartDate.Value.ToString(),
                 //dtpStartDate.Value.ToString() == dtpEndDate.Value.ToString() ? "" : dtpEndDate.Value.ToString(),
-                  ((DateTime)dtpStartDate.Value).ToShortDateString(),
-                  ((DateTime)dtpEndDate.Value).ToShortDateString(),
+                  ((DateTime)dtpStartDate.SelectedDate).ToShortDateString(),
+                  ((DateTime)dtpEndDate.SelectedDate).ToShortDateString(),
                   _province1.SelectedIndex < 1 ? "" : (_province1.SelectedItem as Label).Tag,
                   _city1.SelectedIndex < 1 ? "" : (_city1.SelectedItem as Label).Tag,
                   _region1.SelectedIndex < 1 ? "" : (_region1.SelectedItem as Label).Tag,

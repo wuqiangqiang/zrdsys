@@ -44,7 +44,7 @@ namespace FoodSafetyMonitoring.Manager.UserControls
 
         void _listview_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            RowMax = (int)_listview.ActualHeight / 33;
+            RowMax = (int)_listview.ActualHeight / 35;
             PageIndex = 1;
 
             if (GetDataByPageNumberEvent != null)
@@ -191,7 +191,7 @@ namespace FoodSafetyMonitoring.Manager.UserControls
                 button_details.SetBinding(Button.TagProperty, new Binding(table.Columns[0].ColumnName));
                 //button_details.SetResourceReference(Button.StyleProperty, "ListDetailsImageButtonTemplate");
                 button_details.SetValue(Button.ContentProperty, ">>");
-                button_details.SetValue(Button.ForegroundProperty, Brushes.Blue);
+                button_details.SetValue(Button.ForegroundProperty, Brushes.White);
                 button_details.SetValue(Button.FontSizeProperty, 14.0);
                 //button_details.SetValue(Button.FontFamilyProperty, "黑体");
                 DataTemplate dataTemplate_details = new DataTemplate() { VisualTree = button_details };
@@ -209,7 +209,7 @@ namespace FoodSafetyMonitoring.Manager.UserControls
                 button_state.AddHandler(Button.ClickEvent, new RoutedEventHandler(state_Click));
                 button_state.SetBinding(Button.TagProperty, new Binding(table.Columns[0].ColumnName));
                 button_state.SetBinding(Button.ContentProperty, new Binding(table.Columns[1].ColumnName));
-                button_state.SetValue(Button.ForegroundProperty, Brushes.Blue);
+                button_state.SetValue(Button.ForegroundProperty, Brushes.White);
                 button_state.SetValue(Button.FontSizeProperty, 12.0);
 
                 DataTemplate dataTemplate_state = new DataTemplate() { VisualTree = button_state };

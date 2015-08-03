@@ -74,7 +74,7 @@
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsExpanded" Value="True">
                                 <Setter TargetName="gr" Property="Height" Value="{Binding Path=DesiredSize/Height,ElementName=scv}"/>
-                                <!--<Setter TargetName="scv" Property="Background" Value="#f2f1f1"/>-->
+                                <Setter TargetName="scv" Property="Background" Value="#f2f1f1"/>
                                 <!--<Setter TargetName="hea" Property="Background" Value="Blue"/>-->
                             </Trigger>
                         </ControlTemplate.Triggers>
@@ -100,15 +100,15 @@
                     <Setter Property="Foreground" Value="Gold"/>
                 </Trigger>-->
                 <Trigger Property="IsPressed" Value="True">
-                    <Setter Property="Foreground" Value="#003e8c"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
                 </Trigger>
-                <Trigger Property="IsPressed" Value="false">
+                <!--<Trigger Property="IsPressed" Value="false">
                     <Setter Property="Foreground" Value="Black"/>
-                </Trigger>
+                </Trigger>-->
             </Style.Triggers>
         </Style>
     </UserControl.Resources>
-    <Grid  x:Name="_grid" HorizontalAlignment="Left" >
+    <Grid  x:Name="_grid" HorizontalAlignment="Left" ScrollViewer.VerticalScrollBarVisibility="Auto" >
         <StackPanel>
             <Expander ExpandDirection="Down" Width="210" x:Name="_expander_0">
                 <Expander.Header>

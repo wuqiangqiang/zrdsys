@@ -5,14 +5,12 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../Themes/ImageButtonStyle.xaml"/>
-                <ResourceDictionary Source="../Themes/GridViewColumnHeaderStyle.xaml"/>
+                <ResourceDictionary Source="../Themes/ListViewColumn.xaml"/>
                 <ResourceDictionary Source="../Themes/TextBox.xaml"/>
-                <ResourceDictionary Source="../Themes/PasswordBox.xaml"/>
                 <ResourceDictionary Source="../Themes/ComboBox.xaml"/>
                 <ResourceDictionary Source="../Themes/TextBlock.xaml"/>
                 <ResourceDictionary Source="../Themes/StackPanel.xaml"/>
-                <ResourceDictionary Source="../Themes/GridViewColumnHeaderStyle.xaml"/>
+                <ResourceDictionary Source="../Themes/Button_new.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
@@ -29,16 +27,16 @@
                 </Setter>
                 <!--<Setter Property="HorizontalAlignment" Value="Center"></Setter>-->
                 <Setter Property="HorizontalContentAlignment" Value="Center" />
-                <Setter Property="FontFamily" Value="楷体"/>
-                <Setter Property="FontSize" Value="14"/>
-                <Setter Property="Height" Value="30" />
+                <Setter Property="FontFamily" Value="微软雅黑"/>
+                <Setter Property="FontSize" Value="12"/>
+                <Setter Property="Height" Value="35" />
             </Style>
         </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition />
-            <RowDefinition Height="30" />
+            <RowDefinition Height="35" />
         </Grid.RowDefinitions>
-        <ListView x:Name="_listview" Grid.Row="0"  HorizontalContentAlignment="Center" ItemContainerStyle="{StaticResource ResourceKey= _style_listviewItem}" FontFamily="楷体" FontSize="14">
+        <ListView x:Name="_listview" Grid.Row="0"  HorizontalContentAlignment="Center" ItemContainerStyle="{StaticResource ResourceKey= _style_listviewItem}"  ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden">
             <ListView.View >
                 <GridView x:Name="_gridview" >
                 </GridView>
@@ -49,16 +47,16 @@
             <TextBlock Text="0"  MinWidth="15" Name="textblock_row_sum" VerticalAlignment="Center" Margin="5,0,5,0" Visibility="Hidden"/>
             <TextBlock Text="总页数"  MinWidth="25" VerticalAlignment="Center"  Foreground="Blue"/>
             <TextBlock Text="0"  MinWidth="15" Name="textblock_page_sum" VerticalAlignment="Center" Margin="5,0,5,0"/>
-            <Button Content="上一页" Width="60" Name="btnPrev" FontFamily="黑体" FontSize="14" VerticalAlignment="Center" Click="btnPrev_Click" />
-            <Button Content="下一页" Width="60" Name="btnNext" FontFamily="黑体" FontSize="14" VerticalAlignment="Center"  Click="btnNext_Click"/>
-            <Button Content="首页" Width="60" Name="btnFirst" FontFamily="黑体" FontSize="14" VerticalAlignment="Center" Click="btnFirst_Click" />
-            <Button Content="末页" Width="60" Name="btnLast" FontFamily="黑体" FontSize="14" VerticalAlignment="Center"  Click="btnLast_Click" />
+            <Button Content="首页" Width="60" Name="btnFirst"  VerticalAlignment="Center" Click="btnFirst_Click" />
+            <Button Content="上一页" Width="60" Name="btnPrev"  VerticalAlignment="Center" Margin="5,0,0,0" Click="btnPrev_Click" />           
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="第" MinWidth="15" Name="label3" VerticalAlignment="Center" HorizontalAlignment="Right"  />
                 <TextBox Name="txtCurrentPage" VerticalAlignment="Center"  MinWidth="25" Text="1" TextChanged="txtCurrentPage_TextChanged"/>
                 <TextBlock Text="页"  MinWidth="15" Name="label2" VerticalAlignment="Center" />
             </StackPanel>
-            <Button Content="转到" Width="60" Name="btnGo" FontFamily="黑体" FontSize="14"  VerticalAlignment="Center" Click="btnGo_Click" />
+            <Button Content="跳转" Width="60" Name="btnGo"   VerticalAlignment="Center" Click="btnGo_Click" />
+            <Button Content="下一页" Width="60" Name="btnNext"  VerticalAlignment="Center" Margin="5,0,0,0"  Click="btnNext_Click"/>
+            <Button Content="末页" Width="60" Name="btnLast" VerticalAlignment="Center" Margin="5,0,0,0" Click="btnLast_Click" />
         </StackPanel>
     </Grid>
 </UserControl>

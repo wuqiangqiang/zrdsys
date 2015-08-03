@@ -29,7 +29,7 @@
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Grid>
                         <Image x:Name="login" Source="/res/loginButton.png"></Image>
-                        <TextBlock FontFamily="黑体" FontSize="14"  HorizontalAlignment="Center" VerticalAlignment="Center" Text="登录" Foreground="White"></TextBlock>
+                        <TextBlock FontFamily="微软雅黑" FontSize="14"  HorizontalAlignment="Center" VerticalAlignment="Center" Text="登录" Foreground="White"></TextBlock>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
@@ -43,7 +43,7 @@
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Grid>
                         <Image x:Name="save" Source="/Manager/Images/btn_back2.png"></Image>
-                        <TextBlock FontFamily="黑体" FontSize="14"  HorizontalAlignment="Center" VerticalAlignment="Center" Text="重置密码" Foreground="White"></TextBlock>
+                        <TextBlock FontFamily="微软雅黑" FontSize="14"  HorizontalAlignment="Center" VerticalAlignment="Center" Text="重置密码" Foreground="White"></TextBlock>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
@@ -56,9 +56,17 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Grid>
-                        <Image x:Name="save" Source="/Manager/Images/btn_back1.png"></Image> 
-                        <TextBlock FontFamily="黑体" FontSize="14"  HorizontalAlignment="Center" VerticalAlignment="Center" Text="保存" Foreground="White"></TextBlock>
-                    </Grid> 
+                        <Image x:Name="save" Source="/Manager/Images/btn_normal.png"></Image>
+                        <TextBlock FontFamily="微软雅黑" FontSize="14"  HorizontalAlignment="Center" VerticalAlignment="Center" Text="保存" Foreground="White"></TextBlock>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="save" Property="Source" Value="/Manager/Images/btn_pressed.png"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="false">
+                            <Setter TargetName="save" Property="Source" Value="/Manager/Images/btn_normal.png"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -70,9 +78,17 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Grid>
-                        <Image x:Name="save" Source="/Manager/Images/btn_back1.png"></Image>
-                        <TextBlock FontFamily="黑体" FontSize="14"  HorizontalAlignment="Center" VerticalAlignment="Center" Text="取消" Foreground="White"></TextBlock>
-                    </Grid> 
+                        <Image x:Name="save" Source="/Manager/Images/btn_normal.png"></Image>
+                        <TextBlock FontFamily="微软雅黑" FontSize="14"  HorizontalAlignment="Center" VerticalAlignment="Center" Text="取消" Foreground="White"></TextBlock>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="save" Property="Source" Value="/Manager/Images/btn_pressed.png"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="false">
+                            <Setter TargetName="save" Property="Source" Value="/Manager/Images/btn_normal.png"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -85,7 +101,7 @@
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Grid >
                         <Image x:Name="save" Source="/Manager/Images/btn_normal.png"></Image>
-                        <TextBlock FontFamily="黑体" FontSize="14"  HorizontalAlignment="Center" VerticalAlignment="Center" Text="查询" Foreground="White"></TextBlock>
+                        <TextBlock FontFamily="微软雅黑" FontSize="14"  HorizontalAlignment="Center" VerticalAlignment="Center" Text="查询" Foreground="White"></TextBlock>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsPressed" Value="True">
@@ -109,7 +125,7 @@
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Grid>
                         <Image x:Name="save" Source="/Manager/Images/btn_normal.png"></Image>
-                        <TextBlock FontFamily="黑体" FontSize="14"  HorizontalAlignment="Center" VerticalAlignment="Center" Text="导出" Foreground="White"></TextBlock>
+                        <TextBlock FontFamily="微软雅黑" FontSize="14"  HorizontalAlignment="Center" VerticalAlignment="Center" Text="导出" Foreground="White"></TextBlock>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsPressed" Value="True">
@@ -130,9 +146,17 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Grid>
-                        <Image x:Name="save" Source="/Manager/Images/btn_back3.png"></Image>
-                        <TextBlock FontFamily="黑体" FontSize="14"  HorizontalAlignment="Center" VerticalAlignment="Center" Text="创建新帐号" Foreground="White"></TextBlock>
-                    </Grid> 
+                        <Image x:Name="save" Source="/Manager/Images/btn_normal.png"></Image>
+                        <TextBlock FontFamily="微软雅黑" FontSize="14"  HorizontalAlignment="Center" VerticalAlignment="Center" Text="创建新帐号" Foreground="White"></TextBlock>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="save" Property="Source" Value="/Manager/Images/btn_pressed.png"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="false">
+                            <Setter TargetName="save" Property="Source" Value="/Manager/Images/btn_normal.png"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

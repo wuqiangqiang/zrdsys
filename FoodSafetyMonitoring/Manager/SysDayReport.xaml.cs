@@ -41,7 +41,7 @@ namespace FoodSafetyMonitoring.Manager
             this.detecttype = detect_type;
             user_flag_tier = (Application.Current.Resources["User"] as UserInfo).FlagTier;
 
-            reportDate.Value = DateTime.Now.AddDays(-1);
+            reportDate.SelectedDate = DateTime.Now.AddDays(-1);
             switch (user_flag_tier)
             {
                 case "0": _dept_name.Text = "选择省:";
@@ -91,7 +91,7 @@ namespace FoodSafetyMonitoring.Manager
         private void _query_Click(object sender, RoutedEventArgs e)
         {
             DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_report_day_hb('{0}','{1}','{2}','{3}','{4}','{5}','{6}')",
-                              (Application.Current.Resources["User"] as UserInfo).ID, reportDate.Value,
+                              (Application.Current.Resources["User"] as UserInfo).ID, reportDate.SelectedDate,
                                _detect_dept.SelectedIndex < 1 ? "" : (_detect_dept.SelectedItem as Label).Tag,
                                _detect_item.SelectedIndex < 1 ? "" : (_detect_item.SelectedItem as Label).Tag,
                                _detect_result.SelectedIndex < 1 ? "" : (_detect_result.SelectedItem as Label).Tag,
@@ -204,10 +204,10 @@ namespace FoodSafetyMonitoring.Manager
 
             //表格的标题
             string title = "";
-            title = string.Format("{0}年{1}月{2}日  检测数据日报表（单位：份次） 合计{3}条数据", reportDate.Value.Value.Year, reportDate.Value.Value.Month, reportDate.Value.Value.Day, row_count);
+            //title = string.Format("{0}年{1}月{2}日  检测数据日报表（单位：份次） 合计{3}条数据", reportDate.SelectedDate.Value.Year, reportDate.SelectedDate.Value.Month, reportDate.SelectedDate.Value.Day, row_count);
 
             _tableview.BShowDetails = true;
-            _title.Text = "▪ " + title;
+            _title.Text = string.Format("合计{0}条数据", row_count);
             _tableview.SetDataTable(tabledisplay,title, new List<int>());
 
         }
@@ -223,7 +223,7 @@ namespace FoodSafetyMonitoring.Manager
             item_id = _detect_item.SelectedIndex < 1 ? "" : (_detect_dept.SelectedItem as Label).Tag.ToString();
             result_id = _detect_result.SelectedIndex < 1 ? "" : (_detect_result.SelectedItem as Label).Tag.ToString();
 
-            grid_info.Children.Add(new UcDayReportDetails(dbOperation, reportDate.Value.ToString(), dept_id, item_id, result_id, detecttype));
+            grid_info.Children.Add(new UcDayReportDetails(dbOperation, reportDate.SelectedDate.ToString(), dept_id, item_id, result_id, detecttype));
         }
 
         private void _export_Click(object sender, RoutedEventArgs e)

@@ -70,7 +70,7 @@ namespace FoodSafetyMonitoring.Manager.UserControls
                 button_details.AddHandler(Button.ClickEvent, new RoutedEventHandler(details_Click));
                 button_details.SetBinding(Button.TagProperty, new Binding(dt.Columns[1].ColumnName));
                 button_details.SetValue(Button.ContentProperty, ">>");
-                button_details.SetValue(Button.ForegroundProperty, Brushes.Blue);
+                button_details.SetValue(Button.ForegroundProperty, Brushes.White);
                 button_details.SetValue(Button.FontSizeProperty, 14.0);
                 button_details.SetBinding(Button.VisibilityProperty, new Binding(dt.Columns[0].ColumnName) { Converter = new VisibleBtnConverter() });
                 DataTemplate dataTemplate_details = new DataTemplate() { VisualTree = button_details };
@@ -125,7 +125,7 @@ namespace FoodSafetyMonitoring.Manager.UserControls
                 button_details.AddHandler(Button.ClickEvent, new RoutedEventHandler(details_Click));
                 button_details.SetBinding(Button.TagProperty, new Binding(dt.Columns[1].ColumnName));
                 button_details.SetValue(Button.ContentProperty, ">>");
-                button_details.SetValue(Button.ForegroundProperty, Brushes.Blue);
+                button_details.SetValue(Button.ForegroundProperty, Brushes.White);
                 button_details.SetValue(Button.FontSizeProperty, 14.0);
                 button_details.SetBinding(Button.VisibilityProperty, new Binding(dt.Columns[0].ColumnName) { Converter = new VisibleBtnConverter() });
                 DataTemplate dataTemplate_details = new DataTemplate() { VisualTree = button_details };

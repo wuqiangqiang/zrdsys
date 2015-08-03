@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <Style TargetType="{x:Type ScrollBar}">
+    <!--<Style TargetType="{x:Type ScrollBar}">
         <Setter Property="Stylus.IsFlicksEnabled" Value="True" />
         <Setter Property="Background" Value="#D5E0FF" />
         <Setter Property="Foreground" Value="Transparent" />
@@ -16,6 +16,80 @@
                 <Setter Property="Height" Value="Auto" />
             </Trigger>
         </Style.Triggers>
+    </Style>-->
+
+    <Style x:Key="scroll_thumb_style" TargetType="Thumb">
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="OverridesDefaultStyle" Value="true"/>
+        <Setter Property="IsTabStop" Value="false"/>
+        <Setter Property="Focusable" Value="false"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Thumb">
+                    <Rectangle Width="13" Fill="#7D7D7D" RadiusX="0" RadiusY="0">
+                    </Rectangle>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
-    
+
+    <ControlTemplate x:Key="scroll_background" TargetType="RepeatButton">
+        <Border Background="Transparent">
+        </Border>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="scroll_up" TargetType="RepeatButton">
+        <Border Background="Transparent">
+        </Border>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="scroll_down" TargetType="RepeatButton">
+        <Border>
+            <Border.Background>
+                <ImageBrush ImageSource="/Manager/Images/btn_pressed.png" />
+            </Border.Background>
+        </Border>
+    </ControlTemplate>
+
+
+    <Style TargetType="ScrollBar">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ScrollBar">
+                    <Grid Width="15">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="15" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="15" />
+                        </Grid.RowDefinitions>
+                        <!--<Border Grid.RowSpan="3">
+                            <Border.Background>
+                                <ImageBrush ImageSource="/images/scroll_background.png" />
+                            </Border.Background>
+                        </Border>-->
+                        <RepeatButton Template="{StaticResource scroll_up}" Grid.Row="0" Command="ScrollBar.LineUpCommand" />
+                        <RepeatButton Template="{StaticResource scroll_down}" Grid.Row="2" Command="ScrollBar.LineDownCommand" />
+
+                        <Border Width="13" HorizontalAlignment="Center" CornerRadius="0" Background="#33555555" Grid.Row="1" >
+                        
+                            <Track  HorizontalAlignment="Center" Name="PART_Track" Width="{TemplateBinding Width}" Maximum="{TemplateBinding Maximum}" Minimum="{TemplateBinding Minimum}"
+                                        Value="{TemplateBinding Value}"  IsDirectionReversed="true">
+                                <Track.DecreaseRepeatButton>
+                                    <RepeatButton Template="{StaticResource scroll_background}" Command="ScrollBar.LineUpCommand"  />
+                                </Track.DecreaseRepeatButton>
+                                <Track.IncreaseRepeatButton>
+                                    <RepeatButton Template="{StaticResource scroll_background}" Command="ScrollBar.LineDownCommand" />
+                                </Track.IncreaseRepeatButton>
+                                <Track.Thumb>
+                                    <Thumb Style="{StaticResource scroll_thumb_style}" >
+                                    </Thumb>
+                                </Track.Thumb>
+                            </Track>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 </ResourceDictionary>

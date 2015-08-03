@@ -31,14 +31,14 @@ namespace FoodSafetyMonitoring.Manager
 
         private List<DeptItemInfo> list = new List<DeptItemInfo>();
 
-        private readonly List<string> year = new List<string>() { "2010",
-            "2011", 
-            "2012",
-            "2013",
-            "2014",
-            "2015",
-            "2016",
-            "2017"};//初始化变量
+        //private readonly List<string> year = new List<string>() { "2010",
+        //    "2011", 
+        //    "2012",
+        //    "2013",
+        //    "2014",
+        //    "2015",
+        //    "2016",
+        //    "2017"};//初始化变量
 
         public SysYearReport(IDBOperation dbOperation, string dept_type, string detect_type)
         {
@@ -49,8 +49,11 @@ namespace FoodSafetyMonitoring.Manager
             this.detecttype = detect_type;
             user_flag_tier = (Application.Current.Resources["User"] as UserInfo).FlagTier;
 
-            _year.ItemsSource = year;
-            _year.SelectedIndex = 5;
+            //_year.ItemsSource = year;
+            //_year.SelectedIndex = 5;
+
+            dtpStartDate.SelectedDate = DateTime.Now.AddDays(-1);
+            dtpEndDate.SelectedDate = DateTime.Now;
 
             //检测站点
             switch (user_flag_tier)
@@ -99,8 +102,10 @@ namespace FoodSafetyMonitoring.Manager
 
         private void _query_Click(object sender, RoutedEventArgs e)
         {
-            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_report_year_hb('{0}','{1}','{2}','{3}','{4}','{5}','{6}')",
-                              (Application.Current.Resources["User"] as UserInfo).ID, _year.Text,
+            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_report_year_hb('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}')",
+                              (Application.Current.Resources["User"] as UserInfo).ID, 
+                              ((DateTime)dtpStartDate.SelectedDate).ToShortDateString(),
+                              ((DateTime)dtpEndDate.SelectedDate).ToShortDateString(),
                                _detect_dept.SelectedIndex < 1 ? "" : (_detect_dept.SelectedItem as Label).Tag,
                                _detect_item.SelectedIndex < 1 ? "" : (_detect_item.SelectedItem as Label).Tag,
                                _detect_result.SelectedIndex < 1 ? "" : (_detect_result.SelectedItem as Label).Tag,
@@ -210,9 +215,9 @@ namespace FoodSafetyMonitoring.Manager
 
             //表格的标题
             string title = "";
-            title = string.Format("{0}年  检测数据年报表（单位：份次） 合计{1}条数据", _year.Text, row_count);
+            //title = string.Format("{0}年  检测数据年报表（单位：份次） 合计{1}条数据", _year.Text, row_count);
             _tableview.BShowDetails = true;
-            _title.Text = "▪ " + title;
+            _title.Text = string.Format("合计{0}条数据", row_count);
             _tableview.SetDataTable(tabledisplay, title, new List<int>());
 
         }
@@ -228,7 +233,8 @@ namespace FoodSafetyMonitoring.Manager
             item_id = _detect_item.SelectedIndex < 1 ? "" : (_detect_dept.SelectedItem as Label).Tag.ToString();
             result_id = _detect_result.SelectedIndex < 1 ? "" : (_detect_result.SelectedItem as Label).Tag.ToString();
 
-            grid_info.Children.Add(new UcYearReportDetails(dbOperation, _year.Text, dept_id, item_id, result_id, detecttype));
+            grid_info.Children.Add(new UcYearReportDetails(dbOperation, ((DateTime)dtpStartDate.SelectedDate).ToShortDateString(),
+                              ((DateTime)dtpEndDate.SelectedDate).ToShortDateString(), dept_id, item_id, result_id, detecttype));
         }
 
         private void _export_Click(object sender, RoutedEventArgs e)

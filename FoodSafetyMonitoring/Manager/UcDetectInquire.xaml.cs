@@ -84,21 +84,21 @@ namespace FoodSafetyMonitoring.Manager
             MyColumns.Add("companyname", new MyColumn("companyname", "来源单位") { BShow = true, Width = 18 });
             MyColumns.Add("sum_num", new MyColumn("sum_num", "总行数") { BShow = false });
 
-            //_tableview.MyColumns = MyColumns;
-            //_tableview.BShowModify = false;
-            //_tableview.BShowDetails = true;
+            _tableview.MyColumns = MyColumns;
+            _tableview.BShowModify = false;
+            _tableview.BShowDetails = true;
 
-            //if ((Application.Current.Resources["User"] as UserInfo).FlagTier == "0")
-            //{
-            //    _tableview.BShowDelete = true;
-            //}
-            //else
-            //{
-            //    _tableview.BShowDelete = false;
-            //}
-            
-            //_tableview.DetailsRowEnvent += new UcTableOperableView.DetailsRowEventHandler(_tableview_DetailsRowEnvent);
-            //_tableview.DeleteRowEnvent += new UcTableOperableView.DeleteRowEventHandler(_tableview_DeleteRowEnvent);
+            if ((Application.Current.Resources["User"] as UserInfo).FlagTier == "0")
+            {
+                _tableview.BShowDelete = true;
+            }
+            else
+            {
+                _tableview.BShowDelete = false;
+            }
+
+            _tableview.DetailsRowEnvent += new UcTableOperableView_NoTitle.DetailsRowEventHandler(_tableview_DetailsRowEnvent);
+            _tableview.DeleteRowEnvent += new UcTableOperableView_NoTitle.DeleteRowEventHandler(_tableview_DeleteRowEnvent);
         }
 
         void _province1_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -155,36 +155,37 @@ namespace FoodSafetyMonitoring.Manager
                 Toolkit.MessageBox.Show("开始时间大于结束时间，请重新选择！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
-            //_tableview.GetDataByPageNumberEvent += new UcTableOperableView.GetDataByPageNumberEventHandler(_tableview_GetDataByPageNumberEvent);
-            //GetData();
+            _tableview.GetDataByPageNumberEvent += new UcTableOperableView_NoTitle.GetDataByPageNumberEventHandler(_tableview_GetDataByPageNumberEvent);
+            GetData();
             //_tableview.Title = string.Format("数据统计时间:{0}年{1}月{2}日到{3}年{4}月{5}日 合计{6}条数据", dtpStartDate.SelectedDate.Value.Year, dtpStartDate.SelectedDate.Value.Month, dtpStartDate.SelectedDate.Value.Day,
             //              dtpEndDate.SelectedDate.Value.Year, dtpEndDate.SelectedDate.Value.Month, dtpEndDate.SelectedDate.Value.Day, _tableview.RowTotal);
-            //_tableview.PageIndex = 1;
+            _title.Text = string.Format("合计{0}条数据", _tableview.RowTotal);
+            _tableview.PageIndex = 1;
         }
 
         private void GetData()
         {
-            //DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_query_detect_hb({0},'{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}','{13}',{14},{15})",
-            //      (Application.Current.Resources["User"] as UserInfo).ID,
-            //    //dtpStartDate.Value.ToString() == dtpEndDate.Value.ToString() ? "" : dtpStartDate.Value.ToString(),
-            //    //dtpStartDate.Value.ToString() == dtpEndDate.Value.ToString() ? "" : dtpEndDate.Value.ToString(),
-            //      ((DateTime)dtpStartDate.SelectedDate).ToShortDateString(),
-            //      ((DateTime)dtpEndDate.SelectedDate).ToShortDateString(),
-            //      _province1.SelectedIndex < 1 ? "" : (_province1.SelectedItem as Label).Tag,
-            //      _city1.SelectedIndex < 1 ? "" : (_city1.SelectedItem as Label).Tag,
-            //      _region1.SelectedIndex < 1 ? "" : (_region1.SelectedItem as Label).Tag,
-            //      _source_company1.SelectedIndex < 1 ? "" : (_source_company1.SelectedItem as Label).Tag,
-            //       _detect_station.SelectedIndex < 1 ? "" : (_detect_station.SelectedItem as Label).Tag,
-            //      _detect_item1.SelectedIndex < 1 ? "" : (_detect_item1.SelectedItem as Label).Tag,
-            //      _detect_object1.SelectedIndex < 1 ? "" : (_detect_object1.SelectedItem as Label).Tag,
-            //      _detect_result1.SelectedIndex < 1 ? "" : (_detect_result1.SelectedItem as Label).Tag,
-            //      _detect_method.SelectedIndex < 1 ? "" : (_detect_method.SelectedItem as Label).Tag,
-            //      _detect_person1.SelectedIndex < 1 ? "" : (_detect_person1.SelectedItem as Label).Tag,
-            //      _detect_type.SelectedIndex < 1 ? "" : (_detect_type.SelectedItem as Label).Tag,
-            //      (_tableview.PageIndex - 1) * _tableview.RowMax,
-            //      _tableview.RowMax)).Tables[0];
+            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_query_detect_hb({0},'{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}','{13}',{14},{15})",
+                  (Application.Current.Resources["User"] as UserInfo).ID,
+                //dtpStartDate.Value.ToString() == dtpEndDate.Value.ToString() ? "" : dtpStartDate.Value.ToString(),
+                //dtpStartDate.Value.ToString() == dtpEndDate.Value.ToString() ? "" : dtpEndDate.Value.ToString(),
+                  ((DateTime)dtpStartDate.SelectedDate).ToShortDateString(),
+                  ((DateTime)dtpEndDate.SelectedDate).ToShortDateString(),
+                  _province1.SelectedIndex < 1 ? "" : (_province1.SelectedItem as Label).Tag,
+                  _city1.SelectedIndex < 1 ? "" : (_city1.SelectedItem as Label).Tag,
+                  _region1.SelectedIndex < 1 ? "" : (_region1.SelectedItem as Label).Tag,
+                  _source_company1.SelectedIndex < 1 ? "" : (_source_company1.SelectedItem as Label).Tag,
+                   _detect_station.SelectedIndex < 1 ? "" : (_detect_station.SelectedItem as Label).Tag,
+                  _detect_item1.SelectedIndex < 1 ? "" : (_detect_item1.SelectedItem as Label).Tag,
+                  _detect_object1.SelectedIndex < 1 ? "" : (_detect_object1.SelectedItem as Label).Tag,
+                  _detect_result1.SelectedIndex < 1 ? "" : (_detect_result1.SelectedItem as Label).Tag,
+                  _detect_method.SelectedIndex < 1 ? "" : (_detect_method.SelectedItem as Label).Tag,
+                  _detect_person1.SelectedIndex < 1 ? "" : (_detect_person1.SelectedItem as Label).Tag,
+                  _detect_type.SelectedIndex < 1 ? "" : (_detect_type.SelectedItem as Label).Tag,
+                  (_tableview.PageIndex - 1) * _tableview.RowMax,
+                  _tableview.RowMax)).Tables[0];
 
-            //_tableview.Table = table;
+            _tableview.Table = table;
         }
 
         void _tableview_GetDataByPageNumberEvent()
@@ -237,27 +238,27 @@ namespace FoodSafetyMonitoring.Manager
 
         private void _export_Click(object sender, RoutedEventArgs e)
         {
-            //DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_query_detect_hb({0},'{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}','{13}',{14},{15})",
-            //      (Application.Current.Resources["User"] as UserInfo).ID,
-            //    //dtpStartDate.Value.ToString() == dtpEndDate.Value.ToString() ? "" : dtpStartDate.Value.ToString(),
-            //    //dtpStartDate.Value.ToString() == dtpEndDate.Value.ToString() ? "" : dtpEndDate.Value.ToString(),
-            //      ((DateTime)dtpStartDate.SelectedDate).ToShortDateString(),
-            //      ((DateTime)dtpEndDate.SelectedDate).ToShortDateString(),
-            //      _province1.SelectedIndex < 1 ? "" : (_province1.SelectedItem as Label).Tag,
-            //      _city1.SelectedIndex < 1 ? "" : (_city1.SelectedItem as Label).Tag,
-            //      _region1.SelectedIndex < 1 ? "" : (_region1.SelectedItem as Label).Tag,
-            //      _source_company1.SelectedIndex < 1 ? "" : (_source_company1.SelectedItem as Label).Tag,
-            //       _detect_station.SelectedIndex < 1 ? "" : (_detect_station.SelectedItem as Label).Tag,
-            //      _detect_item1.SelectedIndex < 1 ? "" : (_detect_item1.SelectedItem as Label).Tag,
-            //      _detect_object1.SelectedIndex < 1 ? "" : (_detect_object1.SelectedItem as Label).Tag,
-            //      _detect_result1.SelectedIndex < 1 ? "" : (_detect_result1.SelectedItem as Label).Tag,
-            //      _detect_method.SelectedIndex < 1 ? "" : (_detect_method.SelectedItem as Label).Tag,
-            //      _detect_person1.SelectedIndex < 1 ? "" : (_detect_person1.SelectedItem as Label).Tag,
-            //      _detect_type.SelectedIndex < 1 ? "" : (_detect_type.SelectedItem as Label).Tag,
-            //      0,
-            //      _tableview.RowTotal)).Tables[0];
+            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_query_detect_hb({0},'{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}','{13}',{14},{15})",
+                  (Application.Current.Resources["User"] as UserInfo).ID,
+                //dtpStartDate.Value.ToString() == dtpEndDate.Value.ToString() ? "" : dtpStartDate.Value.ToString(),
+                //dtpStartDate.Value.ToString() == dtpEndDate.Value.ToString() ? "" : dtpEndDate.Value.ToString(),
+                  ((DateTime)dtpStartDate.SelectedDate).ToShortDateString(),
+                  ((DateTime)dtpEndDate.SelectedDate).ToShortDateString(),
+                  _province1.SelectedIndex < 1 ? "" : (_province1.SelectedItem as Label).Tag,
+                  _city1.SelectedIndex < 1 ? "" : (_city1.SelectedItem as Label).Tag,
+                  _region1.SelectedIndex < 1 ? "" : (_region1.SelectedItem as Label).Tag,
+                  _source_company1.SelectedIndex < 1 ? "" : (_source_company1.SelectedItem as Label).Tag,
+                   _detect_station.SelectedIndex < 1 ? "" : (_detect_station.SelectedItem as Label).Tag,
+                  _detect_item1.SelectedIndex < 1 ? "" : (_detect_item1.SelectedItem as Label).Tag,
+                  _detect_object1.SelectedIndex < 1 ? "" : (_detect_object1.SelectedItem as Label).Tag,
+                  _detect_result1.SelectedIndex < 1 ? "" : (_detect_result1.SelectedItem as Label).Tag,
+                  _detect_method.SelectedIndex < 1 ? "" : (_detect_method.SelectedItem as Label).Tag,
+                  _detect_person1.SelectedIndex < 1 ? "" : (_detect_person1.SelectedItem as Label).Tag,
+                  _detect_type.SelectedIndex < 1 ? "" : (_detect_type.SelectedItem as Label).Tag,
+                  0,
+                  _tableview.RowTotal)).Tables[0];
 
-            //_tableview.ExportExcel(table);
+            _tableview.ExportExcel(table);
         }
 
     }

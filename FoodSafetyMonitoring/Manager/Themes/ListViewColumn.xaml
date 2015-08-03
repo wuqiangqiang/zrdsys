@@ -8,16 +8,16 @@
         <Setter Property="Foreground" Value="Black" />
         <Setter Property="FontSize" Value="12" />
         <Setter Property="FontFamily" Value="微软雅黑" />
-        <Setter Property="Height" Value="20" />
-        <!--<Setter Property="Template">
+        <Setter Property="Height" Value="35" />
+        <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="GridViewColumnHeader">
                     <Border 
                       x:Name="Border"  
                       CornerRadius="0,0,0,0" 
-                      BorderThickness="1"
-                      Background="{StaticResource NormalBrush}"
-                      BorderBrush="{StaticResource NormalBorderBrush}">
+                      BorderThickness="1,1,0,1"
+                      Background="{StaticResource DarkBrush}"
+                      BorderBrush="#e0e0e0">
                      <ContentPresenter 
                         Margin="1"
                         HorizontalAlignment="Center"
@@ -26,11 +26,12 @@
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
-        </Setter>-->
+        </Setter>
     </Style>
     <Style TargetType="{x:Type ListView}">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="Black" />
+        <Setter Property="BorderBrush" Value="#e0e0e0" />
     </Style>
     <Style TargetType="{x:Type ListViewItem}">
         <Setter Property="HorizontalContentAlignment" Value="Center" />

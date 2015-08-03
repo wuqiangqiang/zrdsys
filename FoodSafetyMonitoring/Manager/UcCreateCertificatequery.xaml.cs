@@ -33,8 +33,8 @@ namespace FoodSafetyMonitoring.Manager
         {
             InitializeComponent();
             this.dbOperation = dbOperation;
-            dtpStartDate.Value = DateTime.Now.AddDays(-1);
-            dtpEndDate.Value = DateTime.Now;
+            dtpStartDate.SelectedDate = DateTime.Now.AddDays(-1);
+            dtpEndDate.SelectedDate = DateTime.Now;
             ComboboxTool.InitComboboxSource(_source_company1, string.Format(" call p_provice_dept_hb('{0}','yz') ", userId), "cxtj");
             ComboboxTool.InitComboboxSource(_certificate_station, string.Format("call p_user_dept_hb('{0}','cz')", userId), "cxtj");
             _certificate_station.SelectionChanged += new SelectionChangedEventHandler(_certificate_station_SelectionChanged);
@@ -59,7 +59,7 @@ namespace FoodSafetyMonitoring.Manager
             _tableview.BShowDetails = true;
             _tableview.BShowDelete = false;
 
-            _tableview.DetailsRowEnvent += new UcTableOperableView.DetailsRowEventHandler(_tableview_DetailsRowEnvent);
+            _tableview.DetailsRowEnvent += new UcTableOperableView_NoTitle.DetailsRowEventHandler(_tableview_DetailsRowEnvent);
         }
 
         void _certificate_station_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -76,15 +76,16 @@ namespace FoodSafetyMonitoring.Manager
 
         private void _query_Click(object sender, RoutedEventArgs e)
         {
-            if (dtpStartDate.Value.Value.Date > dtpEndDate.Value.Value.Date)
+            if (dtpStartDate.SelectedDate.Value.Date > dtpEndDate.SelectedDate.Value.Date)
             {
                 Toolkit.MessageBox.Show("开始时间大于结束时间，请重新选择！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
-            _tableview.GetDataByPageNumberEvent += new UcTableOperableView.GetDataByPageNumberEventHandler(_tableview_GetDataByPageNumberEvent);
+            _tableview.GetDataByPageNumberEvent += new UcTableOperableView_NoTitle.GetDataByPageNumberEventHandler(_tableview_GetDataByPageNumberEvent);
             GetData();
-            _tableview.Title = string.Format("数据统计时间:{0}年{1}月{2}日到{3}年{4}月{5}日 合计{6}条数据", dtpStartDate.Value.Value.Year, dtpStartDate.Value.Value.Month, dtpStartDate.Value.Value.Day,
-                          dtpEndDate.Value.Value.Year, dtpEndDate.Value.Value.Month, dtpEndDate.Value.Value.Day, _tableview.RowTotal);
+            //_tableview.Title = string.Format("数据统计时间:{0}年{1}月{2}日到{3}年{4}月{5}日 合计{6}条数据", dtpStartDate.Value.Value.Year, dtpStartDate.Value.Value.Month, dtpStartDate.Value.Value.Day,
+            //              dtpEndDate.Value.Value.Year, dtpEndDate.Value.Value.Month, dtpEndDate.Value.Value.Day, _tableview.RowTotal);
+            _title.Text = string.Format("合计{0}条数据", _tableview.RowTotal);
             _tableview.PageIndex = 1;
         }
 
@@ -92,8 +93,8 @@ namespace FoodSafetyMonitoring.Manager
         {
             DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_query_certificate({0},'{1}','{2}','{3}','{4}','{5}',{6},{7})",
                    (Application.Current.Resources["User"] as UserInfo).ID,
-                   ((DateTime)dtpStartDate.Value).ToShortDateString(),
-                   ((DateTime)dtpEndDate.Value).ToShortDateString(),
+                   ((DateTime)dtpStartDate.SelectedDate).ToShortDateString(),
+                   ((DateTime)dtpEndDate.SelectedDate).ToShortDateString(),
                    _source_company1.SelectedIndex < 1 ? "" : (_source_company1.SelectedItem as Label).Tag,
                     _certificate_station.SelectedIndex < 1 ? "" : (_certificate_station.SelectedItem as Label).Tag,
                    _detect_person1.SelectedIndex < 1 ? "" : (_detect_person1.SelectedItem as Label).Tag,
@@ -118,8 +119,8 @@ namespace FoodSafetyMonitoring.Manager
         {
             DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_query_certificate({0},'{1}','{2}','{3}','{4}','{5}',{6},{7})",
                    (Application.Current.Resources["User"] as UserInfo).ID,
-                   ((DateTime)dtpStartDate.Value).ToShortDateString(),
-                   ((DateTime)dtpEndDate.Value).ToShortDateString(),
+                   ((DateTime)dtpStartDate.SelectedDate).ToShortDateString(),
+                   ((DateTime)dtpEndDate.SelectedDate).ToShortDateString(),
                    _source_company1.SelectedIndex < 1 ? "" : (_source_company1.SelectedItem as Label).Tag,
                     _certificate_station.SelectedIndex < 1 ? "" : (_certificate_station.SelectedItem as Label).Tag,
                    _detect_person1.SelectedIndex < 1 ? "" : (_detect_person1.SelectedItem as Label).Tag,

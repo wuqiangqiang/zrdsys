@@ -168,7 +168,10 @@ namespace FoodSafetyMonitoring.Manager
                 row_count = 0;
             }
 
-            _tableview.SetDataTable(table, "数据统计时间:" + _year.Text + "年" + "  合计" + row_count + "条数据", new List<int>());
+            _title.Text = _analysis_theme.Text;
+            _title_1.Text = string.Format("合计{0}条数据", row_count);
+            _title_2.Text = _analysis_theme.Text;
+            _tableview.SetDataTable(table, "", new List<int>());
 
             _chart.Children.Clear(); 
             chart = new Chart();
@@ -177,8 +180,8 @@ namespace FoodSafetyMonitoring.Manager
             chart.Bevel = true;
             Title title = new Title();
             title.Text = _year.Text + "年" + _analysis_theme.Text;
-            title.FontFamily = new FontFamily("楷体");
-            title.FontSize = 16;
+            title.FontFamily = new FontFamily("微软黑体");
+            title.FontSize = 14;
             chart.Titles.Add(title);
 
             for (int i = 0; i < table.Rows.Count; i++)
@@ -186,7 +189,7 @@ namespace FoodSafetyMonitoring.Manager
                 DataSeries dataSeries = new DataSeries();
                 dataSeries.RenderAs = RenderAs.Line;
                 dataSeries.LegendText = table.Rows[i][0].ToString();
-                dataSeries.LabelFontFamily = new FontFamily("楷体");
+                dataSeries.LabelFontFamily = new FontFamily("微软黑体");
                 for (int j = 1; j < table.Columns.Count - 1; j++)
                 {
                     DataPoint point = new DataPoint();

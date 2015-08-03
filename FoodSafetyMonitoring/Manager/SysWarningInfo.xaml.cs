@@ -42,8 +42,8 @@ namespace FoodSafetyMonitoring.Manager
             user_flag_tier = (Application.Current.Resources["User"] as UserInfo).FlagTier;
 
             //初始化查询条件
-            reportDate_kssj.Value = DateTime.Now.AddDays(-1);
-            reportDate_jssj.Value = DateTime.Now;
+            reportDate_kssj.SelectedDate = DateTime.Now.AddDays(-1);
+            reportDate_jssj.SelectedDate = DateTime.Now;
             //检测站点
             switch (user_flag_tier)
             {
@@ -94,7 +94,7 @@ namespace FoodSafetyMonitoring.Manager
 
         private void _query_Click(object sender, RoutedEventArgs e)
         {
-            if (reportDate_kssj.Value.Value.Date > reportDate_jssj.Value.Value.Date)
+            if (reportDate_kssj.SelectedDate.Value.Date > reportDate_jssj.SelectedDate.Value.Date)
             {
                 Toolkit.MessageBox.Show("开始时间大于结束时间，请重新选择！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
@@ -102,10 +102,11 @@ namespace FoodSafetyMonitoring.Manager
 
             _tableview.GetDataByPageNumberEvent += new UcTableOperableView_NoTitle.GetDataByPageNumberEventHandler(_tableview_GetDataByPageNumberEvent);
             GetData();
-            _tableview.Title = string.Format("数据统计时间:{0}年{1}月{2}日到{3}年{4}月{5}日", reportDate_kssj.Value.Value.Year, reportDate_kssj.Value.Value.Month, reportDate_kssj.Value.Value.Day,
-                          reportDate_jssj.Value.Value.Year, reportDate_jssj.Value.Value.Month, reportDate_jssj.Value.Value.Day);
-            _title.Text = string.Format("▪ 数据统计时间:{0}年{1}月{2}日到{3}年{4}月{5}日  合计{6}条数据", reportDate_kssj.Value.Value.Year, reportDate_kssj.Value.Value.Month, reportDate_kssj.Value.Value.Day,
-                          reportDate_jssj.Value.Value.Year, reportDate_jssj.Value.Value.Month, reportDate_jssj.Value.Value.Day, _tableview.RowTotal);
+            //_tableview.Title = string.Format("数据统计时间:{0}年{1}月{2}日到{3}年{4}月{5}日", reportDate_kssj.Value.Value.Year, reportDate_kssj.Value.Value.Month, reportDate_kssj.Value.Value.Day,
+            //              reportDate_jssj.Value.Value.Year, reportDate_jssj.Value.Value.Month, reportDate_jssj.Value.Value.Day);
+            //_title.Text = string.Format("▪ 数据统计时间:{0}年{1}月{2}日到{3}年{4}月{5}日  合计{6}条数据", reportDate_kssj.Value.Value.Year, reportDate_kssj.Value.Value.Month, reportDate_kssj.Value.Value.Day,
+            //              reportDate_jssj.Value.Value.Year, reportDate_jssj.Value.Value.Month, reportDate_jssj.Value.Value.Day, _tableview.RowTotal);
+            _title.Text = string.Format("合计{0}条数据", _tableview.RowTotal);
             _tableview.PageIndex = 1;
             
         }
@@ -113,7 +114,7 @@ namespace FoodSafetyMonitoring.Manager
         private void GetData()
         {
             DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_warning_info_hb('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}',{8},{9})",
-                              (Application.Current.Resources["User"] as UserInfo).ID, reportDate_kssj.Value, reportDate_jssj.Value,
+                              (Application.Current.Resources["User"] as UserInfo).ID, reportDate_kssj.SelectedDate, reportDate_jssj.SelectedDate,
                                _detect_dept.SelectedIndex < 1 ? "" : (_detect_dept.SelectedItem as Label).Tag,
                                _detect_item.SelectedIndex < 1 ? "" : (_detect_item.SelectedItem as Label).Tag,
                                _detect_object.SelectedIndex < 1 ? "" : (_detect_object.SelectedItem as Label).Tag,
@@ -141,13 +142,13 @@ namespace FoodSafetyMonitoring.Manager
             item_id = current_table.Rows[selectrow - 1][3].ToString();
             object_id = current_table.Rows[selectrow - 1][5].ToString();
 
-            grid_info.Children.Add(new UcWarningdetails(dbOperation, reportDate_kssj.Value.ToString(), reportDate_jssj.Value.ToString(), dept_id, item_id, object_id, detecttype));
+            grid_info.Children.Add(new UcWarningdetails(dbOperation, reportDate_kssj.SelectedDate.ToString(), reportDate_jssj.SelectedDate.ToString(), dept_id, item_id, object_id, detecttype));
         }
 
         private void _export_Click(object sender, RoutedEventArgs e)
         {
             DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_warning_info_hb('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}',{8},{9})",
-                              (Application.Current.Resources["User"] as UserInfo).ID, reportDate_kssj.Value, reportDate_jssj.Value,
+                              (Application.Current.Resources["User"] as UserInfo).ID, reportDate_kssj.SelectedDate, reportDate_jssj.SelectedDate,
                                _detect_dept.SelectedIndex < 1 ? "" : (_detect_dept.SelectedItem as Label).Tag,
                                _detect_item.SelectedIndex < 1 ? "" : (_detect_item.SelectedItem as Label).Tag,
                                _detect_object.SelectedIndex < 1 ? "" : (_detect_object.SelectedItem as Label).Tag,

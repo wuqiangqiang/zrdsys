@@ -237,10 +237,10 @@ namespace FoodSafetyMonitoring.Manager
 
             //表格的标题
             string title = "";
-            title = string.Format("{0}年{1}月  检测数据月报表（单位：份次） 合计{2}条数据", _year.Text, _month.Text, row_count);
+            //title = string.Format("{0}年{1}月  检测数据月报表（单位：份次） 合计{2}条数据", _year.Text, _month.Text, row_count);
 
             _tableview.BShowDetails = true;
-            _title.Text = "▪ " + title;
+            _title.Text = string.Format("合计{0}条数据", row_count);
             _tableview.SetDataTable(tabledisplay, title, new List<int>());
 
         }

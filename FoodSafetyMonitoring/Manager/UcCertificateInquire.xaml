@@ -1,7 +1,8 @@
 ﻿<UserControl x:Class="FoodSafetyMonitoring.Manager.UcCertificateInquire"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
- xmlns:control="clr-namespace:FoodSafetyMonitoring.Manager.UserControls">
+             xmlns:control="clr-namespace:FoodSafetyMonitoring.Manager.UserControls"
+             xmlns:toolkit ="http://schemas.microsoft.com/wpf/2008/toolkit">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -10,60 +11,122 @@
                 <ResourceDictionary Source="Themes/StackPanel.xaml"/>
                 <ResourceDictionary Source="Themes/ComboBox.xaml"/>
                 <ResourceDictionary Source="Themes/TextBlock.xaml"/>
+                <ResourceDictionary Source="Themes/DatePicker.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid >
         <Grid.RowDefinitions>
-            <RowDefinition Height="3*"/>
-            <RowDefinition Height="12*"/>
+            <RowDefinition Height="180"/>
+            <RowDefinition />
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" Width="auto" Margin="0,10,0,0">
+        <Grid Grid.Row="0" Width="auto" Margin="5,5,5,5">
             <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="37"/>
+                <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
-            <StackPanel Grid.Row="0" VerticalAlignment="Center">
-                <TextBlock MinWidth="50">设置日期:</TextBlock>
-                <control:DatePickerControl x:Name="dtpStartDate" VerticalAlignment="Center"/>
-                <TextBlock xml:space="preserve" MinWidth="10" Margin="5,0,5,0">至</TextBlock>
-                <control:DatePickerControl x:Name="dtpEndDate" VerticalAlignment="Center" />
-                <!--<TextBlock MinWidth="50" Margin="30,0,0,0">来源区域:</TextBlock>
-                <ComboBox x:Name="_province1" Width="130" Text="省"></ComboBox>
-                <ComboBox x:Name="_city1" Width="130" Text="地市"></ComboBox>
-                <ComboBox x:Name="_region1" Width="120" Text="区县"></ComboBox>-->
-                <TextBlock MinWidth="50" Margin="30,0,0,0">来源单位:</TextBlock>
-                <ComboBox x:Name="_source_company1" Width="300"></ComboBox>
-                <TextBlock MinWidth="50">检测站点:</TextBlock>
-                <ComboBox x:Name="_detect_station" Width="240" HorizontalContentAlignment="Center"/>
-            </StackPanel>
-            <StackPanel Grid.Row="1" VerticalAlignment="Center">
-                <TextBlock MinWidth="40" Margin="20,0,0,0">检测师:</TextBlock>
-                <ComboBox Width="120" x:Name="_detect_person1" />
-                <TextBlock MinWidth="50" Margin="30,0,0,0">检测项目:</TextBlock>
-                <ComboBox Width="140" x:Name="_detect_item1" />
-                <TextBlock MinWidth="50" Margin="30,0,0,0">检测对象:</TextBlock>
-                <ComboBox Width="100" x:Name="_detect_object1" />
-                <TextBlock MinWidth="40" Margin="30,0,0,0">检测方法:</TextBlock>
-                <ComboBox Width="140" x:Name="_detect_method" />
-            </StackPanel>
-            <Grid  Grid.Row="2" VerticalAlignment="Center">
-                <StackPanel>
-                    <!--<TextBlock MinWidth="50">检测站点性质:</TextBlock>
-                    <ComboBox Width="120" x:Name="_dept_type" />-->
-                    <TextBlock MinWidth="50">检测结果:</TextBlock>
-                    <ComboBox Width="120" x:Name="_detect_result1" />
-                    <TextBlock MinWidth="40" Margin="30,0,0,0">数据来源:</TextBlock>
-                    <ComboBox Width="110" x:Name="_detect_type" />
-                </StackPanel>
-                <Button Name="_query" Width="76" Height="30"  Grid.Row="0" Grid.Column="1" Style="{StaticResource SelectImageButtonTemplate}" Click="_query_Click" Margin="0,0,155,0"  HorizontalAlignment="Right"/>
-                <Button Name="_export" Width="76" Height="30" Grid.Column="1" Grid.Row="1" Style="{StaticResource ExportImageButtonTemplate}" Click="_export_Click" Margin="0,0,15,0" HorizontalAlignment="Right"/>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="352"/>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <Grid.Background>
+                        <ImageBrush ImageSource="/res/query_title.png"/>
+                    </Grid.Background>
+                    <TextBlock Margin="40,0,0,0" VerticalAlignment="Center">查询设置</TextBlock>
+                </Grid>
+                <Grid Grid.Column="1">
+                    <Grid.Background>
+                        <ImageBrush ImageSource="/res/title_right.png"/>
+                    </Grid.Background>
+                </Grid>
             </Grid>
-        </Grid>
-        <Grid  Grid.Row="1" Margin="5,5,5,5" x:Name="grid_table">
-            <control:UcTableOperableView x:Name="_tableview" Background="Transparent" />
-        </Grid>
+            <Border Grid.Row="1" Background="#fbfbfc" BorderThickness="1,0,1,1" BorderBrush="#e0e0e0" CornerRadius="0,0,3,3">
+                <Grid Margin="0,10,0,10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="37"/>
+                        <RowDefinition Height="37"/>
+                        <RowDefinition Height="37"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0" >
+                        <StackPanel  VerticalAlignment="Center" >
+                            <TextBlock MinWidth="50">设置日期:</TextBlock>
+                            <toolkit:DatePicker x:Name="dtpStartDate" VerticalAlignment="Center"/>
+                            <TextBlock xml:space="preserve" MinWidth="10" Margin="5,0,5,0">至</TextBlock>
+                            <toolkit:DatePicker x:Name="dtpEndDate" VerticalAlignment="Center" />
+                            <TextBlock MinWidth="50">来源区域:</TextBlock>
+                            <ComboBox x:Name="_province1" Width="120" Text="省" Margin="0,0,5,0"></ComboBox>
+                            <ComboBox x:Name="_city1" Width="120" Text="地市" Margin="0,0,5,0"></ComboBox>
+                            <ComboBox x:Name="_region1" Width="120" Text="区县"></ComboBox>
+                            <TextBlock MinWidth="50">来源单位:</TextBlock>
+                            <ComboBox x:Name="_source_company1" Width="240"></ComboBox>
+                        </StackPanel>
+                    </Grid>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1058*"/>
+                            <ColumnDefinition Width="77*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="0,5.5">
+                            <TextBlock MinWidth="50">检测站点:</TextBlock>
+                            <ComboBox x:Name="_detect_station" Width="260"/>
+                            <TextBlock MinWidth="52">检测师:</TextBlock>
+                            <ComboBox Width="120" x:Name="_detect_person1" />
+                            <TextBlock MinWidth="50">检测项目:</TextBlock>
+                            <ComboBox Width="170" x:Name="_detect_item1" />
+                            <TextBlock MinWidth="50">检测方法:</TextBlock>
+                            <ComboBox Width="200" x:Name="_detect_method" />
+                        </StackPanel>
+                    </Grid>
+                    <Grid  Grid.Row="2">
+                        <StackPanel VerticalAlignment="Center">
+                            <!--<TextBlock MinWidth="50">检测站点性质:</TextBlock>
+                                <ComboBox Width="120" x:Name="_dept_type" />-->
+                            <TextBlock MinWidth="50">检测对象:</TextBlock>
+                            <ComboBox Width="80" x:Name="_detect_object1" />
+                            <TextBlock MinWidth="50">检测结果:</TextBlock>
+                            <ComboBox Width="100" x:Name="_detect_result1" />
+                            <TextBlock MinWidth="50" >数据来源:</TextBlock>
+                            <ComboBox Width="120" x:Name="_detect_type" />
 
+                            <Button Name="_query" Width="120" Height="32" Style="{StaticResource SelectImageButtonTemplate}" Click="_query_Click" Margin="280,0,0,0" />
+                            <Button Name="_export" Width="120" Height="32" Style="{StaticResource ExportImageButtonTemplate}" Click="_export_Click" Margin="50,0,0,0"/>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </Border>
+        </Grid>
+        <Grid Grid.Row="1" Margin="5,5,5,5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="37"/>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="352"/>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <Grid.Background>
+                        <ImageBrush ImageSource="/res/result_title.png"/>
+                    </Grid.Background>
+                    <StackPanel>
+                        <TextBlock Margin="40,0,0,0" VerticalAlignment="Center">查询结果</TextBlock>
+                        <TextBlock x:Name="_title" Margin="20,0,0,0" VerticalAlignment="Center"></TextBlock>
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Column="1">
+                    <Grid.Background>
+                        <ImageBrush ImageSource="/res/title_right.png"/>
+                    </Grid.Background>
+                </Grid>
+            </Grid>
+            <Border Grid.Row="1" BorderThickness="1,0,1,1" BorderBrush="#e0e0e0" CornerRadius="0,0,3,3" Background="#fbfbfc">
+                <Grid  x:Name="grid_table">
+                    <control:UcTableOperableView_NoTitle x:Name="_tableview" Background="Transparent" Margin="0"/>
+                </Grid>
+            </Border>
+        </Grid>
     </Grid>
 </UserControl>

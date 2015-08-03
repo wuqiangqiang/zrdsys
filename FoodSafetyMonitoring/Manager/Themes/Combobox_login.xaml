@@ -4,6 +4,7 @@
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="Shared.xaml" />
+        <!--<ResourceDictionary Source="ScrollBar.xaml" />-->
     </ResourceDictionary.MergedDictionaries>
 
     <!-- SimpleStyles: ComboBox -->
@@ -118,7 +119,7 @@
                   x:Name="DropDownBorder"
                   Background="{StaticResource WindowBackgroundBrush}"
                   BorderThickness="1"
-                  BorderBrush="{StaticResource SolidBorderBrush}"/>
+                  BorderBrush="#699ed4"/>
                                 <ScrollViewer Margin="4,6,4,6" SnapsToDevicePixels="True">
                                     <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained" />
                                 </ScrollViewer>
@@ -136,8 +137,8 @@
                             <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
                         </Trigger>
                         <Trigger SourceName="Popup" Property="Popup.AllowsTransparency" Value="true">
-                            <Setter TargetName="DropDownBorder" Property="CornerRadius" Value="4"/>
-                            <Setter TargetName="DropDownBorder" Property="Margin" Value="0,2,0,0"/>
+                            <Setter TargetName="DropDownBorder" Property="CornerRadius" Value="0"/>
+                            <Setter TargetName="DropDownBorder" Property="Margin" Value="0,4,0,0"/>
                         </Trigger>
                         <Trigger Property="IsEditable"
                  Value="true">
@@ -171,7 +172,7 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsHighlighted" Value="true">
-                            <Setter TargetName="Border" Property="Background" Value="{StaticResource SelectedBackgroundBrush}"/>
+                            <Setter TargetName="Border" Property="Background" Value="#699ed4"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter Property="Foreground" Value="{StaticResource DisabledForegroundBrush}"/>

@@ -43,8 +43,8 @@ namespace FoodSafetyMonitoring.Manager
             this.depttype = dept_type;
             this.detecttype = detect_type;
             user_flag_tier = (Application.Current.Resources["User"] as UserInfo).FlagTier;
-            dtpStartDate.Value = DateTime.Now;
-            dtpEndDate.Value = DateTime.Now;
+            dtpStartDate.SelectedDate = DateTime.Now.AddDays(-1);
+            dtpEndDate.SelectedDate = DateTime.Now;
             switch (user_flag_tier)
             {
                 case "0": dept_name = "各省检测总量占比分析";
@@ -93,7 +93,7 @@ namespace FoodSafetyMonitoring.Manager
                 return;
             }
 
-            if (dtpStartDate.Value.Value.Date > dtpEndDate.Value.Value.Date)
+            if (dtpStartDate.SelectedDate.Value.Date > dtpEndDate.SelectedDate.Value.Date)
             {
                 Toolkit.MessageBox.Show("开始时间大于结束时间，请重新选择！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
@@ -126,7 +126,7 @@ namespace FoodSafetyMonitoring.Manager
                 default: break;
             }
 
-            table = dbOperation.GetDbHelper().GetDataSet(string.Format("call {0}({1},'{2}','{3}','{4}','{5}')", function, userId, (DateTime)dtpStartDate.Value, (DateTime)dtpEndDate.Value, depttype, detecttype)).Tables[0];
+            table = dbOperation.GetDbHelper().GetDataSet(string.Format("call {0}({1},'{2}','{3}','{4}','{5}')", function, userId, (DateTime)dtpStartDate.SelectedDate, (DateTime)dtpEndDate.SelectedDate, depttype, detecttype)).Tables[0];
 
 
             switch (_analysis_theme.Text)
@@ -210,10 +210,10 @@ namespace FoodSafetyMonitoring.Manager
             chart.Background = Brushes.Transparent;
             chart.View3D = true;
             chart.Bevel = true;
-            Title title = new Title();
-            title.Text = _analysis_theme.Text;
-            title.FontFamily = new FontFamily("楷体");
-            title.FontSize = 16;
+            //Title title = new Title();
+            //title.Text = _analysis_theme.Text;
+            //title.FontFamily = new FontFamily("楷体");
+            //title.FontSize = 16;
             DataSeries dataSeries = new DataSeries();
             dataSeries.RenderAs = RenderAs.Pie;
 
@@ -224,12 +224,12 @@ namespace FoodSafetyMonitoring.Manager
                 point.YValue = Convert.ToDouble(table.Rows[i][1].ToString());
                 point.LabelStyle = LabelStyles.Inside;
                 point.LabelText = table.Rows[i][0].ToString();
-                point.LabelFontFamily = new FontFamily("楷体");
-                point.LabelFontSize = 14;
+                point.LabelFontFamily = new FontFamily("微软雅黑");
+                point.LabelFontSize = 12;
                 dataSeries.DataPoints.Add(point);
             }
             chart.Series.Add(dataSeries);
-            chart.Titles.Add(title);
+            //chart.Titles.Add(title);
             _chart.Children.Add(chart);
 
             //计算报表总条数
@@ -246,9 +246,12 @@ namespace FoodSafetyMonitoring.Manager
                 row_count = 0;
             }
 
-            string table_title = "数据统计时间:" + dtpStartDate.Value.Value.Year + "年" + dtpStartDate.Value.Value.Month + "月" + dtpStartDate.Value.Value.Day + "日到" + dtpEndDate.Value.Value.Year + "年" + dtpEndDate.Value.Value.Month + "月" + dtpEndDate.Value.Value.Day + "日" + "  合计" + row_count + "条数据";
-            
-            _tableview.SetDataTable(table, table_title, new List<int>());
+            //string table_title = "数据统计时间:" + dtpStartDate.Value.Value.Year + "年" + dtpStartDate.Value.Value.Month + "月" + dtpStartDate.Value.Value.Day + "日到" + dtpEndDate.Value.Value.Year + "年" + dtpEndDate.Value.Value.Month + "月" + dtpEndDate.Value.Value.Day + "日" + "  合计" + row_count + "条数据";
+
+            _title.Text = _analysis_theme.Text;
+            _title_1.Text = string.Format("合计{0}条数据", row_count);
+            _title_2.Text = _analysis_theme.Text;
+            _tableview.SetDataTable(table, "", new List<int>());
 
         }
 
