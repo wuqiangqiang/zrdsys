@@ -39,8 +39,9 @@ namespace FoodSafetyMonitoring.Manager
             ComboboxTool.InitComboboxSource(_province, rows, "lr");
             _province.SelectionChanged += new SelectionChangedEventHandler(_province_SelectionChanged);
 
-            ComboboxTool.InitComboboxSource(_source_company, string.Format("call p_provice_dept_hb('{0}','yz')", userId), "lr");
-            _source_company.SelectionChanged += new SelectionChangedEventHandler(_source_company_SelectionChanged);
+            //ComboboxTool.InitComboboxSource(_source_company, string.Format("call p_provice_dept_hb('{0}','yz')", userId), "lr");
+            ComboboxTool.InitComboboxSource(_source_company, "SELECT COMPANYID,COMPANYNAME FROM t_company", "lr");
+            //_source_company.SelectionChanged += new SelectionChangedEventHandler(_source_company_SelectionChanged);
             ComboboxTool.InitComboboxSource(_detect_trade, "select tradeId,tradeName from t_trade where openFlag = '1'", "lr");
             _detect_trade.SelectionChanged += new SelectionChangedEventHandler(_detect_trade_SelectionChanged);
             _detect_trade.SelectedIndex = 1;
@@ -139,7 +140,8 @@ namespace FoodSafetyMonitoring.Manager
                 string company_id;
 
                 //判断来源单位是否存在，若不存在则插入数据库
-                bool exit_flag = dbOperation.GetDbHelper().Exists(string.Format("SELECT count(COMPANYID) from t_company where COMPANYNAME ='{0}' and deptid = '{1}'", _source_company.Text, (Application.Current.Resources["User"] as UserInfo).DepartmentID));
+                //bool exit_flag = dbOperation.GetDbHelper().Exists(string.Format("SELECT count(COMPANYID) from t_company where COMPANYNAME ='{0}' and deptid = '{1}'", _source_company.Text, (Application.Current.Resources["User"] as UserInfo).DepartmentID));
+                bool exit_flag = dbOperation.GetDbHelper().Exists(string.Format("SELECT count(COMPANYID) from t_company where COMPANYNAME ='{0}'", _source_company.Text));
                 if (!exit_flag)
                 {
                     int n = dbOperation.GetDbHelper().ExecuteSql(string.Format("INSERT INTO t_company (COMPANYNAME,AREAID,OPENFLAG,deptid,cuserid,cdate) VALUES('{0}','{1}','{2}','{3}','{4}','{5}')",
@@ -197,7 +199,8 @@ namespace FoodSafetyMonitoring.Manager
                     {
                         clear();
                     }
-                    ComboboxTool.InitComboboxSource(_source_company, string.Format("call p_user_dept('{0}')", userId), "lr");
+                    //ComboboxTool.InitComboboxSource(_source_company, string.Format("call p_user_dept('{0}')", userId), "lr");
+                    ComboboxTool.InitComboboxSource(_source_company, "SELECT COMPANYID,COMPANYNAME FROM t_company", "lr");
                 }
                 else
                 {
@@ -251,6 +254,16 @@ namespace FoodSafetyMonitoring.Manager
             {
                 DataRow[] rows = ProvinceCityTable.Select("pid = '" + (_city.SelectedItem as Label).Tag.ToString() + "'");
                 ComboboxTool.InitComboboxSource(_region, rows, "lr");
+                _region.SelectionChanged += new SelectionChangedEventHandler(_region_SelectionChanged);
+            }
+        }
+
+        void _region_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (_region.SelectedIndex > 0)
+            {
+                ComboboxTool.InitComboboxSource(_source_company, "SELECT COMPANYID,COMPANYNAME FROM t_company where AREAID =" + (_region.SelectedItem as Label).Tag.ToString(), "lr");
+
             }
         }
 
@@ -268,7 +281,9 @@ namespace FoodSafetyMonitoring.Manager
                 _city.IsEnabled = false;
                 _region.IsEnabled = false;
 
-                string areaid = dbOperation.GetDbHelper().GetDataSet("SELECT AREAID from t_company where COMPANYID = " + (_source_company.SelectedItem as Label).Tag.ToString()).Tables[0].Rows[0][0].ToString();
+                string company_id = (_source_company.SelectedItem as Label).Tag.ToString();
+
+                string areaid = dbOperation.GetDbHelper().GetDataSet("SELECT AREAID from t_company where COMPANYID = " + company_id).Tables[0].Rows[0][0].ToString();
 
                 _source_company.Tag = areaid;
                 if (areaid.Length > 0)
@@ -298,6 +313,8 @@ namespace FoodSafetyMonitoring.Manager
                     _province.SelectedIndex = 0;
                     _city.SelectedIndex = 0;
                     _region.SelectedIndex = 0;
+
+                    ComboboxTool.InitComboboxSource(_source_company, "SELECT COMPANYID,COMPANYNAME FROM t_company", "lr");
                 }
             }
         }

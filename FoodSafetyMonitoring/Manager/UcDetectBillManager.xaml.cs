@@ -42,7 +42,8 @@ namespace FoodSafetyMonitoring.Manager
             ComboboxTool.InitComboboxSource(_province, rows,"lr");
             _province.SelectionChanged += new SelectionChangedEventHandler(_province_SelectionChanged);
 
-            ComboboxTool.InitComboboxSource(_source_company, "SELECT COMPANYID,COMPANYNAME FROM v_user_company WHERE userid =  " + userId,"lr");
+            //ComboboxTool.InitComboboxSource(_source_company, "SELECT COMPANYID,COMPANYNAME FROM v_user_company WHERE userid =  " + userId,"lr");
+            ComboboxTool.InitComboboxSource(_source_company, "SELECT COMPANYID,COMPANYNAME FROM t_company", "lr");
             if (supplierId == "nkrx")
             {
                 ComboboxTool.InitComboboxSource(_detect_trade, "select tradeId,tradeName from t_trade where openFlag = '1' order by orderId", "lr");
@@ -60,7 +61,7 @@ namespace FoodSafetyMonitoring.Manager
             //ComboboxTool.InitComboboxSource(_detect_sensitivity, "SELECT sensitivityId,sensitivityName FROM t_det_sensitivity where openFlag = '1'", "lr");
             ComboboxTool.InitComboboxSource(_detect_result, "SELECT resultId,resultName FROM t_det_result where openFlag = '1' ORDER BY id", "lr");
             _entering_datetime.Text = string.Format("{0:g}", System.DateTime.Now);
-            _source_company.SelectionChanged += new SelectionChangedEventHandler(_source_company_SelectionChanged);
+            //_source_company.SelectionChanged += new SelectionChangedEventHandler(_source_company_SelectionChanged);
             _detect_person.Text = (Application.Current.Resources["User"] as UserInfo).ShowName;
             _detect_site.Text = dbOperation.GetSingle("SELECT INFO_NAME  from  sys_client_sysdept WHERE INFO_CODE = " + (Application.Current.Resources["User"] as UserInfo).DepartmentID).ToString();
 
@@ -151,7 +152,8 @@ namespace FoodSafetyMonitoring.Manager
                 string company_id;
 
                 //判断来源单位是否存在，若不存在则插入数据库
-                bool exit_flag = dbOperation.Exists(string.Format("SELECT count(COMPANYID) from t_company where COMPANYNAME ='{0}' and deptid = '{1}'", _source_company.Text, (Application.Current.Resources["User"] as UserInfo).DepartmentID));
+                //bool exit_flag = dbOperation.Exists(string.Format("SELECT count(COMPANYID) from t_company where COMPANYNAME ='{0}' and deptid = '{1}'", _source_company.Text, (Application.Current.Resources["User"] as UserInfo).DepartmentID));
+                bool exit_flag = dbOperation.Exists(string.Format("SELECT count(COMPANYID) from t_company where COMPANYNAME ='{0}'", _source_company.Text));
                 if (!exit_flag)
                 {
                     int n = dbOperation.ExecuteSql(string.Format("INSERT INTO t_company (COMPANYNAME,AREAID,OPENFLAG,deptid,cuserid,cdate) VALUES('{0}','{1}','{2}','{3}','{4}','{5}')",
@@ -193,7 +195,8 @@ namespace FoodSafetyMonitoring.Manager
                 {
                     Toolkit.MessageBox.Show("添加成功！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
                     clear();
-                    ComboboxTool.InitComboboxSource(_source_company, "SELECT COMPANYID,COMPANYNAME FROM v_user_company WHERE userid =  " + userId, "lr");
+                    //ComboboxTool.InitComboboxSource(_source_company, "SELECT COMPANYID,COMPANYNAME FROM v_user_company WHERE userid =  " + userId, "lr");
+                    ComboboxTool.InitComboboxSource(_source_company, "SELECT COMPANYID,COMPANYNAME FROM t_company", "lr");
                 }
                 else
                 {
@@ -273,6 +276,8 @@ namespace FoodSafetyMonitoring.Manager
                     _province.SelectedIndex = 0;
                     _city.SelectedIndex = 0;
                     _region.SelectedIndex = 0;
+
+                    ComboboxTool.InitComboboxSource(_source_company, "SELECT COMPANYID,COMPANYNAME FROM t_company", "lr");
                 }
             }
         }
@@ -294,6 +299,16 @@ namespace FoodSafetyMonitoring.Manager
             {
                 DataRow[] rows = ProvinceCityTable.Select("pid = '" + (_city.SelectedItem as Label).Tag.ToString() + "'");
                 ComboboxTool.InitComboboxSource(_region, rows, "lr");
+                _region.SelectionChanged += new SelectionChangedEventHandler(_region_SelectionChanged);
+            }
+        }
+
+        void _region_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (_region.SelectedIndex > 0)
+            {
+                ComboboxTool.InitComboboxSource(_source_company, "SELECT COMPANYID,COMPANYNAME FROM t_company where AREAID =" + (_region.SelectedItem as Label).Tag.ToString(), "lr");
+
             }
         }
 
