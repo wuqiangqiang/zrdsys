@@ -33,22 +33,22 @@ xmlns:control="clr-namespace:FoodSafetyMonitoring.Manager.UserControls">
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Column="1"  FontSize="22" Text="--------------------------出证检测信息录入单--------------------------" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" ></TextBlock>
                 <StackPanel Grid.Row="1" Orientation="Horizontal">
-                    <TextBlock HorizontalAlignment="Right">来源单位:</TextBlock>
-                    <ComboBox Width="280" x:Name="_source_company"></ComboBox>
-                    <TextBlock  >联系电话:</TextBlock>
-                    <TextBlock Width="205" x:Name="_phone_number"></TextBlock>
+                    <TextBlock SnapsToDevicePixels="False">来源产地:</TextBlock>
+                    <!--<TextBlock x:Name="_province" Width="80"></TextBlock>-->
+                    <ComboBox Width="100" x:Name="_province"></ComboBox>
+                    <TextBlock MinWidth="20" Margin="10,0,0,0" >省</TextBlock>
+                    <!--<TextBlock x:Name="_city" Width="80"></TextBlock>-->
+                    <ComboBox Width="100" x:Name="_city"></ComboBox>
+                    <TextBlock  MinWidth="20" Margin="10,0,0,0" >市</TextBlock>
+                    <!--<TextBlock x:Name="_region" Width="80"></TextBlock>-->
+                    <ComboBox Width="100" x:Name="_region"></ComboBox>
+                    <TextBlock  Margin="10,0,0,0" >区（县）</TextBlock>
+                    <!--<TextBlock  >联系电话:</TextBlock>
+                    <TextBlock Width="205" x:Name="_phone_number"></TextBlock>-->
                 </StackPanel>
                 <StackPanel Grid.Row="2" Orientation="Horizontal">
-                    <TextBlock SnapsToDevicePixels="False">来源产地:</TextBlock>
-                    <TextBlock x:Name="_province" Width="80"></TextBlock>
-                    <!--<ComboBox Width="100" x:Name="_province"></ComboBox>-->
-                    <TextBlock MinWidth="20" Margin="10,0,0,0" >省</TextBlock>
-                    <TextBlock x:Name="_city" Width="80"></TextBlock>
-                    <!--<ComboBox Width="100" x:Name="_city"></ComboBox>-->
-                    <TextBlock  MinWidth="20" Margin="10,0,0,0" >市</TextBlock>
-                    <TextBlock x:Name="_region" Width="80"></TextBlock>
-                    <!--<ComboBox Width="100" x:Name="_region"></ComboBox>-->
-                    <TextBlock  Margin="10,0,0,0" >区（县）</TextBlock>
+                    <TextBlock HorizontalAlignment="Right">来源:</TextBlock>
+                    <ComboBox Width="280" x:Name="_source_company" IsEditable="True"></ComboBox>
                 </StackPanel>
                 <StackPanel Grid.Row="3" Orientation="Horizontal">
                     <TextBlock  >批次编码:</TextBlock>

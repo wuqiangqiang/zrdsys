@@ -25,6 +25,7 @@ namespace FoodSafetyMonitoring.Manager
     /// </summary>
     public partial class UcCertificateDetectManager : UserControl
     {
+        DataTable ProvinceCityTable;
         private IDBOperation dbOperation;
         string userId = (Application.Current.Resources["User"] as UserInfo).ID;
         string supplierId = (Application.Current.Resources["User"] as UserInfo).SupplierId;
@@ -32,6 +33,11 @@ namespace FoodSafetyMonitoring.Manager
         {
             InitializeComponent();
             this.dbOperation = dbOperation;
+            ProvinceCityTable = Application.Current.Resources["省市表"] as DataTable;
+            DataRow[] rows = ProvinceCityTable.Select("pid = '0001'");
+
+            ComboboxTool.InitComboboxSource(_province, rows, "lr");
+            _province.SelectionChanged += new SelectionChangedEventHandler(_province_SelectionChanged);
 
             ComboboxTool.InitComboboxSource(_source_company, string.Format("call p_provice_dept_hb('{0}','yz')", userId), "lr");
             _source_company.SelectionChanged += new SelectionChangedEventHandler(_source_company_SelectionChanged);
@@ -51,7 +57,7 @@ namespace FoodSafetyMonitoring.Manager
             this._city.Text = "";
             this._region.Text = "";
             this._source_company.SelectedIndex = 0;
-            this._phone_number.Text = "";
+            //this._phone_number.Text = "";
             this._object_count.Text = "";
             this._batch_number.Text = "";
             this._detect_trade.SelectedIndex = 1;
@@ -129,8 +135,35 @@ namespace FoodSafetyMonitoring.Manager
                     string batch_no = dbOperation.GetDbHelper().GetSingle("select f_create_batchno()").ToString();
                     _batch_number.Text = batch_no;
                 }
+
+                string company_id;
+
+                //判断来源单位是否存在，若不存在则插入数据库
+                bool exit_flag = dbOperation.GetDbHelper().Exists(string.Format("SELECT count(COMPANYID) from t_company where COMPANYNAME ='{0}' and deptid = '{1}'", _source_company.Text, (Application.Current.Resources["User"] as UserInfo).DepartmentID));
+                if (!exit_flag)
+                {
+                    int n = dbOperation.GetDbHelper().ExecuteSql(string.Format("INSERT INTO t_company (COMPANYNAME,AREAID,OPENFLAG,deptid,cuserid,cdate) VALUES('{0}','{1}','{2}','{3}','{4}','{5}')",
+                                                                  _source_company.Text,
+                                                                  (_region.SelectedItem as Label).Tag.ToString(),
+                                                                  '1', (Application.Current.Resources["User"] as UserInfo).DepartmentID,
+                                                                  (Application.Current.Resources["User"] as UserInfo).ID, DateTime.Now));
+                    if (n == 1)
+                    {
+                        company_id = dbOperation.GetDbHelper().GetSingle(string.Format("SELECT COMPANYID from t_company where COMPANYNAME ='{0}' and deptid = '{1}'", _source_company.Text, (Application.Current.Resources["User"] as UserInfo).DepartmentID)).ToString();
+                    }
+                    else
+                    {
+                        Toolkit.MessageBox.Show("来源单位添加失败！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                        return;
+                    }
+                }
+                else
+                {
+                    company_id = dbOperation.GetDbHelper().GetSingle(string.Format("SELECT COMPANYID from t_company where COMPANYNAME ='{0}' and deptid = '{1}'", _source_company.Text, (Application.Current.Resources["User"] as UserInfo).DepartmentID)).ToString();
+                }
+
                 string sql = string.Format("call p_insert_certificate_detect('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}')"
-                              , (_source_company.SelectedItem as Label).Tag.ToString(),
+                              , company_id,
                               _batch_number.Text,
                               (_detect_item.SelectedItem as Label).Tag.ToString(),
                               (_detect_method1.IsChecked == true ? 1 : 0) + (_detect_method2.IsChecked == true ? 2 : 0) + (_detect_method3.IsChecked == true ? 3 : 0),
@@ -164,7 +197,7 @@ namespace FoodSafetyMonitoring.Manager
                     {
                         clear();
                     }
-                    //ComboboxTool.InitComboboxSource(_source_company, string.Format("call p_user_dept('{0}')", userId), "lr");
+                    ComboboxTool.InitComboboxSource(_source_company, string.Format("call p_user_dept('{0}')", userId), "lr");
                 }
                 else
                 {
@@ -201,19 +234,71 @@ namespace FoodSafetyMonitoring.Manager
             }
         }
 
+        void _province_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (_province.SelectedIndex > 0)
+            {
+                DataRow[] rows = ProvinceCityTable.Select("pid = '" + (_province.SelectedItem as Label).Tag.ToString() + "'");
+                ComboboxTool.InitComboboxSource(_city, rows, "lr");
+                _city.SelectionChanged += new SelectionChangedEventHandler(_city_SelectionChanged);
+            }
+        }
+
+
+        void _city_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (_city.SelectedIndex > 0)
+            {
+                DataRow[] rows = ProvinceCityTable.Select("pid = '" + (_city.SelectedItem as Label).Tag.ToString() + "'");
+                ComboboxTool.InitComboboxSource(_region, rows, "lr");
+            }
+        }
+
+
 
         void _source_company_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //来源单位下拉选择的是有效内容，则将省市区自动赋值
+            //获取变更前的状态
+            bool flag = _province.IsEnabled;
+
+            //来源单位下拉选择的是有效内容，则将省市区的下拉灰显并且自动赋值
             if (_source_company.SelectedIndex >= 1)
             {
-                DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_dept_details('{0}')", (_source_company.SelectedItem as Label).Tag.ToString())).Tables[0];
+                _province.IsEnabled = false;
+                _city.IsEnabled = false;
+                _region.IsEnabled = false;
 
-                _province.Text =table.Rows[0][1].ToString();
-                _city.Text = table.Rows[0][3].ToString();
-                _region.Text = table.Rows[0][5].ToString();
-                _phone_number.Text = table.Rows[0][6].ToString();
+                string areaid = dbOperation.GetDbHelper().GetDataSet("SELECT AREAID from t_company where COMPANYID = " + (_source_company.SelectedItem as Label).Tag.ToString()).Tables[0].Rows[0][0].ToString();
 
+                _source_company.Tag = areaid;
+                if (areaid.Length > 0)
+                {
+                    string _areaid = areaid.Substring(0, 2);
+                    _province.Text = ProvinceCityTable.Select("id = '" + _areaid + "'")[0]["name"].ToString();
+                }
+                if (areaid.Length > 2)
+                {
+                    string _areaid = areaid.Substring(0, 4);
+                    _city.Text = ProvinceCityTable.Select("id = '" + _areaid + "'")[0]["name"].ToString();
+                }
+                if (areaid.Length > 4)
+                {
+                    _region.Text = ProvinceCityTable.Select("id = '" + areaid + "'")[0]["name"].ToString();
+                }
+            }
+            //来源单位下拉选择的是“-请选择-”或是手动输入来源单位，则将省市区的下拉激活并且内容清空
+            else if (_source_company.SelectedIndex < 1)
+            {
+                if (flag == false)
+                {
+                    _province.IsEnabled = true;
+                    _city.IsEnabled = true;
+                    _region.IsEnabled = true;
+
+                    _province.SelectedIndex = 0;
+                    _city.SelectedIndex = 0;
+                    _region.SelectedIndex = 0;
+                }
             }
         }
 

@@ -26,7 +26,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Thumb">
-                    <Rectangle Width="13" Fill="#7D7D7D" RadiusX="0" RadiusY="0">
+                    <Rectangle Width="13" Fill="#d1d1d7" RadiusX="0" RadiusY="0">
                     </Rectangle>
                 </ControlTemplate>
             </Setter.Value>
@@ -39,14 +39,17 @@
     </ControlTemplate>
 
     <ControlTemplate x:Key="scroll_up" TargetType="RepeatButton">
-        <Border Background="Transparent">
+        <Border>
+            <Border.Background>
+                <ImageBrush ImageSource="/res/up.png" />
+            </Border.Background>
         </Border>
     </ControlTemplate>
 
     <ControlTemplate x:Key="scroll_down" TargetType="RepeatButton">
         <Border>
             <Border.Background>
-                <ImageBrush ImageSource="/Manager/Images/btn_pressed.png" />
+                <ImageBrush ImageSource="/res/down.png" />
             </Border.Background>
         </Border>
     </ControlTemplate>
@@ -70,7 +73,7 @@
                         <RepeatButton Template="{StaticResource scroll_up}" Grid.Row="0" Command="ScrollBar.LineUpCommand" />
                         <RepeatButton Template="{StaticResource scroll_down}" Grid.Row="2" Command="ScrollBar.LineDownCommand" />
 
-                        <Border Width="13" HorizontalAlignment="Center" CornerRadius="0" Background="#33555555" Grid.Row="1" >
+                        <Border Width="15" HorizontalAlignment="Center" CornerRadius="0" Background="#e9e9ed" Grid.Row="1" >
                         
                             <Track  HorizontalAlignment="Center" Name="PART_Track" Width="{TemplateBinding Width}" Maximum="{TemplateBinding Maximum}" Minimum="{TemplateBinding Minimum}"
                                         Value="{TemplateBinding Value}"  IsDirectionReversed="true">

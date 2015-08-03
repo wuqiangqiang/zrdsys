@@ -4,7 +4,7 @@
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="Shared.xaml" />
-        <!--<ResourceDictionary Source="ScrollBar.xaml" />-->
+        <ResourceDictionary Source="ScrollBar.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <!-- SimpleStyles: ComboBox -->

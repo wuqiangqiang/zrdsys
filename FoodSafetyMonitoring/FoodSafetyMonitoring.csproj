@@ -1211,6 +1211,8 @@
     <Content Include="DLL\MySql.Data.dll" />
     <Content Include="DLL\NPOI.dll" />
     <Content Include="DLL\NPOI.OOXML.dll" />
+    <Resource Include="res\down.png" />
+    <Resource Include="res\up.png" />
     <Resource Include="res\title.png" />
     <Resource Include="Manager\Images\btn_normal.png" />
     <Resource Include="Manager\Images\btn_pressed.png" />

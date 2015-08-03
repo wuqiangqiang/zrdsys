@@ -30,8 +30,8 @@
                 <TextBlock  x:Name="_cardId" Width="180" Margin="5,0,0,0"></TextBlock>
             </StackPanel>
             <StackPanel Grid.Row="1" VerticalAlignment="Center">
-                <TextBlock HorizontalAlignment="Right">来源单位:</TextBlock>
-                <ComboBox Width="280" x:Name="_source_company"></ComboBox>
+                <TextBlock HorizontalAlignment="Right">来源:</TextBlock>
+                <ComboBox Width="280" x:Name="_source_company" IsEditable="True"></ComboBox>
                 <!--<TextBlock  >联系电话:</TextBlock>
                 <TextBlock Width="205" x:Name="_phone_number"></TextBlock>-->
                 <TextBlock  >批次头数:</TextBlock>

@@ -313,6 +313,18 @@ namespace FoodSafetyMonitoring.Manager
                     int count = dbOperation.GetDbHelper().ExecuteSql(sql);
                     if (count == 1)
                     {
+                        //如果是养殖场类型的部门，把信息插入t_company表中
+                        if(row["TYPE"] == "1")
+                        {
+                            int n = dbOperation.GetDbHelper().ExecuteSql(string.Format("INSERT INTO t_company (COMPANYNAME,AREAID,OPENFLAG,cuserid,cdate,sysdeptid) VALUES('{0}','{1}','{2}','{3}','{4}','{5}')",
+                                                                  row["INFO_NAME"],row["COUNTRY"],'1',(Application.Current.Resources["User"] as UserInfo).ID,
+                                                                  DateTime.Now, row["INFO_CODE"]));
+                            if (n != 1)
+                            {
+                                Toolkit.MessageBox.Show("来源单位添加失败！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                                return;
+                            }
+                        }
                         Toolkit.MessageBox.Show("保存成功！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
                         Common.SysLogEntry.WriteLog("部门管理", (Application.Current.Resources["User"] as UserInfo).ShowName, Common.OperationType.Modify, "新增部门信息");
                     }
