@@ -25,6 +25,7 @@ namespace FoodSafetyMonitoring.Manager
     {
         private IDBOperation dbOperation;
         string userId = (Application.Current.Resources["User"] as UserInfo).ID;
+        private string file_num;
 
         public UcCultureFile(IDBOperation dbOperation)
         {
@@ -36,16 +37,20 @@ namespace FoodSafetyMonitoring.Manager
             _file_person.Text = (Application.Current.Resources["User"] as UserInfo).ShowName;
             _culture_company.Text = dbOperation.GetDbHelper().GetSingle("SELECT INFO_NAME from sys_client_sysdept WHERE INFO_CODE = " + (Application.Current.Resources["User"] as UserInfo).DepartmentID).ToString();
             //起始档案编号
-            _file_num.Text = dbOperation.GetDbHelper().GetSingle(string.Format("select f_get_fileno('{0}')",
+            file_num = dbOperation.GetDbHelper().GetSingle(string.Format("select f_get_fileno('{0}')",
                               (Application.Current.Resources["User"] as UserInfo).DepartmentID)).ToString();
+            _file_num.Text = file_num;
+            _file_num_js.Text = file_num;
         }
 
         private void clear()
         {
             this._colony_house.Text = "";
             this._object_sum.Text = "";
-            this._file_num.Text = dbOperation.GetDbHelper().GetSingle(string.Format("select f_get_fileno('{0}')",
+            file_num = dbOperation.GetDbHelper().GetSingle(string.Format("select f_get_fileno('{0}')",
                               (Application.Current.Resources["User"] as UserInfo).DepartmentID)).ToString();
+            this._file_num.Text = file_num;
+            this._file_num_js.Text = file_num;
             this._object_type.SelectedIndex = 0;
             this._file_datetime.Text = string.Format("{0:g}", System.DateTime.Now);
         }
@@ -69,7 +74,7 @@ namespace FoodSafetyMonitoring.Manager
             {
                 string object_type_id;
 
-                //判断来源单位是否存在，若不存在则插入数据库
+                //判断养殖品种是否存在，若不存在则插入数据库
                 bool exit_flag = dbOperation.GetDbHelper().Exists(string.Format("SELECT count(ObjectTypeId) from t_culture_type where ObjectTypeName ='{0}'", _object_type.Text));
                 if (!exit_flag)
                 {
@@ -169,6 +174,23 @@ namespace FoodSafetyMonitoring.Manager
                     return false;
             }
             return true;
+        }
+
+        private void _object_sum_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            int value;
+            if ((sender as TextBox).Text == "")
+            {
+                value = 0;
+            }
+            else
+            {
+                value = Convert.ToInt32((sender as TextBox).Text);
+            }
+            int num = int.Parse(file_num.Substring(8, 5));
+            string file_num_1 = file_num.Substring(0, 8);
+            string file_num_2 = "00000" + Convert.ToString(num + value);
+            _file_num_js.Text = file_num_1 + file_num_2.Substring(file_num_2.Length - 5, 5);
         }
     }
 }

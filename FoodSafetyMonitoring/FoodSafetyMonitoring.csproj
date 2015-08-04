@@ -268,6 +268,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Manager\SysCultureFileReport.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Manager\SysDataDicManager.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -588,6 +592,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Manager\UcCultureFileDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\UcCultureFileReportDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Manager\UcDayReportDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -645,6 +657,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Manager\UcSlaughterDetectManager.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\UcSoldCultureFile.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\UcSoldCultureFileDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -938,6 +958,9 @@
     <Compile Include="Manager\SysComparisonAndAnalysis.xaml.cs">
       <DependentUpon>SysComparisonAndAnalysis.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Manager\SysCultureFileReport.xaml.cs">
+      <DependentUpon>SysCultureFileReport.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Manager\SysDataDicManager.xaml.cs">
       <DependentUpon>SysDataDicManager.xaml</DependentUpon>
     </Compile>
@@ -1025,6 +1048,12 @@
     <Compile Include="Manager\UcCultureFile.xaml.cs">
       <DependentUpon>UcCultureFile.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Manager\UcCultureFileDetails.xaml.cs">
+      <DependentUpon>UcCultureFileDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\UcCultureFileReportDetails.xaml.cs">
+      <DependentUpon>UcCultureFileReportDetails.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Manager\UcDayReportDetails.xaml.cs">
       <DependentUpon>UcDayReportDetails.xaml</DependentUpon>
     </Compile>
@@ -1060,6 +1089,12 @@
     </Compile>
     <Compile Include="Manager\UcSlaughterDetectManager.xaml.cs">
       <DependentUpon>UcSlaughterDetectManager.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\UcSoldCultureFile.xaml.cs">
+      <DependentUpon>UcSoldCultureFile.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\UcSoldCultureFileDetails.xaml.cs">
+      <DependentUpon>UcSoldCultureFileDetails.xaml</DependentUpon>
     </Compile>
     <Compile Include="Manager\UcSourceCompanyManager.xaml.cs">
       <DependentUpon>UcSourceCompanyManager.xaml</DependentUpon>

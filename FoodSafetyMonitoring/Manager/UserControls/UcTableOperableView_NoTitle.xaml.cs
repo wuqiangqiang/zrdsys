@@ -32,6 +32,8 @@ namespace FoodSafetyMonitoring.Manager.UserControls
         public event StateRowEventHandler StateRowEnvent;
         public delegate void GetDataByPageNumberEventHandler();
         public event GetDataByPageNumberEventHandler GetDataByPageNumberEvent;
+        public delegate void SoldRowEventHandler(string id);
+        public event SoldRowEventHandler SoldRowEnvent;
 
 
         public UcTableOperableView_NoTitle()
@@ -198,7 +200,6 @@ namespace FoodSafetyMonitoring.Manager.UserControls
                 gvc_details.CellTemplate = dataTemplate_details;
                 _gridview.Columns.Add(gvc_details);
             }
-
             if (BShowState)
             {
                 GridViewColumn gvc_state = new GridViewColumn();
@@ -215,6 +216,25 @@ namespace FoodSafetyMonitoring.Manager.UserControls
                 DataTemplate dataTemplate_state = new DataTemplate() { VisualTree = button_state };
                 gvc_state.CellTemplate = dataTemplate_state;
                 _gridview.Columns.Add(gvc_state);
+            }
+
+            if (BShowSold)
+            {
+                GridViewColumn gvc_sold = new GridViewColumn();
+                gvc_sold.Header = "出栏";
+                FrameworkElementFactory button_sold = new FrameworkElementFactory(typeof(Button));
+                button_sold.SetResourceReference(Button.HorizontalContentAlignmentProperty, HorizontalAlignment.Center);
+                button_sold.SetValue(Button.WidthProperty, 40.0);
+                button_sold.AddHandler(Button.ClickEvent, new RoutedEventHandler(Sold_Click));
+                button_sold.SetBinding(Button.TagProperty, new Binding(table.Columns[0].ColumnName));
+                //button_sold.SetResourceReference(Button.StyleProperty, "ListDetailsImageButtonTemplate");
+                button_sold.SetValue(Button.ContentProperty, "出栏");
+                button_sold.SetValue(Button.ForegroundProperty, Brushes.White);
+                button_sold.SetValue(Button.FontSizeProperty, 14.0);
+                //button_sold.SetValue(Button.FontFamilyProperty, "黑体");
+                DataTemplate dataTemplate_sold = new DataTemplate() { VisualTree = button_sold };
+                gvc_sold.CellTemplate = dataTemplate_sold;
+                _gridview.Columns.Add(gvc_sold);
             }
             _listview.ItemsSource = null;
             _listview.ItemsSource = table.DefaultView;
@@ -233,6 +253,7 @@ namespace FoodSafetyMonitoring.Manager.UserControls
         public bool BShowDelete { set; get; }
         public bool BShowDetails { set; get; }
         public bool BShowState { set; get; }
+        public bool BShowSold { set; get; }
 
         private DataTable table;
         public DataTable Table
@@ -274,6 +295,14 @@ namespace FoodSafetyMonitoring.Manager.UserControls
             if (DetailsRowEnvent != null)
             {
                 DetailsRowEnvent((sender as Button).Tag.ToString());
+            }
+        }
+
+        private void Sold_Click(object sender, RoutedEventArgs e)
+        {
+            if (SoldRowEnvent != null)
+            {
+                SoldRowEnvent((sender as Button).Tag.ToString());
             }
         }
 

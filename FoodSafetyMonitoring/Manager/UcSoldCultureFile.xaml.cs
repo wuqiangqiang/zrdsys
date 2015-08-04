@@ -20,16 +20,15 @@ using FoodSafetyMonitoring.Manager.UserControls;
 namespace FoodSafetyMonitoring.Manager
 {
     /// <summary>
-    /// UcQueryCultureFile.xaml 的交互逻辑
+    /// UcSoldCultureFile.xaml 的交互逻辑
     /// </summary>
-    public partial class UcQueryCultureFile : UserControl
+    public partial class UcSoldCultureFile : UserControl
     {
         public IDBOperation dbOperation = null;
         private Dictionary<string, MyColumn> MyColumns = new Dictionary<string, MyColumn>();
 
         string userId = (Application.Current.Resources["User"] as UserInfo).ID;
-
-        public UcQueryCultureFile(IDBOperation dbOperation)
+        public UcSoldCultureFile(IDBOperation dbOperation)
         {
             InitializeComponent();
             this.dbOperation = dbOperation;
@@ -37,11 +36,8 @@ namespace FoodSafetyMonitoring.Manager
             //画面初始化-养殖档案列表画面
             dtpStartDate.SelectedDate = DateTime.Now.AddDays(-1);
             dtpEndDate.SelectedDate = DateTime.Now;
+            ComboboxTool.InitComboboxSource(_colony_batch, string.Format("call p_user_colony_batch('{0}')", userId), "cxtj");
             ComboboxTool.InitComboboxSource(_colony_no, string.Format("call p_user_colony('{0}')", userId), "cxtj");
-            ComboboxTool.InitComboboxSource(_object_type, "SELECT ObjectTypeId,ObjectTypeName FROM t_culture_type where OpenFlag = '1'", "cxtj");
-            ComboboxTool.InitComboboxSource(_culture_company, string.Format("call p_user_dept_hb('{0}','yz')", userId), "cxtj");
-            ComboboxTool.InitComboboxSource(_file_cuserid, string.Format("call p_user_detuser_hb('{0}','yz')", userId), "cxtj");
-            _culture_company.SelectionChanged += new SelectionChangedEventHandler(_culture_company_SelectionChanged);
 
             SetColumns();
         }
@@ -51,68 +47,51 @@ namespace FoodSafetyMonitoring.Manager
             MyColumns.Add("createdate", new MyColumn("createdate", "建档时间") { BShow = true, Width = 18 });
             MyColumns.Add("culturecompany", new MyColumn("culturecompany", "养殖企业名称") { BShow = true, Width = 18 });
             MyColumns.Add("colonyhouse", new MyColumn("colonyhouse", "圈舍号") { BShow = true, Width = 5 });
-            MyColumns.Add("fileno", new MyColumn("fileno", "档案编号") { BShow = true, Width = 15 });
+            MyColumns.Add("colonybatch", new MyColumn("colonybatch", "圈舍批次") { BShow = true, Width = 15 });
             MyColumns.Add("objecttype", new MyColumn("objecttype", "养殖品种") { BShow = true, Width = 15 });
             MyColumns.Add("createuser", new MyColumn("createuser", "建档人") { BShow = true, Width = 10 });
-            MyColumns.Add("colonybatch", new MyColumn("colonybatch", "圈舍批次") { BShow = true, Width = 12 });
-            MyColumns.Add("solddate", new MyColumn("solddate", "出栏时间") { BShow = true, Width = 18 });
-            MyColumns.Add("solduserid", new MyColumn("solduserid", "出栏操作人") { BShow = true, Width = 10 });
-            MyColumns.Add("soldflag", new MyColumn("soldflag", "出栏状态") { BShow = true, Width = 8 });
             MyColumns.Add("sum_num", new MyColumn("sum_num", "总行数") { BShow = false });
 
             _tableview.MyColumns = MyColumns;
-            _tableview.BShowModify = false;
-            _tableview.BShowDetails = false;
+            _tableview.BShowSold = true;
+            _tableview.BShowDetails = true;
 
-            if ((Application.Current.Resources["User"] as UserInfo).FlagTier == "0")
-            {
-                _tableview.BShowDelete = true;
-            }
-            else
-            {
-                _tableview.BShowDelete = false;
-            }
-
-            _tableview.DeleteRowEnvent += new UcTableOperableView_NoTitle.DeleteRowEventHandler(_tableview_DeleteRowEnvent);
+            _tableview.DetailsRowEnvent += new UcTableOperableView_NoTitle.DetailsRowEventHandler(_tableview_DetailsRowEnvent);
+            _tableview.SoldRowEnvent += new UcTableOperableView_NoTitle.SoldRowEventHandler(_tableview_SoldRowEnvent);
         }
 
-        void _culture_company_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        void _tableview_DetailsRowEnvent(string id)
         {
-            if (_culture_company.SelectedIndex > 0)
-            {
-                ComboboxTool.InitComboboxSource(_file_cuserid, string.Format("SELECT RECO_PKID,INFO_USER,NUMB_USER FROM sys_client_user where fk_dept = '{0}'", (_culture_company.SelectedItem as Label).Tag.ToString()), "cxtj");
-            }
-            else if (_culture_company.SelectedIndex == 0)
-            {
-                ComboboxTool.InitComboboxSource(_file_cuserid, string.Format("call p_user_detuser_hb('{0}','yz')", userId), "cxtj");
-            }
+            grid_table.Children.Add(new UcSoldCultureFileDetails(dbOperation, id, (Application.Current.Resources["User"] as UserInfo).DepartmentID));       
         }
 
-        void _tableview_DeleteRowEnvent(string id)
+        void _tableview_SoldRowEnvent(string id)
         {
-            if (Toolkit.MessageBox.Show("确定要删除该条养殖档案记录吗？", "系统询问", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            if (Toolkit.MessageBox.Show("确定要对该批次进行出栏操作吗？", "系统询问", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
                 try
                 {
-                    int result = dbOperation.GetDbHelper().ExecuteSql(string.Format("delete from t_culture_file where FileNo ='{0}'", id));
+                    int result = dbOperation.GetDbHelper().ExecuteSql(string.Format("update t_culture_file set soldflag = '1' where colonybatch ='{0}'", id));
                     if (result > 0)
                     {
-                        Toolkit.MessageBox.Show("删除成功！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                        Toolkit.MessageBox.Show("出栏成功！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
                         GetData();
                     }
                     else
                     {
-                        Toolkit.MessageBox.Show("删除失败！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                        Toolkit.MessageBox.Show("出栏失败！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
                         return;
                     }
                 }
                 catch
                 {
-                    Toolkit.MessageBox.Show("删除失败2！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                    Toolkit.MessageBox.Show("出栏失败2！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
                     return;
                 }
             }
         }
+
+
         private void _query_Click(object sender, RoutedEventArgs e)
         {
             if (dtpStartDate.SelectedDate.Value.Date > dtpEndDate.SelectedDate.Value.Date)
@@ -130,14 +109,12 @@ namespace FoodSafetyMonitoring.Manager
 
         private void GetData()
         {
-            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_query_culture_file({0},'{1}','{2}','{3}','{4}','{5}','{6}',{7},{8})",
+            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_query_sold_culture_file({0},'{1}','{2}','{3}','{4}',{5},{6})",
                    userId,
                    ((DateTime)dtpStartDate.SelectedDate).ToShortDateString(),
                    ((DateTime)dtpEndDate.SelectedDate).ToShortDateString(),
-                   _object_type.SelectedIndex < 1 ? "" : (_object_type.SelectedItem as Label).Tag,
+                   _colony_batch.SelectedIndex < 1 ? "" : (_colony_batch.SelectedItem as Label).Tag,
                    _colony_no.SelectedIndex < 1 ? "" : (_colony_no.SelectedItem as Label).Tag,
-                   _culture_company.SelectedIndex < 1 ? "" : (_culture_company.SelectedItem as Label).Tag,
-                   _file_cuserid.SelectedIndex < 1 ? "" : (_file_cuserid.SelectedItem as Label).Tag,
                    (_tableview.PageIndex - 1) * _tableview.RowMax,
                    _tableview.RowMax)).Tables[0];
 
@@ -151,14 +128,12 @@ namespace FoodSafetyMonitoring.Manager
 
         private void _export_Click(object sender, RoutedEventArgs e)
         {
-            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_query_culture_file({0},'{1}','{2}','{3}','{4}','{5}','{6}',{7},{8})",
+            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_query_sold_culture_file({0},'{1}','{2}','{3}','{4}',{5},{6})",
                    userId,
                    ((DateTime)dtpStartDate.SelectedDate).ToShortDateString(),
                    ((DateTime)dtpEndDate.SelectedDate).ToShortDateString(),
-                   _object_type.SelectedIndex < 1 ? "" : (_object_type.SelectedItem as Label).Tag,
+                   _colony_batch.SelectedIndex < 1 ? "" : (_colony_batch.SelectedItem as Label).Tag,
                    _colony_no.SelectedIndex < 1 ? "" : (_colony_no.SelectedItem as Label).Tag,
-                   _culture_company.SelectedIndex < 1 ? "" : (_culture_company.SelectedItem as Label).Tag,
-                   _file_cuserid.SelectedIndex < 1 ? "" : (_file_cuserid.SelectedItem as Label).Tag,
                   0,
                   _tableview.RowTotal)).Tables[0];
 

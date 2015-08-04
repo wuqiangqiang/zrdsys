@@ -173,6 +173,10 @@ namespace FoodSafetyMonitoring
                     case "30102": temptb.Header = (sender as Button).Content.ToString();
                         temptb.Content = new UcQueryCultureFile(mainWindow.dbOperation);
                         break;
+                    //养殖检测->档案管理->出栏
+                    case "30103": temptb.Header = (sender as Button).Content.ToString();
+                        temptb.Content = new UcSoldCultureFile(mainWindow.dbOperation);
+                        break;
                     //养殖检测->检测单管理->新建养殖检测单
                     case "30201": temptb.Header = (sender as Button).Content.ToString() + "(养殖)";
                         temptb.Content = new UcCultureDetectManager(mainWindow.dbOperation);
@@ -244,6 +248,10 @@ namespace FoodSafetyMonitoring
                     //养殖检测->数据统计->自定义报表
                     case "30303": temptb.Header = (sender as Button).Content.ToString() + "(养殖)";
                         temptb.Content = new SysYearReport(mainWindow.dbOperation, "yz", "0"); //传入检测站点的类型和检测单的类型
+                        break;
+                    //养殖检测->数据统计->档案统计报表
+                    case "30304": temptb.Header = (sender as Button).Content.ToString();
+                        temptb.Content = new SysCultureFileReport(mainWindow.dbOperation); 
                         break;
                     //出证检测->数据统计->日报表
                     case "40201": temptb.Header = (sender as Button).Content.ToString() + "(出证)";

@@ -39,7 +39,7 @@
                 <StackPanel Grid.Row="1" Orientation="Horizontal">
                     <TextBlock HorizontalAlignment="Right">饲料名称:</TextBlock>
                     <!--<ComboBox Width="100" x:Name="_feed_name" ></ComboBox>-->
-                    <TextBox x:Name="_feed_name" Width="100"></TextBox>
+                    <TextBox x:Name="_feed_name" Width="100" MaxLength="10"></TextBox>
                     <TextBlock >饲料品牌:</TextBlock>
                     <TextBox x:Name="_feed_brand" Width="100"></TextBox>
                     <TextBlock >生产企业名称:</TextBlock>

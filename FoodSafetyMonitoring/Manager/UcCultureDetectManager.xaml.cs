@@ -35,11 +35,15 @@ namespace FoodSafetyMonitoring.Manager
             InitializeComponent();
             this.dbOperation = dbOperation;
 
-            ComboboxTool.InitComboboxSource(_culture_file, "select FileNo,FileNo from v_user_culture_file where userid =" + userId, "lr");
-            _culture_file.SelectionChanged += new SelectionChangedEventHandler(_culture_file_SelectionChanged);
-            ComboboxTool.InitComboboxSource(_detect_trade, "select tradeId,tradeName from t_trade where openFlag = '1'", "lr");
-            _detect_trade.SelectionChanged += new SelectionChangedEventHandler(_detect_trade_SelectionChanged);
-            _detect_trade.SelectedIndex = 1;
+            ComboboxTool.InitComboboxSource(_colony_no, string.Format("call p_user_colony_wcl({0})", userId), "lr");
+            _colony_no.SelectionChanged += new SelectionChangedEventHandler(_colony_no_SelectionChanged);
+            //ComboboxTool.InitComboboxSource(_culture_file, "select FileNo,FileNo from v_user_culture_file where userid =" + userId, "lr");
+            //_culture_file.SelectionChanged += new SelectionChangedEventHandler(_culture_file_SelectionChanged);
+            //ComboboxTool.InitComboboxSource(_detect_trade, "select tradeId,tradeName from t_trade where openFlag = '1'", "lr");
+            //_detect_trade.SelectionChanged += new SelectionChangedEventHandler(_detect_trade_SelectionChanged);
+            //_detect_trade.SelectedIndex = 1;
+            ComboboxTool.InitComboboxSource(_detect_item, string.Format("SELECT ItemID,ItemNAME FROM t_det_item_hb WHERE  (tradeId ='1'or ifnull(tradeId,'') = '') and OPENFLAG = '1' "), "lr");
+            _detect_item.SelectionChanged += new SelectionChangedEventHandler(_detect_item_SelectionChanged);
             ComboboxTool.InitComboboxSource(_detect_result, "SELECT resultId,resultName FROM t_det_result where openFlag = '1' ORDER BY id", "lr");
             _entering_datetime.Text = string.Format("{0:g}", System.DateTime.Now);
             _detect_person.Text = (Application.Current.Resources["User"] as UserInfo).ShowName;
@@ -51,7 +55,7 @@ namespace FoodSafetyMonitoring.Manager
             this._file_cdate.Text = "";
             this._colony_no.Text = "";
             this._detect_site.Text = "";
-            this._detect_trade.SelectedIndex = 1;
+            //this._detect_trade.SelectedIndex = 1;
             this._detect_item.SelectedIndex = 0;
             this._detect_method1.IsChecked = false;
             this._detect_method2.IsChecked = false;
@@ -167,6 +171,12 @@ namespace FoodSafetyMonitoring.Manager
             }
         }
 
+        void _colony_no_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboboxTool.InitComboboxSource(_culture_file, string.Format("call p_user_colony_wcl({0},'{1}')", userId, (_colony_no.SelectedItem as Label).Tag), "lr");
+            _culture_file.SelectionChanged += new SelectionChangedEventHandler(_culture_file_SelectionChanged);
+        }
+
         void _culture_file_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             string culture_no;
@@ -193,7 +203,7 @@ namespace FoodSafetyMonitoring.Manager
                 //else
                 //{
                     this._file_cdate.Text = table.Rows[0][0].ToString();
-                    this._colony_no.Text = table.Rows[0][1].ToString(); 
+                    //this._colony_no.Text = table.Rows[0][1].ToString(); 
                     this._detect_site.Text = table.Rows[0][3].ToString();
                     dept_id = table.Rows[0][2].ToString(); 
                 //}
@@ -201,35 +211,36 @@ namespace FoodSafetyMonitoring.Manager
             else if (_culture_file.SelectedIndex == 0)
             {
                 this._file_cdate.Text = "";
-                this._colony_no.Text = "";
+                //this._colony_no.Text = "";
                 this._detect_site.Text = "";
                 dept_id = ""; 
             }
         }
 
-        void _detect_trade_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (_detect_trade.SelectedIndex > 0)
-            {
-                //ComboboxTool.InitComboboxSource(_detect_item, string.Format("SELECT itemid,ItemNAME FROM v_user_item WHERE userid = '{0}' and (tradeId ='{1}'or ifnull(tradeId,'') = '')", userId, (_detect_trade.SelectedItem as Label).Tag), "lr");
-                ComboboxTool.InitComboboxSource(_detect_item, string.Format("SELECT ItemID,ItemNAME FROM t_det_item WHERE  (tradeId ='{0}'or ifnull(tradeId,'') = '') and OPENFLAG = '1' order by orderId", (_detect_trade.SelectedItem as Label).Tag), "lr");
-                _detect_item.SelectionChanged += new SelectionChangedEventHandler(_detect_item_SelectionChanged);
-            }
-            //else
-            //{
-            //    _detect_item.Items.Clear();
-            //    _detect_object.Items.Clear();
-            //    _detect_sample.Items.Clear();
-            //    _detect_sensitivity.Items.Clear();
-            //}
-        }
+        //void _detect_trade_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //    if (_detect_trade.SelectedIndex > 0)
+        //    {
+        //        //ComboboxTool.InitComboboxSource(_detect_item, string.Format("SELECT itemid,ItemNAME FROM v_user_item WHERE userid = '{0}' and (tradeId ='{1}'or ifnull(tradeId,'') = '')", userId, (_detect_trade.SelectedItem as Label).Tag), "lr");
+        //        ComboboxTool.InitComboboxSource(_detect_item, string.Format("SELECT ItemID,ItemNAME FROM t_det_item WHERE  (tradeId ='{0}'or ifnull(tradeId,'') = '') and OPENFLAG = '1' order by orderId", (_detect_trade.SelectedItem as Label).Tag), "lr");
+        //        _detect_item.SelectionChanged += new SelectionChangedEventHandler(_detect_item_SelectionChanged);
+        //    }
+        //    //else
+        //    //{
+        //    //    _detect_item.Items.Clear();
+        //    //    _detect_object.Items.Clear();
+        //    //    _detect_sample.Items.Clear();
+        //    //    _detect_sensitivity.Items.Clear();
+        //    //}
+        //}
 
         void _detect_item_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (_detect_item.SelectedIndex > 0)
             {
                 //ComboboxTool.InitComboboxSource(_detect_object, string.Format("call p_detect_object( '{0}','{1}')", userId, (_detect_item.SelectedItem as Label).Tag), "lr");
-                ComboboxTool.InitComboboxSource(_detect_object, string.Format("SELECT objectId,objectName FROM v_item_object WHERE itemId = '{0}' and tradeId = '{1}'", (_detect_item.SelectedItem as Label).Tag, (_detect_trade.SelectedItem as Label).Tag), "lr");
+                //ComboboxTool.InitComboboxSource(_detect_object, string.Format("SELECT objectId,objectName FROM v_item_object WHERE itemId = '{0}' and tradeId = '{1}'", (_detect_item.SelectedItem as Label).Tag, (_detect_trade.SelectedItem as Label).Tag), "lr");
+                ComboboxTool.InitComboboxSource(_detect_object, string.Format("SELECT objectId,objectName FROM t_det_object WHERE OPENFLAG = '1'"), "lr");
                 _detect_object.SelectionChanged += new SelectionChangedEventHandler(_detect_object_SelectionChanged);
             }
         }

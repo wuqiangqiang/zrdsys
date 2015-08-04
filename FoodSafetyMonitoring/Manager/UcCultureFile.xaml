@@ -34,9 +34,11 @@
                 </StackPanel>
                 <StackPanel Grid.Row="2" Orientation="Horizontal">
                     <TextBlock  >圈舍养殖数量:</TextBlock>
-                    <TextBox Width="90" Height="20" x:Name="_object_sum" MaxLength="5" TextAlignment="Right" InputMethod.IsInputMethodEnabled="False" DataObject.Pasting="Object_Sum_Pasting" PreviewKeyDown="Object_Sum_PreviewKeyDown"  PreviewTextInput="Object_Sum_PreviewTextInput"></TextBox>
-                    <TextBlock Width="90" >起始档案编号:</TextBlock>
+                    <TextBox Width="90" Height="20" x:Name="_object_sum" MaxLength="5" TextAlignment="Right" InputMethod.IsInputMethodEnabled="False" DataObject.Pasting="Object_Sum_Pasting" PreviewKeyDown="Object_Sum_PreviewKeyDown"  PreviewTextInput="Object_Sum_PreviewTextInput" TextChanged="_object_sum_TextChanged"></TextBox>
+                    <TextBlock Width="90" >档案编号:</TextBlock>
                     <TextBlock Width="100" x:Name="_file_num"></TextBlock>
+                    <TextBlock > - </TextBlock>
+                    <TextBlock Width="100" x:Name="_file_num_js"></TextBlock>
                 </StackPanel>
                 <StackPanel Grid.Row="3" Orientation="Horizontal">
                     <TextBlock  MinWidth="40">养殖企业名称:</TextBlock>

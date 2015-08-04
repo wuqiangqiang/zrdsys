@@ -41,14 +41,14 @@ namespace FoodSafetyMonitoring.Manager
             dtpStartDate.SelectedDate = DateTime.Now.AddDays(-1);
             dtpEndDate.SelectedDate = DateTime.Now;
             //ComboboxTool.InitComboboxSource(_source_company1, string.Format(" call p_user_company('{0}','') ", userId), "cxtj");
-            ComboboxTool.InitComboboxSource(_detect_station, string.Format("call p_user_dept_hb('{0}','tz')", userId), "cxtj");
-            ComboboxTool.InitComboboxSource(_detect_feed, "select feedid,feedname from t_feed where openflag = '1'", "cxtj");
-            ComboboxTool.InitComboboxSource(_detect_item1, "SELECT ItemID,ItemNAME FROM t_det_item WHERE  (tradeId ='1'or tradeId ='2' or tradeId ='3' or ifnull(tradeId,'') = '') and OPENFLAG = '1' order by orderId", "cxtj");
-            ComboboxTool.InitComboboxSource(_detect_object1, "SELECT objectId,objectName FROM t_det_object WHERE  (tradeId ='1'or tradeId ='2' or tradeId ='3' or ifnull(tradeId,'') = '') and OPENFLAG = '1'", "cxtj");
+            ComboboxTool.InitComboboxSource(_detect_station, string.Format("call p_user_dept_hb('{0}','yz')", userId), "cxtj");
+            ComboboxTool.InitComboboxSource(_detect_feed, string.Format("call p_user_feed('{0}')", userId), "cxtj");
+            ComboboxTool.InitComboboxSource(_detect_item1, "SELECT ItemID,ItemNAME FROM t_det_item_hb WHERE  (tradeId ='0' or ifnull(tradeId,'') = '') and OPENFLAG = '1'", "cxtj");  
             ComboboxTool.InitComboboxSource(_detect_result1, "SELECT resultId,resultName FROM t_det_result where openFlag = '1' ORDER BY id", "cxtj");
-            ComboboxTool.InitComboboxSource(_detect_person1, string.Format("call p_user_detuser_hb('{0}','tz')", userId), "cxtj");
+            ComboboxTool.InitComboboxSource(_detect_person1, string.Format("call p_user_detuser_hb('{0}','yz')", userId), "cxtj");
             ComboboxTool.InitComboboxSource(_detect_method, "select reagentId,reagentName from t_det_reagent where openFlag = '1'", "cxtj");
-            ComboboxTool.InitComboboxSource(_detect_type, "SELECT sourceId,sourceName FROM t_det_source where openFlag = '1'", "cxtj");
+            //ComboboxTool.InitComboboxSource(_detect_object1, "SELECT objectId,objectName FROM t_det_object WHERE  (tradeId ='1'or tradeId ='2' or tradeId ='3' or ifnull(tradeId,'') = '') and OPENFLAG = '1'", "cxtj");
+            //ComboboxTool.InitComboboxSource(_detect_type, "SELECT sourceId,sourceName FROM t_det_source where openFlag = '1'", "cxtj");
             //ComboboxTool.InitComboboxSource(_dept_type, "SELECT typeId,typeName FROM t_dept_type where openFlag = '1'", "cxtj");
 
             //ComboboxTool.InitComboboxSource(_province1, rows, "cxtj");
@@ -63,7 +63,7 @@ namespace FoodSafetyMonitoring.Manager
         {
             MyColumns.Add("orderid", new MyColumn("orderid", "检测单编号") { BShow = true, Width = 10 });
             MyColumns.Add("detecttype", new MyColumn("detecttype", "数据来源id") { BShow = false });
-            MyColumns.Add("detecttypename", new MyColumn("detecttypename", "数据来源") { BShow = true, Width = 10 });
+            MyColumns.Add("detecttypename", new MyColumn("detecttypename", "数据来源") { BShow = false, Width = 10 });
             MyColumns.Add("detectdate", new MyColumn("detectdate", "检测时间") { BShow = true, Width = 18 });
             MyColumns.Add("deptid", new MyColumn("deptid", "检测站点id") { BShow = false });
             MyColumns.Add("deptname", new MyColumn("deptname", "检测站点") { BShow = true, Width = 16 });
@@ -146,7 +146,7 @@ namespace FoodSafetyMonitoring.Manager
             }
             else if (_detect_station.SelectedIndex == 0)
             {
-                ComboboxTool.InitComboboxSource(_detect_person1, string.Format("call p_user_detuser_hb('{0}','tz')", userId), "cxtj");
+                ComboboxTool.InitComboboxSource(_detect_person1, string.Format("call p_user_detuser_hb('{0}','yz')", userId), "cxtj");
             }
         }
 
@@ -167,7 +167,7 @@ namespace FoodSafetyMonitoring.Manager
 
         private void GetData()
         {
-            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_query_feed_detect({0},'{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}',{11},{12})",
+            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_query_feed_detect({0},'{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}',{9},{10})",
                   (Application.Current.Resources["User"] as UserInfo).ID,
                 //dtpStartDate.Value.ToString() == dtpEndDate.Value.ToString() ? "" : dtpStartDate.Value.ToString(),
                 //dtpStartDate.Value.ToString() == dtpEndDate.Value.ToString() ? "" : dtpEndDate.Value.ToString(),
@@ -176,11 +176,11 @@ namespace FoodSafetyMonitoring.Manager
                   _detect_feed.SelectedIndex < 1 ? "" : (_detect_feed.SelectedItem as Label).Tag,
                    _detect_station.SelectedIndex < 1 ? "" : (_detect_station.SelectedItem as Label).Tag,
                   _detect_item1.SelectedIndex < 1 ? "" : (_detect_item1.SelectedItem as Label).Tag,
-                  _detect_object1.SelectedIndex < 1 ? "" : (_detect_object1.SelectedItem as Label).Tag,
+                  //_detect_object1.SelectedIndex < 1 ? "" : (_detect_object1.SelectedItem as Label).Tag,
                   _detect_result1.SelectedIndex < 1 ? "" : (_detect_result1.SelectedItem as Label).Tag,
                   _detect_method.SelectedIndex < 1 ? "" : (_detect_method.SelectedItem as Label).Tag,
                   _detect_person1.SelectedIndex < 1 ? "" : (_detect_person1.SelectedItem as Label).Tag,
-                  _detect_type.SelectedIndex < 1 ? "" : (_detect_type.SelectedItem as Label).Tag,
+                  //_detect_type.SelectedIndex < 1 ? "" : (_detect_type.SelectedItem as Label).Tag,
                   (_tableview.PageIndex - 1) * _tableview.RowMax,
                   _tableview.RowMax)).Tables[0];
 
@@ -237,7 +237,7 @@ namespace FoodSafetyMonitoring.Manager
 
         private void _export_Click(object sender, RoutedEventArgs e)
         {
-            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_query_feed_detect({0},'{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}',{11},{12})",
+            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_query_feed_detect({0},'{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}',{9},{10})",
                   (Application.Current.Resources["User"] as UserInfo).ID,
                 //dtpStartDate.Value.ToString() == dtpEndDate.Value.ToString() ? "" : dtpStartDate.Value.ToString(),
                 //dtpStartDate.Value.ToString() == dtpEndDate.Value.ToString() ? "" : dtpEndDate.Value.ToString(),
@@ -246,11 +246,11 @@ namespace FoodSafetyMonitoring.Manager
                   _detect_feed.SelectedIndex < 1 ? "" : (_detect_feed.SelectedItem as Label).Tag,
                    _detect_station.SelectedIndex < 1 ? "" : (_detect_station.SelectedItem as Label).Tag,
                   _detect_item1.SelectedIndex < 1 ? "" : (_detect_item1.SelectedItem as Label).Tag,
-                  _detect_object1.SelectedIndex < 1 ? "" : (_detect_object1.SelectedItem as Label).Tag,
+                //_detect_object1.SelectedIndex < 1 ? "" : (_detect_object1.SelectedItem as Label).Tag,
                   _detect_result1.SelectedIndex < 1 ? "" : (_detect_result1.SelectedItem as Label).Tag,
                   _detect_method.SelectedIndex < 1 ? "" : (_detect_method.SelectedItem as Label).Tag,
                   _detect_person1.SelectedIndex < 1 ? "" : (_detect_person1.SelectedItem as Label).Tag,
-                  _detect_type.SelectedIndex < 1 ? "" : (_detect_type.SelectedItem as Label).Tag,
+                //_detect_type.SelectedIndex < 1 ? "" : (_detect_type.SelectedItem as Label).Tag,
                   0,
                   _tableview.RowTotal)).Tables[0];
 
