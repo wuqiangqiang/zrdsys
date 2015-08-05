@@ -24,22 +24,14 @@ namespace FoodSafetyMonitoring.Manager
     {
         private IDBOperation dbOperation;
         private Dictionary<string, MyColumn> MyColumns = new Dictionary<string, MyColumn>();
-        public string CompanyId { get; set; }
         public string BatchNo { get; set; }
-        public string DeptId { get; set; }
-        public string ItemId { get; set; }
-        public string ResultId { get; set; }
 
-        public UcCreateCertificatedetails(IDBOperation dbOperation, string company_id,string batch_no, string itemId,string deptId, string resultId)
+        public UcCreateCertificatedetails(IDBOperation dbOperation,string batch_no)
         {
             InitializeComponent();
 
             this.dbOperation = dbOperation;
-            this.CompanyId = company_id;
             this.BatchNo = batch_no;
-            this.DeptId = deptId;
-            this.ItemId = itemId;
-            this.ResultId = resultId;
 
             MyColumns.Add("orderid", new MyColumn("orderid", "检测单编号") { BShow = true, Width = 8 });
             MyColumns.Add("detecttypename", new MyColumn("detecttypename", "信息来源") { BShow = true, Width = 8 });
@@ -67,8 +59,8 @@ namespace FoodSafetyMonitoring.Manager
 
         private void GetData()
         {
-            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_certificate_details('{0}','{1}','{2}','{3}','{4}',{5},{6})",
-                                CompanyId,BatchNo, DeptId, ItemId, ResultId,
+            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_certificate_details('{0}',{1},{2})",
+                                BatchNo,
                               (_tableview.PageIndex - 1) * _tableview.RowMax,
                               _tableview.RowMax)).Tables[0];
 

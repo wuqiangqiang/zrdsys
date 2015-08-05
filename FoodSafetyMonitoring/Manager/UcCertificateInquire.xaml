@@ -59,24 +59,20 @@
                             <ComboBox x:Name="_province1" Width="120" Text="省" Margin="0,0,5,0"></ComboBox>
                             <ComboBox x:Name="_city1" Width="120" Text="地市" Margin="0,0,5,0"></ComboBox>
                             <ComboBox x:Name="_region1" Width="120" Text="区县"></ComboBox>
-                            <TextBlock MinWidth="50">来源单位:</TextBlock>
+                            <TextBlock MinWidth="50">被检单位:</TextBlock>
                             <ComboBox x:Name="_source_company1" Width="240"></ComboBox>
                         </StackPanel>
                     </Grid>
                     <Grid Grid.Row="1">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="1058*"/>
-                            <ColumnDefinition Width="77*"/>
-                        </Grid.ColumnDefinitions>
                         <StackPanel VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="0,5.5">
-                            <TextBlock MinWidth="50">检测站点:</TextBlock>
+                            <TextBlock MinWidth="50">检测单位:</TextBlock>
                             <ComboBox x:Name="_detect_station" Width="260"/>
                             <TextBlock MinWidth="52">检测师:</TextBlock>
                             <ComboBox Width="120" x:Name="_detect_person1" />
                             <TextBlock MinWidth="50">检测项目:</TextBlock>
                             <ComboBox Width="170" x:Name="_detect_item1" />
                             <TextBlock MinWidth="50">检测方法:</TextBlock>
-                            <ComboBox Width="200" x:Name="_detect_method" />
+                            <ComboBox Width="240" x:Name="_detect_method" />
                         </StackPanel>
                     </Grid>
                     <Grid  Grid.Row="2">

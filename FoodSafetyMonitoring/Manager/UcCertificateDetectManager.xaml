@@ -11,6 +11,7 @@ xmlns:control="clr-namespace:FoodSafetyMonitoring.Manager.UserControls">
                 <ResourceDictionary Source="Themes/ComboBox.xaml"/>
                 <ResourceDictionary Source="Themes/TextBlock.xaml"/>
                 <ResourceDictionary Source="Themes/CheckBox.xaml"/>
+                <ResourceDictionary Source="Themes/Button_new.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
@@ -47,12 +48,13 @@ xmlns:control="clr-namespace:FoodSafetyMonitoring.Manager.UserControls">
                     <TextBlock Width="205" x:Name="_phone_number"></TextBlock>-->
                 </StackPanel>
                 <StackPanel Grid.Row="2" Orientation="Horizontal">
-                    <TextBlock HorizontalAlignment="Right">来源:</TextBlock>
+                    <TextBlock HorizontalAlignment="Right">被检单位:</TextBlock>
                     <ComboBox Width="280" x:Name="_source_company" IsEditable="True"></ComboBox>
                 </StackPanel>
                 <StackPanel Grid.Row="3" Orientation="Horizontal">
                     <TextBlock  >批次编码:</TextBlock>
                     <TextBlock  x:Name="_batch_number" Width="180" Margin="5,0,0,0"></TextBlock>
+                    <Button Content="获取批次编码" Width="100" Name="btnGo"   VerticalAlignment="Center" Click="btnget_Click" />
                     <TextBlock  >批次头数:</TextBlock>
                     <TextBox Width="50" x:Name="_object_count" MaxLength="5" TextAlignment="Right" InputMethod.IsInputMethodEnabled="False" DataObject.Pasting="Object_Count_Pasting" PreviewKeyDown="Object_Count_PreviewKeyDown"  PreviewTextInput="Object_Count_PreviewTextInput"></TextBox>
                     <TextBlock  >检测方法:</TextBlock>
@@ -62,7 +64,7 @@ xmlns:control="clr-namespace:FoodSafetyMonitoring.Manager.UserControls">
                 </StackPanel>
                 <StackPanel Grid.Row="4" Orientation="Horizontal">
                     <TextBlock  >检测项目:</TextBlock>
-                    <ComboBox  Width="100" x:Name="_detect_trade" IsEnabled="False"></ComboBox>
+                    <!--<ComboBox  Width="100" x:Name="_detect_trade" IsEnabled="False"></ComboBox>-->
                     <ComboBox  Width="140" x:Name="_detect_item" ></ComboBox>
                     <TextBlock  >检测对象:</TextBlock>
                     <ComboBox  Width="100" x:Name="_detect_object"></ComboBox>
@@ -76,7 +78,7 @@ xmlns:control="clr-namespace:FoodSafetyMonitoring.Manager.UserControls">
                     <ComboBox  Width="140" x:Name="_detect_result"></ComboBox>
                 </StackPanel>
                 <StackPanel Grid.Row="6" Orientation="Horizontal">
-                    <TextBlock  MinWidth="40">检测点:</TextBlock>
+                    <TextBlock  MinWidth="40">检测单位:</TextBlock>
                     <TextBlock  x:Name="_detect_site" Margin="5,0,0,0" MinWidth="200" ></TextBlock>
                     <TextBlock  MinWidth="40">检测师:</TextBlock>
                     <TextBlock  x:Name="_detect_person" Margin="5,0,0,0" MinWidth="180" ></TextBlock>

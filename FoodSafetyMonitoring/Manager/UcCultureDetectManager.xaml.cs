@@ -173,8 +173,12 @@ namespace FoodSafetyMonitoring.Manager
 
         void _colony_no_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ComboboxTool.InitComboboxSource(_culture_file, string.Format("call p_user_colony_wcl({0},'{1}')", userId, (_colony_no.SelectedItem as Label).Tag), "lr");
-            _culture_file.SelectionChanged += new SelectionChangedEventHandler(_culture_file_SelectionChanged);
+            if (_colony_no.SelectedIndex > 0)
+            {
+                ComboboxTool.InitComboboxSource(_culture_file, string.Format("call p_user_culture_file({0},'{1}')", userId, (_colony_no.SelectedItem as Label).Tag), "lr");
+                _culture_file.SelectionChanged += new SelectionChangedEventHandler(_culture_file_SelectionChanged);
+            }
+            
         }
 
         void _culture_file_SelectionChanged(object sender, SelectionChangedEventArgs e)

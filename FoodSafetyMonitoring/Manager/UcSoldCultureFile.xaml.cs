@@ -71,7 +71,8 @@ namespace FoodSafetyMonitoring.Manager
             {
                 try
                 {
-                    int result = dbOperation.GetDbHelper().ExecuteSql(string.Format("update t_culture_file set soldflag = '1' where colonybatch ='{0}'", id));
+                    int result = dbOperation.GetDbHelper().ExecuteSql(string.Format("update t_culture_file set soldflag = '1',solddate = '{0}',solduserid = '{1}' where colonybatch ='{2}'",
+                                                                                    System.DateTime.Now,userId,id));
                     if (result > 0)
                     {
                         Toolkit.MessageBox.Show("出栏成功！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);

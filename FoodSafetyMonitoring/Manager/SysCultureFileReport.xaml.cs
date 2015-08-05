@@ -92,6 +92,7 @@ namespace FoodSafetyMonitoring.Manager
 
             //创建DataTable
             DataTable tabledisplay = new DataTable();
+            tabledisplay.Columns.Add(new DataColumn("序号"));
             switch (user_flag_tier)
             {
                 case "0": tabledisplay.Columns.Add(new DataColumn("省名称"));
@@ -112,8 +113,9 @@ namespace FoodSafetyMonitoring.Manager
             for (int i = 0; i < table.Rows.Count; i++ )
             {
                 var row = tabledisplay.NewRow();
-                row[0] = table.Rows[i][1].ToString();
-                row[1] = table.Rows[i][2].ToString();
+                row[0] = i + 1;
+                row[1] = table.Rows[i][1].ToString();
+                row[2] = table.Rows[i][2].ToString();
 
                 tabledisplay.Rows.Add(row);
             }

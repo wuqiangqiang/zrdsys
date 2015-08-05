@@ -46,7 +46,7 @@ namespace FoodSafetyMonitoring.Manager.UserControls
 
         void _listview_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            RowMax = (int)_listview.ActualHeight / 35;
+            RowMax = (int)(_listview.ActualHeight - 35) / 35;
             PageIndex = 1;
 
             if (GetDataByPageNumberEvent != null)

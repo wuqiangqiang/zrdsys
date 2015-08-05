@@ -185,7 +185,7 @@ namespace FoodSafetyMonitoring.Manager
             }
             else
             {
-                value = Convert.ToInt32((sender as TextBox).Text);
+                value = Convert.ToInt32((sender as TextBox).Text) - 1;
             }
             int num = int.Parse(file_num.Substring(8, 5));
             string file_num_1 = file_num.Substring(0, 8);
