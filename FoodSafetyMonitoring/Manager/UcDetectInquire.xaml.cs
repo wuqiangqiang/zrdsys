@@ -40,7 +40,8 @@ namespace FoodSafetyMonitoring.Manager
             //画面初始化-检测单列表画面
             dtpStartDate.SelectedDate = DateTime.Now.AddDays(-1);
             dtpEndDate.SelectedDate = DateTime.Now;
-            ComboboxTool.InitComboboxSource(_source_company1, string.Format(" call p_user_company('{0}','') ", userId), "cxtj");
+            //ComboboxTool.InitComboboxSource(_source_company1, string.Format(" call p_user_company('{0}','') ", userId), "cxtj");
+            ComboboxTool.InitComboboxSource(_source_company1, "SELECT COMPANYID,COMPANYNAME FROM t_company", "cxtj");
             ComboboxTool.InitComboboxSource(_detect_station, string.Format("call p_user_dept_hb('{0}','tz')", userId), "cxtj");
             ComboboxTool.InitComboboxSource(_detect_item1, "SELECT ItemID,ItemNAME FROM t_det_item WHERE  (tradeId ='1'or tradeId ='2' or tradeId ='3' or ifnull(tradeId,'') = '') and OPENFLAG = '1' order by orderId", "cxtj");
             ComboboxTool.InitComboboxSource(_detect_object1, "SELECT objectId,objectName FROM t_det_object WHERE  (tradeId ='1'or tradeId ='2' or tradeId ='3' or ifnull(tradeId,'') = '') and OPENFLAG = '1'", "cxtj");
@@ -108,7 +109,8 @@ namespace FoodSafetyMonitoring.Manager
                 DataRow[] rows = ProvinceCityTable.Select("pid = '" + (_province1.SelectedItem as Label).Tag.ToString() + "'");
                 ComboboxTool.InitComboboxSource(_city1, rows, "cxtj");
                 //20150707来源单位改为连动（受来源区域影响）
-                ComboboxTool.InitComboboxSource(_source_company1, string.Format(" call p_user_company('{0}','{1}') ", userId, (_province1.SelectedItem as Label).Tag.ToString()), "cxtj");
+                //ComboboxTool.InitComboboxSource(_source_company1, string.Format(" call p_user_company('{0}','{1}') ", userId, (_province1.SelectedItem as Label).Tag.ToString()), "cxtj");
+                ComboboxTool.InitComboboxSource(_source_company1, "SELECT COMPANYID,COMPANYNAME FROM t_company where AREAID like '" + (_province1.SelectedItem as Label).Tag + "%'", "cxtj");
                 _city1.SelectionChanged += new SelectionChangedEventHandler(_city1_SelectionChanged);
             }
         }
@@ -121,7 +123,8 @@ namespace FoodSafetyMonitoring.Manager
                 DataRow[] rows = ProvinceCityTable.Select("pid = '" + (_city1.SelectedItem as Label).Tag.ToString() + "'");
                 ComboboxTool.InitComboboxSource(_region1, rows, "cxtj");
                 //20150707来源单位改为连动（受来源区域影响）
-                ComboboxTool.InitComboboxSource(_source_company1, string.Format(" call p_user_company('{0}','{1}') ", userId, (_city1.SelectedItem as Label).Tag.ToString()), "cxtj");
+                //ComboboxTool.InitComboboxSource(_source_company1, string.Format(" call p_user_company('{0}','{1}') ", userId, (_city1.SelectedItem as Label).Tag.ToString()), "cxtj");
+                ComboboxTool.InitComboboxSource(_source_company1, "SELECT COMPANYID,COMPANYNAME FROM t_company where AREAID like '" + (_city1.SelectedItem as Label).Tag + "%'", "cxtj");
                 _region1.SelectionChanged += new SelectionChangedEventHandler(_region1_SelectionChanged);
             }
         }
@@ -131,7 +134,8 @@ namespace FoodSafetyMonitoring.Manager
         {
             if (_region1.SelectedIndex > 0)
             {
-                ComboboxTool.InitComboboxSource(_source_company1, string.Format("call p_user_company('{0}','{1}')", userId, (_region1.SelectedItem as Label).Tag.ToString()), "cxtj");
+                //ComboboxTool.InitComboboxSource(_source_company1, string.Format("call p_user_company('{0}','{1}')", userId, (_region1.SelectedItem as Label).Tag.ToString()), "cxtj");
+                ComboboxTool.InitComboboxSource(_source_company1, "SELECT COMPANYID,COMPANYNAME FROM t_company where AREAID =" + (_region1.SelectedItem as Label).Tag.ToString(), "cxtj");
             }
         }
 

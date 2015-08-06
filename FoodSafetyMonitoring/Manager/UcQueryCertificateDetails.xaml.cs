@@ -22,6 +22,7 @@ namespace FoodSafetyMonitoring.Manager
     /// </summary>
     public partial class UcQueryCertificateDetails : UserControl
     {
+        //暂时没用上
         private IDBOperation dbOperation;
         private Dictionary<string, MyColumn> MyColumns = new Dictionary<string, MyColumn>();
         public string CardId { get; set; }

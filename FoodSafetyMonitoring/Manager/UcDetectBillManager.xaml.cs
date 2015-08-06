@@ -43,25 +43,28 @@ namespace FoodSafetyMonitoring.Manager
             _province.SelectionChanged += new SelectionChangedEventHandler(_province_SelectionChanged);
 
             //ComboboxTool.InitComboboxSource(_source_company, "SELECT COMPANYID,COMPANYNAME FROM v_user_company WHERE userid =  " + userId,"lr");
-            ComboboxTool.InitComboboxSource(_source_company, "SELECT COMPANYID,COMPANYNAME FROM t_company", "lr");
-            if (supplierId == "nkrx")
-            {
-                ComboboxTool.InitComboboxSource(_detect_trade, "select tradeId,tradeName from t_trade where openFlag = '1' order by orderId", "lr");
-            }
-            else
+            //ComboboxTool.InitComboboxSource(_source_company, "SELECT COMPANYID,COMPANYNAME FROM t_company", "lr");
+            //_source_company.SelectionChanged += new SelectionChangedEventHandler(_source_company_SelectionChanged);
+            //if (supplierId == "nkrx")
+            //{
+            //    ComboboxTool.InitComboboxSource(_detect_trade, "select tradeId,tradeName from t_trade where openFlag = '1' order by orderId", "lr");
+            //}
+            //else
 
-            {
-                ComboboxTool.InitComboboxSource(_detect_trade, "select tradeId,tradeName from t_trade where openFlag = '1'", "lr");
-            }
-            _detect_trade.SelectionChanged += new SelectionChangedEventHandler(_detect_trade_SelectionChanged);
-            _detect_trade.SelectedIndex = 1;
+            //{
+            //    ComboboxTool.InitComboboxSource(_detect_trade, "select tradeId,tradeName from t_trade where openFlag = '1'", "lr");
+            //}
+            //_detect_trade.SelectionChanged += new SelectionChangedEventHandler(_detect_trade_SelectionChanged);
+            //_detect_trade.SelectedIndex = 1;
             //ComboboxTool.InitComboboxSource(_detect_item, "SELECT itemid,ItemNAME FROM v_user_item WHERE userid = " + userId);
             //ComboboxTool.InitComboboxSource(_detect_object, " SELECT objectId,objectName FROM v_user_object WHERE userid = " + userId);
             //ComboboxTool.InitComboboxSource(_detect_sample, "  SELECT sampleId,sampleName FROM v_user_sample WHERE userid = " + userId);
             //ComboboxTool.InitComboboxSource(_detect_sensitivity, "SELECT sensitivityId,sensitivityName FROM t_det_sensitivity where openFlag = '1'", "lr");
+            ComboboxTool.InitComboboxSource(_detect_item, string.Format("SELECT ItemID,ItemNAME FROM t_det_item WHERE  (tradeId ='1'or ifnull(tradeId,'') = '') and OPENFLAG = '1'"), "lr");
+            _detect_item.SelectionChanged += new SelectionChangedEventHandler(_detect_item_SelectionChanged);
+            
             ComboboxTool.InitComboboxSource(_detect_result, "SELECT resultId,resultName FROM t_det_result where openFlag = '1' ORDER BY id", "lr");
             _entering_datetime.Text = string.Format("{0:g}", System.DateTime.Now);
-            //_source_company.SelectionChanged += new SelectionChangedEventHandler(_source_company_SelectionChanged);
             _detect_person.Text = (Application.Current.Resources["User"] as UserInfo).ShowName;
             _detect_site.Text = dbOperation.GetSingle("SELECT INFO_NAME  from  sys_client_sysdept WHERE INFO_CODE = " + (Application.Current.Resources["User"] as UserInfo).DepartmentID).ToString();
 
@@ -76,7 +79,7 @@ namespace FoodSafetyMonitoring.Manager
             this._detect_number.Text = "";
             this._object_count.Text = "";
             this._object_label.Text = "";
-            this._detect_trade.SelectedIndex = 1;
+            //this._detect_trade.SelectedIndex = 1;
             this._detect_item.SelectedIndex = 0;
             this._detect_method1.IsChecked = false;
             this._detect_method2.IsChecked = false;
@@ -163,7 +166,7 @@ namespace FoodSafetyMonitoring.Manager
                                                                   (Application.Current.Resources["User"] as UserInfo).ID, DateTime.Now));
                     if (n == 1)
                     {
-                        company_id = dbOperation.GetSingle(string.Format("SELECT COMPANYID from t_company where COMPANYNAME ='{0}' and deptid = '{1}'", _source_company.Text, (Application.Current.Resources["User"] as UserInfo).DepartmentID)).ToString();
+                        company_id = dbOperation.GetSingle(string.Format("SELECT COMPANYID from t_company where COMPANYNAME ='{0}'", _source_company.Text)).ToString();
                     }
                     else
                     {
@@ -173,7 +176,7 @@ namespace FoodSafetyMonitoring.Manager
                 }
                 else
                 {
-                    company_id = dbOperation.GetSingle(string.Format("SELECT COMPANYID from t_company where COMPANYNAME ='{0}' and deptid = '{1}'", _source_company.Text, (Application.Current.Resources["User"] as UserInfo).DepartmentID)).ToString();
+                    company_id = dbOperation.GetSingle(string.Format("SELECT COMPANYID from t_company where COMPANYNAME ='{0}'", _source_company.Text)).ToString();
                 }
 
                 string sql = string.Format("call p_insert_detect_hb('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}')"
@@ -196,7 +199,7 @@ namespace FoodSafetyMonitoring.Manager
                     Toolkit.MessageBox.Show("添加成功！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
                     clear();
                     //ComboboxTool.InitComboboxSource(_source_company, "SELECT COMPANYID,COMPANYNAME FROM v_user_company WHERE userid =  " + userId, "lr");
-                    ComboboxTool.InitComboboxSource(_source_company, "SELECT COMPANYID,COMPANYNAME FROM t_company", "lr");
+                    //ComboboxTool.InitComboboxSource(_source_company, "SELECT COMPANYID,COMPANYNAME FROM t_company", "lr");
                 }
                 else
                 {
@@ -234,53 +237,53 @@ namespace FoodSafetyMonitoring.Manager
         }
 
 
-        void _source_company_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            //获取变更前的状态
-            bool flag = _province.IsEnabled ;
+        //void _source_company_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //    //获取变更前的状态
+        //    bool flag = _province.IsEnabled ;
             
-            //来源单位下拉选择的是有效内容，则将省市区的下拉灰显并且自动赋值
-            if (_source_company.SelectedIndex >= 1)
-            {
-                _province.IsEnabled = false;
-                _city.IsEnabled = false;
-                _region.IsEnabled = false;
+        //    //来源单位下拉选择的是有效内容，则将省市区的下拉灰显并且自动赋值
+        //    if (_source_company.SelectedIndex >= 1)
+        //    {
+        //        _province.IsEnabled = false;
+        //        _city.IsEnabled = false;
+        //        _region.IsEnabled = false;
 
-                string areaid = dbOperation.GetDataSet("SELECT AREAID from t_company where COMPANYID = " + (_source_company.SelectedItem as Label).Tag.ToString()).Tables[0].Rows[0][0].ToString();
+        //        string areaid = dbOperation.GetDataSet("SELECT AREAID from t_company where COMPANYID = " + (_source_company.SelectedItem as Label).Tag.ToString()).Tables[0].Rows[0][0].ToString();
 
-                _source_company.Tag = areaid;
-                if (areaid.Length > 0)
-                {
-                    string _areaid = areaid.Substring(0, 2);
-                    _province.Text = ProvinceCityTable.Select("id = '" + _areaid + "'")[0]["name"].ToString();
-                }
-                if (areaid.Length > 2)
-                {
-                    string _areaid = areaid.Substring(0, 4);
-                    _city.Text = ProvinceCityTable.Select("id = '" + _areaid + "'")[0]["name"].ToString();
-                }
-                if (areaid.Length > 4)
-                {
-                    _region.Text = ProvinceCityTable.Select("id = '" + areaid + "'")[0]["name"].ToString();
-                }
-            }
-            //来源单位下拉选择的是“-请选择-”或是手动输入来源单位，则将省市区的下拉激活并且内容清空
-            else if (_source_company.SelectedIndex < 1)
-            {
-                if (flag == false)
-                {
-                    _province.IsEnabled = true;
-                    _city.IsEnabled = true;
-                    _region.IsEnabled = true;
+        //        _source_company.Tag = areaid;
+        //        if (areaid.Length > 0)
+        //        {
+        //            string _areaid = areaid.Substring(0, 2);
+        //            _province.Text = ProvinceCityTable.Select("id = '" + _areaid + "'")[0]["name"].ToString();
+        //        }
+        //        if (areaid.Length > 2)
+        //        {
+        //            string _areaid = areaid.Substring(0, 4);
+        //            _city.Text = ProvinceCityTable.Select("id = '" + _areaid + "'")[0]["name"].ToString();
+        //        }
+        //        if (areaid.Length > 4)
+        //        {
+        //            _region.Text = ProvinceCityTable.Select("id = '" + areaid + "'")[0]["name"].ToString();
+        //        }
+        //    }
+        //    //来源单位下拉选择的是“-请选择-”或是手动输入来源单位，则将省市区的下拉激活并且内容清空
+        //    else if (_source_company.SelectedIndex < 1)
+        //    {
+        //        if (flag == false)
+        //        {
+        //            _province.IsEnabled = true;
+        //            _city.IsEnabled = true;
+        //            _region.IsEnabled = true;
 
-                    _province.SelectedIndex = 0;
-                    _city.SelectedIndex = 0;
-                    _region.SelectedIndex = 0;
+        //            _province.SelectedIndex = 0;
+        //            _city.SelectedIndex = 0;
+        //            _region.SelectedIndex = 0;
 
-                    ComboboxTool.InitComboboxSource(_source_company, "SELECT COMPANYID,COMPANYNAME FROM t_company", "lr");
-                }
-            }
-        }
+        //            ComboboxTool.InitComboboxSource(_source_company, "SELECT COMPANYID,COMPANYNAME FROM t_company", "lr");
+        //        }
+        //    }
+        //}
 
         void _province_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -312,29 +315,30 @@ namespace FoodSafetyMonitoring.Manager
             }
         }
 
-        void _detect_trade_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (_detect_trade.SelectedIndex > 0)
-            {
-                //ComboboxTool.InitComboboxSource(_detect_item, string.Format("SELECT itemid,ItemNAME FROM v_user_item WHERE userid = '{0}' and (tradeId ='{1}'or ifnull(tradeId,'') = '')", userId, (_detect_trade.SelectedItem as Label).Tag), "lr");
-                ComboboxTool.InitComboboxSource(_detect_item, string.Format("SELECT ItemID,ItemNAME FROM t_det_item WHERE  (tradeId ='{0}'or ifnull(tradeId,'') = '') and OPENFLAG = '1' order by orderId", (_detect_trade.SelectedItem as Label).Tag), "lr");
-                _detect_item.SelectionChanged += new SelectionChangedEventHandler(_detect_item_SelectionChanged);
-            }
-            //else
-            //{
-            //    _detect_item.Items.Clear();
-            //    _detect_object.Items.Clear();
-            //    _detect_sample.Items.Clear();
-            //    _detect_sensitivity.Items.Clear();
-            //}
-        }
+        //void _detect_trade_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //    if (_detect_trade.SelectedIndex > 0)
+        //    {
+        //        //ComboboxTool.InitComboboxSource(_detect_item, string.Format("SELECT itemid,ItemNAME FROM v_user_item WHERE userid = '{0}' and (tradeId ='{1}'or ifnull(tradeId,'') = '')", userId, (_detect_trade.SelectedItem as Label).Tag), "lr");
+        //        ComboboxTool.InitComboboxSource(_detect_item, string.Format("SELECT ItemID,ItemNAME FROM t_det_item WHERE  (tradeId ='{0}'or ifnull(tradeId,'') = '') and OPENFLAG = '1' order by orderId", (_detect_trade.SelectedItem as Label).Tag), "lr");
+        //        _detect_item.SelectionChanged += new SelectionChangedEventHandler(_detect_item_SelectionChanged);
+        //    }
+        //    //else
+        //    //{
+        //    //    _detect_item.Items.Clear();
+        //    //    _detect_object.Items.Clear();
+        //    //    _detect_sample.Items.Clear();
+        //    //    _detect_sensitivity.Items.Clear();
+        //    //}
+        //}
 
         void _detect_item_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (_detect_item.SelectedIndex > 0)
             {
                 //ComboboxTool.InitComboboxSource(_detect_object, string.Format("call p_detect_object( '{0}','{1}')", userId, (_detect_item.SelectedItem as Label).Tag), "lr");
-                ComboboxTool.InitComboboxSource(_detect_object, string.Format("SELECT objectId,objectName FROM v_item_object WHERE itemId = '{0}' and tradeId = '{1}'", (_detect_item.SelectedItem as Label).Tag ,(_detect_trade.SelectedItem as Label).Tag), "lr");
+                //ComboboxTool.InitComboboxSource(_detect_object, string.Format("SELECT objectId,objectName FROM v_item_object WHERE itemId = '{0}' and tradeId = '{1}'", (_detect_item.SelectedItem as Label).Tag ,(_detect_trade.SelectedItem as Label).Tag), "lr");
+                ComboboxTool.InitComboboxSource(_detect_object, string.Format("SELECT objectId,objectName FROM t_det_object WHERE OPENFLAG = '1'"), "lr");
                 _detect_object.SelectionChanged += new SelectionChangedEventHandler(_detect_object_SelectionChanged);
             }
         }

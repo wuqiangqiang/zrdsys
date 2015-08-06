@@ -97,17 +97,18 @@ namespace FoodSafetyMonitoring.Manager
 
         private void _query_Click(object sender, RoutedEventArgs e)
         {
-            if (_source_company.SelectedIndex <= 0)
-            {
-                Toolkit.MessageBox.Show("被检单位不能为空", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
-                return;
-            }
+            //if (_source_company.SelectedIndex <= 0)
+            //{
+            //    Toolkit.MessageBox.Show("被检单位不能为空", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+            //    return;
+            //}
 
             //清空列表
             lvlist.DataContext = null;
 
             //根据条件查询出数据
-            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_certificate_main('{0}')", (_source_company.SelectedItem as Label).Tag.ToString())).Tables[0];
+            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_certificate_main({0},'{1}')",
+                                             userId, _source_company.SelectedIndex < 1 ? "" : (_source_company.SelectedItem as Label).Tag)).Tables[0];
             current_table = table;
             lvlist.DataContext = table;
         }

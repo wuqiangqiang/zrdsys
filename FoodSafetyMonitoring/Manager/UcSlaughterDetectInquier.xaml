@@ -59,7 +59,7 @@
                             <ComboBox x:Name="_province1" Width="120" Text="省" Margin="0,0,5,0"></ComboBox>
                             <ComboBox x:Name="_city1" Width="120" Text="地市" Margin="0,0,5,0"></ComboBox>
                             <ComboBox x:Name="_region1" Width="120" Text="区县"></ComboBox>
-                            <TextBlock MinWidth="50">来源单位:</TextBlock>
+                            <TextBlock MinWidth="50">被检单位:</TextBlock>
                             <ComboBox x:Name="_source_company1" Width="240"></ComboBox>
                         </StackPanel>
                     </Grid>
@@ -72,7 +72,7 @@
                             <TextBlock MinWidth="50">检测项目:</TextBlock>
                             <ComboBox Width="170" x:Name="_detect_item1" />
                             <TextBlock MinWidth="40">检测方法:</TextBlock>
-                            <ComboBox Width="200" x:Name="_detect_method" />
+                            <ComboBox Width="240" x:Name="_detect_method" />
                         </StackPanel>
                     </Grid>
                     <Grid  Grid.Row="2">

@@ -41,7 +41,7 @@ namespace FoodSafetyMonitoring.Manager
             reportDate_kssj.SelectedDate = DateTime.Now.AddDays(-1);
             reportDate_jssj.SelectedDate = DateTime.Now;
             //检测项目
-            ComboboxTool.InitComboboxSource(_detect_item, "SELECT ItemID,ItemNAME FROM t_det_item WHERE  (tradeId ='1'or tradeId ='2' or tradeId ='3' or ifnull(tradeId,'') = '') and OPENFLAG = '1' order by orderId", "cxtj");
+            ComboboxTool.InitComboboxSource(_detect_item, "SELECT ItemID,ItemNAME FROM t_det_item_hb  WHERE  OPENFLAG = '1'", "cxtj");
 
             MyColumns.Add("orderid", new MyColumn("orderid", "检测单编号") { BShow = true, Width = 10 });
             MyColumns.Add("itemname", new MyColumn("itemname", "检测项目") { BShow = true, Width = 14 });

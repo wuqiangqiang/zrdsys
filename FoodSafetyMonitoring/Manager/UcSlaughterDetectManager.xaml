@@ -35,23 +35,24 @@
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Column="1"  FontSize="22" Text="--------------------------样本检测信息录入单--------------------------" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" ></TextBlock>
                 <StackPanel Grid.Row="1" Orientation="Horizontal">
-                    <TextBlock SnapsToDevicePixels="False">来源产地:</TextBlock>
-                    <ComboBox Width="100" x:Name="_province"></ComboBox>
-                    <TextBlock MinWidth="20" Margin="10,0,0,0" >省</TextBlock>
-                    <ComboBox Width="100" x:Name="_city"></ComboBox>
-                    <TextBlock  MinWidth="20" Margin="10,0,0,0" >市</TextBlock>
-                    <ComboBox Width="100" x:Name="_region"></ComboBox>
-                    <TextBlock  Margin="10,0,0,0" >区（县）</TextBlock>
+                    <TextBlock  >检疫证号:</TextBlock>
+                    <!--<TextBox Width="305" x:Name="_detect_number" MaxLength="20" InputMethod.IsInputMethodEnabled="False" PreviewKeyDown="Detect_Number_PreviewKeyDown"></TextBox>-->
+                    <ComboBox x:Name="_detect_number" Width="180"></ComboBox>
                 </StackPanel>
                 <StackPanel Grid.Row="2" Orientation="Horizontal">
-                    <TextBlock HorizontalAlignment="Right">来源:</TextBlock>
-                    <ComboBox Width="280" x:Name="_source_company" IsEditable="True"></ComboBox>
-                    <TextBlock  >检疫证号:</TextBlock>
-                    <TextBox Width="305" x:Name="_detect_number" MaxLength="20" InputMethod.IsInputMethodEnabled="False" PreviewKeyDown="Detect_Number_PreviewKeyDown"></TextBox>
+                    <TextBlock SnapsToDevicePixels="False">来源产地:</TextBlock>
+                    <ComboBox Width="100" x:Name="_province" IsEnabled="False"></ComboBox>
+                    <TextBlock MinWidth="20" Margin="10,0,0,0" >省</TextBlock>
+                    <ComboBox Width="100" x:Name="_city" IsEnabled="False"></ComboBox>
+                    <TextBlock  MinWidth="20" Margin="10,0,0,0" >市</TextBlock>
+                    <ComboBox Width="100" x:Name="_region" IsEnabled="False"></ComboBox>
+                    <TextBlock  Margin="10,0,0,0" >区（县）</TextBlock>
+                    <TextBlock HorizontalAlignment="Right">被检单位:</TextBlock>
+                    <ComboBox Width="280" x:Name="_source_company" IsEnabled="False"></ComboBox>
                 </StackPanel>
                 <StackPanel Grid.Row="3" Orientation="Horizontal">
                     <TextBlock  >批次头数:</TextBlock>
-                    <TextBox Width="60" x:Name="_object_count" MaxLength="5" TextAlignment="Right" InputMethod.IsInputMethodEnabled="False" DataObject.Pasting="Object_Count_Pasting" PreviewKeyDown="Object_Count_PreviewKeyDown"  PreviewTextInput="Object_Count_PreviewTextInput"></TextBox>
+                    <TextBox Width="60" x:Name="_object_count" IsEnabled="False" MaxLength="5" TextAlignment="Right" InputMethod.IsInputMethodEnabled="False" DataObject.Pasting="Object_Count_Pasting" PreviewKeyDown="Object_Count_PreviewKeyDown"  PreviewTextInput="Object_Count_PreviewTextInput"></TextBox>
                     <TextBlock Width="40" >耳标号:</TextBlock>
                     <TextBox Width="100" x:Name="_object_label" MaxLength="15" InputMethod.IsInputMethodEnabled="False" PreviewKeyDown="Object_Lable_PreviewKeyDown"></TextBox>
                     <TextBlock  >检测方法:</TextBlock>
@@ -61,7 +62,7 @@
                 </StackPanel>
                 <StackPanel Grid.Row="4" Orientation="Horizontal">
                     <TextBlock  >检测项目:</TextBlock>
-                    <ComboBox  Width="100" x:Name="_detect_trade" IsEnabled="False"></ComboBox>
+                    <!--<ComboBox  Width="100" x:Name="_detect_trade" IsEnabled="False"></ComboBox>-->
                     <ComboBox  Width="140" x:Name="_detect_item" ></ComboBox>
                     <TextBlock  >检测对象:</TextBlock>
                     <ComboBox  Width="100" x:Name="_detect_object"></ComboBox>
