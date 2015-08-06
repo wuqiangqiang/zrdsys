@@ -93,58 +93,60 @@ namespace FoodSafetyMonitoring.Manager
         void _tableview_StateRowEnvent(string id)
         {
             int orderid = int.Parse(id);
-            string reviewflag = dbOperation.GetDbHelper().GetSingle(string.Format("select ReviewFlag from t_detect_report where ORDERID = '{0}'", orderid)).ToString();
+            DataTable table =  dbOperation.GetDbHelper().GetDataSet(string.Format("select ReviewFlag,DetectFlag from t_detect_report where ORDERID = '{0}'", orderid)).Tables[0];
+            string reviewflag = table.Rows[0][0].ToString();
+            string DetectFlag = table.Rows[0][1].ToString();
             if (reviewflag == "1")
             {
-                if (DetectType == "0")
+                if (DetectFlag == "0")
                 {
                     Culture_DetectDetailsReview det = new Culture_DetectDetailsReview(dbOperation, orderid);
                     det.ShowDialog();
                 }
-                else if (DetectType == "1")
+                else if (DetectFlag == "1")
                 {
                     Certificate_DetectDetailsReview det = new Certificate_DetectDetailsReview(dbOperation, orderid);
                     det.ShowDialog();
                 }
-                else if (DetectType == "2")
+                else if (DetectFlag == "2")
                 {
                     Slaughter_DetectDetailsReview det = new Slaughter_DetectDetailsReview(dbOperation, orderid);
                     det.ShowDialog();
                 }
-                else if (DetectType == "3")
+                else if (DetectFlag == "3")
                 {
                     Feed_DetectDetailsReview det = new Feed_DetectDetailsReview(dbOperation, orderid);
                     det.ShowDialog();
                 }
-                else if (DetectType == "")
+                else if (DetectFlag == "")
                 {
                     detectDetailsReview det = new detectDetailsReview(dbOperation, orderid);
                     det.ShowDialog();
                 }      
             }
             else
-            { 
-                if (DetectType == "0")
+            {
+                if (DetectFlag == "0")
                 {
                     culture_detectdetails det = new culture_detectdetails(dbOperation, orderid);
                     det.ShowDialog();
                 }
-                else if (DetectType == "1")
+                else if (DetectFlag == "1")
                 {
                     Certificate_detectdetails det = new Certificate_detectdetails(dbOperation, orderid);
                     det.ShowDialog();
                 }
-                else if (DetectType == "2")
+                else if (DetectFlag == "2")
                 {
                     Slaughter_detectdetails det = new Slaughter_detectdetails(dbOperation, orderid);
                     det.ShowDialog();
                 }
-                else if (DetectType == "3")
+                else if (DetectFlag == "3")
                 {
                     Feed_detectdetails det = new Feed_detectdetails(dbOperation, orderid);
                     det.ShowDialog();
                 }
-                else if (DetectType == "")
+                else if (DetectFlag == "")
                 {
                     detectdetails det = new detectdetails(dbOperation, orderid);
                     det.ShowDialog();

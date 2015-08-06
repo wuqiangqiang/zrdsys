@@ -423,7 +423,7 @@ namespace FoodSafetyMonitoring
                         break;
                     //饲料检测->风险预警->复核日志
                     case "90103": temptb.Header = (sender as Button).Content.ToString() + "(饲料)";
-                        temptb.Content = new SysWarningReport(mainWindow.dbOperation, "yz", "3"); //传入检测站点的类型和检测单的类型
+                        temptb.Content = new SysReviewLog(mainWindow.dbOperation, "yz", "3"); //传入检测站点的类型和检测单的类型
                         break;
                     //养殖检测->风险预警->实时风险
                     case "90201": temptb.Header = (sender as Button).Content.ToString() + "(养殖)";
@@ -435,7 +435,7 @@ namespace FoodSafetyMonitoring
                         break;
                     //养殖检测->风险预警->复核日志
                     case "90203": temptb.Header = (sender as Button).Content.ToString() + "(养殖)";
-                        temptb.Content = new SysWarningReport(mainWindow.dbOperation, "yz", "0"); //传入检测站点的类型和检测单的类型
+                        temptb.Content = new SysReviewLog(mainWindow.dbOperation, "yz", "0"); //传入检测站点的类型和检测单的类型
                         break;
                     //出证检测->风险预警->实时风险
                     case "90301": temptb.Header = (sender as Button).Content.ToString() + "(出证)";
@@ -447,7 +447,7 @@ namespace FoodSafetyMonitoring
                         break;
                     //出证检测->风险预警->复核日志
                     case "90303": temptb.Header = (sender as Button).Content.ToString() + "(出证)";
-                        temptb.Content = new SysWarningReport(mainWindow.dbOperation, "cz", "1"); //传入检测站点的类型和检测单的类型
+                        temptb.Content = new SysReviewLog(mainWindow.dbOperation, "cz", "1"); //传入检测站点的类型和检测单的类型
                         break; 
                     //宰前检测->风险预警->实时风险
                     case "90401": temptb.Header = (sender as Button).Content.ToString() + "(宰前)";
@@ -459,7 +459,7 @@ namespace FoodSafetyMonitoring
                         break;
                     //宰前检测->风险预警->复核日志
                     case "90403": temptb.Header = (sender as Button).Content.ToString() + "(宰前)";
-                        temptb.Content = new SysWarningReport(mainWindow.dbOperation, "tz", ""); //传入检测站点的类型和检测单的类型
+                        temptb.Content = new SysReviewLog(mainWindow.dbOperation, "tz", ""); //传入检测站点的类型和检测单的类型
                         break;
                     //屠宰同步检测->风险预警->实时风险
                     case "90501": temptb.Header = (sender as Button).Content.ToString() + "(屠宰同步)";
@@ -471,7 +471,7 @@ namespace FoodSafetyMonitoring
                         break;
                     //屠宰同步检测->风险预警->复核日志
                     case "90503": temptb.Header = (sender as Button).Content.ToString() + "(屠宰同步)";
-                        temptb.Content = new SysWarningReport(mainWindow.dbOperation, "tz", "2"); //传入检测站点的类型和检测单的类型
+                        temptb.Content = new SysReviewLog(mainWindow.dbOperation, "tz", "2"); //传入检测站点的类型和检测单的类型
                         break;
                     ////养殖检测->风险预警->预警数据统计
                     //case "20604": temptb.Header = (sender as Button).Content.ToString() + "(养殖)";
@@ -491,11 +491,11 @@ namespace FoodSafetyMonitoring
                     //    break;
                     //风险预警->预警数据统计
                     case "90601": temptb.Header = (sender as Button).Content.ToString();
-                        temptb.Content = new SysReviewLog(mainWindow.dbOperation, "yz", "0"); //传入检测站点的类型和检测单的类型
+                        temptb.Content = new SysWarningReport(mainWindow.dbOperation); //传入检测站点的类型和检测单的类型
                         break;
                     //风险预警->预警数据分析
                     case "90701": temptb.Header = (sender as Button).Content.ToString();
-                        temptb.Content = new SysReviewLog(mainWindow.dbOperation, "cz", "1"); //传入检测站点的类型和检测单的类型
+                        temptb.Content = new SysWarningReport(mainWindow.dbOperation); //传入检测站点的类型和检测单的类型
                         break;
                     //系统管理->系统管理->部门管理
                     case "D0101": temptb.Header = (sender as Button).Content.ToString();

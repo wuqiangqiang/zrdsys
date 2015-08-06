@@ -47,7 +47,7 @@ namespace FoodSafetyMonitoring.Manager
                 sbSql.Append(" AND FLAG_LOGSORT='" + (cmbOperationType.SelectedItem as ComboBoxItem).Content.ToString() + "' ");
             }
 
-            sbSql.Append(" AND INFO_DATE>='" + Convert.ToDateTime(dtpStartDate.Value).ToShortDateString() + " 00:00:01" + "' AND INFO_DATE<='" + Convert.ToDateTime(dtpEndDate.Value).ToShortDateString() + " 23:59:59" + "'");
+            sbSql.Append(" AND INFO_DATE>='" + Convert.ToDateTime(dtpStartDate.SelectedDate).ToShortDateString() + " 00:00:01" + "' AND INFO_DATE<='" + Convert.ToDateTime(dtpEndDate.SelectedDate).ToShortDateString() + " 23:59:59" + "'");
 
             try
             {

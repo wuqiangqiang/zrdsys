@@ -35,7 +35,7 @@ namespace FoodSafetyMonitoring.Manager
             InitializeComponent();
             this.dbOperation = dbOperation;
 
-            ComboboxTool.InitComboboxSource(_colony_no, string.Format("call p_user_colony_wcl({0})", userId), "lr");
+            ComboboxTool.InitComboboxSource(_colony_no, string.Format("call p_user_colony_batch({0})", userId), "lr");
             _colony_no.SelectionChanged += new SelectionChangedEventHandler(_colony_no_SelectionChanged);
             //ComboboxTool.InitComboboxSource(_culture_file, "select FileNo,FileNo from v_user_culture_file where userid =" + userId, "lr");
             //_culture_file.SelectionChanged += new SelectionChangedEventHandler(_culture_file_SelectionChanged);
@@ -51,8 +51,8 @@ namespace FoodSafetyMonitoring.Manager
 
         private void clear()
         {
-            this._culture_file.SelectedIndex = 0;
-            this._file_cdate.Text = "";
+            //this._culture_file.SelectedIndex = 0;
+            //this._file_cdate.Text = "";
             this._colony_no.Text = "";
             this._detect_site.Text = "";
             //this._detect_trade.SelectedIndex = 1;
@@ -70,21 +70,21 @@ namespace FoodSafetyMonitoring.Manager
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
             string msg = "";
-            if ((_culture_file.SelectedIndex < 0 && _culture_file.Text =="")|| _culture_file.SelectedIndex == 0)
-            {
-                msg = "*请选择档案编号";
-            }
-            else if (_detect_site.Text.Trim().Length == 0)
+            //if ((_culture_file.SelectedIndex < 0 && _culture_file.Text =="")|| _culture_file.SelectedIndex == 0)
+            //{
+            //    msg = "*请选择档案编号";
+            //}
+            if (_detect_site.Text.Trim().Length == 0)
             {
                 msg = "*养殖企业名称不能为空";
             }
-            else if (_file_cdate.Text.Trim().Length == 0 )
-            {
-                msg = "*建档时间不能为空";
-            }
+            //else if (_file_cdate.Text.Trim().Length == 0 )
+            //{
+            //    msg = "*建档时间不能为空";
+            //}
             else if (_colony_no.Text.Trim().Length == 0 )
             {
-                msg = "*圈舍号不能为空";
+                msg = "*圈舍批次号不能为空";
             }
             else if (_detect_item.SelectedIndex < 1)
             {
@@ -117,7 +117,7 @@ namespace FoodSafetyMonitoring.Manager
             else
             {
                 string sql = string.Format("call p_insert_culture_detect('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}')"
-                              , _culture_file.Text,
+                              , (_colony_no.SelectedItem as Label).Tag.ToString(),
                               (_detect_item.SelectedItem as Label).Tag.ToString(),
                               (_detect_method1.IsChecked == true ? 1 : 0) + (_detect_method2.IsChecked == true ? 2 : 0) + (_detect_method3.IsChecked == true ? 3 : 0),
                               (_detect_object.SelectedItem as Label).Tag.ToString(),
@@ -134,7 +134,7 @@ namespace FoodSafetyMonitoring.Manager
                 {
                     Toolkit.MessageBox.Show("添加成功！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
                     clear();
-                    ComboboxTool.InitComboboxSource(_culture_file, "select FileNo,FileNo from v_user_culture_file where userid =" + userId, "lr");
+                    //ComboboxTool.InitComboboxSource(_culture_file, "select FileNo,FileNo from v_user_culture_file where userid =" + userId, "lr");
                 }
                 else
                 {
@@ -175,51 +175,54 @@ namespace FoodSafetyMonitoring.Manager
         {
             if (_colony_no.SelectedIndex > 0)
             {
-                ComboboxTool.InitComboboxSource(_culture_file, string.Format("call p_user_culture_file({0},'{1}')", userId, (_colony_no.SelectedItem as Label).Tag), "lr");
-                _culture_file.SelectionChanged += new SelectionChangedEventHandler(_culture_file_SelectionChanged);
+                //ComboboxTool.InitComboboxSource(_culture_file, string.Format("call p_user_culture_file({0},'{1}')", userId, (_colony_no.SelectedItem as Label).Tag), "lr");
+                //_culture_file.SelectionChanged += new SelectionChangedEventHandler(_culture_file_SelectionChanged);
+                DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_culturefile('{0}')", (_colony_no.SelectedItem as Label).Tag)).Tables[0];
+                this._detect_site.Text = table.Rows[0][3].ToString();
+                dept_id = table.Rows[0][2].ToString();
             }
-            
+
         }
 
-        void _culture_file_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            string culture_no;
-            //if (_culture_file.SelectedIndex > 0)
-            //{
-            //    culture_no = (_culture_file.SelectedItem as Label).Tag.ToString();
-            //}
-            //else
-            //{
-            //    culture_no = _culture_file.Text;
-            //}
+        //void _culture_file_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //    string culture_no;
+        //    //if (_culture_file.SelectedIndex > 0)
+        //    //{
+        //    //    culture_no = (_culture_file.SelectedItem as Label).Tag.ToString();
+        //    //}
+        //    //else
+        //    //{
+        //    //    culture_no = _culture_file.Text;
+        //    //}
 
-            if (_culture_file.SelectedIndex > 0)
-            //if (_culture_file.SelectedIndex > 0 || (_culture_file.SelectedIndex < 0 && _culture_file.Text != "" && _culture_file.Text != "-请选择-"))
-            {
-                culture_no = (_culture_file.SelectedItem as Label).Tag.ToString();
+        //    if (_culture_file.SelectedIndex > 0)
+        //    //if (_culture_file.SelectedIndex > 0 || (_culture_file.SelectedIndex < 0 && _culture_file.Text != "" && _culture_file.Text != "-请选择-"))
+        //    {
+        //        culture_no = (_culture_file.SelectedItem as Label).Tag.ToString();
 
-                DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_culturefile('{0}')", culture_no)).Tables[0];
-                //if (table.Rows.Count == 0)
-                //{
-                //    Toolkit.MessageBox.Show("档案编码输入有误！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
-                //    return;
-                //}
-                //else
-                //{
-                    this._file_cdate.Text = table.Rows[0][0].ToString();
-                    //this._colony_no.Text = table.Rows[0][1].ToString(); 
-                    this._detect_site.Text = table.Rows[0][3].ToString();
-                    dept_id = table.Rows[0][2].ToString(); 
-                //}
-            }
-            else if (_culture_file.SelectedIndex == 0)
-            {
-                this._file_cdate.Text = "";
-                //this._colony_no.Text = "";
-                this._detect_site.Text = "";
-                dept_id = ""; 
-            }
-        }
+        //        DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_culturefile('{0}')", culture_no)).Tables[0];
+        //        //if (table.Rows.Count == 0)
+        //        //{
+        //        //    Toolkit.MessageBox.Show("档案编码输入有误！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+        //        //    return;
+        //        //}
+        //        //else
+        //        //{
+        //            this._file_cdate.Text = table.Rows[0][0].ToString();
+        //            //this._colony_no.Text = table.Rows[0][1].ToString(); 
+        //            this._detect_site.Text = table.Rows[0][3].ToString();
+        //            dept_id = table.Rows[0][2].ToString(); 
+        //        //}
+        //    }
+        //    else if (_culture_file.SelectedIndex == 0)
+        //    {
+        //        this._file_cdate.Text = "";
+        //        //this._colony_no.Text = "";
+        //        this._detect_site.Text = "";
+        //        dept_id = ""; 
+        //    }
+        //}
 
         //void _detect_trade_SelectionChanged(object sender, SelectionChangedEventArgs e)
         //{

@@ -104,7 +104,14 @@ namespace FoodSafetyMonitoring.Manager
             }
             else if (detecttype == "2")
             {
+                Slaughter_DetectDetailsReview det = new Slaughter_DetectDetailsReview(dbOperation, orderid);
+                det.ShowDialog();
 
+            }
+            else if (detecttype == "3")
+            {
+                Feed_DetectDetailsReview det = new Feed_DetectDetailsReview(dbOperation, orderid);
+                det.ShowDialog();
             }
             else if (detecttype == "")
             {

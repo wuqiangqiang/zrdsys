@@ -102,7 +102,12 @@ namespace FoodSafetyMonitoring.Manager
             //    Toolkit.MessageBox.Show("被检单位不能为空", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
             //    return;
             //}
+            getdata();
+            
+        }
 
+        private void  getdata()
+        {
             //清空列表
             lvlist.DataContext = null;
 
@@ -183,17 +188,18 @@ namespace FoodSafetyMonitoring.Manager
 
             string batch_no = (sender as Button).Tag.ToString();
 
-            string sql = string.Format("call p_insert_certificate('{0}','{1}','{2}','{3}','{4}','{5}')"
-                            , card_id, batch_no,(_source_company.SelectedItem as Label).Tag.ToString(),
+            string sql = string.Format("call p_insert_certificate('{0}','{1}','{2}','{3}','{4}')"
+                            , card_id, batch_no,
                             (Application.Current.Resources["User"] as UserInfo).DepartmentID,
                             (Application.Current.Resources["User"] as UserInfo).ID,
                             System.DateTime.Now);
 
 
             int i = dbOperation.GetDbHelper().ExecuteSql(sql);
-            if (i == 1)
+            if (i == 0)
             {
                 Toolkit.MessageBox.Show("电子出证单生成成功！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                getdata();
                 return;
             }
             else

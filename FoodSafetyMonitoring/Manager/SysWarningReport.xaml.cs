@@ -30,16 +30,12 @@ namespace FoodSafetyMonitoring.Manager
         private Dictionary<string, MyColumn> MyColumns = new Dictionary<string, MyColumn>();
         private string user_flag_tier;
         private string dept_name;
-        private string depttype;
-        private string detecttype;
 
-        public SysWarningReport(IDBOperation dbOperation, string dept_type, string detect_type)
+        public SysWarningReport(IDBOperation dbOperation)
         {
             InitializeComponent();
 
             this.dbOperation = dbOperation;
-            this.depttype = dept_type;
-            this.detecttype = detect_type;
             user_flag_tier = (Application.Current.Resources["User"] as UserInfo).FlagTier;
 
             //初始化查询条件
@@ -65,9 +61,22 @@ namespace FoodSafetyMonitoring.Manager
                     break;
                 default: break;
             }
-            ComboboxTool.InitComboboxSource(_detect_dept, string.Format("call p_dept_cxtj_hb({0},'{1}')", (Application.Current.Resources["User"] as UserInfo).ID, depttype), "cxtj");
+            //复核状态
+            DataTable table_detect_type = new DataTable();
+            table_detect_type.Columns.Add("id", Type.GetType("System.String"));
+            table_detect_type.Columns.Add("name", Type.GetType("System.String"));
+            table_detect_type.Rows.Add(new object[] { "3", "饲料检测" });
+            table_detect_type.Rows.Add(new object[] { "0", "养殖检测" });
+            table_detect_type.Rows.Add(new object[] { "1", "出证检测" });
+            table_detect_type.Rows.Add(new object[] { "4", "宰前检测" });
+            table_detect_type.Rows.Add(new object[] { "2", "屠宰同步检测" });
+            ComboboxTool.InitComboboxSource(_detect_type, table_detect_type, "cxtj");
+            _detect_type.SelectionChanged += new SelectionChangedEventHandler(_detect_type_SelectionChanged);
+
+            //ComboboxTool.InitComboboxSource(_detect_dept, string.Format("call p_dept_cxtj_hb({0},'{1}')", (Application.Current.Resources["User"] as UserInfo).ID, depttype), "cxtj");
+            ComboboxTool.InitComboboxSource(_detect_dept, string.Format("call p_dept_cxtj({0})", (Application.Current.Resources["User"] as UserInfo).ID), "cxtj");
             //检测项目
-            ComboboxTool.InitComboboxSource(_detect_item, "SELECT ItemID,ItemNAME FROM t_det_item WHERE  (tradeId ='1'or tradeId ='2' or tradeId ='3' or ifnull(tradeId,'') = '') and OPENFLAG = '1' order by orderId", "cxtj");
+            ComboboxTool.InitComboboxSource(_detect_item, "SELECT ItemID,ItemNAME FROM t_det_item_hb WHERE OPENFLAG = '1'", "cxtj");
             //复核状态
             DataTable table_detect_result = new DataTable();
             table_detect_result.Columns.Add("id", Type.GetType("System.String"));
@@ -91,6 +100,27 @@ namespace FoodSafetyMonitoring.Manager
             _tableview.DetailsRowEnvent += new UcTableOperableView_NoTitle.DetailsRowEventHandler(_tableview_DetailsRowEnvent);
         }
 
+        void _detect_type_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(_detect_type.SelectedIndex > 0)
+            {
+                switch ((_detect_type.SelectedItem as Label).Tag.ToString())
+                {
+                    case "0": ComboboxTool.InitComboboxSource(_detect_dept, string.Format("call p_dept_cxtj_hb({0},'{1}')", (Application.Current.Resources["User"] as UserInfo).ID, "yz"), "cxtj");
+                        break;
+                    case "1": ComboboxTool.InitComboboxSource(_detect_dept, string.Format("call p_dept_cxtj_hb({0},'{1}')", (Application.Current.Resources["User"] as UserInfo).ID, "cz"), "cxtj");
+                        break;
+                    case "2": ComboboxTool.InitComboboxSource(_detect_dept, string.Format("call p_dept_cxtj_hb({0},'{1}')", (Application.Current.Resources["User"] as UserInfo).ID, "tz"), "cxtj");
+                        break;
+                    case "3": ComboboxTool.InitComboboxSource(_detect_dept, string.Format("call p_dept_cxtj_hb({0},'{1}')", (Application.Current.Resources["User"] as UserInfo).ID, "yz"), "cxtj");
+                        break;
+                    case "4": ComboboxTool.InitComboboxSource(_detect_dept, string.Format("call p_dept_cxtj_hb({0},'{1}')", (Application.Current.Resources["User"] as UserInfo).ID, "tz"), "cxtj");
+                        break;
+                    default: break;
+                }
+            }
+        }
+
         private void _query_Click(object sender, RoutedEventArgs e)
         {
             if (reportDate_kssj.SelectedDate.Value.Date > reportDate_jssj.SelectedDate.Value.Date)
@@ -111,12 +141,12 @@ namespace FoodSafetyMonitoring.Manager
         private void GetData()
         {
 
-            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_warning_report_hb('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}',{8},{9})",
+            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_warning_report_hb('{0}','{1}','{2}','{3}','{4}','{5}','{6}',{7},{8})",
                              (Application.Current.Resources["User"] as UserInfo).ID, reportDate_kssj.SelectedDate, reportDate_jssj.SelectedDate,
                               _detect_dept.SelectedIndex < 1 ? "" : (_detect_dept.SelectedItem as Label).Tag,
                               _detect_item.SelectedIndex < 1 ? "" : (_detect_item.SelectedItem as Label).Tag,
                               _review_flag.SelectedIndex < 1 ? "" : (_review_flag.SelectedItem as Label).Tag,
-                              depttype, detecttype,
+                              _detect_type.SelectedIndex < 1 ? "" : (_detect_type.SelectedItem as Label).Tag,
                              (_tableview.PageIndex - 1) * _tableview.RowMax,
                              _tableview.RowMax)).Tables[0];
             _tableview.Table = table;
@@ -133,22 +163,24 @@ namespace FoodSafetyMonitoring.Manager
             string dept_id;
             string item_id;
             string review_id;
+            string detect_type;
 
             dept_id = id;
             item_id = _detect_item.SelectedIndex < 1 ? "" : (_detect_dept.SelectedItem as Label).Tag.ToString();
             review_id = _review_flag.SelectedIndex < 1 ? "" : (_review_flag.SelectedItem as Label).Tag.ToString();
+            detect_type = _detect_type.SelectedIndex < 1 ? "" : (_detect_type.SelectedItem as Label).Tag.ToString();
 
-            grid_info.Children.Add(new UcWarningReportDetails(dbOperation, reportDate_kssj.SelectedDate.ToString(), reportDate_jssj.SelectedDate.ToString(), dept_id, item_id, review_id, dept_name, detecttype));
+            grid_info.Children.Add(new UcWarningReportDetails(dbOperation, reportDate_kssj.SelectedDate.ToString(), reportDate_jssj.SelectedDate.ToString(), dept_id, item_id, review_id, dept_name, detect_type));
         }
 
         private void _export_Click(object sender, RoutedEventArgs e)
         {
-            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_warning_report_hb('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}',{8},{9})",
+            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_warning_report_hb('{0}','{1}','{2}','{3}','{4}','{5}','{6}',{7},{8})",
                              (Application.Current.Resources["User"] as UserInfo).ID, reportDate_kssj.SelectedDate, reportDate_jssj.SelectedDate,
                               _detect_dept.SelectedIndex < 1 ? "" : (_detect_dept.SelectedItem as Label).Tag,
                               _detect_item.SelectedIndex < 1 ? "" : (_detect_item.SelectedItem as Label).Tag,
                               _review_flag.SelectedIndex < 1 ? "" : (_review_flag.SelectedItem as Label).Tag,
-                              depttype, detecttype,
+                              _detect_type.SelectedIndex < 1 ? "" : (_detect_type.SelectedItem as Label).Tag,
                              0,
                              _tableview.RowTotal)).Tables[0];
 
