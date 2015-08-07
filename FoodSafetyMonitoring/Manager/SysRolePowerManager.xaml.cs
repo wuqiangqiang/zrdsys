@@ -79,7 +79,7 @@ namespace FoodSafetyMonitoring.Manager
         public DataTable GetMenuTableByMenuRight()
         {
             string strSql = "SELECT rp.SUB_ID,s.SUB_NAME,s.SUB_FATHER_ID " +
-                            "FROM sys_sub s ,sys_rolepermission rp , sys_client_user u " +
+                            "FROM sys_sub_hb s ,sys_rolepermission_hb rp , sys_client_user u " +
                             "WHERE s.SUB_ID = rp.SUB_ID " +
                             "AND rp.ROLE_ID = u.ROLE_ID " +
                             "AND u.RECO_PKID = " + (Application.Current.Resources["User"] as UserInfo).ID;
@@ -210,7 +210,7 @@ namespace FoodSafetyMonitoring.Manager
         private List<string> GetUserRoleMenu(string id)
         {
             List<string> list = new List<string>();
-            string strSql = "SELECT rp.SUB_ID,s.SUB_NAME FROM sys_sub s ,sys_rolepermission rp WHERE s.SUB_ID = rp.SUB_ID AND rp.ROLE_ID =" + id;
+            string strSql = "SELECT rp.SUB_ID,s.SUB_NAME FROM sys_sub_hb s ,sys_rolepermission_hb rp WHERE s.SUB_ID = rp.SUB_ID AND rp.ROLE_ID =" + id;
             try
             {
                 DataTable dt = dbHelper.GetDataSet(strSql).Tables[0];

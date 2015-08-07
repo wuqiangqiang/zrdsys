@@ -10,19 +10,8 @@
                 <ResourceDictionary Source="Themes/StackPanel.xaml"/>
                 <ResourceDictionary Source="Themes/ImageButtonStyle.xaml"/>
                 <ResourceDictionary Source="Themes/tabcontrol.xaml"/>
+                <ResourceDictionary Source="Themes/ListViewColumn.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-            <usercontrols:BackGroundConverter x:Key="_converter"/>
-            <Style x:Key="_style_listviewItem" TargetType="ListViewItem">
-                <Setter Property="Background">
-                    <Setter.Value>
-                        <Binding RelativeSource="{RelativeSource Self}" Converter="{ StaticResource ResourceKey=_converter}" />
-                    </Setter.Value>
-                </Setter>
-                <Setter Property="Foreground" Value="Black">
-                </Setter>
-                <!--<Setter Property="HorizontalAlignment" Value="Center"></Setter>-->
-                <Setter Property="HorizontalContentAlignment" Value="Center" />
-            </Style>
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
@@ -30,59 +19,87 @@
             <TabItem Header="考评结果" >
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="12.5*"/>
+                        <RowDefinition Height="106"/>
+                        <RowDefinition />
                     </Grid.RowDefinitions>
-                    <StackPanel Grid.Row="0" Margin="0,10,0,0">
-                        <TextBlock  >选择日期:</TextBlock>
-                        <ComboBox x:Name="_year" Grid.Column="3" Background="White" MinWidth="80"  MaxDropDownHeight="200" />
-                        <!--<ComboBox x:Name="_month" Grid.Column="3" Background="White" MinWidth="60"  MaxDropDownHeight="200"/>-->
-                        <Button Name="_query" Width="76" Height="30" Style="{StaticResource SelectImageButtonTemplate}" Margin="50,0,0,0" VerticalAlignment="Center"  Click="_query_Click"/>
-                        <Button Name="_export" Width="76" Height="30" Style="{StaticResource ExportImageButtonTemplate}" Margin="50,0,0,0" VerticalAlignment="Center" Click="_export_Click"/>
-                    </StackPanel>
-                    <usercontrols:UcTableOperableView x:Name="_tableview" Grid.Row="1" Background="Transparent"  Margin="5"/>
-                    <!--<ListView Grid.Row="2" Name="lvlist" ItemsSource="{Binding}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" ItemContainerStyle="{StaticResource ResourceKey= _style_listviewItem}">
-                        <ListView.View>
-                            <GridView >
-                                <GridViewColumn Width="150" Header="区县名称" DisplayMemberBinding="{Binding PART_NAME}" ></GridViewColumn>
-                                <GridViewColumn Width="200" Header="月度任务量"  DisplayMemberBinding="{Binding task_theory}" ></GridViewColumn>
-                                <GridViewColumn Width="200" Header="月度实际完成量"   DisplayMemberBinding="{Binding task_actual}"></GridViewColumn>
-                                <GridViewColumn Width="200" Header="月度任务完成率"   DisplayMemberBinding="{Binding task_percent}"></GridViewColumn>
-                                <GridViewColumn Width="150" Header="评级"   DisplayMemberBinding="{Binding task_gradename}"></GridViewColumn>
-                                <GridViewColumn Width="120" Header="详情" >
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate >
-                                            <Button Name="btnDetails" Width="100" Height="28"  Click="btnDetails_Click" Tag="{Binding Path = PART_ID }">查询数据&gt;&gt;</Button>
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
-                            </GridView>
-                        </ListView.View>
-                    </ListView>-->
+                    <Grid Grid.Row="0" Width="auto" Margin="5,5,5,5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="37"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <Grid.Background>
+                                <ImageBrush ImageSource="/res/title.png"/>
+                            </Grid.Background>
+                            <TextBlock Margin="20,0,0,0" VerticalAlignment="Center">查询设置</TextBlock>
+                        </Grid>
+                        <Border Grid.Row="1" Background="#fbfbfc" BorderThickness="1,0,1,1" BorderBrush="#e0e0e0" CornerRadius="0,0,3,3">
+                            <Grid Margin="0,10,0,10">
+                                <StackPanel  VerticalAlignment="Center" >
+                                    <TextBlock  >选择日期:</TextBlock>
+                                    <ComboBox x:Name="_year" Grid.Column="3" Background="White" MinWidth="80"  MaxDropDownHeight="200" />
+                                    <!--<ComboBox x:Name="_month" Grid.Column="3" Background="White" MinWidth="60"  MaxDropDownHeight="200"/>-->
+                                    <Button Name="_query" Width="120" Height="32" Style="{StaticResource SelectImageButtonTemplate}" Margin="50,0,0,0" VerticalAlignment="Center"  Click="_query_Click"/>
+                                    <Button Name="_export" Width="120" Height="32" Style="{StaticResource ExportImageButtonTemplate}" Margin="50,0,0,0" VerticalAlignment="Center" Click="_export_Click"/>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                    <Grid Grid.Row="1" Margin="5,5,5,5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="37"/>
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <Grid.Background>
+                                <ImageBrush ImageSource="/res/title.png"/>
+                            </Grid.Background>
+                            <StackPanel>
+                                <TextBlock Margin="20,0,0,0" VerticalAlignment="Center">查询结果</TextBlock>
+                                <TextBlock x:Name="_title" Margin="20,0,0,0" VerticalAlignment="Center"></TextBlock>
+                            </StackPanel>
+                        </Grid>
+                        <Border Grid.Row="1" BorderThickness="1,0,1,1" BorderBrush="#e0e0e0" CornerRadius="0,0,3,3" Background="#fbfbfc">
+                            <Grid  x:Name="grid_info">
+                                <usercontrols:UcTableOperableView_NoTitle x:Name="_tableview" Background="Transparent" Margin="0"/>
+                            </Grid>
+                        </Border>
+                    </Grid>
                 </Grid>
             </TabItem>
             <TabItem Header="考评指标设置"  Name="scroll">
-                <Grid>
+                <Grid Margin ="10">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="30" />
-                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="37"/>
+                        <RowDefinition />
                     </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0" FontSize="14" FontWeight="200" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,10,0,0">▪ 检测任务执行绩效考评指标设置</TextBlock>
-                    <ListView Grid.Row="1" Name="lvlist2" ItemsSource="{Binding}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" ItemContainerStyle="{StaticResource ResourceKey= _style_listviewItem}" Margin="5" Width="610" FontFamily="宋体" FontSize="14" HorizontalAlignment="Left">
-                        <ListView.View>
-                            <GridView >
-                                <GridViewColumn Width="200" Header="等级" DisplayMemberBinding="{Binding gradeName}" ></GridViewColumn>
-                                <GridViewColumn Width="200" Header="绩效考评指标"  DisplayMemberBinding="{Binding parameter}" ></GridViewColumn>
-                                <GridViewColumn Width="200" Header="考评参数设置">
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate >
-                                            <Button Name="btnReset" Width="100" Height="25" FontFamily="宋体" FontSize="12" Click="btnReset_Click" Tag="{Binding Path = gradeId }">重置参数&gt;&gt;</Button>
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
+                    <Grid Grid.Row="0">
+                        <Grid.Background>
+                            <ImageBrush ImageSource="/res/title.png"/>
+                        </Grid.Background>
+                        <StackPanel>
+                            <TextBlock Margin="20,0,0,0" VerticalAlignment="Center">检测任务执行绩效考评指标设置</TextBlock>
+                        </StackPanel>
+                    </Grid>
+                    <Border Grid.Row="1" BorderThickness="1,0,1,1" BorderBrush="#e0e0e0" CornerRadius="0,0,3,3" Background="#fbfbfc">
+                        <Grid  x:Name="grid_table">
+                            <ListView Grid.Row="1" Name="lvlist2" ItemsSource="{Binding}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" ItemContainerStyle="{StaticResource ResourceKey= _style_listviewItem}" Margin="5" Width="610" FontFamily="宋体" FontSize="14" HorizontalAlignment="Left">
+                                <ListView.View>
+                                    <GridView >
+                                        <GridViewColumn Width="200" Header="等级" DisplayMemberBinding="{Binding gradeName}" ></GridViewColumn>
+                                        <GridViewColumn Width="200" Header="绩效考评指标"  DisplayMemberBinding="{Binding parameter}" ></GridViewColumn>
+                                        <GridViewColumn Width="200" Header="考评参数设置">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate >
+                                                    <Button Name="btnReset" Width="100" Height="25" FontFamily="宋体" FontSize="12" Click="btnReset_Click" Tag="{Binding Path = gradeId }">重置参数&gt;&gt;</Button>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                        </Grid>
+                    </Border>
                 </Grid>
             </TabItem>
         </TabControl>

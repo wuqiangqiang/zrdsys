@@ -6,7 +6,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Themes/ImageButtonStyle.xaml"/>
-                <ResourceDictionary Source="Themes/TextBox.xaml"/>
+                <ResourceDictionary Source="Themes/TextBoxStyle.xaml"/>
                 <ResourceDictionary Source="Themes/PasswordBox.xaml"/>
                 <ResourceDictionary Source="Themes/Button.xaml"/>
                 <ResourceDictionary Source="Themes/StackPanel.xaml"/>
@@ -18,30 +18,50 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
-        <TabControl Grid.Row="1" x:Name="_tabControl" SelectionChanged="_tabControl_SelectionChanged" Tag="">
-            <TabItem Header="分配检测任务" >
+        <TabControl Grid.Row="1" x:Name="_tabControl" Background="White" SelectionChanged="_tabControl_SelectionChanged" Margin="10" Tag="">
+            <TabItem Header="抽检率设置" >
                 <Grid >
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="40"/>
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="30"/>
                         <RowDefinition Height="38"/>
                     </Grid.RowDefinitions>
-                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                        <!--<TextBlock x:Name="_detect_trade_name">选择项目类别:</TextBlock>
-                        <ComboBox Width="80" x:Name="_detect_trade"></ComboBox>-->
+                    <!--<StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                        --><!--<TextBlock x:Name="_detect_trade_name">选择项目类别:</TextBlock>
+                        <ComboBox Width="80" x:Name="_detect_trade"></ComboBox>--><!--
                         <TextBlock  x:Name="_dept_name">选择检测站点:</TextBlock>
                         <ComboBox Width="200" x:Name="_detect_station"></ComboBox>
-                    </StackPanel>
-                    <Grid x:Name="_grid_detail" Grid.Row="1"/>
+                    </StackPanel>-->
+                    <Grid x:Name="_grid_detail" Grid.Row="1" HorizontalAlignment="Center"/>
                     <TextBlock Name="txtMsg" Grid.Row="2" Foreground="Red" FontSize="14" FontFamily="宋体" ></TextBlock>
                     <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" > 
-                        <Button Name="btnSave" Width="76" Height="30" Style="{StaticResource SaveImageButtonTemplate}" Click="btnSave_Click" Visibility="Hidden" /> 
+                        <Button Name="btnSave" Width="120" Height="32" Style="{StaticResource SaveImageButtonTemplate}" Click="btnSave_Click" /> 
                     </StackPanel>
                 </Grid>
             </TabItem>
-            <TabItem Header="任务汇总表"  >
-                <control:UcTableOperableView x:Name="_tableview" Grid.Row="2"  Margin="5,10,5,5"/>
+            <TabItem Header="抽检率统计表"  >  
+                <Grid Margin ="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="37"/>
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.Background>
+                            <ImageBrush ImageSource="/res/title.png"/>
+                        </Grid.Background>
+                        <StackPanel>
+                            <TextBlock Margin="20,0,0,0" VerticalAlignment="Center">各年度抽检率统计明细表</TextBlock>
+                            <TextBlock x:Name="_title" Margin="20,0,0,0" VerticalAlignment="Center"></TextBlock>
+                        </StackPanel>
+                    </Grid>
+                    <Border Grid.Row="1" BorderThickness="1,0,1,1" BorderBrush="#e0e0e0" CornerRadius="0,0,3,3" Background="#fbfbfc">
+                        <Grid  x:Name="grid_table">
+                            <!--<control:UcTableOperableView_NoTitle x:Name="_tableview" Background="Transparent" Margin="0"/>-->
+                            <control:UcTableOperableView_NoTitle x:Name="_tableview"  Margin="0"/>
+                        </Grid>
+                    </Border>
+                </Grid>
             </TabItem>
         </TabControl>
     </Grid>

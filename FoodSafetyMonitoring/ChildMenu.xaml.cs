@@ -497,6 +497,10 @@ namespace FoodSafetyMonitoring
                     case "90701": temptb.Header = (sender as Button).Content.ToString();
                         temptb.Content = new SysWarningReport(mainWindow.dbOperation); //传入检测站点的类型和检测单的类型
                         break;
+                    //检测师管理->签到记录管理->签到记录查询
+                    case "C0101": temptb.Header = (sender as Button).Content.ToString();
+                        temptb.Content = new SysDetectUserManager(mainWindow.dbOperation);
+                        break;
                     //系统管理->系统管理->部门管理
                     case "D0101": temptb.Header = (sender as Button).Content.ToString();
                         temptb.Content = new SysDeptManager(mainWindow.dbOperation);
@@ -517,10 +521,13 @@ namespace FoodSafetyMonitoring
                     case "D0106": temptb.Header = (sender as Button).Content.ToString();
                         temptb.Content = new SysLogManager();
                         break;
+                    //系统管理->系统管理->权限管理
+                    case "D0107": temptb.Header = (sender as Button).Content.ToString();
+                        temptb.Content = new SysRolePowerManager();
+                        break;
                     //帮助->帮助->帮助
                     case "E0101": temptb.Header = (sender as Button).Content.ToString();
-                        //temptb.Content = new UcUnrealizedModul();
-                        temptb.Content = new SysRolePowerManager();
+                        temptb.Content = new UcUnrealizedModul();
                         break;
                     //帮助->帮助->关于
                     case "E0102": temptb.Header = (sender as Button).Content.ToString();

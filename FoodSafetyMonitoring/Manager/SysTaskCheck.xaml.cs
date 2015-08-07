@@ -96,16 +96,16 @@ namespace FoodSafetyMonitoring.Manager
 
             _tableview.MyColumns = MyColumns;
             //_tableview.BShowDetails = true;
-            _tableview.DetailsRowEnvent += new UcTableOperableView.DetailsRowEventHandler(_tableview_DetailsRowEnvent);
+            _tableview.DetailsRowEnvent += new UcTableOperableView_NoTitle.DetailsRowEventHandler(_tableview_DetailsRowEnvent);
 
         }
 
         private void _query_Click(object sender, RoutedEventArgs e)
         {
-            _tableview.GetDataByPageNumberEvent += new UcTableOperableView.GetDataByPageNumberEventHandler(_tableview_GetDataByPageNumberEvent);
-            
+            _tableview.GetDataByPageNumberEvent += new UcTableOperableView_NoTitle.GetDataByPageNumberEventHandler(_tableview_GetDataByPageNumberEvent);
+
             GetData();
-            _tableview.Title = _year.Text + "年 检测任务执行绩效考评结果" + "  合计" + _tableview.RowTotal + "条数据";
+            //_tableview.Title = _year.Text + "年 检测任务执行绩效考评结果" + "  合计" + _tableview.RowTotal + "条数据";
         }
 
         private void GetData()

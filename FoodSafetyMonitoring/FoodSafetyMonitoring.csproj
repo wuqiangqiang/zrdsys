@@ -282,6 +282,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Manager\SysDetectUserManager.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Manager\SysHelp.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -708,6 +712,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Manager\UcUserCheckDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Manager\UcWarningdetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -965,6 +973,9 @@
     <Compile Include="Manager\SysDayReport.xaml.cs">
       <DependentUpon>SysDayReport.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Manager\SysDetectUserManager.xaml.cs">
+      <DependentUpon>SysDetectUserManager.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Manager\SysHelp.xaml.cs">
       <DependentUpon>SysHelp.xaml</DependentUpon>
     </Compile>
@@ -1114,6 +1125,9 @@
     </Compile>
     <Compile Include="Manager\SysWarningInfo.xaml.cs">
       <DependentUpon>SysWarningInfo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\UcUserCheckDetails.xaml.cs">
+      <DependentUpon>UcUserCheckDetails.xaml</DependentUpon>
     </Compile>
     <Compile Include="Manager\UcWarningdetails.xaml.cs">
       <DependentUpon>UcWarningdetails.xaml</DependentUpon>
