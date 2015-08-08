@@ -22,5 +22,6 @@
         <Setter Property="Height" Value="26"/>
         <Setter Property="BorderThickness" Value="0.8"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
-    </Style>
+        <Setter Property="Background" Value="{StaticResource DarkBrush}"/>
+   </Style>
 </ResourceDictionary>

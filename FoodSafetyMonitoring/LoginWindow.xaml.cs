@@ -115,6 +115,16 @@ namespace FoodSafetyMonitoring
             }
         }
 
+        private void min_MouseEnter(object sender, MouseEventArgs e)
+        {
+            min.Source = new BitmapImage(new Uri("pack://application:,," + "/res/small_on.png"));
+        }
+
+        private void min_MouseLeave(object sender, MouseEventArgs e)
+        {
+            min.Source = new BitmapImage(new Uri("pack://application:,," + "/res/small.png"));
+        }
+
         //鼠标点击关闭按钮时触发
         private void exit_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -122,6 +132,16 @@ namespace FoodSafetyMonitoring
             {
                 this.Close();
             }
+        }
+
+        private void exit_MouseEnter(object sender, MouseEventArgs e)
+        {
+            exit.Source = new BitmapImage(new Uri("pack://application:,," + "/res/shut_on.png"));
+        }
+
+        private void exit_MouseLeave(object sender, MouseEventArgs e)
+        {
+            exit.Source = new BitmapImage(new Uri("pack://application:,," + "/res/shut.png"));
         }
 
         //鼠标点击登录按钮触发

@@ -257,7 +257,7 @@ namespace FoodSafetyMonitoring.Manager
             this.txtUserName.Text = "";
             this._user_manger.IsChecked = false;
             this._user_manger_2.IsChecked = false;
-            this.txtMsg.Text = "";
+            //this.txtMsg.Text = "";
             this._department.IsEnabled = false;
             this._cmbRoleType.IsEnabled = false;
             this._subDetails.IsEnabled = false;
@@ -377,27 +377,27 @@ namespace FoodSafetyMonitoring.Manager
             this.btnSave.Tag = id;
         }
 
-        
+
         private void FrameworkElement_GotFocus(object sender, RoutedEventArgs e)
         {
-            ClearTip(sender);
+            //ClearTip(sender);
         }
 
         /// <summary>
         /// 清除提示信息
         /// </summary>
         /// <param name="sender">控件</param>
-        private void ClearTip(object sender)
-        {
-            string name = (sender as FrameworkElement).Name;
-            if (txtMsg.Tag != null)
-            {
-                if (name == txtMsg.Tag.ToString())
-                {
-                    txtMsg.Text = "";
-                }
-            }
-        }
+        //private void ClearTip(object sender)
+        //{
+        //    string name = (sender as FrameworkElement).Name;
+        //    if (txtMsg.Tag != null)
+        //    {
+        //        if (name == txtMsg.Tag.ToString())
+        //        {
+        //            txtMsg.Text = "";
+        //        }
+        //    }
+        //}
 
         private void _user_manger_Checked(object sender, RoutedEventArgs e)
         {
@@ -416,35 +416,40 @@ namespace FoodSafetyMonitoring.Manager
             string user_manager_flag = "";
             if (this._department.SelectedIndex < 1)
             {
-                txtMsg.Text = "*请选择帐号使用单位！";
-                txtMsg.Tag = "_department";
+                //txtMsg.Text = "*请选择帐号使用单位！";
+                //txtMsg.Tag = "_department";
+                Toolkit.MessageBox.Show("请选择帐号使用单位!", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
 
             if (this._cmbRoleType.SelectedIndex < 1)
             {
-                txtMsg.Text = "*请选择帐号权限！";
-                txtMsg.Tag = "_cmbRoleType";
+                //txtMsg.Text = "*请选择帐号权限！";
+                //txtMsg.Tag = "_cmbRoleType";
+                Toolkit.MessageBox.Show("请选择帐号权限!", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
             if (this._loginName.Text.Trim() == "")
             {
-                txtMsg.Text = "*请输入登录帐号！";
-                txtMsg.Tag = "_loginName";
+                //txtMsg.Text = "*请输入登录帐号！";
+                //txtMsg.Tag = "_loginName";
+                Toolkit.MessageBox.Show("请输入登录帐号!", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
 
             if (this._loginPassword.Password.Trim() == "")
             {
-                txtMsg.Text = "*请输入密码！";
-                txtMsg.Tag = "txtPwd";
+                //txtMsg.Text = "*请输入密码！";
+                //txtMsg.Tag = "txtPwd";
+                Toolkit.MessageBox.Show("请输入密码!", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
 
             if (this.txtUserName.Text.Trim() == "")
             {
-                txtMsg.Text = "*请输入帐号使用人姓名！";
-                txtMsg.Tag = "txtUserName";
+                //txtMsg.Text = "*请输入帐号使用人姓名！";
+                //txtMsg.Tag = "txtUserName";
+                Toolkit.MessageBox.Show("请输入帐号使用人姓名!", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
 

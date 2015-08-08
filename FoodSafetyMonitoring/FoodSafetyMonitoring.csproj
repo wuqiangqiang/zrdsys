@@ -486,6 +486,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Manager\Themes\Password_new.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Manager\Themes\RichTextBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -1258,6 +1262,8 @@
     <Content Include="DLL\MySql.Data.dll" />
     <Content Include="DLL\NPOI.dll" />
     <Content Include="DLL\NPOI.OOXML.dll" />
+    <Resource Include="res\small_on.png" />
+    <Resource Include="res\shut_on.png" />
     <Resource Include="res\down.png" />
     <Resource Include="res\up.png" />
     <Resource Include="res\title.png" />

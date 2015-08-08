@@ -6,31 +6,41 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Themes/TextBox.xaml"/>
-                <ResourceDictionary Source="Themes/Button.xaml"/>
+                <ResourceDictionary Source="Themes/Button_new.xaml"/>
                 <ResourceDictionary Source="Themes/StackPanel.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
-    <Grid>
-        <Grid HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,30,0,0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="150"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <!--<ColumnDefinition Width="80"/>-->
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <!--<TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" FontSize="16">上传图片:</TextBlock>-->
-            <TextBox  x:Name="FileNameTextBox" MinWidth="400" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"></TextBox>
-            <StackPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Center">
-                <Button  Content="浏览" x:Name="_browse" Click="btBrowse_Click"  Height="25" Width="60" FontSize="14" FontFamily="黑体"/>
-                <Button  Content="上传" x:Name="_update" Click="btUpdate_Click"  Height="25" Width="60" FontSize="14" FontFamily="黑体"/>
-                <!--<Button  Grid.Row="0" Grid.Column="2" Content="预览" x:Name="_show" Click="btShow_Click"  Height="25" Width="80" FontSize="14" FontFamily="黑体"/>-->
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="37"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.Background>
+                <ImageBrush ImageSource="/res/title.png"/>
+            </Grid.Background>
+            <StackPanel>
+                <TextBlock Margin="20,0,0,0" VerticalAlignment="Center">上传图片</TextBlock>
             </StackPanel>
-            <Image Grid.Row="1" Grid.Column="0" x:Name="image1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="68" Height="68"></Image>
-            <!--<Image Grid.Row="1" Grid.Column="2" x:Name="image2" HorizontalAlignment="Center" VerticalAlignment="Center"></Image>-->
         </Grid>
-    </Grid>
+        <Border Grid.Row="1" BorderThickness="1,0,1,1" BorderBrush="#e0e0e0" CornerRadius="0,0,3,3" Background="#fbfbfc">
+            <Grid Margin="0,30,0,0" HorizontalAlignment="Center" Width="auto">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="37" />
+                    <RowDefinition Height="150" />
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBox  x:Name="FileNameTextBox" MinWidth="400" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"></TextBox>
+                        <Button  Content="浏览" x:Name="_browse" Click="btBrowse_Click"  Height="25" Width="60" Margin="10,0,0,0"/>
+                        <Button  Content="上传" x:Name="_update" Click="btUpdate_Click"  Height="25" Width="60" Margin="10,0,0,0"/>
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <Image x:Name="image1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="68" Height="68"></Image>
+                </Grid>
+            </Grid>
+        </Border>
+    </Grid> 
 </UserControl>
