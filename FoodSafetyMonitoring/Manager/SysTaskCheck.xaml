@@ -83,7 +83,7 @@
                     </Grid>
                     <Border Grid.Row="1" BorderThickness="1,0,1,1" BorderBrush="#e0e0e0" CornerRadius="0,0,3,3" Background="#fbfbfc">
                         <Grid  x:Name="grid_table">
-                            <ListView Grid.Row="1" Name="lvlist2" ItemsSource="{Binding}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" ItemContainerStyle="{StaticResource ResourceKey= _style_listviewItem}" Margin="5" Width="610" FontFamily="宋体" FontSize="14" HorizontalAlignment="Left">
+                            <ListView Grid.Row="1" Name="lvlist2" ItemsSource="{Binding}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Margin="5" Width="610"  HorizontalAlignment="Left">
                                 <ListView.View>
                                     <GridView >
                                         <GridViewColumn Width="200" Header="等级" DisplayMemberBinding="{Binding gradeName}" ></GridViewColumn>

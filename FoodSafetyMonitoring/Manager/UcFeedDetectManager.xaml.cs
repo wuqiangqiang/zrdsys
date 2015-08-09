@@ -53,6 +53,7 @@ namespace FoodSafetyMonitoring.Manager
             _detect_item.SelectionChanged += new SelectionChangedEventHandler(_detect_item_SelectionChanged);
             ComboboxTool.InitComboboxSource(_detect_sample, string.Format("SELECT sampleId,sampleName FROM t_det_sample WHERE sampleId = '197'"), "lr");
             ComboboxTool.InitComboboxSource(_detect_result, "SELECT resultId,resultName FROM t_det_result where openFlag = '1' ORDER BY id", "lr");
+            ComboboxTool.InitComboboxSource(_card_brand, "SELECT cardbrandid,cardbrandname FROM t_cardbrand where openFlag = '1'", "lr");
             _entering_datetime.Text = string.Format("{0:g}", System.DateTime.Now);
             _detect_person.Text = (Application.Current.Resources["User"] as UserInfo).ShowName;
             _detect_site.Text = dbOperation.GetSingle("SELECT INFO_NAME  from  sys_client_sysdept WHERE INFO_CODE = " + (Application.Current.Resources["User"] as UserInfo).DepartmentID).ToString();
@@ -77,6 +78,7 @@ namespace FoodSafetyMonitoring.Manager
             this._detect_sample.SelectedIndex = 0;
             this._detect_sensitivity.SelectedIndex = 0;
             this._detect_result.SelectedIndex = 0;
+            this._card_brand.SelectedIndex = 0;
             this._entering_datetime.Text = string.Format("{0:g}", System.DateTime.Now);
         }
 
@@ -115,14 +117,18 @@ namespace FoodSafetyMonitoring.Manager
             {
                 msg = "*请输入检测师";
             }
+            else if (_card_brand.SelectedIndex < 1)
+            {
+                msg = "*请选择检测用卡";
+            }
             else
             {
                 string feed_info_id;
-                int n = dbOperation.ExecuteSql(string.Format("INSERT INTO t_feed_info (feedid,feedbrand,producecompany,producebatchno,batchnum,buydate,createuserid,createdate) VALUES('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}')",
+                int n = dbOperation.ExecuteSql(string.Format("INSERT INTO t_feed_info (feedid,feedbrand,producecompany,producebatchno,batchnum,buydate,createuserid,createdate,createdeptid) VALUES('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}')",
                                                                _feed_name.Text,
                                                                 _feed_brand.Text, _produce_company.Text,_produce_batchno.Text,
                                                                 _batch_num.Text,_buy_date.Text,
-                                                                userId, DateTime.Now));
+                                                                userId, DateTime.Now, (Application.Current.Resources["User"] as UserInfo).DepartmentID.ToString()));
                 if (n == 1)
                 {
                     feed_info_id = dbOperation.GetSingle(string.Format("SELECT max(id) from t_feed_info where feedid ='{0}' and createuserid = '{1}'", _feed_name.Text, userId)).ToString();
@@ -133,7 +139,7 @@ namespace FoodSafetyMonitoring.Manager
                     return;
                 }
 
-                string sql = string.Format("call p_insert_feed_detect('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}')"
+                string sql = string.Format("call p_insert_feed_detect('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}')"
                               , _feed_name.Text, feed_info_id,
                               (_detect_item.SelectedItem as Label).Tag.ToString(),
                               (_detect_method1.IsChecked == true ? 1 : 0) + (_detect_method2.IsChecked == true ? 2 : 0) + (_detect_method3.IsChecked == true ? 3 : 0),
@@ -143,7 +149,8 @@ namespace FoodSafetyMonitoring.Manager
                               (_detect_result.SelectedItem as Label).Tag.ToString(),
                               (Application.Current.Resources["User"] as UserInfo).DepartmentID,
                               (Application.Current.Resources["User"] as UserInfo).ID,
-                              System.DateTime.Now);
+                              System.DateTime.Now,
+                              (_card_brand.SelectedItem as Label).Tag.ToString());
 
                 int i = dbOperation.ExecuteSql(sql);
                 if (i == 1)

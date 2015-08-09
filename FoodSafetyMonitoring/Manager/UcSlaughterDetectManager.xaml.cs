@@ -69,7 +69,7 @@ namespace FoodSafetyMonitoring.Manager
             ComboboxTool.InitComboboxSource(_detect_number, string.Format("SELECT CARDID,CARDID FROM v_zq_detect WHERE  DETECTID = '{0}'", departmentId), "lr");
             _detect_number.SelectionChanged += new SelectionChangedEventHandler(_detect_number_SelectionChanged);
 
-            ComboboxTool.InitComboboxSource(_detect_item, string.Format("SELECT ItemID,ItemNAME FROM t_det_item WHERE  (tradeId ='1'or ifnull(tradeId,'') = '') and OPENFLAG = '1'"), "lr");
+            ComboboxTool.InitComboboxSource(_detect_item, string.Format("SELECT ItemID,ItemNAME FROM t_det_item WHERE  (tradeId ='2'or ifnull(tradeId,'') = '') and OPENFLAG = '1'"), "lr");
             _detect_item.SelectionChanged += new SelectionChangedEventHandler(_detect_item_SelectionChanged);
 
             ComboboxTool.InitComboboxSource(_detect_result, "SELECT resultId,resultName FROM t_det_result where openFlag = '1' ORDER BY id", "lr");

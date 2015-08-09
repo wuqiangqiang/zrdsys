@@ -23,9 +23,10 @@
             <Grid.Background>
                 <ImageBrush ImageSource="/res/detect_back.png" Stretch="Fill"></ImageBrush>
             </Grid.Background>
-            <Grid Margin="50,30,50,50">
+            <Grid Margin="50,20,50,30">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="60"/>
+                    <RowDefinition Height="50"/>
                     <RowDefinition Height="50"/>
                     <RowDefinition Height="50"/>
                     <RowDefinition Height="50"/>
@@ -34,7 +35,7 @@
                     <RowDefinition Height="80"/>
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
-                    <TextBlock FontSize="20" Text="样本检测信息录入单" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" ></TextBlock>
+                    <TextBlock FontSize="20" Text="饲料检测信息录入单" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" ></TextBlock>
                 </Grid>
                 <Grid Grid.Row="1">
                     <StackPanel >
@@ -83,6 +84,12 @@
                 </Grid>
                 <Grid Grid.Row="5">
                     <StackPanel >
+                        <TextBlock  Width="80">检测用卡:</TextBlock>
+                        <ComboBox  x:Name="_card_brand" Margin="5,0,0,0" Width="120" ></ComboBox>
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Row="6">
+                    <StackPanel >
                         <TextBlock  Width="80">检测单位:</TextBlock>
                         <TextBlock  x:Name="_detect_site" Margin="5,0,0,0" Width="126" ></TextBlock>
                         <TextBlock  Width="80">检测师:</TextBlock>
@@ -91,11 +98,11 @@
                         <TextBlock  x:Name="_entering_datetime" Margin="5,0,0,0" Width="200" ></TextBlock>
                     </StackPanel>
                 </Grid>
-                <Grid Grid.Row="6">
+                <Grid Grid.Row="7">
                     <StackPanel >
-                        <TextBlock Name="txtMsg"  Foreground="Red" FontSize="14" FontFamily="宋体"  HorizontalAlignment="Center" ></TextBlock>
+                        <TextBlock Name="txtMsg" Width="200" Foreground="Red" FontSize="14" FontFamily="宋体"  HorizontalAlignment="Center" ></TextBlock>
                         <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" >
-                            <Button Name="btnSave" Width="120" Height="32" Style="{StaticResource SaveImageButtonTemplate}" Click="btnSave_Click" Margin="220,0,20,0"/>
+                            <Button Name="btnSave" Width="120" Height="32" Style="{StaticResource SaveImageButtonTemplate}" Click="btnSave_Click" Margin="30,0,20,0"/>
                             <Button Name="btnCancel" Width="120" Height="32" Style="{StaticResource CancelImageButtonTemplate}" Click="Clear_Click" Margin="20,0,0,0"  />
                         </StackPanel>
                     </StackPanel>

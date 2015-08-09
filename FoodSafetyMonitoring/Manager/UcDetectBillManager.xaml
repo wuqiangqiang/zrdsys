@@ -16,100 +16,95 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
-    <Grid> 
-        <Grid  Margin="0,30,0,30" HorizontalAlignment="Center">
+    <Grid>
+        <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Width="906" Height="479">
             <Grid.Background>
                 <ImageBrush ImageSource="/res/detect_back.png" Stretch="Fill"></ImageBrush>
             </Grid.Background>
-            <Grid Margin="60,20,80,60">
+            <Grid Margin="30,20,50,30">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="80"/>
                 </Grid.RowDefinitions>
-                <!--<Grid Grid.Row="0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition Width="198"/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <Grid>
-                        <Grid.Background>
-                            <ImageBrush ImageSource="/res/line.png"/>
-                        </Grid.Background>
-                    </Grid>
-                    <TextBlock Grid.Column="1"  FontSize="22" Text="样本检测信息录入单" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" Width="198"></TextBlock>
-                    <Grid Grid.Column="2">
-                        <Grid.Background>
-                            <ImageBrush ImageSource="/res/line.png" />
-                        </Grid.Background>
-                    </Grid>
-                </Grid>-->
-                <TextBlock Grid.Column="1"  FontSize="22" Text="--------------------------样本检测信息录入单--------------------------" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" ></TextBlock>
-                <StackPanel Grid.Row="1" Orientation="Horizontal">
-                    <TextBlock SnapsToDevicePixels="False">来源产地:</TextBlock>
-                    <ComboBox Width="100" x:Name="_province"></ComboBox>
-                    <TextBlock MinWidth="20" Margin="10,0,0,0" >省</TextBlock>
-                    <ComboBox Width="100" x:Name="_city"></ComboBox>
-                    <TextBlock  MinWidth="20" Margin="10,0,0,0" >市</TextBlock>
-                    <ComboBox Width="100" x:Name="_region"></ComboBox>
-                    <TextBlock  Margin="10,0,0,0" >区（县）</TextBlock>
-                </StackPanel>
-                <StackPanel Grid.Row="2" Orientation="Horizontal">
-                    <TextBlock HorizontalAlignment="Right">来源:</TextBlock>
-                    <ComboBox Width="280" x:Name="_source_company" IsEditable="True"></ComboBox>
-                    <TextBlock  >检疫证号:</TextBlock>
-                    <TextBox Width="305" x:Name="_detect_number" MaxLength="20" InputMethod.IsInputMethodEnabled="False" PreviewKeyDown="Detect_Number_PreviewKeyDown"></TextBox>
-                </StackPanel>
-                <StackPanel Grid.Row="3" Orientation="Horizontal">
-                    <TextBlock  >批次头数:</TextBlock>
-                    <TextBox Width="60" x:Name="_object_count" MaxLength="5" TextAlignment="Right" InputMethod.IsInputMethodEnabled="False" DataObject.Pasting="Object_Count_Pasting" PreviewKeyDown="Object_Count_PreviewKeyDown"  PreviewTextInput="Object_Count_PreviewTextInput"></TextBox>
-                    <TextBlock Width="40" >耳标号:</TextBlock>
-                    <TextBox Width="100" x:Name="_object_label" MaxLength="15" InputMethod.IsInputMethodEnabled="False" PreviewKeyDown="Object_Lable_PreviewKeyDown"></TextBox>
-                    <TextBlock  >检测方法:</TextBlock>
-                    <CheckBox x:Name="_detect_method1" Checked="_detect_method1_Checked" >金标检测卡</CheckBox>
-                    <CheckBox x:Name="_detect_method2" Checked="_detect_method1_Checked" >ELISA试剂盒</CheckBox>
-                    <CheckBox x:Name="_detect_method3" Checked="_detect_method1_Checked" >分析检测</CheckBox>
-                </StackPanel>
-                <StackPanel Grid.Row="4" Orientation="Horizontal">
-                    <TextBlock  >检测项目:</TextBlock>
-                    <!--<ComboBox  Width="100" x:Name="_detect_trade" IsEnabled="False"></ComboBox>-->
-                    <ComboBox  Width="140" x:Name="_detect_item" ></ComboBox>
-                    <TextBlock  >检测对象:</TextBlock>
-                    <ComboBox  Width="100" x:Name="_detect_object"></ComboBox>
-                    <TextBlock  >检测样本:</TextBlock>
-                    <ComboBox  Width="120" x:Name="_detect_sample"></ComboBox>
-                </StackPanel>
-                <StackPanel Grid.Row="5" Orientation="Horizontal">
-                    <TextBlock  >检测灵敏度:</TextBlock>
-                    <ComboBox   Width="100" x:Name="_detect_sensitivity"></ComboBox>
-                    <TextBlock  >检测结果:</TextBlock>
-                    <ComboBox  Width="140" x:Name="_detect_result"></ComboBox>
-                </StackPanel>
-                <StackPanel Grid.Row="6" Orientation="Horizontal">
-                    <TextBlock  MinWidth="40">检测点:</TextBlock>
-                    <TextBlock  x:Name="_detect_site" Margin="5,0,0,0" MinWidth="200" ></TextBlock>
-                    <TextBlock  MinWidth="40">检测师:</TextBlock>
-                    <TextBlock  x:Name="_detect_person" Margin="5,0,0,0" MinWidth="180" ></TextBlock>
-                    <TextBlock  MinWidth="40">录入时间:</TextBlock>
-                    <TextBlock  x:Name="_entering_datetime" Margin="5,0,0,0" MinWidth="150" ></TextBlock>
-                </StackPanel>
-                <Grid Grid.Row="8">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="192"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Name="txtMsg"  Foreground="Red" FontSize="14" FontFamily="宋体"  HorizontalAlignment="Center" ></TextBlock>
-                    <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" >
-                        <Button Name="btnSave" Width="76" Height="30" Style="{StaticResource SaveImageButtonTemplate}" Click="btnSave_Click" Margin="0,0,20,0"/>
-                        <Button Name="btnCancel" Width="76" Height="30" Style="{StaticResource CancelImageButtonTemplate}" Click="Clear_Click" Margin="20,0,0,0"  />
+                <Grid Grid.Row="0">
+                    <TextBlock FontSize="20" Text="宰前检测信息录入单" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" ></TextBlock>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <StackPanel >
+                        <TextBlock Width="80" SnapsToDevicePixels="False">来源产地:</TextBlock>
+                        <ComboBox Width="100" x:Name="_province"></ComboBox>
+                        <TextBlock MinWidth="20" Margin="10,0,0,0" >省</TextBlock>
+                        <ComboBox Width="100" x:Name="_city"></ComboBox>
+                        <TextBlock  MinWidth="20" Margin="10,0,0,0" >市</TextBlock>
+                        <ComboBox Width="100" x:Name="_region"></ComboBox>
+                        <TextBlock  Margin="10,0,0,0" >区（县）</TextBlock>
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Row="2">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Width="80">被检单位:</TextBlock>
+                        <ComboBox Width="310" x:Name="_source_company" IsEditable="True"></ComboBox>
+                        <TextBlock Width="70" >检疫证号:</TextBlock>
+                        <TextBox Width="280" x:Name="_detect_number" MaxLength="20" InputMethod.IsInputMethodEnabled="False" PreviewKeyDown="Detect_Number_PreviewKeyDown"></TextBox>
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Row="3">
+                    <StackPanel >
+                        <TextBlock Width="80" >批次头数:</TextBlock>
+                        <TextBox Width="120" Margin="0" x:Name="_object_count" MaxLength="5" TextAlignment="Right" InputMethod.IsInputMethodEnabled="False" DataObject.Pasting="Object_Count_Pasting" PreviewKeyDown="Object_Count_PreviewKeyDown"  PreviewTextInput="Object_Count_PreviewTextInput"></TextBox>
+                        <TextBlock Width="60" >耳标号:</TextBlock>
+                        <TextBox Width="100" Margin="0" x:Name="_object_label" MaxLength="15" InputMethod.IsInputMethodEnabled="False" PreviewKeyDown="Object_Lable_PreviewKeyDown"></TextBox>
+                        <TextBlock  Width="70">检测方法:</TextBlock>
+                        <CheckBox x:Name="_detect_method1" Checked="_detect_method1_Checked" >金标检测卡</CheckBox>
+                        <CheckBox x:Name="_detect_method2" Checked="_detect_method1_Checked" >ELISA试剂盒</CheckBox>
+                        <CheckBox x:Name="_detect_method3" Checked="_detect_method1_Checked" >分析检测</CheckBox>
+                        <TextBlock Width="80" Margin="103,0,10,0">检测项目:</TextBlock>
+                        <!--<ComboBox  Width="100" x:Name="_detect_trade" IsEnabled="False"></ComboBox>-->
+                        <ComboBox  Width="200" x:Name="_detect_item" ></ComboBox>
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Row="4">
+                    <StackPanel >
+                        <TextBlock Width="80" >检测对象:</TextBlock>
+                        <ComboBox  Width="120" x:Name="_detect_object"></ComboBox>
+                        <TextBlock Width="60" >检测样本:</TextBlock>
+                        <ComboBox  Width="100" x:Name="_detect_sample"></ComboBox>
+                        <TextBlock Width="70" >检测灵敏度:</TextBlock>
+                        <ComboBox  Width="280" x:Name="_detect_sensitivity" Margin="5,0,0,0"></ComboBox>
+                        
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Row="5">
+                    <StackPanel >
+                        <TextBlock Width="80">检测结果:</TextBlock>
+                        <ComboBox  Width="120" x:Name="_detect_result"></ComboBox>
+                        <TextBlock  Width="60">检测用卡:</TextBlock>
+                        <ComboBox  x:Name="_card_brand" Margin="0,0,0,0" Width="100" ></ComboBox>
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Row="6">
+                    <StackPanel >
+                        <TextBlock  Width="80">检测单位:</TextBlock>
+                        <TextBlock  x:Name="_detect_site" Margin="0,0,0,0" Width="120" ></TextBlock>
+                        <TextBlock  Width="60">检测师:</TextBlock>
+                        <TextBlock  x:Name="_detect_person" Margin="0,0,0,0" Width="100" ></TextBlock>
+                        <TextBlock  Width="80">录入时间:</TextBlock>
+                        <TextBlock  x:Name="_entering_datetime" Margin="5,0,0,0" Width="200" ></TextBlock>
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Row="7">
+                    <StackPanel >
+                        <TextBlock Name="txtMsg" Width="200" Foreground="Red" FontSize="14" FontFamily="宋体"  HorizontalAlignment="Center" ></TextBlock>
+                        <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" >
+                            <Button Name="btnSave" Width="120" Height="32" Style="{StaticResource SaveImageButtonTemplate}" Click="btnSave_Click" Margin="30,0,20,0"/>
+                            <Button Name="btnCancel" Width="120" Height="32" Style="{StaticResource CancelImageButtonTemplate}" Click="Clear_Click" Margin="20,0,0,0"  />
+                        </StackPanel>
                     </StackPanel>
                 </Grid>
             </Grid>

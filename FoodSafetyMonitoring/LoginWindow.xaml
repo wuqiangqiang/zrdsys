@@ -18,7 +18,7 @@
             <ImageBrush ImageSource="/res/login.jpg"></ImageBrush>
         </Canvas.Background>
         <Thumb Width="432" Height="120" Background="Transparent" Opacity="0" DragDelta="Thumb_DragDelta" ></Thumb>
-        <Image  Width="80" Height="80" Source="/res/title_logo.png"  VerticalAlignment="Top"  Canvas.Left="30" Canvas.Top="30"/>
+        <!--<Image  Width="80" Height="80" Source="/res/title_logo.png"  VerticalAlignment="Top"  Canvas.Left="30" Canvas.Top="30"/>-->
         <Image  Width="15" Height="15" Source="/res/small.png" x:Name="min" MouseDown="min_MouseDown" MouseEnter="min_MouseEnter" MouseLeave="min_MouseLeave" ToolTip="最小化"   VerticalAlignment="Top"  Canvas.Left="390" Canvas.Top="1"/>
         <Image  Width="15" Height="15" Source="/res/shut.png" x:Name="exit" MouseDown="exit_MouseDown" MouseEnter="exit_MouseEnter" MouseLeave="exit_MouseLeave" ToolTip="关闭"  HorizontalAlignment="Right" VerticalAlignment="Top"  Canvas.Left="410" Canvas.Top="1"/>
         <Image x:Name="_img_user" Source="/res/username.png" Canvas.Left="96" Canvas.Top="162" Width="245" Height="41"></Image>

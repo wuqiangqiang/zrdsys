@@ -63,10 +63,10 @@
                                 <ComboBox x:Name="_source_company1" Width="300"></ComboBox>-->
                             <TextBlock MinWidth="50">检测站点:</TextBlock>
                             <ComboBox x:Name="_detect_station" Width="240"/>
-                            <TextBlock MinWidth="30">检测师:</TextBlock>
-                            <ComboBox Width="100" x:Name="_detect_person1" />
+                            <TextBlock MinWidth="50">检测师:</TextBlock>
+                            <ComboBox Width="120" x:Name="_detect_person1" />
                             <TextBlock MinWidth="50">检测项目:</TextBlock>
-                            <ComboBox Width="120" x:Name="_detect_item1" />
+                            <ComboBox Width="140" x:Name="_detect_item1" />
                         </StackPanel>
                     </Grid>
                     <Grid Grid.Row="1">
@@ -74,11 +74,13 @@
                             <!--<TextBlock MinWidth="50">检测对象:</TextBlock>
                             <ComboBox Width="120" x:Name="_detect_object1" />-->
                             <TextBlock MinWidth="50">检测方法:</TextBlock>
-                            <ComboBox Width="120" x:Name="_detect_method" />
+                            <ComboBox Width="262" x:Name="_detect_method" />
+                            <TextBlock MinWidth="50">检测用卡:</TextBlock>
+                            <ComboBox Width="240" x:Name="_card_brand" />
                             <TextBlock MinWidth="50">检测结果:</TextBlock>
-                            <ComboBox Width="130" x:Name="_detect_result1" />
+                            <ComboBox Width="120" x:Name="_detect_result1"/>
                             <TextBlock MinWidth="50">饲料名称:</TextBlock>
-                            <ComboBox Width="170" x:Name="_detect_feed" />
+                            <ComboBox Width="140" x:Name="_detect_feed" />
                             <!--<TextBlock MinWidth="50">数据来源:</TextBlock>
                             <ComboBox Width="120" x:Name="_detect_type" />-->
                         </StackPanel>
@@ -87,8 +89,7 @@
                         <StackPanel VerticalAlignment="Center">
                             <!--<TextBlock MinWidth="50">检测站点性质:</TextBlock>
                                 <ComboBox Width="120" x:Name="_dept_type" />-->
-
-                            <Button Name="_query" Width="120" Height="32" Style="{StaticResource SelectImageButtonTemplate}" Click="_query_Click" Margin="750,0,0,0" />
+                            <Button Name="_query" Width="120" Height="32" Style="{StaticResource SelectImageButtonTemplate}" Click="_query_Click" Margin="820,0,0,0" />
                             <Button Name="_export" Width="120" Height="32" Style="{StaticResource ExportImageButtonTemplate}" Click="_export_Click" Margin="50,0,0,0"/>
                         </StackPanel>
                     </Grid>

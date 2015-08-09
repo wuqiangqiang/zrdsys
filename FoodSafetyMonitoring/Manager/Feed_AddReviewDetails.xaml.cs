@@ -52,7 +52,7 @@ namespace FoodSafetyMonitoring.Manager
             //_img.Source = new BitmapImage(new Uri("http://www.zrodo.com:8080/xmjc/" + table.Rows[0][20].ToString()));
             _feedname.Text = table.Rows[0][10].ToString();
             _itemName.Text = table.Rows[0][3].ToString();
-            _objectName.Text = table.Rows[0][4].ToString();
+            _cardbrand.Text = table.Rows[0][4].ToString();
             _sampleName.Text = table.Rows[0][5].ToString();
             _reangetName.Text = table.Rows[0][7].ToString();
             _sensitivityName.Text = table.Rows[0][6].ToString();
