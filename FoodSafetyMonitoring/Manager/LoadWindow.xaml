@@ -17,6 +17,7 @@
             <Ellipse Width="21.835" Height="21.862" Canvas.Left="98.165" Canvas.Top="54.414" Stretch="Fill" Fill="#003e8c" Opacity="0.3"/>
             <Ellipse Width="21.835" Height="21.862" Canvas.Left="92.9838" Canvas.Top="26.9938" Stretch="Fill" Fill="#003e8c" Opacity="0.2"/>
             <Ellipse Width="21.835" Height="21.862" Canvas.Left="47.2783" Canvas.Top="0.5" Stretch="Fill" Fill="#003e8c" Opacity="0.1"/>
+            <TextBlock Canvas.Left="40" Canvas.Top="60">加载中...</TextBlock>
             <Canvas.RenderTransform>
                 <RotateTransform x:Name="SpinnerRotate" Angle="0" />
             </Canvas.RenderTransform>

@@ -35,8 +35,8 @@
                         <GridViewColumn Width="150" Header="检测方法"   DisplayMemberBinding="{Binding ReagentName}"></GridViewColumn>
                         <GridViewColumn Width="150" Header="检测结果"   DisplayMemberBinding="{Binding ResultName}"></GridViewColumn>
                         <GridViewColumn Width="150" Header="检测师"   DisplayMemberBinding="{Binding DetectUsername}"></GridViewColumn>
-                        <GridViewColumn Width="200" Header="来源区域"   DisplayMemberBinding="{Binding AreaName}"></GridViewColumn>
-                        <GridViewColumn Width="180" Header="来源单位"   DisplayMemberBinding="{Binding CompanyName}"></GridViewColumn>
+                        <GridViewColumn Width="200" Header="来源产地"   DisplayMemberBinding="{Binding AreaName}"></GridViewColumn>
+                        <GridViewColumn Width="180" Header="被检单位"   DisplayMemberBinding="{Binding CompanyName}"></GridViewColumn>
                         <GridViewColumn Width="100" Header="状态">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate >

@@ -57,17 +57,17 @@
                             <TextBlock MinWidth="50">养殖企业名称:</TextBlock>
                             <ComboBox x:Name="_culture_company" Width="240"/>
                             <TextBlock MinWidth="50">建档人:</TextBlock>
-                            <ComboBox Width="120" x:Name="_file_cuserid" />
+                            <ComboBox Width="130" x:Name="_file_cuserid" />
                             <TextBlock MinWidth="30">圈舍号:</TextBlock>
-                            <ComboBox Width="80" x:Name="_colony_no"/>
+                            <ComboBox Width="130" x:Name="_colony_no"/>
                         </StackPanel>
                     </Grid>
                     <Grid Grid.Row="1">
                         <StackPanel VerticalAlignment="Center">
                             <TextBlock MinWidth="50">圈舍养殖品种:</TextBlock>
-                            <ComboBox Width="95" x:Name="_object_type" />
+                            <ComboBox Width="236" x:Name="_object_type" />
                             
-                            <Button Name="_query" Width="120" Height="32" Style="{StaticResource SelectImageButtonTemplate}" Click="_query_Click" Margin="650,0,0,0" />
+                            <Button Name="_query" Width="120" Height="32" Style="{StaticResource SelectImageButtonTemplate}" Click="_query_Click" Margin="480,0,0,0" />
                             <Button Name="_export" Width="120" Height="32" Style="{StaticResource ExportImageButtonTemplate}" Click="_export_Click" Margin="50,0,0,0"/>
                         </StackPanel>
                     </Grid>

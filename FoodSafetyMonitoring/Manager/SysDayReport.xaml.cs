@@ -50,20 +50,20 @@ namespace FoodSafetyMonitoring.Manager
                     break;
                 case "2": _dept_name.Text = "选择区县:";
                     break;
-                case "3": _dept_name.Text = "选择检测站点:";
+                case "3": _dept_name.Text = "选择检测单位:";
                     break;
-                case "4": _dept_name.Text = "选择检测站点:";
+                case "4": _dept_name.Text = "选择检测单位:";
                     break;
                 default: break;
             }
-            //检测站点
+            //检测单位
             ComboboxTool.InitComboboxSource(_detect_dept, string.Format("call p_dept_cxtj_hb({0},'{1}')", (Application.Current.Resources["User"] as UserInfo).ID, depttype), "cxtj");
             //检测项目
             ComboboxTool.InitComboboxSource(_detect_item, "SELECT ItemID,ItemNAME FROM t_det_item WHERE  (tradeId ='1'or tradeId ='2' or tradeId ='3' or ifnull(tradeId,'') = '') and OPENFLAG = '1' order by orderId", "cxtj");
             //检测结果
             ComboboxTool.InitComboboxSource(_detect_result, "SELECT resultId,resultName FROM t_det_result where openFlag='1' ORDER BY id", "cxtj");
 
-            //如果登录用户的部门是站点级别，则将查询条件检测站点赋上默认值
+            //如果登录用户的部门是站点级别，则将查询条件检测单位赋上默认值
             if (isDept())
             {
                 _detect_dept.SelectedIndex = 1;
@@ -131,9 +131,9 @@ namespace FoodSafetyMonitoring.Manager
                     break;
                 case "2": tabledisplay.Columns.Add(new DataColumn("区县名称"));
                     break;
-                case "3": tabledisplay.Columns.Add(new DataColumn("检测站点名称"));
+                case "3": tabledisplay.Columns.Add(new DataColumn("检测单位名称"));
                     break;
-                case "4": tabledisplay.Columns.Add(new DataColumn("检测站点名称"));
+                case "4": tabledisplay.Columns.Add(new DataColumn("检测单位名称"));
                     break;
                 default: break;
             }

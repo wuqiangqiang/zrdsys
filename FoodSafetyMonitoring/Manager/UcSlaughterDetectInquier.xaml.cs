@@ -46,10 +46,12 @@ namespace FoodSafetyMonitoring.Manager
             ComboboxTool.InitComboboxSource(_detect_station, string.Format("call p_user_dept_hb('{0}','tz')", userId), "cxtj");
             ComboboxTool.InitComboboxSource(_detect_item1, "SELECT ItemID,ItemNAME FROM t_det_item_hb WHERE  (tradeId ='2' or ifnull(tradeId,'') = '') and OPENFLAG = '1'", "cxtj");
             ComboboxTool.InitComboboxSource(_detect_object1, "SELECT objectId,objectName FROM t_det_object WHERE  OPENFLAG = '1'", "cxtj");
-            ComboboxTool.InitComboboxSource(_detect_result1, "SELECT resultId,resultName FROM t_det_result where openFlag = '1' ORDER BY id", "cxtj");
+            //ComboboxTool.InitComboboxSource(_detect_result1, "SELECT resultId,resultName FROM t_det_result where openFlag = '1' ORDER BY id", "cxtj");
+            _detect_result1.SelectedIndex = 0;
             ComboboxTool.InitComboboxSource(_detect_person1, string.Format("call p_user_detuser_hb('{0}','tz')", userId), "cxtj");
-            ComboboxTool.InitComboboxSource(_detect_method, "select reagentId,reagentName from t_det_reagent where openFlag = '1'", "cxtj");
+            ComboboxTool.InitComboboxSource(_detect_method, "select reagentId,reagentName from t_det_reagent_hb where  tradeid ='1' and openFlag = '1'", "cxtj");
             ComboboxTool.InitComboboxSource(_detect_type, "SELECT sourceId,sourceName FROM t_det_source where openFlag = '1'", "cxtj");
+            ComboboxTool.InitComboboxSource(_card_brand, "SELECT cardbrandid,cardbrandname FROM t_cardbrand where openFlag = '1'", "cxtj");
             //ComboboxTool.InitComboboxSource(_dept_type, "SELECT typeId,typeName FROM t_dept_type where openFlag = '1'", "cxtj");
 
             ComboboxTool.InitComboboxSource(_province1, rows, "cxtj");
@@ -62,28 +64,30 @@ namespace FoodSafetyMonitoring.Manager
 
         private void SetColumns()
         {
-            MyColumns.Add("orderid", new MyColumn("orderid", "检测单编号") { BShow = true, Width = 10 });
+            MyColumns.Add("orderid", new MyColumn("orderid", "检测单编号") { BShow = true, Width = 8 });
             MyColumns.Add("detecttype", new MyColumn("detecttype", "数据来源id") { BShow = false });
-            MyColumns.Add("detecttypename", new MyColumn("detecttypename", "数据来源") { BShow = true, Width = 10 });
-            MyColumns.Add("detectdate", new MyColumn("detectdate", "检测时间") { BShow = true, Width = 18 });
+            MyColumns.Add("detecttypename", new MyColumn("detecttypename", "数据来源") { BShow = true, Width = 8 });
+            MyColumns.Add("cardbrandid", new MyColumn("cardbrandid", "检测用卡id") { BShow = false });
+            MyColumns.Add("cardbrandname", new MyColumn("cardbrandname", "检测用卡") { BShow = true, Width = 14 });
+            MyColumns.Add("detectdate", new MyColumn("detectdate", "检测时间") { BShow = true, Width = 16 });
             MyColumns.Add("deptid", new MyColumn("deptid", "检测站点id") { BShow = false });
-            MyColumns.Add("deptname", new MyColumn("deptname", "检测站点") { BShow = true, Width = 16 });
+            MyColumns.Add("deptname", new MyColumn("deptname", "检测单位") { BShow = true, Width = 14 });
             MyColumns.Add("itemid", new MyColumn("itemid", "检测项目id") { BShow = false });
-            MyColumns.Add("itemname", new MyColumn("itemname", "检测项目") { BShow = true, Width = 12 });
+            MyColumns.Add("itemname", new MyColumn("itemname", "检测项目") { BShow = true, Width = 10 });
             MyColumns.Add("objectid", new MyColumn("objectid", "检测对象id") { BShow = false });
-            MyColumns.Add("objectname", new MyColumn("objectname", "检测对象") { BShow = true, Width = 10 });
+            MyColumns.Add("objectname", new MyColumn("objectname", "检测对象") { BShow = true, Width = 8 });
             MyColumns.Add("sampleid", new MyColumn("sampleid", "检测样本id") { BShow = false });
-            MyColumns.Add("samplename", new MyColumn("samplename", "检测样本") { BShow = true, Width = 10 });
+            MyColumns.Add("samplename", new MyColumn("samplename", "检测样本") { BShow = true, Width = 8 });
             MyColumns.Add("sensitivityid", new MyColumn("sensitivityid", "检测灵敏度id") { BShow = false });
-            MyColumns.Add("sensitivityname", new MyColumn("sensitivityname", "检测灵敏度") { BShow = true, Width = 10 });
+            MyColumns.Add("sensitivityname", new MyColumn("sensitivityname", "检测灵敏度") { BShow = false, Width = 9 });
             MyColumns.Add("reagentid", new MyColumn("companyid", "检测方法id") { BShow = false });
             MyColumns.Add("reagentname", new MyColumn("reagentname", "检测方法") { BShow = false });
             MyColumns.Add("resultid", new MyColumn("resultid", "检测结果id") { BShow = false });
-            MyColumns.Add("resultname", new MyColumn("resultname", "检测结果") { BShow = true, Width = 10 });
+            MyColumns.Add("resultname", new MyColumn("resultname", "检测结果") { BShow = true, Width = 8 });
             MyColumns.Add("detectuserid", new MyColumn("detectuserid", "检测师id") { BShow = false });
             MyColumns.Add("areaname", new MyColumn("areaname", "来源产地") { BShow = false });
-            MyColumns.Add("companyid", new MyColumn("companyid", "来源单位id") { BShow = false });
-            MyColumns.Add("companyname", new MyColumn("companyname", "来源单位") { BShow = true, Width = 18 });
+            MyColumns.Add("companyid", new MyColumn("companyid", "被检单位id") { BShow = false });
+            MyColumns.Add("companyname", new MyColumn("companyname", "被检单位") { BShow = true, Width = 16 });
             MyColumns.Add("sum_num", new MyColumn("sum_num", "总行数") { BShow = false });
 
             _tableview.MyColumns = MyColumns;
@@ -109,7 +113,7 @@ namespace FoodSafetyMonitoring.Manager
             {
                 DataRow[] rows = ProvinceCityTable.Select("pid = '" + (_province1.SelectedItem as Label).Tag.ToString() + "'");
                 ComboboxTool.InitComboboxSource(_city1, rows, "cxtj");
-                //20150707来源单位改为连动（受来源区域影响）
+                //20150707被检单位改为连动（受来源产地影响）
                 //ComboboxTool.InitComboboxSource(_source_company1, string.Format(" call p_user_company('{0}','{1}') ", userId, (_province1.SelectedItem as Label).Tag.ToString()), "cxtj");
                 ComboboxTool.InitComboboxSource(_source_company1, "SELECT COMPANYID,COMPANYNAME FROM t_company where AREAID like '" + (_province1.SelectedItem as Label).Tag + "%'", "cxtj");
                 _city1.SelectionChanged += new SelectionChangedEventHandler(_city1_SelectionChanged);
@@ -123,14 +127,14 @@ namespace FoodSafetyMonitoring.Manager
             {
                 DataRow[] rows = ProvinceCityTable.Select("pid = '" + (_city1.SelectedItem as Label).Tag.ToString() + "'");
                 ComboboxTool.InitComboboxSource(_region1, rows, "cxtj");
-                //20150707来源单位改为连动（受来源区域影响）
+                //20150707被检单位改为连动（受来源产地影响）
                 //ComboboxTool.InitComboboxSource(_source_company1, string.Format(" call p_user_company('{0}','{1}') ", userId, (_city1.SelectedItem as Label).Tag.ToString()), "cxtj");
                 ComboboxTool.InitComboboxSource(_source_company1, "SELECT COMPANYID,COMPANYNAME FROM t_company where AREAID like '" + (_city1.SelectedItem as Label).Tag + "%'", "cxtj");
                 _region1.SelectionChanged += new SelectionChangedEventHandler(_region1_SelectionChanged);
             }
         }
 
-        //20150707来源单位改为连动（受来源区域影响）
+        //20150707被检单位改为连动（受来源产地影响）
         void _region1_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (_region1.SelectedIndex > 0)
@@ -171,7 +175,7 @@ namespace FoodSafetyMonitoring.Manager
 
         private void GetData()
         {
-            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_query_slaughter_detect({0},'{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}','{13}',{14},{15})",
+            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_query_slaughter_detect({0},'{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}','{13}','{14}',{15},{16})",
                   (Application.Current.Resources["User"] as UserInfo).ID,
                 //dtpStartDate.Value.ToString() == dtpEndDate.Value.ToString() ? "" : dtpStartDate.Value.ToString(),
                 //dtpStartDate.Value.ToString() == dtpEndDate.Value.ToString() ? "" : dtpEndDate.Value.ToString(),
@@ -184,10 +188,11 @@ namespace FoodSafetyMonitoring.Manager
                    _detect_station.SelectedIndex < 1 ? "" : (_detect_station.SelectedItem as Label).Tag,
                   _detect_item1.SelectedIndex < 1 ? "" : (_detect_item1.SelectedItem as Label).Tag,
                   _detect_object1.SelectedIndex < 1 ? "" : (_detect_object1.SelectedItem as Label).Tag,
-                  _detect_result1.SelectedIndex < 1 ? "" : (_detect_result1.SelectedItem as Label).Tag,
+                  _detect_result1.SelectedIndex < 1 ? "" : (_detect_result1.SelectedItem as ComboBoxItem).Content.ToString(),
                   _detect_method.SelectedIndex < 1 ? "" : (_detect_method.SelectedItem as Label).Tag,
                   _detect_person1.SelectedIndex < 1 ? "" : (_detect_person1.SelectedItem as Label).Tag,
                   _detect_type.SelectedIndex < 1 ? "" : (_detect_type.SelectedItem as Label).Tag,
+                  _card_brand.SelectedIndex < 1 ? "" : (_card_brand.SelectedItem as Label).Tag,
                   (_tableview.PageIndex - 1) * _tableview.RowMax,
                   _tableview.RowMax)).Tables[0];
 
@@ -244,7 +249,7 @@ namespace FoodSafetyMonitoring.Manager
 
         private void _export_Click(object sender, RoutedEventArgs e)
         {
-            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_query_slaughter_detect({0},'{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}','{13}',{14},{15})",
+            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_query_slaughter_detect({0},'{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}','{13}','{14}',{15},{16})",
                   (Application.Current.Resources["User"] as UserInfo).ID,
                 //dtpStartDate.Value.ToString() == dtpEndDate.Value.ToString() ? "" : dtpStartDate.Value.ToString(),
                 //dtpStartDate.Value.ToString() == dtpEndDate.Value.ToString() ? "" : dtpEndDate.Value.ToString(),
@@ -261,6 +266,7 @@ namespace FoodSafetyMonitoring.Manager
                   _detect_method.SelectedIndex < 1 ? "" : (_detect_method.SelectedItem as Label).Tag,
                   _detect_person1.SelectedIndex < 1 ? "" : (_detect_person1.SelectedItem as Label).Tag,
                   _detect_type.SelectedIndex < 1 ? "" : (_detect_type.SelectedItem as Label).Tag,
+                  _card_brand.SelectedIndex < 1 ? "" : (_card_brand.SelectedItem as Label).Tag,
                   0,
                   _tableview.RowTotal)).Tables[0];
 

@@ -56,27 +56,30 @@
                             <toolkit:DatePicker x:Name="dtpEndDate" VerticalAlignment="Center" />
                             <TextBlock MinWidth="50">养殖企业名称:</TextBlock>
                             <ComboBox x:Name="_culture_company" Width="260"></ComboBox>
-                            <TextBlock MinWidth="30">检测师:</TextBlock>
-                            <ComboBox Width="100" x:Name="_detect_person1" />
-                            <TextBlock MinWidth="50">检测项目:</TextBlock>
+                            <TextBlock Width="50">检测师:</TextBlock>
+                            <ComboBox Width="120" x:Name="_detect_person1"/>
+                            <TextBlock Width="50">检测项目:</TextBlock>
                             <ComboBox Width="120" x:Name="_detect_item1" />
                         </StackPanel>
                     </Grid>
                     <Grid Grid.Row="1">
                         <StackPanel VerticalAlignment="Center"> 
                             <TextBlock MinWidth="50">检测对象:</TextBlock>
-                            <ComboBox Width="120" x:Name="_detect_object1" />
-                            <TextBlock MinWidth="40">检测方法:</TextBlock>
-                            <ComboBox Width="120" x:Name="_detect_method" />
-                            <TextBlock MinWidth="50">检测结果:</TextBlock>
-                            <ComboBox Width="120" x:Name="_detect_result1" />
-                            <TextBlock MinWidth="50">数据来源:</TextBlock>
-                            <ComboBox Width="120" x:Name="_detect_type" />
+                            <ComboBox Width="262" x:Name="_detect_object1" />
+                            <TextBlock Width="75">检测方法:</TextBlock>
+                            <ComboBox Width="260" x:Name="_detect_method" />
+                            <TextBlock Width="50">检测结果:</TextBlock>
+                            <ComboBox Width="120" x:Name="_detect_result1"/>
+                            <TextBlock Width="50">检测用卡:</TextBlock>
+                            <ComboBox Width="120" x:Name="_card_brand" />
+                            
                         </StackPanel>
                     </Grid>
                     <Grid  Grid.Row="2">
                         <StackPanel VerticalAlignment="Center">
-                            <Button Name="_query" Width="120" Height="32" Style="{StaticResource SelectImageButtonTemplate}" Click="_query_Click" Margin="780,0,0,0" />
+                            <TextBlock MinWidth="50">数据来源:</TextBlock>
+                            <ComboBox Width="262" x:Name="_detect_type" />
+                            <Button Name="_query" Width="120" Height="32" Style="{StaticResource SelectImageButtonTemplate}" Click="_query_Click" Margin="480,0,0,0" />
                             <Button Name="_export" Width="120" Height="32" Style="{StaticResource ExportImageButtonTemplate}" Click="_export_Click" Margin="50,0,0,0"/>
                         </StackPanel>
                     </Grid>

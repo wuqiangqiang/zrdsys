@@ -77,7 +77,7 @@ namespace FoodSafetyMonitoring.Manager
             {
                 DataRow[] rows = ProvinceCityTable.Select("pid = '" + (_province.SelectedItem as Label).Tag.ToString() + "'");
                 ComboboxTool.InitComboboxSource(_city, rows, "cxtj");
-                //20150707来源单位改为连动（受来源区域影响）
+                //20150707来源单位改为连动（受来源产地影响）
                 //ComboboxTool.InitComboboxSource(_source_company1, string.Format(" call p_user_company('{0}','{1}') ", userId, (_province1.SelectedItem as Label).Tag.ToString()), "cxtj");
                 ComboboxTool.InitComboboxSource(_source_company, "SELECT COMPANYID,COMPANYNAME FROM t_company where AREAID like '" + (_province.SelectedItem as Label).Tag + "%'", "cxtj");
                 _city.SelectionChanged += new SelectionChangedEventHandler(_city_SelectionChanged);
@@ -91,14 +91,14 @@ namespace FoodSafetyMonitoring.Manager
             {
                 DataRow[] rows = ProvinceCityTable.Select("pid = '" + (_city.SelectedItem as Label).Tag.ToString() + "'");
                 ComboboxTool.InitComboboxSource(_region, rows, "cxtj");
-                //20150707来源单位改为连动（受来源区域影响）
+                //20150707来源单位改为连动（受来源产地影响）
                 //ComboboxTool.InitComboboxSource(_source_company1, string.Format(" call p_user_company('{0}','{1}') ", userId, (_city1.SelectedItem as Label).Tag.ToString()), "cxtj");
                 ComboboxTool.InitComboboxSource(_source_company, "SELECT COMPANYID,COMPANYNAME FROM t_company where AREAID like '" + (_city.SelectedItem as Label).Tag + "%'", "cxtj");
                 _region.SelectionChanged += new SelectionChangedEventHandler(_region_SelectionChanged);
             }
         }
 
-        //20150707来源单位改为连动（受来源区域影响）
+        //20150707来源单位改为连动（受来源产地影响）
         void _region_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (_region.SelectedIndex > 0)
@@ -156,7 +156,8 @@ namespace FoodSafetyMonitoring.Manager
 
         private void _btn_card_Click(object sender, RoutedEventArgs e)
         {
-
+            CertificatePreview cer = new CertificatePreview();
+            cer.ShowDialog();
         }
 
         //private void GetData()

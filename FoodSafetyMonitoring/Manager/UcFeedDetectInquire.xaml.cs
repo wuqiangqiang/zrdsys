@@ -66,8 +66,8 @@ namespace FoodSafetyMonitoring.Manager
             MyColumns.Add("detecttype", new MyColumn("detecttype", "数据来源id") { BShow = false });
             MyColumns.Add("detecttypename", new MyColumn("detecttypename", "数据来源") { BShow = false, Width = 10 });
             MyColumns.Add("detectdate", new MyColumn("detectdate", "检测时间") { BShow = true, Width = 18 });
-            MyColumns.Add("deptid", new MyColumn("deptid", "检测站点id") { BShow = false });
-            MyColumns.Add("deptname", new MyColumn("deptname", "检测站点") { BShow = true, Width = 16 });
+            MyColumns.Add("deptid", new MyColumn("deptid", "检测单位id") { BShow = false });
+            MyColumns.Add("deptname", new MyColumn("deptname", "检测单位") { BShow = true, Width = 16 });
             MyColumns.Add("itemid", new MyColumn("itemid", "检测项目id") { BShow = false });
             MyColumns.Add("itemname", new MyColumn("itemname", "检测项目") { BShow = true, Width = 12 });
             //MyColumns.Add("objectid", new MyColumn("objectid", "检测对象id") { BShow = false });
@@ -84,8 +84,8 @@ namespace FoodSafetyMonitoring.Manager
             MyColumns.Add("resultname", new MyColumn("resultname", "检测结果") { BShow = true, Width = 10 });
             MyColumns.Add("detectuserid", new MyColumn("detectuserid", "检测师id") { BShow = false });
             //MyColumns.Add("areaname", new MyColumn("areaname", "来源产地") { BShow = false });
-            //MyColumns.Add("companyid", new MyColumn("companyid", "来源单位id") { BShow = false });
-            //MyColumns.Add("companyname", new MyColumn("companyname", "来源单位") { BShow = true, Width = 18 });
+            //MyColumns.Add("companyid", new MyColumn("companyid", "被检单位id") { BShow = false });
+            //MyColumns.Add("companyname", new MyColumn("companyname", "被检单位") { BShow = true, Width = 18 });
             MyColumns.Add("feedname", new MyColumn("feedname", "饲料名称") { BShow = true, Width = 10 });
             MyColumns.Add("sum_num", new MyColumn("sum_num", "总行数") { BShow = false });
 
@@ -112,7 +112,7 @@ namespace FoodSafetyMonitoring.Manager
         //    {
         //        DataRow[] rows = ProvinceCityTable.Select("pid = '" + (_province1.SelectedItem as Label).Tag.ToString() + "'");
         //        ComboboxTool.InitComboboxSource(_city1, rows, "cxtj");
-        //        //20150707来源单位改为连动（受来源区域影响）
+        //        //20150707来源单位改为连动（受来源产地影响）
         //        ComboboxTool.InitComboboxSource(_source_company1, string.Format(" call p_user_company('{0}','{1}') ", userId, (_province1.SelectedItem as Label).Tag.ToString()), "cxtj");
         //        _city1.SelectionChanged += new SelectionChangedEventHandler(_city1_SelectionChanged);
         //    }
@@ -125,13 +125,13 @@ namespace FoodSafetyMonitoring.Manager
         //    {
         //        DataRow[] rows = ProvinceCityTable.Select("pid = '" + (_city1.SelectedItem as Label).Tag.ToString() + "'");
         //        ComboboxTool.InitComboboxSource(_region1, rows, "cxtj");
-        //        //20150707来源单位改为连动（受来源区域影响）
+        //        //20150707来源单位改为连动（受来源产地影响）
         //        ComboboxTool.InitComboboxSource(_source_company1, string.Format(" call p_user_company('{0}','{1}') ", userId, (_city1.SelectedItem as Label).Tag.ToString()), "cxtj");
         //        _region1.SelectionChanged += new SelectionChangedEventHandler(_region1_SelectionChanged);
         //    }
         //}
 
-        ////20150707来源单位改为连动（受来源区域影响）
+        ////20150707来源单位改为连动（受来源产地影响）
         //void _region1_SelectionChanged(object sender, SelectionChangedEventArgs e)
         //{
         //    if (_region1.SelectedIndex > 0)
@@ -241,7 +241,7 @@ namespace FoodSafetyMonitoring.Manager
 
         private void _export_Click(object sender, RoutedEventArgs e)
         {
-            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_query_feed_detect({0},'{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}',{9},{10})",
+            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_query_feed_detect({0},'{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}',{10},{11})",
                   (Application.Current.Resources["User"] as UserInfo).ID,
                 //dtpStartDate.Value.ToString() == dtpEndDate.Value.ToString() ? "" : dtpStartDate.Value.ToString(),
                 //dtpStartDate.Value.ToString() == dtpEndDate.Value.ToString() ? "" : dtpEndDate.Value.ToString(),
@@ -255,6 +255,7 @@ namespace FoodSafetyMonitoring.Manager
                   _detect_method.SelectedIndex < 1 ? "" : (_detect_method.SelectedItem as Label).Tag,
                   _detect_person1.SelectedIndex < 1 ? "" : (_detect_person1.SelectedItem as Label).Tag,
                 //_detect_type.SelectedIndex < 1 ? "" : (_detect_type.SelectedItem as Label).Tag,
+                  _card_brand.SelectedIndex < 1 ? "" : (_card_brand.SelectedItem as Label).Tag,
                   0,
                   _tableview.RowTotal)).Tables[0];
 

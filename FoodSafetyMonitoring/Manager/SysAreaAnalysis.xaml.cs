@@ -28,12 +28,12 @@ namespace FoodSafetyMonitoring.Manager
         private string detecttype;
 
         private readonly List<string> analysisThemes = new List<string>() { "-请选择-",
-            "检测样本来源区域分布(全国)分析", 
-            "检测样本来源区域分布(省内)分析",
-            "阳性样本检出来源区域分布(全国)分析",
-            "阳性样本检出来源区域分布(省内)分析",
-            "疑似阳性样本检出来源区域分布(全国)分析",
-            "疑似阳性样本检出来源区域分布(省内)分析"};//初始化变量
+            "检测样本来源产地分布(全国)分析", 
+            "检测样本来源产地分布(省内)分析",
+            "阳性样本检出来源产地分布(全国)分析",
+            "阳性样本检出来源产地分布(省内)分析",
+            "疑似阳性样本检出来源产地分布(全国)分析",
+            "疑似阳性样本检出来源产地分布(省内)分析"};//初始化变量
 
         public SysAreaAnalysis(IDBOperation dbOperation, string dept_type, string detect_type)
         {
@@ -67,12 +67,12 @@ namespace FoodSafetyMonitoring.Manager
 
             switch (_analysis_theme.Text)
             {
-                case "检测样本来源区域分布(全国)分析": function = "p_qyfx_provice_hb"; break;
-                case "检测样本来源区域分布(省内)分析": function = "p_qyfx_city_hb"; break;
-                case "阳性样本检出来源区域分布(全国)分析": function = "p_qyfx_provice_yang_hb"; break;
-                case "阳性样本检出来源区域分布(省内)分析": function = "p_qyfx_city_yang_hb"; break;
-                case "疑似阳性样本检出来源区域分布(全国)分析": function = "p_qyfx_provice_like_yang_hb"; break;
-                case "疑似阳性样本检出来源区域分布(省内)分析": function = "p_qyfx_city_like_yang_hb"; break;
+                case "检测样本来源产地分布(全国)分析": function = "p_qyfx_provice_hb"; break;
+                case "检测样本来源产地分布(省内)分析": function = "p_qyfx_city_hb"; break;
+                case "阳性样本检出来源产地分布(全国)分析": function = "p_qyfx_provice_yang_hb"; break;
+                case "阳性样本检出来源产地分布(省内)分析": function = "p_qyfx_city_yang_hb"; break;
+                case "疑似阳性样本检出来源产地分布(全国)分析": function = "p_qyfx_provice_like_yang_hb"; break;
+                case "疑似阳性样本检出来源产地分布(省内)分析": function = "p_qyfx_city_like_yang_hb"; break;
                 default: break;
             }
 
@@ -80,22 +80,22 @@ namespace FoodSafetyMonitoring.Manager
 
             switch (_analysis_theme.Text)
             {
-                case "检测样本来源区域分布(全国)分析": table.Columns[0].ColumnName = "来源省市";
+                case "检测样本来源产地分布(全国)分析": table.Columns[0].ColumnName = "来源省市";
                                                        table.Columns[1].ColumnName = "检测数量"; 
                                                        break;
-                case "检测样本来源区域分布(省内)分析": table.Columns[0].ColumnName = "省内来源地市";
+                case "检测样本来源产地分布(省内)分析": table.Columns[0].ColumnName = "省内来源地市";
                                                        table.Columns[1].ColumnName = "检测数量";
                                                        break;
-                case "阳性样本检出来源区域分布(全国)分析": table.Columns[0].ColumnName = "来源省市";
+                case "阳性样本检出来源产地分布(全国)分析": table.Columns[0].ColumnName = "来源省市";
                                                            table.Columns[1].ColumnName = "阳性检出数量";
                                                            break;
-                case "阳性样本检出来源区域分布(省内)分析": table.Columns[0].ColumnName = "省内来源地市";
+                case "阳性样本检出来源产地分布(省内)分析": table.Columns[0].ColumnName = "省内来源地市";
                                                            table.Columns[1].ColumnName = "阳性检出数量";
                                                            break;
-                case "疑似阳性样本检出来源区域分布(全国)分析": table.Columns[0].ColumnName = "来源省市";
+                case "疑似阳性样本检出来源产地分布(全国)分析": table.Columns[0].ColumnName = "来源省市";
                                                            table.Columns[1].ColumnName = "疑似阳性检出数量";
                                                            break;
-                case "疑似阳性样本检出来源区域分布(省内)分析": table.Columns[0].ColumnName = "省内来源地市";
+                case "疑似阳性样本检出来源产地分布(省内)分析": table.Columns[0].ColumnName = "省内来源地市";
                                                            table.Columns[1].ColumnName = "疑似阳性检出数量";
                                                            break;
                 default: break;

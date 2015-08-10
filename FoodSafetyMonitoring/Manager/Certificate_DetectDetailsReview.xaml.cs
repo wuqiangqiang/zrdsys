@@ -65,6 +65,7 @@ namespace FoodSafetyMonitoring.Manager
             _reviewReagent_text.Text = table.Rows[0][15].ToString();
             _reviewResult_text.Text = table.Rows[0][16].ToString();
             _reviewDate.Text = table.Rows[0][17].ToString();
+            _cardbrand.Text = table.Rows[0][22].ToString();
         }
 
         private void Thumb_DragDelta(object sender, System.Windows.Controls.Primitives.DragDeltaEventArgs e)

@@ -55,7 +55,7 @@
                             <toolkit:DatePicker x:Name="dtpStartDate" VerticalAlignment="Center"/>
                             <TextBlock xml:space="preserve" MinWidth="10" Margin="5,0,5,0">至</TextBlock>
                             <toolkit:DatePicker x:Name="dtpEndDate" VerticalAlignment="Center" />
-                            <TextBlock MinWidth="50">来源区域:</TextBlock>
+                            <TextBlock MinWidth="50">来源产地:</TextBlock>
                             <ComboBox x:Name="_province1" Width="120" Text="省" Margin="0,0,5,0"></ComboBox>
                             <ComboBox x:Name="_city1" Width="120" Text="地市" Margin="0,0,5,0"></ComboBox>
                             <ComboBox x:Name="_region1" Width="120" Text="区县"></ComboBox>
@@ -65,7 +65,7 @@
                     </Grid>
                     <Grid Grid.Row="1">
                         <StackPanel VerticalAlignment="Center">
-                            <TextBlock MinWidth="50">检测站点:</TextBlock>
+                            <TextBlock MinWidth="50">检测单位:</TextBlock>
                             <ComboBox x:Name="_detect_station" Width="260"/>
                             <TextBlock MinWidth="52" >检测师:</TextBlock>
                             <ComboBox Width="120" x:Name="_detect_person1" />
@@ -82,11 +82,17 @@
                             <TextBlock MinWidth="50">检测对象:</TextBlock>
                             <ComboBox Width="80" x:Name="_detect_object1" />
                             <TextBlock MinWidth="50">检测结果:</TextBlock>
-                            <ComboBox Width="100" x:Name="_detect_result1" />
+                            <ComboBox Width="100" x:Name="_detect_result1" >
+                                <ComboBoxItem Height="30" VerticalContentAlignment="Center">-全部-</ComboBoxItem>
+                                <ComboBoxItem Height="30" VerticalContentAlignment="Center">有</ComboBoxItem>
+                                <ComboBoxItem Height="30" VerticalContentAlignment="Center">无</ComboBoxItem>
+                            </ComboBox>
                             <TextBlock MinWidth="40">数据来源:</TextBlock>
                             <ComboBox Width="120" x:Name="_detect_type" />
+                            <TextBlock MinWidth="50" >检测用卡:</TextBlock>
+                            <ComboBox Width="170" x:Name="_card_brand" />
 
-                            <Button Name="_query" Width="120" Height="32" Style="{StaticResource SelectImageButtonTemplate}" Click="_query_Click" Margin="280,0,0,0" />
+                            <Button Name="_query" Width="120" Height="32" Style="{StaticResource SelectImageButtonTemplate}" Click="_query_Click" Margin="40,0,0,0" />
                             <Button Name="_export" Width="120" Height="32" Style="{StaticResource ExportImageButtonTemplate}" Click="_export_Click" Margin="50,0,0,0"/>
                         </StackPanel>
                     </Grid>

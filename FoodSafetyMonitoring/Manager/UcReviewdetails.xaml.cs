@@ -44,7 +44,7 @@ namespace FoodSafetyMonitoring.Manager
             MyColumns.Add("orderid", new MyColumn("orderid", "检测单编号") { BShow = true, Width = 8 });
             MyColumns.Add("detecttypename", new MyColumn("detecttypename", "信息来源") { BShow = true, Width = 8 });
             MyColumns.Add("detectdate", new MyColumn("detectdate", "检测时间") { BShow = true, Width = 16 });
-            MyColumns.Add("partname", new MyColumn("partname", "检测站点") { BShow = true, Width = 12 });
+            MyColumns.Add("partname", new MyColumn("partname", "检测单位") { BShow = true, Width = 12 });
             MyColumns.Add("itemname", new MyColumn("itemname", "检测项目") { BShow = true, Width = 10 });
             MyColumns.Add("objectname", new MyColumn("objectname", "检测对象") { BShow = true, Width = 8 });
             MyColumns.Add("samplename", new MyColumn("samplename", "检测样本") { BShow = true, Width = 8 });
@@ -52,8 +52,8 @@ namespace FoodSafetyMonitoring.Manager
             MyColumns.Add("reagentname", new MyColumn("reagentname", "检测方法") { BShow = true, Width = 10 });
             MyColumns.Add("resultname", new MyColumn("resultname", "检测结果") { BShow = true, Width = 10 });
             MyColumns.Add("detectusername", new MyColumn("detectusername", "检测师") { BShow = true, Width = 10 });
-            MyColumns.Add("areaname", new MyColumn("areaname", "来源区域") { BShow = false, Width = 14 });
-            MyColumns.Add("companyname", new MyColumn("companyname", "来源单位") { BShow = true, Width = 12 });
+            MyColumns.Add("areaname", new MyColumn("areaname", "来源产地") { BShow = false, Width = 14 });
+            MyColumns.Add("companyname", new MyColumn("companyname", "被检单位") { BShow = true, Width = 12 });
             MyColumns.Add("reviewflagname", new MyColumn("reviewflagname", "是否复核") { BShow = false });
             MyColumns.Add("sum_num", new MyColumn("sum_num", "总行数") { BShow = false });
 

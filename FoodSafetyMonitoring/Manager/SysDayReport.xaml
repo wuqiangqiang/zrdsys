@@ -51,7 +51,7 @@
                         <StackPanel  VerticalAlignment="Center" >
                             <TextBlock MinWidth="50">设置日期:</TextBlock>
                             <toolkit:DatePicker x:Name="reportDate" VerticalAlignment="Center"/>
-                            <TextBlock  xml:space="preserve" MinWidth="10" x:Name="_dept_name" >选择检测站点:</TextBlock>
+                            <TextBlock  xml:space="preserve" MinWidth="10" x:Name="_dept_name" >选择检测单位:</TextBlock>
                             <ComboBox Name="_detect_dept" Background="White" MaxDropDownHeight="200" Width="240" />
                             <TextBlock  xml:space="preserve" MinWidth="10" >选择检测项目:</TextBlock>
                             <ComboBox Name="_detect_item" Background="White" MaxDropDownHeight="200" Width="120" />

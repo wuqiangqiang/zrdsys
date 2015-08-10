@@ -200,7 +200,9 @@ namespace FoodSafetyMonitoring.Manager
             {
                 Toolkit.MessageBox.Show("电子出证单生成成功！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
                 getdata();
-                return;
+
+                CertificatePreview cer = new CertificatePreview();
+                cer.ShowDialog();
             }
             else
             {

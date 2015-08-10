@@ -26,11 +26,13 @@
                 <Setter Property="FontFamily" Value="微软雅黑"/>
                 <Setter Property="FontSize" Value="12"/>
                 <Setter Property="Height" Value="35" />
+                <Setter Property="BorderThickness" Value="0,0,0,1" />
+                <Setter Property="BorderBrush" Value="#e0e0e0" />
             </Style>
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid >
-        <ListView AlternationCount="2" x:Name="_listview" ItemContainerStyle="{StaticResource ResourceKey= _style_listviewItem}" HorizontalContentAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
+        <ListView AlternationCount="2" x:Name="_listview" ItemContainerStyle="{StaticResource ResourceKey= _style_listviewItem}" HorizontalContentAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto">
             <ListView.View >
                 <GridView x:Name="_gridview"  >
                 </GridView>

@@ -55,7 +55,7 @@
                             <toolkit:DatePicker x:Name="dtpStartDate" VerticalAlignment="Center"/>
                             <TextBlock xml:space="preserve" MinWidth="10" Margin="5,0,5,0">至</TextBlock>
                             <toolkit:DatePicker x:Name="dtpEndDate" VerticalAlignment="Center" />-->
-                            <TextBlock MinWidth="50">来源区域:</TextBlock>
+                            <TextBlock MinWidth="50">来源产地:</TextBlock>
                             <ComboBox x:Name="_province" Width="120" Text="省" Margin="0,0,5,0"></ComboBox>
                             <ComboBox x:Name="_city" Width="120" Text="地市" Margin="0,0,5,0"></ComboBox>
                             <ComboBox x:Name="_region" Width="120" Text="区县"></ComboBox>
@@ -108,8 +108,8 @@
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>-->
-                                <GridViewColumn Width="100" Header="来源区域" DisplayMemberBinding="{Binding areaname}" ></GridViewColumn>
-                                <GridViewColumn Width="100" Header="被检单位" DisplayMemberBinding="{Binding COMPANYNAME}" ></GridViewColumn>
+                                <GridViewColumn Width="160" Header="来源产地" DisplayMemberBinding="{Binding areaname}" ></GridViewColumn>
+                                <GridViewColumn Width="160" Header="被检单位" DisplayMemberBinding="{Binding COMPANYNAME}" ></GridViewColumn>
                                 <GridViewColumn Width="110" Header="出证检测批次编码" DisplayMemberBinding="{Binding batchno}" ></GridViewColumn>
                                 <GridViewColumn Width="150" Header="出证审核状态"  DisplayMemberBinding="{Binding sh_ok}" ></GridViewColumn>
                                 <GridViewColumn Width="110" Header="出证检测单详情">

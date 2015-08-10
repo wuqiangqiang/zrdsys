@@ -8,7 +8,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Themes/ListViewColumn.xaml"/>
                 <ResourceDictionary Source="Themes/ImageButtonStyle.xaml"/>
-                <ResourceDictionary Source="Themes/Button_new.xaml"/>
+                <!--<ResourceDictionary Source="Themes/Button_new.xaml"/>-->
                 <ResourceDictionary Source="Themes/StackPanel.xaml"/>
                 <ResourceDictionary Source="Themes/ComboBox.xaml"/>
                 <ResourceDictionary Source="Themes/TextBlock.xaml"/>
@@ -55,7 +55,7 @@
                             <toolkit:DatePicker x:Name="dtpStartDate" VerticalAlignment="Center"/>
                             <TextBlock xml:space="preserve" MinWidth="10" Margin="5,0,5,0">至</TextBlock>
                             <toolkit:DatePicker x:Name="dtpEndDate" VerticalAlignment="Center" />
-                            <TextBlock MinWidth="50">来源区域:</TextBlock>
+                            <TextBlock MinWidth="50">来源产地:</TextBlock>
                             <ComboBox x:Name="_province" Width="120" Text="省" Margin="0,0,5,0"></ComboBox>
                             <ComboBox x:Name="_city" Width="120" Text="地市" Margin="0,0,5,0"></ComboBox>
                             <ComboBox x:Name="_region" Width="120" Text="区县"></ComboBox>
@@ -117,11 +117,11 @@
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>-->
                                 <GridViewColumn Width="100" Header="检疫证号" DisplayMemberBinding="{Binding CARDID}" ></GridViewColumn>
-                                <GridViewColumn Width="100" Header="出证时间" DisplayMemberBinding="{Binding cdate}" ></GridViewColumn>
+                                <GridViewColumn Width="140" Header="出证时间" DisplayMemberBinding="{Binding cdate}" ></GridViewColumn>
                                 <GridViewColumn Width="100" Header="出证单位" DisplayMemberBinding="{Binding DeptName}" ></GridViewColumn>
                                 <GridViewColumn Width="100" Header="出证人" DisplayMemberBinding="{Binding username}" ></GridViewColumn>
-                                <GridViewColumn Width="100" Header="来源区域" DisplayMemberBinding="{Binding areaname}" ></GridViewColumn>
-                                <GridViewColumn Width="100" Header="被检单位" DisplayMemberBinding="{Binding COMPANYNAME}" ></GridViewColumn>
+                                <GridViewColumn Width="130" Header="来源产地" DisplayMemberBinding="{Binding areaname}" ></GridViewColumn>
+                                <GridViewColumn Width="120" Header="被检单位" DisplayMemberBinding="{Binding COMPANYNAME}" ></GridViewColumn>
                                 <GridViewColumn Width="110" Header="出证检测批次编码" DisplayMemberBinding="{Binding batchno}" ></GridViewColumn>
                                 <GridViewColumn Width="110" Header="出证检测单详情">
                                     <GridViewColumn.CellTemplate>
@@ -131,7 +131,7 @@
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
                                 <GridViewColumn Width="100" Header="出证状态"   DisplayMemberBinding="{Binding cz_ok}"></GridViewColumn>
-                                <GridViewColumn Width="90" Header="电子证详情">
+                                <GridViewColumn Width="80" Header="电子证详情">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
                                             <Button Content="电子证" x:Name="_btn_card" Width="60" Tag="{Binding CARDID}" Click="_btn_card_Click"></Button>

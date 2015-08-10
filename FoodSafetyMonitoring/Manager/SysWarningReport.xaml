@@ -55,7 +55,7 @@
                             <toolkit:DatePicker x:Name="reportDate_jssj" VerticalAlignment="Center" />
                             <TextBlock  xml:space="preserve" MinWidth="10">检测种类:</TextBlock>
                             <ComboBox Name="_detect_type" MaxDropDownHeight="200" MinWidth="100"/>
-                            <TextBlock  xml:space="preserve" MinWidth="10" x:Name="_dept_name">检测站点:</TextBlock>
+                            <TextBlock  xml:space="preserve" MinWidth="10" x:Name="_dept_name">检测单位:</TextBlock>
                             <ComboBox Name="_detect_dept" MaxDropDownHeight="200" MinWidth="240"/>
                             <TextBlock  xml:space="preserve" MinWidth="10" >检测项目:</TextBlock>
                             <ComboBox Name="_detect_item"  MaxDropDownHeight="200" MinWidth="120"/>

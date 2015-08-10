@@ -46,9 +46,10 @@ namespace FoodSafetyMonitoring.Manager
             //_detect_trade.SelectionChanged += new SelectionChangedEventHandler(_detect_trade_SelectionChanged);
             //_detect_trade.SelectedIndex = 1;
 
-            ComboboxTool.InitComboboxSource(_detect_item, string.Format("SELECT ItemID,ItemNAME FROM t_det_item WHERE  (tradeId ='1'or ifnull(tradeId,'') = '') and OPENFLAG = '1'"), "lr");
+            ComboboxTool.InitComboboxSource(_detect_item, string.Format("SELECT ItemID,ItemNAME FROM t_det_item_hb WHERE  (tradeId ='1'or ifnull(tradeId,'') = '') and OPENFLAG = '1'"), "lr");
             _detect_item.SelectionChanged += new SelectionChangedEventHandler(_detect_item_SelectionChanged);
             ComboboxTool.InitComboboxSource(_detect_result, "SELECT resultId,resultName FROM t_det_result where openFlag = '1' ORDER BY id", "lr");
+            ComboboxTool.InitComboboxSource(_card_brand, "SELECT cardbrandid,cardbrandname FROM t_cardbrand where openFlag = '1'", "lr");
             _entering_datetime.Text = string.Format("{0:g}", System.DateTime.Now);
             _detect_person.Text = (Application.Current.Resources["User"] as UserInfo).ShowName;
             _detect_site.Text = dbOperation.GetDbHelper().GetSingle("SELECT INFO_NAME  from  sys_client_sysdept WHERE INFO_CODE = " + (Application.Current.Resources["User"] as UserInfo).DepartmentID).ToString();
@@ -64,6 +65,7 @@ namespace FoodSafetyMonitoring.Manager
             this._object_count.Text = "";
             this._batch_number.Text = "";
             //this._detect_trade.SelectedIndex = 1;
+            this._card_brand.SelectedIndex = 0;
             this._detect_item.SelectedIndex = 0;
             this._detect_method1.IsChecked = false;
             this._detect_method2.IsChecked = false;
@@ -136,6 +138,10 @@ namespace FoodSafetyMonitoring.Manager
             {
                 msg = "*请输入检测师";
             }
+            else if (_card_brand.SelectedIndex < 1)
+            {
+                msg = "*请选择检测用卡";
+            }
             else
             {
                 ////批次编码为空时，自动生成编码
@@ -172,7 +178,7 @@ namespace FoodSafetyMonitoring.Manager
                     company_id = dbOperation.GetDbHelper().GetSingle(string.Format("SELECT COMPANYID from t_company where COMPANYNAME ='{0}'", _source_company.Text)).ToString();
                 }
 
-                string sql = string.Format("call p_insert_certificate_detect('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}')"
+                string sql = string.Format("call p_insert_certificate_detect('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}')"
                               , company_id,
                               _batch_number.Text,
                               (_detect_item.SelectedItem as Label).Tag.ToString(),
@@ -181,6 +187,7 @@ namespace FoodSafetyMonitoring.Manager
                               (_detect_sample.SelectedItem as Label).Tag.ToString(),
                               (_detect_sensitivity.SelectedItem as Label).Tag.ToString(),
                               (_detect_result.SelectedItem as Label).Tag.ToString(),
+                              (_card_brand.SelectedItem as Label).Tag.ToString(),
                               (Application.Current.Resources["User"] as UserInfo).DepartmentID,
                               (Application.Current.Resources["User"] as UserInfo).ID,
                               System.DateTime.Now, _object_count.Text);
@@ -200,6 +207,7 @@ namespace FoodSafetyMonitoring.Manager
                     this._detect_sample.SelectedIndex = 0;
                     this._detect_sensitivity.SelectedIndex = 0;
                     this._detect_result.SelectedIndex = 0;
+                    this._card_brand.SelectedIndex = 0;
                     this._entering_datetime.Text = string.Format("{0:g}", System.DateTime.Now);
                     //}
                     //else

@@ -17,6 +17,7 @@ using System.Security.Cryptography;
 using System.Configuration;
 using Toolkit = Microsoft.Windows.Controls;
 using System.Diagnostics;
+using FoodSafetyMonitoring.Manager;
 
 namespace FoodSafetyMonitoring
 {

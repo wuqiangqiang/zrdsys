@@ -110,7 +110,7 @@
             </StackPanel>
             <Grid x:Name="_grid_13" Grid.Column="3" HorizontalAlignment="Right"  VerticalAlignment="Bottom">
                 <Image x:Name="_image_13" Width="50" Height="20" Source="/res/help_normal.png"/>
-                <TextBlock x:Name="_text_13" FontFamily="微软雅黑" FontSize="12" VerticalAlignment="Bottom" HorizontalAlignment="Right"  Foreground="Black" Margin="0,0,5,2">帮助</TextBlock>
+                <TextBlock x:Name="_text_13" FontFamily="微软雅黑" FontSize="12" VerticalAlignment="Bottom" HorizontalAlignment="Right"  Foreground="Black" Margin="0,0,5,2" Visibility="Hidden">帮助</TextBlock>
             </Grid>
             <StackPanel Orientation="Horizontal"  Grid.Column="4" HorizontalAlignment="Right"  VerticalAlignment="Top">
                 <Image Width="29" Height="26" MouseEnter ="min_MouseEnter" MouseLeave="all_MouseLeave" Source="/res/min.png" x:Name="min" MouseDown="min_MouseDown" ToolTip="缩小" />

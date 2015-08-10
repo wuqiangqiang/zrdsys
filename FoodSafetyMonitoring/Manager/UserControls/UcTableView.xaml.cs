@@ -280,7 +280,7 @@ namespace FoodSafetyMonitoring.Manager.UserControls
             }
             else
             {
-                return Brushes.GhostWhite;
+                return new SolidColorBrush(Color.FromRgb(244, 244, 246));
             }
         }
 

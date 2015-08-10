@@ -64,6 +64,7 @@ namespace FoodSafetyMonitoring.Manager
             _detect_item.SelectionChanged += new SelectionChangedEventHandler(_detect_item_SelectionChanged);
             
             ComboboxTool.InitComboboxSource(_detect_result, "SELECT resultId,resultName FROM t_det_result where openFlag = '1' ORDER BY id", "lr");
+            ComboboxTool.InitComboboxSource(_card_brand, "SELECT cardbrandid,cardbrandname FROM t_cardbrand where openFlag = '1'", "lr");
             _entering_datetime.Text = string.Format("{0:g}", System.DateTime.Now);
             _detect_person.Text = (Application.Current.Resources["User"] as UserInfo).ShowName;
             _detect_site.Text = dbOperation.GetSingle("SELECT INFO_NAME  from  sys_client_sysdept WHERE INFO_CODE = " + (Application.Current.Resources["User"] as UserInfo).DepartmentID).ToString();
@@ -85,6 +86,7 @@ namespace FoodSafetyMonitoring.Manager
             this._detect_method2.IsChecked = false;
             this._detect_method3.IsChecked = false;
             this._detect_object.SelectedIndex = 0;
+            this._card_brand.SelectedIndex = 0;
             this._detect_sample.SelectedIndex = 0;
             this._detect_sensitivity.SelectedIndex = 0;
             this._detect_result.SelectedIndex = 0;
@@ -150,6 +152,10 @@ namespace FoodSafetyMonitoring.Manager
             {
                 msg = "*请输入检测师";
             }
+            else if (_card_brand.SelectedIndex < 1)
+            {
+                msg = "*请选择检测用卡";
+            }
             else
             {
                 string company_id;
@@ -179,7 +185,7 @@ namespace FoodSafetyMonitoring.Manager
                     company_id = dbOperation.GetSingle(string.Format("SELECT COMPANYID from t_company where COMPANYNAME ='{0}'", _source_company.Text)).ToString();
                 }
 
-                string sql = string.Format("call p_insert_detect_hb('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}')"
+                string sql = string.Format("call p_insert_detect_hb('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}','{13}')"
                               , company_id,
                               _detect_number.Text,
                               (_detect_item.SelectedItem as Label).Tag.ToString(),
@@ -188,6 +194,7 @@ namespace FoodSafetyMonitoring.Manager
                               (_detect_sample.SelectedItem as Label).Tag.ToString(),
                               (_detect_sensitivity.SelectedItem as Label).Tag.ToString(),
                               (_detect_result.SelectedItem as Label).Tag.ToString(),
+                              (_card_brand.SelectedItem as Label).Tag.ToString(),
                               (Application.Current.Resources["User"] as UserInfo).DepartmentID,
                               (Application.Current.Resources["User"] as UserInfo).ID,
                               System.DateTime.Now,_object_count.Text,_object_label.Text);

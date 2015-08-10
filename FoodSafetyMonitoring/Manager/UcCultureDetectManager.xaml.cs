@@ -45,17 +45,19 @@ namespace FoodSafetyMonitoring.Manager
             ComboboxTool.InitComboboxSource(_detect_item, string.Format("SELECT ItemID,ItemNAME FROM t_det_item_hb WHERE  (tradeId ='1'or ifnull(tradeId,'') = '') and OPENFLAG = '1' "), "lr");
             _detect_item.SelectionChanged += new SelectionChangedEventHandler(_detect_item_SelectionChanged);
             ComboboxTool.InitComboboxSource(_detect_result, "SELECT resultId,resultName FROM t_det_result where openFlag = '1' ORDER BY id", "lr");
+            ComboboxTool.InitComboboxSource(_card_brand, "SELECT cardbrandid,cardbrandname FROM t_cardbrand where openFlag = '1'", "lr");
             _entering_datetime.Text = string.Format("{0:g}", System.DateTime.Now);
             _detect_person.Text = (Application.Current.Resources["User"] as UserInfo).ShowName;
         }
 
         private void clear()
         {
-            //this._culture_file.SelectedIndex = 0;
+            this._culture_file.SelectedIndex = 0;
             //this._file_cdate.Text = "";
             this._colony_no.Text = "";
             this._detect_site.Text = "";
             //this._detect_trade.SelectedIndex = 1;
+            this._card_brand.SelectedIndex = 0;
             this._detect_item.SelectedIndex = 0;
             this._detect_method1.IsChecked = false;
             this._detect_method2.IsChecked = false;
@@ -70,22 +72,22 @@ namespace FoodSafetyMonitoring.Manager
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
             string msg = "";
-            //if ((_culture_file.SelectedIndex < 0 && _culture_file.Text =="")|| _culture_file.SelectedIndex == 0)
-            //{
-            //    msg = "*请选择档案编号";
-            //}
-            if (_detect_site.Text.Trim().Length == 0)
+            if (_colony_no.Text.Trim().Length == 0 )
+            {
+                msg = "*请选择圈舍批次号";
+            }
+            else if ((_culture_file.SelectedIndex < 0 && _culture_file.Text == "") || _culture_file.SelectedIndex == 0)
+            {
+                msg = "*请选择档案编号";
+            }
+            else if (_detect_site.Text.Trim().Length == 0)
             {
                 msg = "*养殖企业名称不能为空";
             }
             //else if (_file_cdate.Text.Trim().Length == 0 )
             //{
             //    msg = "*建档时间不能为空";
-            //}
-            else if (_colony_no.Text.Trim().Length == 0 )
-            {
-                msg = "*圈舍批次号不能为空";
-            }
+            //} 
             else if (_detect_item.SelectedIndex < 1)
             {
                 msg = "*请选择检测项目";
@@ -114,10 +116,16 @@ namespace FoodSafetyMonitoring.Manager
             {
                 msg = "*检测师不能为空";
             }
+            else if (_card_brand.SelectedIndex < 1)
+            {
+                msg = "*请选择检测用卡";
+            }
             else
             {
-                string sql = string.Format("call p_insert_culture_detect('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}')"
+                string sql = string.Format("call p_insert_culture_detect('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}')"
                               , (_colony_no.SelectedItem as Label).Tag.ToString(),
+                              (_culture_file.SelectedItem as Label).Tag.ToString(),
+                              (_card_brand.SelectedItem as Label).Tag.ToString(),
                               (_detect_item.SelectedItem as Label).Tag.ToString(),
                               (_detect_method1.IsChecked == true ? 1 : 0) + (_detect_method2.IsChecked == true ? 2 : 0) + (_detect_method3.IsChecked == true ? 3 : 0),
                               (_detect_object.SelectedItem as Label).Tag.ToString(),
@@ -175,7 +183,7 @@ namespace FoodSafetyMonitoring.Manager
         {
             if (_colony_no.SelectedIndex > 0)
             {
-                //ComboboxTool.InitComboboxSource(_culture_file, string.Format("call p_user_culture_file({0},'{1}')", userId, (_colony_no.SelectedItem as Label).Tag), "lr");
+                ComboboxTool.InitComboboxSource(_culture_file, string.Format("call p_user_culture_file({0},'{1}')", userId, (_colony_no.SelectedItem as Label).Tag), "lr");
                 //_culture_file.SelectionChanged += new SelectionChangedEventHandler(_culture_file_SelectionChanged);
                 DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_culturefile('{0}')", (_colony_no.SelectedItem as Label).Tag)).Tables[0];
                 this._detect_site.Text = table.Rows[0][3].ToString();

@@ -184,6 +184,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Manager\CertificatePreview.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Manager\Certificate_AddReviewDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -501,6 +505,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Manager\Themes\ScrollViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Manager\Themes\Shared.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -913,6 +921,9 @@
       <DependentUpon>AddReviewDetails.xaml</DependentUpon>
     </Compile>
     <Compile Include="Manager\AlarmData.cs" />
+    <Compile Include="Manager\CertificatePreview.xaml.cs">
+      <DependentUpon>CertificatePreview.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Manager\Certificate_AddReviewDetails.xaml.cs">
       <DependentUpon>Certificate_AddReviewDetails.xaml</DependentUpon>
     </Compile>
@@ -1262,6 +1273,13 @@
     <Content Include="DLL\MySql.Data.dll" />
     <Content Include="DLL\NPOI.dll" />
     <Content Include="DLL\NPOI.OOXML.dll" />
+    <Resource Include="res\certificate.jpg" />
+    <Resource Include="res\down_click.png" />
+    <Resource Include="res\left_click.png" />
+    <Resource Include="res\right_click.png" />
+    <Resource Include="res\up_click.png" />
+    <Resource Include="res\left.png" />
+    <Resource Include="res\right.png" />
     <Resource Include="res\small_on.png" />
     <Resource Include="res\shut_on.png" />
     <Resource Include="res\down.png" />

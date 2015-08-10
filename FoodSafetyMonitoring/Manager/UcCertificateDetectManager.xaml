@@ -55,6 +55,9 @@ xmlns:control="clr-namespace:FoodSafetyMonitoring.Manager.UserControls">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Width="80">被检单位:</TextBlock>
                         <ComboBox Width="280" x:Name="_source_company" IsEditable="True"></ComboBox>
+                        <TextBlock Width="60" x:Name="_txt_name">圈舍批次:</TextBlock>
+                        <TextBox MinWidth="10" x:Name="_card_no" Visibility="Hidden"></TextBox>
+                        <ComboBox Width="270" x:Name="_colony_batch" IsEditable="True" Margin="0,0,0,0" Visibility="Hidden"></ComboBox>
                     </StackPanel>
                 </Grid>
                 <Grid Grid.Row="3">

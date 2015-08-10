@@ -64,28 +64,27 @@
                         <CheckBox x:Name="_detect_method1" Checked="_detect_method1_Checked" >金标检测卡</CheckBox>
                         <CheckBox x:Name="_detect_method2" Checked="_detect_method1_Checked" >ELISA试剂盒</CheckBox>
                         <CheckBox x:Name="_detect_method3" Checked="_detect_method1_Checked" >分析检测</CheckBox>
-                        <TextBlock Width="80" Margin="103,0,10,0">检测项目:</TextBlock>
-                        <!--<ComboBox  Width="100" x:Name="_detect_trade" IsEnabled="False"></ComboBox>-->
-                        <ComboBox  Width="200" x:Name="_detect_item" ></ComboBox>
                     </StackPanel>
                 </Grid>
                 <Grid Grid.Row="4">
                     <StackPanel >
-                        <TextBlock Width="80" >检测对象:</TextBlock>
-                        <ComboBox  Width="120" x:Name="_detect_object"></ComboBox>
-                        <TextBlock Width="60" >检测样本:</TextBlock>
-                        <ComboBox  Width="100" x:Name="_detect_sample"></ComboBox>
-                        <TextBlock Width="70" >检测灵敏度:</TextBlock>
-                        <ComboBox  Width="280" x:Name="_detect_sensitivity" Margin="5,0,0,0"></ComboBox>
-                        
+                        <TextBlock Width="80">检测项目:</TextBlock>
+                        <!--<ComboBox  Width="100" x:Name="_detect_trade" IsEnabled="False"></ComboBox>-->
+                        <ComboBox  Width="120" x:Name="_detect_item" ></ComboBox>
+                        <TextBlock Width="60" >检测对象:</TextBlock>
+                        <ComboBox  Width="100" x:Name="_detect_object"></ComboBox>
+                        <TextBlock Width="75" >检测样本:</TextBlock>
+                        <ComboBox  Width="280" x:Name="_detect_sample"></ComboBox>
                     </StackPanel>
                 </Grid>
                 <Grid Grid.Row="5">
                     <StackPanel >
-                        <TextBlock Width="80">检测结果:</TextBlock>
-                        <ComboBox  Width="120" x:Name="_detect_result"></ComboBox>
-                        <TextBlock  Width="60">检测用卡:</TextBlock>
-                        <ComboBox  x:Name="_card_brand" Margin="0,0,0,0" Width="100" ></ComboBox>
+                        <TextBlock Width="80" >检测灵敏度:</TextBlock>
+                        <ComboBox  Width="120" x:Name="_detect_sensitivity" Margin="0,0,0,0"></ComboBox>
+                        <TextBlock Width="60">检测结果:</TextBlock>
+                        <ComboBox  Width="100" x:Name="_detect_result"></ComboBox>
+                        <TextBlock  Width="75">检测用卡:</TextBlock>
+                        <ComboBox  x:Name="_card_brand" Margin="0,0,0,0" Width="280" ></ComboBox>
                     </StackPanel>
                 </Grid>
                 <Grid Grid.Row="6">

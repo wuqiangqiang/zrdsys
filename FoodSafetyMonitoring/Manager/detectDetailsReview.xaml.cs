@@ -62,6 +62,7 @@ namespace FoodSafetyMonitoring.Manager
             _detectDate.Text = table.Rows[0][1].ToString();
             _detectUserName.Text = table.Rows[0][9].ToString();
             _detectTypeName.Text = table.Rows[0][0].ToString();
+            _cardbrand.Text = table.Rows[0][23].ToString(); 
             _reviewBz.Text = table.Rows[0][19].ToString();
             _reviewUserid.Text = table.Rows[0][14].ToString();
             _reviewReagent_text.Text = table.Rows[0][15].ToString();

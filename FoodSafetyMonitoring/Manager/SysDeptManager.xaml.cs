@@ -198,7 +198,7 @@ namespace FoodSafetyMonitoring.Manager
                 {
                     if (row["FLAG_TIER"].ToString() == "4")
                     {
-                        Toolkit.MessageBox.Show("请输入检测站点名称!", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                        Toolkit.MessageBox.Show("请输入检测单位名称!", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
                         return;
                     }
                     else
@@ -314,14 +314,14 @@ namespace FoodSafetyMonitoring.Manager
                     if (count == 1)
                     {
                         //如果是养殖场类型的部门，把信息插入t_company表中
-                        if(row["TYPE"] == "1")
+                        if(row["TYPE"].ToString() == "1")
                         {
                             int n = dbOperation.GetDbHelper().ExecuteSql(string.Format("INSERT INTO t_company (COMPANYNAME,AREAID,OPENFLAG,cuserid,cdate,sysdeptid) VALUES('{0}','{1}','{2}','{3}','{4}','{5}')",
                                                                   row["INFO_NAME"],row["COUNTRY"],'1',(Application.Current.Resources["User"] as UserInfo).ID,
                                                                   DateTime.Now, row["INFO_CODE"]));
                             if (n != 1)
                             {
-                                Toolkit.MessageBox.Show("来源单位添加失败！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                                Toolkit.MessageBox.Show("被检单位添加失败！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
                                 return;
                             }
                         }
@@ -516,7 +516,7 @@ namespace FoodSafetyMonitoring.Manager
                 _add.IsEnabled = true;
                 if (row["FLAG_TIER"].ToString() == "4")
                 {
-                    _station_name.Text = "检测站点名称:";
+                    _station_name.Text = "检测单位名称:";
                 }
                 else
                 {
@@ -721,7 +721,7 @@ namespace FoodSafetyMonitoring.Manager
             }
             if (_regional_level.Text == "检测站")
             {
-                _station_name.Text = "检测站点名称:";
+                _station_name.Text = "检测单位名称:";
             }
             else
             {
@@ -744,7 +744,7 @@ namespace FoodSafetyMonitoring.Manager
             bool result = dbOperation.GetDbHelper().Exists(string.Format("select count(ORDERID) from t_detect_report where DETECTID ='{0}'", department.Row["INFO_CODE"]));
             if (result)
             {
-                Toolkit.MessageBox.Show("该检测站点已有对应的检测单数据，不能删除！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                Toolkit.MessageBox.Show("该检测单位已有对应的检测单数据，不能删除！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
 

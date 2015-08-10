@@ -100,7 +100,7 @@ namespace FoodSafetyMonitoring
                 Application.Current.Resources.Add("省市表", dbOperation.GetProvinceCity());
                 UserInfo userInfo = Application.Current.Resources["User"] as UserInfo;
                 this.userName = userInfo.ShowName;
-                
+
                 //加载标题
                 this._user.Text = this.userName;
                 //this._date.Text = DateTime.Now.ToLongDateString().ToString() +  DateTime.Now.ToString("dddd");

@@ -53,11 +53,11 @@ namespace FoodSafetyMonitoring.Manager
                 case "2": _dept_name.Text = "区县:";
                     dept_name = "区县名称";
                     break;
-                case "3": _dept_name.Text = "检测站点:";
-                    dept_name = "检测站点名称";
+                case "3": _dept_name.Text = "检测单位:";
+                    dept_name = "检测单位名称";
                     break;
-                case "4": _dept_name.Text = "检测站点:";
-                    dept_name = "检测站点名称";
+                case "4": _dept_name.Text = "检测单位:";
+                    dept_name = "检测单位名称";
                     break;
                 default: break;
             }

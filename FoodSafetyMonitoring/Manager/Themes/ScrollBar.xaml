@@ -26,12 +26,14 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Thumb">
-                    <Rectangle Width="13" Fill="#d1d1d7" RadiusX="0" RadiusY="0">
+                    <Rectangle  Fill="#d1d1d7" RadiusX="0" RadiusY="0">
                     </Rectangle>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
+    
+    
 
     <ControlTemplate x:Key="scroll_background" TargetType="RepeatButton">
         <Border Background="Transparent">
@@ -39,19 +41,71 @@
     </ControlTemplate>
 
     <ControlTemplate x:Key="scroll_up" TargetType="RepeatButton">
-        <Border>
+        <Border x:Name="border">
             <Border.Background>
                 <ImageBrush ImageSource="/res/up.png" />
             </Border.Background>
         </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True" >
+                <Setter TargetName="border" Property="Background">
+                    <Setter.Value>
+                        <ImageBrush ImageSource="/res/up_click.png" />
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </ControlTemplate.Triggers>
     </ControlTemplate>
 
     <ControlTemplate x:Key="scroll_down" TargetType="RepeatButton">
-        <Border>
+        <Border x:Name="border">
             <Border.Background>
                 <ImageBrush ImageSource="/res/down.png" />
             </Border.Background>
         </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True" >
+                <Setter TargetName="border" Property="Background">
+                    <Setter.Value>
+                        <ImageBrush ImageSource="/res/down_click.png" />
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="scroll_left" TargetType="RepeatButton">
+        <Border x:Name="border">
+            <Border.Background>
+                <ImageBrush ImageSource="/res/left.png" />
+            </Border.Background>
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True" >
+                <Setter TargetName="border" Property="Background">
+                    <Setter.Value>
+                        <ImageBrush ImageSource="/res/left_click.png" />
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="scroll_right" TargetType="RepeatButton">
+        <Border x:Name="border">
+            <Border.Background>
+                <ImageBrush ImageSource="/res/right.png" />
+            </Border.Background>
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True" >
+                <Setter TargetName="border" Property="Background">
+                    <Setter.Value>
+                        <ImageBrush ImageSource="/res/right_click.png" />
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </ControlTemplate.Triggers>
     </ControlTemplate>
 
 
@@ -73,8 +127,7 @@
                         <RepeatButton Template="{StaticResource scroll_up}" Grid.Row="0" Command="ScrollBar.LineUpCommand" />
                         <RepeatButton Template="{StaticResource scroll_down}" Grid.Row="2" Command="ScrollBar.LineDownCommand" />
 
-                        <Border Width="15" HorizontalAlignment="Center" CornerRadius="0" Background="#e9e9ed" Grid.Row="1" >
-                        
+                        <Border Width="15" HorizontalAlignment="Center" CornerRadius="0" Background="#e9e9ed" Grid.Row="1" >   
                             <Track  HorizontalAlignment="Center" Name="PART_Track" Width="{TemplateBinding Width}" Maximum="{TemplateBinding Maximum}" Minimum="{TemplateBinding Minimum}"
                                         Value="{TemplateBinding Value}"  IsDirectionReversed="true">
                                 <Track.DecreaseRepeatButton>
@@ -93,6 +146,47 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-    </Style>
+        <Style.Triggers>
+            <Trigger Property="Orientation" Value="Horizontal">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ScrollBar">
+                            <Grid Height ="15">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="15" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="15" />
+                                </Grid.ColumnDefinitions>
+                                <!--<Border Grid.RowSpan="3">
+                            <Border.Background>
+                                <ImageBrush ImageSource="/images/scroll_background.png" />
+                            </Border.Background>
+                        </Border>-->
+                                <RepeatButton Template="{StaticResource scroll_left}" Grid.Column="0" Command="ScrollBar.LineLeftCommand" />
+                                <RepeatButton Template="{StaticResource scroll_right}" Grid.Column="2" Command="ScrollBar.LineRightCommand" />
 
+                                <Border Height="15" VerticalAlignment="Center" CornerRadius="0" Background="#e9e9ed" Grid.Column="1" >
+                                    <Track  VerticalAlignment="Center" Name="PART_Track" Height="{TemplateBinding Height}" Maximum="{TemplateBinding Maximum}" Minimum="{TemplateBinding Minimum}"
+                                        Value="{TemplateBinding Value}"  IsDirectionReversed="False">
+                                        <Track.DecreaseRepeatButton>
+                                            <RepeatButton Template="{StaticResource scroll_background}" Command="ScrollBar.LineLeftCommand"  />
+                                        </Track.DecreaseRepeatButton>
+                                        <Track.IncreaseRepeatButton>
+                                            <RepeatButton Template="{StaticResource scroll_background}" Command="ScrollBar.LineRightCommand" />
+                                        </Track.IncreaseRepeatButton>
+                                        <Track.Thumb>
+                                            <Thumb Style="{StaticResource scroll_thumb_style}" >
+                                            </Thumb>
+                                        </Track.Thumb>
+                                    </Track>
+                                </Border>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
 </ResourceDictionary>
+    
+    

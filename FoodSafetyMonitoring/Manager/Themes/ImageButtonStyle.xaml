@@ -162,6 +162,48 @@
         </Setter>
     </Style>
 
+    <Style x:Key="PrintImageButtonTemplate" TargetType="Button"  BasedOn="{StaticResource ButtonBase}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid>
+                        <Image x:Name="save" Source="/Manager/Images/btn_normal.png"></Image>
+                        <TextBlock FontFamily="微软雅黑" FontSize="14"  HorizontalAlignment="Center" VerticalAlignment="Center" Text="打印" Foreground="White"></TextBlock>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="save" Property="Source" Value="/Manager/Images/btn_pressed.png"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="false">
+                            <Setter TargetName="save" Property="Source" Value="/Manager/Images/btn_normal.png"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="CloseImageButtonTemplate" TargetType="Button"  BasedOn="{StaticResource ButtonBase}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid>
+                        <Image x:Name="save" Source="/Manager/Images/btn_normal.png"></Image>
+                        <TextBlock FontFamily="微软雅黑" FontSize="14"  HorizontalAlignment="Center" VerticalAlignment="Center" Text="关闭" Foreground="White"></TextBlock>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="save" Property="Source" Value="/Manager/Images/btn_pressed.png"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="false">
+                            <Setter TargetName="save" Property="Source" Value="/Manager/Images/btn_normal.png"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <!--添加图片按钮-->
     <!--<Style x:Key="AddImageImageButtonTemplate" TargetType="Button"  BasedOn="{StaticResource ButtonBase}">
         <Setter Property="Template">
