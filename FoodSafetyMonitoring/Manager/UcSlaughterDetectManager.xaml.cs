@@ -72,7 +72,7 @@ namespace FoodSafetyMonitoring.Manager
             ComboboxTool.InitComboboxSource(_detect_item, string.Format("SELECT ItemID,ItemNAME FROM t_det_item_hb WHERE  (tradeId ='2'or ifnull(tradeId,'') = '') and OPENFLAG = '1'"), "lr");
             _detect_item.SelectionChanged += new SelectionChangedEventHandler(_detect_item_SelectionChanged);
             this._detect_result.SelectedIndex = 0;
-            //ComboboxTool.InitComboboxSource(_detect_result, "SELECT resultId,resultName FROM t_det_result where openFlag = '1' ORDER BY id", "lr");
+            ComboboxTool.InitComboboxSource(_detect_result, "SELECT resultId,resultName FROM t_det_result_hb where tradeid = '1' and openFlag = '1' ORDER BY id", "lr");
             ComboboxTool.InitComboboxSource(_card_brand, "SELECT cardbrandid,cardbrandname FROM t_cardbrand where openFlag = '1'", "lr");
             _entering_datetime.Text = string.Format("{0:g}", System.DateTime.Now);
             _detect_person.Text = (Application.Current.Resources["User"] as UserInfo).ShowName;
@@ -202,7 +202,7 @@ namespace FoodSafetyMonitoring.Manager
                               (_detect_object.SelectedItem as Label).Tag.ToString(),
                               (_detect_sample.SelectedItem as Label).Tag.ToString(),
                               //(_detect_sensitivity.SelectedItem as Label).Tag.ToString(),
-                              (_detect_result.SelectedItem as ComboBoxItem).Content.ToString(),
+                              (_detect_result.SelectedItem as Label).Tag.ToString(),
                               (_card_brand.SelectedItem as Label).Tag.ToString(),
                               (Application.Current.Resources["User"] as UserInfo).DepartmentID,
                               (Application.Current.Resources["User"] as UserInfo).ID,

@@ -79,9 +79,9 @@
                         <ComboBox  Width="140" x:Name="_detect_sensitivity"></ComboBox>-->
                         <TextBlock Width="70">检测结果:</TextBlock>
                         <ComboBox  Width="140" x:Name="_detect_result">
-                            <ComboBoxItem Height="30" VerticalContentAlignment="Center">-请选择-</ComboBoxItem>
+                            <!--<ComboBoxItem Height="30" VerticalContentAlignment="Center">-请选择-</ComboBoxItem>
                             <ComboBoxItem Height="30" VerticalContentAlignment="Center">有</ComboBoxItem>
-                            <ComboBoxItem Height="30" VerticalContentAlignment="Center">无</ComboBoxItem>
+                            <ComboBoxItem Height="30" VerticalContentAlignment="Center">无</ComboBoxItem>-->
                         </ComboBox>
                         <TextBlock  Width="70">检测用卡:</TextBlock>
                         <ComboBox  x:Name="_card_brand" Margin="0,0,0,0" Width="170" ></ComboBox>

@@ -44,7 +44,7 @@ namespace FoodSafetyMonitoring.Manager
             //_detect_trade.SelectedIndex = 1;
             ComboboxTool.InitComboboxSource(_detect_item, string.Format("SELECT ItemID,ItemNAME FROM t_det_item_hb WHERE  (tradeId ='1'or ifnull(tradeId,'') = '') and OPENFLAG = '1' "), "lr");
             _detect_item.SelectionChanged += new SelectionChangedEventHandler(_detect_item_SelectionChanged);
-            ComboboxTool.InitComboboxSource(_detect_result, "SELECT resultId,resultName FROM t_det_result where openFlag = '1' ORDER BY id", "lr");
+            ComboboxTool.InitComboboxSource(_detect_result, "SELECT resultId,resultName FROM t_det_result_hb where tradeid = '0' and openFlag = '1' ORDER BY id", "lr");
             ComboboxTool.InitComboboxSource(_card_brand, "SELECT cardbrandid,cardbrandname FROM t_cardbrand where openFlag = '1'", "lr");
             _entering_datetime.Text = string.Format("{0:g}", System.DateTime.Now);
             _detect_person.Text = (Application.Current.Resources["User"] as UserInfo).ShowName;

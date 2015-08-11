@@ -83,9 +83,9 @@
                             <ComboBox Width="80" x:Name="_detect_object1" />
                             <TextBlock MinWidth="50">检测结果:</TextBlock>
                             <ComboBox Width="100" x:Name="_detect_result1" >
-                                <ComboBoxItem Height="30" VerticalContentAlignment="Center">-全部-</ComboBoxItem>
+                                <!--<ComboBoxItem Height="30" VerticalContentAlignment="Center">-全部-</ComboBoxItem>
                                 <ComboBoxItem Height="30" VerticalContentAlignment="Center">有</ComboBoxItem>
-                                <ComboBoxItem Height="30" VerticalContentAlignment="Center">无</ComboBoxItem>
+                                <ComboBoxItem Height="30" VerticalContentAlignment="Center">无</ComboBoxItem>-->
                             </ComboBox>
                             <TextBlock MinWidth="40">数据来源:</TextBlock>
                             <ComboBox Width="120" x:Name="_detect_type" />

@@ -54,10 +54,10 @@ xmlns:control="clr-namespace:FoodSafetyMonitoring.Manager.UserControls">
                 <Grid Grid.Row="2">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Width="80">被检单位:</TextBlock>
-                        <ComboBox Width="280" x:Name="_source_company" IsEditable="True"></ComboBox>
-                        <TextBlock Width="60" x:Name="_txt_name">圈舍批次:</TextBlock>
+                        <ComboBox Width="410" x:Name="_source_company" IsEditable="True"></ComboBox>
+                        <TextBlock Width="59" x:Name="_txt_name">圈舍批次:</TextBlock>
                         <TextBox MinWidth="10" x:Name="_card_no" Visibility="Hidden"></TextBox>
-                        <ComboBox Width="270" x:Name="_colony_batch" IsEditable="True" Margin="0,0,0,0" Visibility="Hidden"></ComboBox>
+                        <ComboBox Width="140" x:Name="_colony_batch" IsEditable="True" Margin="0,0,0,0" ></ComboBox>
                     </StackPanel>
                 </Grid>
                 <Grid Grid.Row="3">
@@ -65,8 +65,8 @@ xmlns:control="clr-namespace:FoodSafetyMonitoring.Manager.UserControls">
                         <TextBlock  Width="80">批次编码:</TextBlock>
                         <TextBlock  x:Name="_batch_number" Width="280" Margin="0,0,0,0"></TextBlock>
                         <Button Margin="13,0,0,0" Content="获取批次编码" Width="110" Name="btnGo"   VerticalAlignment="Center" Click="btnget_Click" />
-                        <TextBlock  Width="80" Margin="20,0,10,0">批次头数:</TextBlock>
-                        <TextBox Width="140" x:Name="_object_count" MaxLength="5" TextAlignment="Right" InputMethod.IsInputMethodEnabled="False" DataObject.Pasting="Object_Count_Pasting" PreviewKeyDown="Object_Count_PreviewKeyDown"  PreviewTextInput="Object_Count_PreviewTextInput"></TextBox>
+                        <TextBlock  Width="80" Margin="26,0,10,0">批次头数:</TextBlock>
+                        <TextBox Width="140" Margin="0" x:Name="_object_count" MaxLength="5" TextAlignment="Right" InputMethod.IsInputMethodEnabled="False" DataObject.Pasting="Object_Count_Pasting" PreviewKeyDown="Object_Count_PreviewKeyDown"  PreviewTextInput="Object_Count_PreviewTextInput"></TextBox>
                     </StackPanel>
                 </Grid>
                 <Grid Grid.Row="4">
@@ -75,7 +75,7 @@ xmlns:control="clr-namespace:FoodSafetyMonitoring.Manager.UserControls">
                         <CheckBox x:Name="_detect_method1" Checked="_detect_method1_Checked" >金标检测卡</CheckBox>
                         <CheckBox x:Name="_detect_method2" Checked="_detect_method1_Checked" >ELISA试剂盒</CheckBox>
                         <CheckBox x:Name="_detect_method3" Checked="_detect_method1_Checked" >分析检测</CheckBox>
-                        <TextBlock  Width="80" Margin="145,0,10,0">检测项目:</TextBlock>
+                        <TextBlock  Width="80" Margin="146,0,10,0">检测项目:</TextBlock>
                         <!--<ComboBox  Width="100" x:Name="_detect_trade" IsEnabled="False"></ComboBox>-->
                         <ComboBox  Width="140" x:Name="_detect_item" ></ComboBox>
                     </StackPanel>
@@ -83,9 +83,9 @@ xmlns:control="clr-namespace:FoodSafetyMonitoring.Manager.UserControls">
                 <Grid Grid.Row="5">
                     <StackPanel >
                         <TextBlock Width="80" >检测对象:</TextBlock>
-                        <ComboBox  Width="180" x:Name="_detect_object"></ComboBox>
+                        <ComboBox  Width="170" x:Name="_detect_object"></ComboBox>
                         <TextBlock Width="80" >检测样本:</TextBlock>
-                        <ComboBox  Width="120" x:Name="_detect_sample"></ComboBox>
+                        <ComboBox  Width="130" x:Name="_detect_sample"></ComboBox>
                         <TextBlock  Width="80">检测灵敏度:</TextBlock>
                         <ComboBox   Width="140" x:Name="_detect_sensitivity"></ComboBox>
                     </StackPanel>
@@ -93,17 +93,17 @@ xmlns:control="clr-namespace:FoodSafetyMonitoring.Manager.UserControls">
                 <Grid Grid.Row="6">
                     <StackPanel >
                         <TextBlock Width="80" >检测结果:</TextBlock>
-                        <ComboBox  Width="180" x:Name="_detect_result"></ComboBox>
+                        <ComboBox  Width="170" x:Name="_detect_result"></ComboBox>
                         <TextBlock  Width="80">检测用卡:</TextBlock>
-                        <ComboBox  x:Name="_card_brand" Margin="0,0,0,0" Width="120" ></ComboBox>
+                        <ComboBox  x:Name="_card_brand" Margin="0,0,0,0" Width="130" ></ComboBox>
                     </StackPanel>
                 </Grid>
                 <Grid Grid.Row="7">
                     <StackPanel >
                         <TextBlock  Width="80">检测单位:</TextBlock>
-                        <TextBlock  x:Name="_detect_site" Margin="0,0,0,0" Width="180" ></TextBlock>
+                        <TextBlock  x:Name="_detect_site" Margin="0,0,0,0" Width="170" ></TextBlock>
                         <TextBlock  Width="80">检测师:</TextBlock>
-                        <TextBlock  x:Name="_detect_person" Margin="0,0,0,0" Width="120" ></TextBlock>
+                        <TextBlock  x:Name="_detect_person" Margin="0,0,0,0" Width="130" ></TextBlock>
                         <TextBlock  Width="80">录入时间:</TextBlock>
                         <TextBlock  x:Name="_entering_datetime" Margin="0,0,0,0" Width="160" ></TextBlock>
                     </StackPanel>

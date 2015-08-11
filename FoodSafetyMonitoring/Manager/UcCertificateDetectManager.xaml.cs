@@ -48,7 +48,7 @@ namespace FoodSafetyMonitoring.Manager
 
             ComboboxTool.InitComboboxSource(_detect_item, string.Format("SELECT ItemID,ItemNAME FROM t_det_item_hb WHERE  (tradeId ='1'or ifnull(tradeId,'') = '') and OPENFLAG = '1'"), "lr");
             _detect_item.SelectionChanged += new SelectionChangedEventHandler(_detect_item_SelectionChanged);
-            ComboboxTool.InitComboboxSource(_detect_result, "SELECT resultId,resultName FROM t_det_result where openFlag = '1' ORDER BY id", "lr");
+            ComboboxTool.InitComboboxSource(_detect_result, "SELECT resultId,resultName FROM t_det_result_hb where tradeid = '0' and openFlag = '1' ORDER BY id", "lr");
             ComboboxTool.InitComboboxSource(_card_brand, "SELECT cardbrandid,cardbrandname FROM t_cardbrand where openFlag = '1'", "lr");
             _entering_datetime.Text = string.Format("{0:g}", System.DateTime.Now);
             _detect_person.Text = (Application.Current.Resources["User"] as UserInfo).ShowName;
@@ -178,7 +178,7 @@ namespace FoodSafetyMonitoring.Manager
                     company_id = dbOperation.GetDbHelper().GetSingle(string.Format("SELECT COMPANYID from t_company where COMPANYNAME ='{0}'", _source_company.Text)).ToString();
                 }
 
-                string sql = string.Format("call p_insert_certificate_detect('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}')"
+                string sql = string.Format("call p_insert_certificate_detect('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}','{13}','{14}')"
                               , company_id,
                               _batch_number.Text,
                               (_detect_item.SelectedItem as Label).Tag.ToString(),
@@ -188,6 +188,7 @@ namespace FoodSafetyMonitoring.Manager
                               (_detect_sensitivity.SelectedItem as Label).Tag.ToString(),
                               (_detect_result.SelectedItem as Label).Tag.ToString(),
                               (_card_brand.SelectedItem as Label).Tag.ToString(),
+                              _colony_batch.Text, _card_no.Text,
                               (Application.Current.Resources["User"] as UserInfo).DepartmentID,
                               (Application.Current.Resources["User"] as UserInfo).ID,
                               System.DateTime.Now, _object_count.Text);
@@ -259,6 +260,22 @@ namespace FoodSafetyMonitoring.Manager
                 DataRow[] rows = ProvinceCityTable.Select("pid = '" + (_province.SelectedItem as Label).Tag.ToString() + "'");
                 ComboboxTool.InitComboboxSource(_city, rows, "lr");
                 _city.SelectionChanged += new SelectionChangedEventHandler(_city_SelectionChanged);
+                if ((_province.SelectedItem as Label).Tag.ToString() == "42")
+                {
+                    _txt_name.Text = "圈舍批次";
+                    _colony_batch.Width = 140;
+                    _colony_batch.Visibility = Visibility.Visible;
+                    _card_no.Width = 0;
+                    _card_no.Visibility = Visibility.Hidden;
+                }
+                else
+                {
+                    _txt_name.Text = "检疫证号";
+                    _card_no.Width = 150;
+                    _card_no.Visibility = Visibility.Visible;
+                    _colony_batch.Width = 0;
+                    _colony_batch.Visibility = Visibility.Hidden;
+                }
             }
         }
 
@@ -278,11 +295,21 @@ namespace FoodSafetyMonitoring.Manager
             if (_region.SelectedIndex > 0)
             {
                 ComboboxTool.InitComboboxSource(_source_company, "SELECT COMPANYID,COMPANYNAME FROM t_company where AREAID =" + (_region.SelectedItem as Label).Tag.ToString(), "lr");
-
+                _source_company.SelectionChanged += new SelectionChangedEventHandler(_source_company_SelectionChanged);
             }
         }
 
+        void _source_company_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (_source_company.SelectedIndex >= 1)
+            {
+                string company_id = (_source_company.SelectedItem as Label).Tag.ToString();
+                string dept_id = dbOperation.GetDbHelper().GetSingle(string.Format("select sysdeptid from t_company where COMPANYID = '{0}'",company_id)).ToString();
+                ComboboxTool.InitComboboxSource(_colony_batch, string.Format("call p_user_colony_batch_ycl({0})", dept_id), "lr");
+            }
 
+        }
+       
 
         //void _source_company_SelectionChanged(object sender, SelectionChangedEventArgs e)
         //{

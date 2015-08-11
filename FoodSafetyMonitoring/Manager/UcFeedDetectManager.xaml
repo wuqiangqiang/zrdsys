@@ -23,7 +23,7 @@
             <Grid.Background>
                 <ImageBrush ImageSource="/res/detect_back.png" Stretch="Fill"></ImageBrush>
             </Grid.Background>
-            <Grid Margin="50,20,50,30">
+            <Grid Margin="40,20,50,30">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="60"/>
                     <RowDefinition Height="50"/>
@@ -41,7 +41,7 @@
                     <StackPanel >
                         <TextBlock Width="80">饲料名称:</TextBlock>
                         <!--<ComboBox Width="100" x:Name="_feed_name" ></ComboBox>-->
-                        <TextBox x:Name="_feed_name" Width="120" MaxLength="10"></TextBox>
+                        <TextBox x:Name="_feed_name" Width="130" MaxLength="10"></TextBox>
                         <TextBlock Width="80">饲料品牌:</TextBlock>
                         <TextBox x:Name="_feed_brand" Width="100" Margin="5,0,20,0"></TextBox>
                         <TextBlock Width="76">生产企业名称:</TextBlock>
@@ -51,7 +51,7 @@
                 <Grid Grid.Row="2">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Width="80">生产批次号:</TextBlock>
-                        <TextBox x:Name="_produce_batchno" Width="120"></TextBox>
+                        <TextBox x:Name="_produce_batchno" Width="130"></TextBox>
                         <TextBlock  Width="80">批次采购数量:</TextBlock>
                         <TextBox x:Name="_batch_num" Width="100" MaxLength="5" TextAlignment="Right" InputMethod.IsInputMethodEnabled="False" DataObject.Pasting="batch_num_Pasting" PreviewKeyDown="batch_num_PreviewKeyDown"  PreviewTextInput="batch_num_PreviewTextInput"></TextBox>
                         <TextBlock Margin="0" >KG</TextBlock>
@@ -65,7 +65,7 @@
                         <CheckBox x:Name="_detect_method1" Checked="_detect_method1_Checked" >金标检测卡</CheckBox>
                         <CheckBox x:Name="_detect_method2" Checked="_detect_method1_Checked" >ELISA试剂盒</CheckBox>
                         <CheckBox x:Name="_detect_method3" Checked="_detect_method1_Checked" >分析检测</CheckBox>
-                        <TextBlock Width="80" Margin="103,0,10,0">检测项目:</TextBlock>
+                        <TextBlock Width="80" Margin="113,0,10,0">检测项目:</TextBlock>
                         <!--<ComboBox  Width="100" x:Name="_detect_trade" IsEnabled="False"></ComboBox>-->
                         <ComboBox  Width="200" x:Name="_detect_item" ></ComboBox>
                     </StackPanel>
@@ -75,7 +75,7 @@
                         <!--<TextBlock  >检测对象:</TextBlock>
                         <ComboBox  Width="100" x:Name="_detect_object"></ComboBox>-->
                         <TextBlock Width="80" >检测样本:</TextBlock>
-                        <ComboBox  Width="120" x:Name="_detect_sample" Margin="5,0,5,0"></ComboBox>
+                        <ComboBox  Width="130" x:Name="_detect_sample" Margin="5,0,5,0"></ComboBox>
                         <TextBlock Width="80" >检测灵敏度:</TextBlock>
                         <ComboBox  Width="100" x:Name="_detect_sensitivity" Margin="5,0,22,0"></ComboBox>
                         <TextBlock Width="80">检测结果:</TextBlock>
@@ -85,13 +85,13 @@
                 <Grid Grid.Row="5">
                     <StackPanel >
                         <TextBlock  Width="80">检测用卡:</TextBlock>
-                        <ComboBox  x:Name="_card_brand" Margin="5,0,0,0" Width="120" ></ComboBox>
+                        <ComboBox  x:Name="_card_brand" Margin="5,0,0,0" Width="130" ></ComboBox>
                     </StackPanel>
                 </Grid>
                 <Grid Grid.Row="6">
                     <StackPanel >
                         <TextBlock  Width="80">检测单位:</TextBlock>
-                        <TextBlock  x:Name="_detect_site" Margin="5,0,0,0" Width="126" ></TextBlock>
+                        <TextBlock  x:Name="_detect_site" Margin="5,0,0,0" Width="136" ></TextBlock>
                         <TextBlock  Width="80">检测师:</TextBlock>
                         <TextBlock  x:Name="_detect_person" Margin="5,0,0,0" Width="120" ></TextBlock>
                         <TextBlock  Width="80">录入时间:</TextBlock>

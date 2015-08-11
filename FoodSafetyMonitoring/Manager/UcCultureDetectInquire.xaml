@@ -57,9 +57,9 @@
                             <TextBlock MinWidth="50">养殖企业名称:</TextBlock>
                             <ComboBox x:Name="_culture_company" Width="260"></ComboBox>
                             <TextBlock Width="50">检测师:</TextBlock>
-                            <ComboBox Width="120" x:Name="_detect_person1"/>
+                            <ComboBox Width="110" x:Name="_detect_person1"/>
                             <TextBlock Width="50">检测项目:</TextBlock>
-                            <ComboBox Width="120" x:Name="_detect_item1" />
+                            <ComboBox Width="130" x:Name="_detect_item1" />
                         </StackPanel>
                     </Grid>
                     <Grid Grid.Row="1">
@@ -69,9 +69,9 @@
                             <TextBlock Width="75">检测方法:</TextBlock>
                             <ComboBox Width="260" x:Name="_detect_method" />
                             <TextBlock Width="50">检测结果:</TextBlock>
-                            <ComboBox Width="120" x:Name="_detect_result1"/>
+                            <ComboBox Width="110" x:Name="_detect_result1"/>
                             <TextBlock Width="50">检测用卡:</TextBlock>
-                            <ComboBox Width="120" x:Name="_card_brand" />
+                            <ComboBox Width="130" x:Name="_card_brand" />
                             
                         </StackPanel>
                     </Grid>

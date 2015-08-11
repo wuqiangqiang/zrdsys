@@ -46,7 +46,7 @@ namespace FoodSafetyMonitoring.Manager
             ComboboxTool.InitComboboxSource(_detect_station, string.Format("call p_user_dept_hb('{0}','tz')", userId), "cxtj");
             ComboboxTool.InitComboboxSource(_detect_item1, "SELECT ItemID,ItemNAME FROM t_det_item_hb WHERE  (tradeId ='2' or ifnull(tradeId,'') = '') and OPENFLAG = '1'", "cxtj");
             ComboboxTool.InitComboboxSource(_detect_object1, "SELECT objectId,objectName FROM t_det_object WHERE  OPENFLAG = '1'", "cxtj");
-            //ComboboxTool.InitComboboxSource(_detect_result1, "SELECT resultId,resultName FROM t_det_result where openFlag = '1' ORDER BY id", "cxtj");
+            ComboboxTool.InitComboboxSource(_detect_result1, "SELECT resultId,resultName FROM t_det_result_hb where tradeid = '1' and openFlag = '1' ORDER BY id", "cxtj");
             _detect_result1.SelectedIndex = 0;
             ComboboxTool.InitComboboxSource(_detect_person1, string.Format("call p_user_detuser_hb('{0}','tz')", userId), "cxtj");
             ComboboxTool.InitComboboxSource(_detect_method, "select reagentId,reagentName from t_det_reagent_hb where  tradeid ='1' and openFlag = '1'", "cxtj");

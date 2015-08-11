@@ -44,9 +44,9 @@ namespace FoodSafetyMonitoring.Manager
             ComboboxTool.InitComboboxSource(_detect_station, string.Format("call p_user_dept_hb('{0}','yz')", userId), "cxtj");
             ComboboxTool.InitComboboxSource(_detect_feed, string.Format("call p_user_feed('{0}')", userId), "cxtj");
             ComboboxTool.InitComboboxSource(_detect_item1, "SELECT ItemID,ItemNAME FROM t_det_item_hb WHERE  (tradeId ='0' or ifnull(tradeId,'') = '') and OPENFLAG = '1'", "cxtj");  
-            ComboboxTool.InitComboboxSource(_detect_result1, "SELECT resultId,resultName FROM t_det_result where openFlag = '1' ORDER BY id", "cxtj");
+            ComboboxTool.InitComboboxSource(_detect_result1, "SELECT resultId,resultName FROM t_det_result_hb where tradeid = '0' and openFlag = '1' ORDER BY id", "cxtj");
             ComboboxTool.InitComboboxSource(_detect_person1, string.Format("call p_user_detuser_hb('{0}','yz')", userId), "cxtj");
-            ComboboxTool.InitComboboxSource(_detect_method, "select reagentId,reagentName from t_det_reagent where openFlag = '1'", "cxtj");
+            ComboboxTool.InitComboboxSource(_detect_method, "select reagentId,reagentName from t_det_reagent_hb where tradeid = '0' and openFlag = '1'", "cxtj");
             ComboboxTool.InitComboboxSource(_card_brand, "SELECT cardbrandid,cardbrandname FROM t_cardbrand where openFlag = '1'", "cxtj");
             //ComboboxTool.InitComboboxSource(_detect_object1, "SELECT objectId,objectName FROM t_det_object WHERE  (tradeId ='1'or tradeId ='2' or tradeId ='3' or ifnull(tradeId,'') = '') and OPENFLAG = '1'", "cxtj");
             //ComboboxTool.InitComboboxSource(_detect_type, "SELECT sourceId,sourceName FROM t_det_source where openFlag = '1'", "cxtj");
