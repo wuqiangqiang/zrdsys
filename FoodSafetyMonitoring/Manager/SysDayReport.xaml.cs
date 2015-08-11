@@ -46,7 +46,7 @@ namespace FoodSafetyMonitoring.Manager
             {
                 case "0": _dept_name.Text = "选择省:";
                     break;
-                case "1": _dept_name.Text = "选择地市:";
+                case "1": _dept_name.Text = "选择市州:";
                     break;
                 case "2": _dept_name.Text = "选择区县:";
                     break;
@@ -58,10 +58,32 @@ namespace FoodSafetyMonitoring.Manager
             }
             //检测单位
             ComboboxTool.InitComboboxSource(_detect_dept, string.Format("call p_dept_cxtj_hb({0},'{1}')", (Application.Current.Resources["User"] as UserInfo).ID, depttype), "cxtj");
-            //检测项目
-            ComboboxTool.InitComboboxSource(_detect_item, "SELECT ItemID,ItemNAME FROM t_det_item WHERE  (tradeId ='1'or tradeId ='2' or tradeId ='3' or ifnull(tradeId,'') = '') and OPENFLAG = '1' order by orderId", "cxtj");
-            //检测结果
-            ComboboxTool.InitComboboxSource(_detect_result, "SELECT resultId,resultName FROM t_det_result where openFlag='1' ORDER BY id", "cxtj");
+            
+            //2015-08-11 根据不同检测模块显示不同的检测项目
+            if (detecttype == "3")//饲料检测
+            {
+                ComboboxTool.InitComboboxSource(_detect_item, "SELECT ItemID,ItemNAME FROM t_det_item_hb WHERE  (tradeId ='0' or ifnull(tradeId,'') = '') and OPENFLAG = '1'", "cxtj");
+            }
+            else if (detecttype == "2")//同步检测
+            {
+                ComboboxTool.InitComboboxSource(_detect_item, "SELECT ItemID,ItemNAME FROM t_det_item_hb WHERE  (tradeId ='2' or ifnull(tradeId,'') = '') and OPENFLAG = '1'", "cxtj");
+            }
+            else//其余检测
+            {
+                ComboboxTool.InitComboboxSource(_detect_item, "SELECT ItemID,ItemNAME FROM t_det_item_hb WHERE  (tradeId ='1' or ifnull(tradeId,'') = '') and OPENFLAG = '1'", "cxtj");
+            }
+
+            //2015-08-11 根据不同检测模块显示不同的检测结果
+            if (detecttype == "2")//同步检测
+            {
+                ComboboxTool.InitComboboxSource(_detect_result, "SELECT resultId,resultName FROM t_det_result_hb  where tradeid = '1' and openFlag='1' ORDER BY id", "cxtj");
+            }
+            else//其余检测
+            {
+                ComboboxTool.InitComboboxSource(_detect_result, "SELECT resultId,resultName FROM t_det_result_hb  where tradeid = '0' and openFlag='1' ORDER BY id", "cxtj");
+            }
+
+            
 
             //如果登录用户的部门是站点级别，则将查询条件检测单位赋上默认值
             if (isDept())
@@ -127,7 +149,7 @@ namespace FoodSafetyMonitoring.Manager
             {
                 case "0": tabledisplay.Columns.Add(new DataColumn("省名称"));
                     break;
-                case "1": tabledisplay.Columns.Add(new DataColumn("地市名称"));
+                case "1": tabledisplay.Columns.Add(new DataColumn("市州名称"));
                     break;
                 case "2": tabledisplay.Columns.Add(new DataColumn("区县名称"));
                     break;
@@ -146,9 +168,20 @@ namespace FoodSafetyMonitoring.Manager
             }
             //表格后面为合计列
             tabledisplay.Columns.Add(new DataColumn("合计"));
-            tabledisplay.Columns.Add(new DataColumn("阴性样本"));
-            tabledisplay.Columns.Add(new DataColumn("疑似阳性样本"));
-            tabledisplay.Columns.Add(new DataColumn("阳性样本"));
+            //屠宰同步检测结果为有无
+            //if (detecttype == "2")
+            //{
+            //    tabledisplay.Columns.Add(new DataColumn("无"));
+            //    tabledisplay.Columns.Add(new DataColumn("有"));
+            //    //tabledisplay.Columns.Add(new DataColumn("阳性样本"));
+            //}
+            //else
+            //{
+                tabledisplay.Columns.Add(new DataColumn("阴性样本"));
+                tabledisplay.Columns.Add(new DataColumn("疑似阳性样本"));
+                tabledisplay.Columns.Add(new DataColumn("阳性样本"));
+            //}
+            
 
             //为表中各行生成数据
             for (int i = 0; i < DeptNames.Length; i++)
@@ -170,7 +203,7 @@ namespace FoodSafetyMonitoring.Manager
                 row[ItemNames.Length + 2] = list.Where(t => t.DeptName == DeptNames[i] ).Select(t => t.Sum).FirstOrDefault();
                 row[ItemNames.Length + 3] = list.Where(t => t.DeptName == DeptNames[i] ).Select(t => t.Yin).FirstOrDefault();
                 row[ItemNames.Length + 4] = list.Where(t => t.DeptName == DeptNames[i] ).Select(t => t.Yisi).FirstOrDefault();
-                row[ItemNames.Length + 5] = list.Where(t => t.DeptName == DeptNames[i] ).Select(t => t.Yang).FirstOrDefault();
+                row[ItemNames.Length + 5] = list.Where(t => t.DeptName == DeptNames[i]).Select(t => t.Yang).FirstOrDefault();
 
                 tabledisplay.Rows.Add(row);
             }

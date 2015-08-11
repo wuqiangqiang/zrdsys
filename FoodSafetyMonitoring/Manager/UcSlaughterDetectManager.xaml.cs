@@ -73,7 +73,7 @@ namespace FoodSafetyMonitoring.Manager
             _detect_item.SelectionChanged += new SelectionChangedEventHandler(_detect_item_SelectionChanged);
             this._detect_result.SelectedIndex = 0;
             ComboboxTool.InitComboboxSource(_detect_result, "SELECT resultId,resultName FROM t_det_result_hb where tradeid = '1' and openFlag = '1' ORDER BY id", "lr");
-            ComboboxTool.InitComboboxSource(_card_brand, "SELECT cardbrandid,cardbrandname FROM t_cardbrand where openFlag = '1'", "lr");
+            //ComboboxTool.InitComboboxSource(_card_brand, "SELECT cardbrandid,cardbrandname FROM t_cardbrand where openFlag = '1'", "lr");
             _entering_datetime.Text = string.Format("{0:g}", System.DateTime.Now);
             _detect_person.Text = (Application.Current.Resources["User"] as UserInfo).ShowName;
             _detect_site.Text = dbOperation.GetSingle("SELECT INFO_NAME  from  sys_client_sysdept WHERE INFO_CODE = " + (Application.Current.Resources["User"] as UserInfo).DepartmentID).ToString();
@@ -91,7 +91,7 @@ namespace FoodSafetyMonitoring.Manager
             this._object_label.Text = "";
             //this._detect_trade.SelectedIndex = 1;
             this._detect_item.SelectedIndex = 0;
-            this._card_brand.SelectedIndex = 0;
+            //this._card_brand.SelectedIndex = 0;
             this._detect_method1.IsChecked = false;
             this._detect_method2.IsChecked = false;
             this._detect_method3.IsChecked = false;
@@ -133,9 +133,13 @@ namespace FoodSafetyMonitoring.Manager
             {
                 msg = "*耳标号不能为空";
             }
+            else if (_object_label.Text.Trim().Length != 15)
+            {
+                msg = "*耳标号必须输入15位";
+            }
             else if (_detect_item.SelectedIndex < 1)
             {
-                msg = "*请选择检查项目";
+                msg = "*请选择检测项目";
             }
             else if (_detect_method1.IsChecked != true && _detect_method2.IsChecked != true && _detect_method3.IsChecked != true)
             {
@@ -161,10 +165,10 @@ namespace FoodSafetyMonitoring.Manager
             {
                 msg = "*请输入检测师";
             }
-            else if (_card_brand.SelectedIndex < 1)
-            {
-                msg = "*请选择检测用卡";
-            }
+            //else if (_card_brand.SelectedIndex < 1)
+            //{
+            //    msg = "*请选择检测用卡";
+            //}
             else
             {
                 //string company_id;
@@ -194,7 +198,7 @@ namespace FoodSafetyMonitoring.Manager
                 //    company_id = dbOperation.GetSingle(string.Format("SELECT COMPANYID from t_company where COMPANYNAME ='{0}' and deptid = '{1}'", _source_company.Text, (Application.Current.Resources["User"] as UserInfo).DepartmentID)).ToString();
                 //}
 
-                string sql = string.Format("call p_insert_slaughter_detect('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}')"
+                string sql = string.Format("call p_insert_slaughter_detect('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}')"
                               , (_source_company.SelectedItem as Label).Tag.ToString(),
                               _detect_number.Text,
                               (_detect_item.SelectedItem as Label).Tag.ToString(),
@@ -203,7 +207,7 @@ namespace FoodSafetyMonitoring.Manager
                               (_detect_sample.SelectedItem as Label).Tag.ToString(),
                               //(_detect_sensitivity.SelectedItem as Label).Tag.ToString(),
                               (_detect_result.SelectedItem as Label).Tag.ToString(),
-                              (_card_brand.SelectedItem as Label).Tag.ToString(),
+                              //(_card_brand.SelectedItem as Label).Tag.ToString(),
                               (Application.Current.Resources["User"] as UserInfo).DepartmentID,
                               (Application.Current.Resources["User"] as UserInfo).ID,
                               System.DateTime.Now, _object_count.Text, _object_label.Text);
@@ -402,6 +406,27 @@ namespace FoodSafetyMonitoring.Manager
         {
             if (e.Key == Key.Space)
                 e.Handled = true;
+        }
+
+        private void Object_Lable_Pasting(object sender, DataObjectPastingEventArgs e)
+        {
+            if (e.DataObject.GetDataPresent(typeof(String)))
+            {
+                String text = (String)e.DataObject.GetData(typeof(String));
+                if (!isNumberic(text))
+                { e.CancelCommand(); }
+            }
+            else { e.CancelCommand(); }
+        }
+
+        private void Object_Lable_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (!isNumberic(e.Text))
+            {
+                e.Handled = true;
+            }
+            else
+                e.Handled = false;
         }
 
         private void Object_Count_Pasting(object sender, DataObjectPastingEventArgs e)

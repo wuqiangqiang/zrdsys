@@ -128,7 +128,7 @@ namespace FoodSafetyMonitoring.Manager
                         _cmbRoleType.IsEnabled = false;
                         _subDetails.Text = dbHelper.GetSingle("select GROUP_CONCAT(SUB_NAME) as SUB_NAME from v_sub_details where ROLE_ID = '79' and SUB_FATHER_ID = '0'").ToString();
                         break;
-                    case "1": _cmbRoleType.Text = "地市级管理员";
+                    case "1": _cmbRoleType.Text = "市州级管理员";
                         _cmbRoleType.IsEnabled = false;
                         _subDetails.Text = dbHelper.GetSingle("select GROUP_CONCAT(SUB_NAME) as SUB_NAME from v_sub_details where ROLE_ID = '76' and SUB_FATHER_ID = '0'").ToString();
                         break;

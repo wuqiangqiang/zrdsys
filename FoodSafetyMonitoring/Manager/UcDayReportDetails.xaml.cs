@@ -43,17 +43,43 @@ namespace FoodSafetyMonitoring.Manager
 
             MyColumns.Add("orderid", new MyColumn("orderid", "检测单编号") { BShow = true, Width = 8 });
             MyColumns.Add("detecttypename", new MyColumn("detecttypename", "信息来源") { BShow = true, Width = 8 });
-            MyColumns.Add("detectdate", new MyColumn("detectdate", "检测时间") { BShow = true, Width = 18 });
-            MyColumns.Add("partname", new MyColumn("partname", "检测单位") { BShow = true, Width = 16 });
+            MyColumns.Add("detectdate", new MyColumn("detectdate", "检测时间") { BShow = true, Width = 18 });       
             MyColumns.Add("itemname", new MyColumn("itemname", "检测项目") { BShow = true, Width = 10 });
-            MyColumns.Add("objectname", new MyColumn("objectname", "检测对象") { BShow = true, Width = 8 });
+            MyColumns.Add("partname", new MyColumn("partname", "检测单位") { BShow = true, Width = 16 });
             MyColumns.Add("samplename", new MyColumn("samplename", "检测样本") { BShow = true, Width = 8 });
-            MyColumns.Add("sensitivityname", new MyColumn("sensitivityname", "检测灵敏度") { BShow = true, Width = 10 });
             MyColumns.Add("reagentname", new MyColumn("reagentname", "检测方法") { BShow = true, Width = 10 });
             MyColumns.Add("resultname", new MyColumn("resultname", "检测结果") { BShow = true, Width = 8 });
             MyColumns.Add("detectusername", new MyColumn("detectusername", "检测师") { BShow = true, Width = 8 });
+            //20150811 根据不同的检测模块显示不同的内容
+            if (DetectType == "3")//饲料检测
+            {
+                MyColumns.Add("objectname", new MyColumn("objectname", "检测对象") { BShow = false, Width = 8 });
+                MyColumns.Add("companyname", new MyColumn("companyname", "被检单位") { BShow = false, Width = 16 });
+                MyColumns.Add("sensitivityname", new MyColumn("sensitivityname", "检测灵敏度") { BShow = true, Width = 10 });
+                MyColumns.Add("cardbrandname", new MyColumn("cardbrandname", "检测用卡") { BShow = true, Width = 13 });
+            }
+            else if (DetectType == "0")//养殖检测
+            {
+                MyColumns.Add("sensitivityname", new MyColumn("sensitivityname", "检测灵敏度") { BShow = true, Width = 10 });
+                MyColumns.Add("objectname", new MyColumn("objectname", "检测对象") { BShow = true, Width = 8 });
+                MyColumns.Add("companyname", new MyColumn("companyname", "被检单位") { BShow = false, Width = 16 });
+                MyColumns.Add("cardbrandname", new MyColumn("cardbrandname", "检测用卡") { BShow = true, Width = 13 });
+            }
+            else if (DetectType == "2")//同步检测
+            {
+                MyColumns.Add("sensitivityname", new MyColumn("sensitivityname", "检测灵敏度") { BShow = false, Width = 10 });
+                MyColumns.Add("objectname", new MyColumn("objectname", "检测对象") { BShow = true, Width = 8 });
+                MyColumns.Add("companyname", new MyColumn("companyname", "被检单位") { BShow = true, Width = 16 });
+                MyColumns.Add("cardbrandname", new MyColumn("cardbrandname", "检测用卡") { BShow = false, Width = 13 });
+            }
+            else//其他检测
+            {
+                MyColumns.Add("sensitivityname", new MyColumn("sensitivityname", "检测灵敏度") { BShow = true, Width = 10 });
+                MyColumns.Add("objectname", new MyColumn("objectname", "检测对象") { BShow = true, Width = 8 });
+                MyColumns.Add("companyname", new MyColumn("companyname", "被检单位") { BShow = true, Width = 16 });
+                MyColumns.Add("cardbrandname", new MyColumn("cardbrandname", "检测用卡") { BShow = true, Width = 13 });
+            }
             MyColumns.Add("areaname", new MyColumn("areaname", "来源产地") { BShow = false });
-            MyColumns.Add("companyname", new MyColumn("companyname", "被检单位") { BShow = true, Width = 16 });
             MyColumns.Add("sum_num", new MyColumn("sum_num", "总行数") { BShow = false });
 
             _tableview.MyColumns = MyColumns;

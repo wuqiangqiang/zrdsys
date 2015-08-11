@@ -57,8 +57,8 @@ namespace FoodSafetyMonitoring.Manager
             //    case "0": _dept_name.Text = "选择省:";
             //        dept_name = "省名称";
             //        break;
-            //    case "1": _dept_name.Text = "选择地市:";
-            //        dept_name = "地市名称";
+            //    case "1": _dept_name.Text = "选择市州:";
+            //        dept_name = "市州名称";
             //        break;
             //    case "2": _dept_name.Text = "选择区县:";
             //        dept_name = "区县名称";
@@ -128,6 +128,7 @@ namespace FoodSafetyMonitoring.Manager
 
             //string sql = string.Format("SELECT ItemID,ItemNAME FROM t_det_item WHERE  (tradeId ='{0}'or ifnull(tradeId,'') = '') and OPENFLAG = '1' order by orderId", (_detect_trade.SelectedItem as Label).Tag);
             string sql = "SELECT ItemID,ItemNAME FROM t_det_item_hb WHERE  (tradeId ='1' or ifnull(tradeId,'') = '') and OPENFLAG = '1'";
+            
             DataTable table = dbOperation.GetDataSet(sql).Tables[0];
             _grid_detail.Tag = table;
             for (int i = 0; i < table.Rows.Count; i++)

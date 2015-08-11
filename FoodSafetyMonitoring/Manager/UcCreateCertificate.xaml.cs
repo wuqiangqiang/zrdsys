@@ -112,8 +112,11 @@ namespace FoodSafetyMonitoring.Manager
             lvlist.DataContext = null;
 
             //根据条件查询出数据
-            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_certificate_main({0},'{1}')",
-                                             userId, _source_company.SelectedIndex < 1 ? "" : (_source_company.SelectedItem as Label).Tag)).Tables[0];
+            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_certificate_main({0},'{1}','{2}','{3}','{4}')",
+                                             userId, _source_company.SelectedIndex < 1 ? "" : (_source_company.SelectedItem as Label).Tag,
+                                             _province.SelectedIndex < 1 ? "" : (_province.SelectedItem as Label).Tag,
+                                             _city.SelectedIndex < 1 ? "" : (_city.SelectedItem as Label).Tag,
+                                             _region.SelectedIndex < 1 ? "" : (_region.SelectedItem as Label).Tag)).Tables[0];
             current_table = table;
             lvlist.DataContext = table;
         }

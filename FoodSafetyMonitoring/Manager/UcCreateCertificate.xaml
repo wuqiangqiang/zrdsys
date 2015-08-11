@@ -57,7 +57,7 @@
                             <toolkit:DatePicker x:Name="dtpEndDate" VerticalAlignment="Center" />-->
                             <TextBlock MinWidth="50">来源产地:</TextBlock>
                             <ComboBox x:Name="_province" Width="120" Text="省" Margin="0,0,5,0"></ComboBox>
-                            <ComboBox x:Name="_city" Width="120" Text="地市" Margin="0,0,5,0"></ComboBox>
+                            <ComboBox x:Name="_city" Width="120" Text="市州" Margin="0,0,5,0"></ComboBox>
                             <ComboBox x:Name="_region" Width="120" Text="区县"></ComboBox>
                             <TextBlock MinWidth="50">被检单位:</TextBlock>
                             <ComboBox x:Name="_source_company" Width="240"></ComboBox>

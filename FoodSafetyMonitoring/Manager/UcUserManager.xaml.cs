@@ -30,7 +30,7 @@ namespace FoodSafetyMonitoring.Manager
         private IDBOperation dbOperation;
         FamilyTreeViewModel departmentViewModel;
 
-        readonly Dictionary<string, string> cityLevelDictionary = new Dictionary<string, string>() { { "0", "国家" }, { "1", "省级" }, { "2", "地市" }, { "3", "区县" }, { "4", "检测站" } };
+        readonly Dictionary<string, string> cityLevelDictionary = new Dictionary<string, string>() { { "0", "国家" }, { "1", "省级" }, { "2", "市州" }, { "3", "区县" }, { "4", "检测站" } };
         private Department department;
         private DataTable ProvinceCityTable = null;
         private string user_flag_tier;

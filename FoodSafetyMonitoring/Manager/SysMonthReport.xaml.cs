@@ -69,14 +69,14 @@ namespace FoodSafetyMonitoring.Manager
             _year.SelectedIndex = 5;
 
             _month.ItemsSource = month;
-            _month.SelectedIndex = 6;
+            _month.SelectedIndex = 7;
 
             //检测站点
             switch (user_flag_tier)
             {
                 case "0": _dept_name.Text = "选择省:";
                     break;
-                case "1": _dept_name.Text = "选择地市:";
+                case "1": _dept_name.Text = "选择市州:";
                     break;
                 case "2": _dept_name.Text = "选择区县:";
                     break;
@@ -88,10 +88,29 @@ namespace FoodSafetyMonitoring.Manager
             }
 
             ComboboxTool.InitComboboxSource(_detect_dept, string.Format("call p_dept_cxtj_hb({0},'{1}')", (Application.Current.Resources["User"] as UserInfo).ID, depttype), "cxtj");
-            //检测项目
-            ComboboxTool.InitComboboxSource(_detect_item, "SELECT ItemID,ItemNAME FROM t_det_item WHERE  (tradeId ='1'or tradeId ='2' or tradeId ='3' or ifnull(tradeId,'') = '') and OPENFLAG = '1' order by orderId", "cxtj");
-            //检测结果
-            ComboboxTool.InitComboboxSource(_detect_result, "SELECT resultId,resultName FROM t_det_result where openFlag='1'  ORDER BY id", "cxtj");
+            //2015-08-11 根据不同检测模块显示不同的检测项目
+            if (detecttype == "3")//饲料检测
+            {
+                ComboboxTool.InitComboboxSource(_detect_item, "SELECT ItemID,ItemNAME FROM t_det_item_hb WHERE  (tradeId ='0' or ifnull(tradeId,'') = '') and OPENFLAG = '1'", "cxtj");
+            }
+            else if (detecttype == "2")//同步检测
+            {
+                ComboboxTool.InitComboboxSource(_detect_item, "SELECT ItemID,ItemNAME FROM t_det_item_hb WHERE  (tradeId ='2' or ifnull(tradeId,'') = '') and OPENFLAG = '1'", "cxtj");
+            }
+            else//其余检测
+            {
+                ComboboxTool.InitComboboxSource(_detect_item, "SELECT ItemID,ItemNAME FROM t_det_item_hb WHERE  (tradeId ='1' or ifnull(tradeId,'') = '') and OPENFLAG = '1'", "cxtj");
+            }
+
+            //2015-08-11 根据不同检测模块显示不同的检测结果
+            if (detecttype == "2")//同步检测
+            {
+                ComboboxTool.InitComboboxSource(_detect_result, "SELECT resultId,resultName FROM t_det_result_hb  where tradeid = '1' and openFlag='1' ORDER BY id", "cxtj");
+            }
+            else//其余检测
+            {
+                ComboboxTool.InitComboboxSource(_detect_result, "SELECT resultId,resultName FROM t_det_result_hb  where tradeid = '0' and openFlag='1' ORDER BY id", "cxtj");
+            }
 
             //如果登录用户的部门是站点级别，则将查询条件检测站点赋上默认值
             if (isDept())
@@ -160,7 +179,7 @@ namespace FoodSafetyMonitoring.Manager
             {
                 case "0": tabledisplay.Columns.Add(new DataColumn("省名称"));
                     break;
-                case "1": tabledisplay.Columns.Add(new DataColumn("地市名称"));
+                case "1": tabledisplay.Columns.Add(new DataColumn("市州名称"));
                     break;
                 case "2": tabledisplay.Columns.Add(new DataColumn("区县名称"));
                     break;

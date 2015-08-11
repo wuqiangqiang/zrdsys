@@ -75,7 +75,7 @@ namespace FoodSafetyMonitoring.Manager
             {
                 case "0": dept_name = "省名称";
                     break;
-                case "1": dept_name = "地市名称";
+                case "1": dept_name = "市州名称";
                     break;
                 case "2": dept_name = "区县名称";
                     break;

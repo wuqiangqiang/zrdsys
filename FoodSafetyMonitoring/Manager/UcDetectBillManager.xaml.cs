@@ -60,10 +60,10 @@ namespace FoodSafetyMonitoring.Manager
             //ComboboxTool.InitComboboxSource(_detect_object, " SELECT objectId,objectName FROM v_user_object WHERE userid = " + userId);
             //ComboboxTool.InitComboboxSource(_detect_sample, "  SELECT sampleId,sampleName FROM v_user_sample WHERE userid = " + userId);
             //ComboboxTool.InitComboboxSource(_detect_sensitivity, "SELECT sensitivityId,sensitivityName FROM t_det_sensitivity where openFlag = '1'", "lr");
-            ComboboxTool.InitComboboxSource(_detect_item, string.Format("SELECT ItemID,ItemNAME FROM t_det_item WHERE  (tradeId ='1'or ifnull(tradeId,'') = '') and OPENFLAG = '1'"), "lr");
+            ComboboxTool.InitComboboxSource(_detect_item, string.Format("SELECT ItemID,ItemNAME FROM t_det_item_hb WHERE  (tradeId ='1'or ifnull(tradeId,'') = '') and OPENFLAG = '1'"), "lr");
             _detect_item.SelectionChanged += new SelectionChangedEventHandler(_detect_item_SelectionChanged);
             
-            ComboboxTool.InitComboboxSource(_detect_result, "SELECT resultId,resultName FROM t_det_result where openFlag = '1' ORDER BY id", "lr");
+            ComboboxTool.InitComboboxSource(_detect_result, "SELECT resultId,resultName FROM t_det_result_hb where tradeid = '0' and openFlag = '1' ORDER BY id", "lr");
             ComboboxTool.InitComboboxSource(_card_brand, "SELECT cardbrandid,cardbrandname FROM t_cardbrand where openFlag = '1'", "lr");
             _entering_datetime.Text = string.Format("{0:g}", System.DateTime.Now);
             _detect_person.Text = (Application.Current.Resources["User"] as UserInfo).ShowName;
@@ -124,9 +124,13 @@ namespace FoodSafetyMonitoring.Manager
             {
                 msg = "*耳标号不能为空";
             }
+            else if (_object_label.Text.Trim().Length != 15)
+            {
+                msg = "*耳标号必须输入15位";
+            }
             else if (_detect_item.SelectedIndex < 1)
             {
-                msg = "*请选择检查项目";
+                msg = "*请选择检测项目";
             }
             else if (_detect_method1.IsChecked != true && _detect_method2.IsChecked != true && _detect_method3.IsChecked != true)
             {
@@ -379,6 +383,27 @@ namespace FoodSafetyMonitoring.Manager
         {
             if (e.Key == Key.Space)
                 e.Handled = true;
+        }
+
+        private void Object_Lable_Pasting(object sender, DataObjectPastingEventArgs e)
+        {
+            if (e.DataObject.GetDataPresent(typeof(String)))
+            {
+                String text = (String)e.DataObject.GetData(typeof(String));
+                if (!isNumberic(text))
+                { e.CancelCommand(); }
+            }
+            else { e.CancelCommand(); }
+        }
+
+        private void Object_Lable_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (!isNumberic(e.Text))
+            {
+                e.Handled = true;
+            }
+            else
+                e.Handled = false;
         }
 
         private void Object_Count_Pasting(object sender, DataObjectPastingEventArgs e)

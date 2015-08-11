@@ -57,7 +57,7 @@
                             <toolkit:DatePicker x:Name="dtpEndDate" VerticalAlignment="Center" />
                             <TextBlock MinWidth="50">来源产地:</TextBlock>
                             <ComboBox x:Name="_province1" Width="120" Text="省" Margin="0,0,5,0"></ComboBox>
-                            <ComboBox x:Name="_city1" Width="120" Text="地市" Margin="0,0,5,0"></ComboBox>
+                            <ComboBox x:Name="_city1" Width="120" Text="市州" Margin="0,0,5,0"></ComboBox>
                             <ComboBox x:Name="_region1" Width="120" Text="区县"></ComboBox>
                             <TextBlock MinWidth="50">被检单位:</TextBlock>
                             <ComboBox x:Name="_source_company1" Width="240"></ComboBox>
@@ -89,10 +89,10 @@
                             </ComboBox>
                             <TextBlock MinWidth="40">数据来源:</TextBlock>
                             <ComboBox Width="120" x:Name="_detect_type" />
-                            <TextBlock MinWidth="50" >检测用卡:</TextBlock>
-                            <ComboBox Width="170" x:Name="_card_brand" />
+                            <!--<TextBlock MinWidth="50" >检测用卡:</TextBlock>
+                            <ComboBox Width="170" x:Name="_card_brand" />-->
 
-                            <Button Name="_query" Width="120" Height="32" Style="{StaticResource SelectImageButtonTemplate}" Click="_query_Click" Margin="40,0,0,0" />
+                            <Button Name="_query" Width="120" Height="32" Style="{StaticResource SelectImageButtonTemplate}" Click="_query_Click" Margin="290,0,0,0" />
                             <Button Name="_export" Width="120" Height="32" Style="{StaticResource ExportImageButtonTemplate}" Click="_export_Click" Margin="50,0,0,0"/>
                         </StackPanel>
                     </Grid>

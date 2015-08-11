@@ -44,7 +44,7 @@ namespace FoodSafetyMonitoring.Manager
             {
                 case "0": _dept_name.Text = "选择省:";
                     break;
-                case "1": _dept_name.Text = "选择地市:";
+                case "1": _dept_name.Text = "选择市州:";
                     break;
                 case "2": _dept_name.Text = "选择区县:";
                     break;
@@ -97,7 +97,7 @@ namespace FoodSafetyMonitoring.Manager
             {
                 case "0": tabledisplay.Columns.Add(new DataColumn("省名称"));
                     break;
-                case "1": tabledisplay.Columns.Add(new DataColumn("地市名称"));
+                case "1": tabledisplay.Columns.Add(new DataColumn("市州名称"));
                     break;
                 case "2": tabledisplay.Columns.Add(new DataColumn("区县名称"));
                     break;

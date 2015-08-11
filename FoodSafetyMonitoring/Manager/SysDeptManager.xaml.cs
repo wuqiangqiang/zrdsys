@@ -30,7 +30,7 @@ namespace FoodSafetyMonitoring.Manager
         FamilyTreeViewModel departmentViewModel;
         private IDBOperation dbOperation;
 
-        readonly Dictionary<string, string> cityLevelDictionary = new Dictionary<string, string>() { { "0", "国家" }, { "1", "省级" }, { "2", "地市" }, { "3", "区县" }, { "4", "检测站" } };
+        readonly Dictionary<string, string> cityLevelDictionary = new Dictionary<string, string>() { { "0", "国家" }, { "1", "省级" }, { "2", "市州" }, { "3", "区县" }, { "4", "检测站" } };
         private Department department;
         private DataTable ProvinceCityTable = null;
         private string user_flag_tier;
@@ -367,6 +367,10 @@ namespace FoodSafetyMonitoring.Manager
                 {
                     type = "0";
                 }
+                else if (_direct_station_2.IsChecked == true)
+                {
+                    type = "3";
+                }
 
                 //保存是否直属信息
                 string is_dept = "";
@@ -387,6 +391,18 @@ namespace FoodSafetyMonitoring.Manager
                     int count = dbOperation.GetDbHelper().ExecuteSql(sql);
                     if (count == 1)
                     {
+                        //如果是养殖场类型的部门，把修改的部门名称保存进t_company表中
+                        if (type == "1")
+                        {
+                            int n = dbOperation.GetDbHelper().ExecuteSql(string.Format("update t_company set COMPANYNAME = '{0}' where sysdeptid = '{1}'",
+                                                                          _station.Text,department.Row["INFO_CODE"]));
+                            if (n != 1)
+                            {
+                                Toolkit.MessageBox.Show("被检单位修改失败！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                                return;
+                            }
+                        }
+
                         Toolkit.MessageBox.Show("保存成功！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
                         Common.SysLogEntry.WriteLog("部门管理", (Application.Current.Resources["User"] as UserInfo).ShowName, Common.OperationType.Modify, "修改部门信息");
                     }
@@ -634,8 +650,10 @@ namespace FoodSafetyMonitoring.Manager
         private void _edit_Click(object sender, RoutedEventArgs e)
         {
             _detail_info.IsEnabled = true;
+            _station_property.IsEnabled = false;
             state = "edit";
             _edit.IsEnabled = false;
+            _station_flag.Text = "(必填)";
 
             Department department = _edit.Tag as Department;
             //对应湖北省级有3个部门（101 湖北畜安处，102 湖北动监处，103 湖北屠宰办），数据库中存在下级部门的是102
@@ -675,6 +693,7 @@ namespace FoodSafetyMonitoring.Manager
             _add.IsEnabled = false;
             _edit.Visibility = Visibility.Hidden;
             _detail_info.IsEnabled = true;
+            _station_property.IsEnabled = true;
             Department department = _add.Tag as Department;
 
             //判断所在地下拉有无值，如果没有值，则显示文本框不显示下拉框；有值则显示下拉框不显示文本框
