@@ -30,7 +30,7 @@ namespace FoodSafetyMonitoring.Manager
         FamilyTreeViewModel departmentViewModel;
         private IDBOperation dbOperation;
 
-        readonly Dictionary<string, string> cityLevelDictionary = new Dictionary<string, string>() { { "0", "国家" }, { "1", "省级" }, { "2", "市州" }, { "3", "区县" }, { "4", "检测站" } };
+        readonly Dictionary<string, string> cityLevelDictionary = new Dictionary<string, string>() { { "0", "国家" }, { "1", "省级" }, { "2", "市州" }, { "3", "区县" }, { "4", "检测单位" } };
         private Department department;
         private DataTable ProvinceCityTable = null;
         private string user_flag_tier;
@@ -446,8 +446,12 @@ namespace FoodSafetyMonitoring.Manager
         private void Clear_Click(object sender, RoutedEventArgs e)
         {
             _detail_info.IsEnabled = false;
-            //_add.IsEnabled = true;
-            _edit.IsEnabled = true;        
+            _add.IsEnabled = true;
+            _edit.IsEnabled = true; 
+            //刷新部门详细信息
+            Department department = _add.Tag as Department;
+            DataRow row = department.Row;
+            load_DeptDetails(row);
         }
 
         //private void txtSearch_ImageClick(object sender, EventArgs e)
@@ -506,145 +510,160 @@ namespace FoodSafetyMonitoring.Manager
         {
             if (e.ClickCount > 0)
             {
-                _contact_number.Text = "";
-                _phone.Text = "";
-                _principal_name.Text = "";
-                _address.Text = "";
-                _area_flag.Text = "";
-                _station_flag.Text = "";
-                _station_property_flag.Text = "";
-
-                _detail_info_all.Visibility = Visibility.Visible;
-                _detail_info.IsEnabled = false;
                 text_treeView = sender as TextBlock;
                 Department department = (sender as TextBlock).Tag as Department;
                 _add.Tag = department;
                 _edit.Tag = department;
                 DataRow row = department.Row;
-                _regional_level.Tag = row["FLAG_TIER"].ToString();
-                _regional_level.Text = cityLevelDictionary[row["FLAG_TIER"].ToString()];
-                _station_property.Visibility = Visibility.Hidden;
-                //隐藏是否直属
-                _is_dept.Visibility = Visibility.Hidden;
-                _city_flag.Visibility = Visibility.Hidden;
-                _lower_area.Visibility = Visibility.Hidden;
-                _edit.IsEnabled = true;
-                _add.IsEnabled = true;
-                if (row["FLAG_TIER"].ToString() == "4")
-                {
-                    _station_name.Text = "检测单位名称:";
-                }
-                else
-                {
-                    _station_name.Text = "部门名称:";
-                }
-                if (user_flag_tier == row["FLAG_TIER"].ToString())
-                {
-                    _add.Visibility = Visibility.Visible;
-                    _delete.Visibility = Visibility.Hidden;
-                    _edit.Visibility = Visibility.Visible;
-                }
-                else
-                {
-                    _add.Visibility = Visibility.Hidden;
-                    _delete.Visibility = Visibility.Visible;
-                    _edit.Visibility = Visibility.Visible;
-                }
 
-                if (_regional_level.Text == "检测站")
-                {
-                    _add.Visibility = Visibility.Hidden;
-                    _station_property.Visibility = Visibility.Visible;
-                    //显示是否直属
-                    _is_dept.Visibility = Visibility.Visible;
-                    _city_flag.Visibility = Visibility.Visible;
-                }
-
-                if (user_flag_tier == "0" && row["FLAG_TIER"].ToString() != "0")
-                {
-                    _Supplier_name.Visibility = Visibility.Visible;
-                    _Supplier.Visibility = Visibility.Visible;
-                }
-                else
-                {
-                    _Supplier_name.Visibility = Visibility.Hidden;
-                    _Supplier.Visibility = Visibility.Hidden;
-                }
-
-                ComboboxTool.InitComboboxSource(_Supplier, "select supplierId,supplierName from t_supplier", "lr");
-                DataRow[] rows = SupplierTable.Select("supplierId = '" + row["supplierId"] + "'");
-                if (rows.Length > 0)
-                {
-                    _Supplier.Text = rows[0]["supplierName"].ToString();
-                }
-
-                string city = "";
-                List<string> citys = null;
-                GetCityByCode(row["FLAG_TIER"].ToString(), row["province"].ToString(), row["city"].ToString(), row["country"].ToString(), ref city, ref citys);
-
-                _belong_to.Text = city;
-                //if (citys.Count > 0)
-                //{
-                    _lower_area.ItemsSource = citys;
-                //}
-
-                _phone.Text = row["tel"].ToString();
-                _contact_number.Text = row["phone"].ToString();
-                _address.Text = row["address"].ToString();
-                _principal_name.Text = row["contacter"].ToString();
-                _station.Text = row["INFO_NAME"].ToString();
-
-                //是否直属
-                if (row["isdept"].ToString() == "0")
-                {
-                    _city_flag.SelectedIndex = 1;
-                }
-                else
-                {
-                    _city_flag.SelectedIndex = 0;
-                }
-
-                if (department.Parent != null)
-                {
-                    _superior_department.Text = department.Parent.Row["INFO_NAME"].ToString();
-                }
-                else
-                {
-                    if (row["FLAG_TIER"].ToString() == "0")
-                    {
-                        _superior_department.Text = "无";
-                    }
-                    else
-                    {
-                        _superior_department.Text = dbOperation.GetDbHelper().GetSingle(string.Format("select INFO_NAME FROM sys_client_sysdept WHERE INFO_CODE = '{0}'", row["FK_CODE_DEPT"].ToString())).ToString();
-                    }  
-                }
-
-                _direct_station.IsChecked = false;
-                _cultivate_station.IsChecked = false;
-                _slaughter_station.IsChecked = false;
-                if (row["type"].ToString().Length != 0)
-                {
-                    if (Convert.ToInt32(row["type"].ToString()) == 2)
-                    {
-                        _direct_station.IsChecked = true;
-                    }
-                    else if (Convert.ToInt32(row["type"].ToString()) == 1)
-                    {
-                        _cultivate_station.IsChecked = true;
-                    }
-                    else if (Convert.ToInt32(row["type"].ToString()) == 0)
-                    {
-                        _slaughter_station.IsChecked = true;
-                    }
-                }
-
-                //_delete.Visibility = Visibility.Hidden;
-                //if (department.Children.Count == 0)
-                //{
-                //    _delete.Visibility = Visibility.Visible;
-                //}
+                load_DeptDetails(row);
             }
+        }
+
+        private void load_DeptDetails(DataRow row)
+        {
+            _contact_number.Text = "";
+            _phone.Text = "";
+            _principal_name.Text = "";
+            _address.Text = "";
+            _area_flag.Text = "";
+            _station_flag.Text = "";
+            _station_property_flag.Text = "";
+
+            _detail_info_all.Visibility = Visibility.Visible;
+            _detail_info.IsEnabled = false;
+            _regional_level.Tag = row["FLAG_TIER"].ToString();
+            _regional_level.Text = cityLevelDictionary[row["FLAG_TIER"].ToString()];
+            _station_property.Visibility = Visibility.Hidden;
+            //隐藏是否直属
+            _is_dept.Visibility = Visibility.Hidden;
+            _city_flag.Visibility = Visibility.Hidden;
+            _lower_area.Visibility = Visibility.Hidden;
+            _edit.IsEnabled = true;
+            _add.IsEnabled = true;
+            if (row["FLAG_TIER"].ToString() == "4")
+            {
+                _station_name.Text = "检测单位名称:";
+            }
+            else
+            {
+                _station_name.Text = "部门名称:";
+            }
+            if (user_flag_tier == row["FLAG_TIER"].ToString())
+            {
+                _add.Visibility = Visibility.Visible;
+                _delete.Visibility = Visibility.Hidden;
+                _edit.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                _add.Visibility = Visibility.Hidden;
+                _delete.Visibility = Visibility.Visible;
+                _edit.Visibility = Visibility.Visible;
+            }
+
+            if (_regional_level.Text == "检测单位")
+            {
+                _add.Visibility = Visibility.Hidden;
+                _station_property.Visibility = Visibility.Visible;
+                //显示是否直属
+                _is_dept.Visibility = Visibility.Visible;
+                _city_flag.Visibility = Visibility.Visible;
+            }
+
+            if (user_flag_tier == "0" && row["FLAG_TIER"].ToString() != "0")
+            {
+                _Supplier_name.Visibility = Visibility.Visible;
+                _Supplier.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                _Supplier_name.Visibility = Visibility.Hidden;
+                _Supplier.Visibility = Visibility.Hidden;
+            }
+
+            ComboboxTool.InitComboboxSource(_Supplier, "select supplierId,supplierName from t_supplier", "lr");
+            DataRow[] rows = SupplierTable.Select("supplierId = '" + row["supplierId"] + "'");
+            if (rows.Length > 0)
+            {
+                _Supplier.Text = rows[0]["supplierName"].ToString();
+            }
+
+            string city = "";
+            List<string> citys = null;
+            GetCityByCode(row["FLAG_TIER"].ToString(), row["province"].ToString(), row["city"].ToString(), row["country"].ToString(), ref city, ref citys);
+
+            _belong_to.Text = city;
+            _lower_area.ItemsSource = citys;
+            _lower_area.SelectedIndex = -1;
+
+            //下级单位全部均已添加完，则不出现添加下级按钮
+            if (_lower_area.Items.Count == 0 && user_flag_tier != "3")
+            {
+                _add.Visibility = Visibility.Hidden;
+            }
+
+            _phone.Text = row["tel"].ToString();
+            _contact_number.Text = row["phone"].ToString();
+            _address.Text = row["address"].ToString();
+            _principal_name.Text = row["contacter"].ToString();
+            _station.Text = row["INFO_NAME"].ToString();
+
+            //是否直属
+            if (row["isdept"].ToString() == "0")
+            {
+                _city_flag.SelectedIndex = 1;
+            }
+            else
+            {
+                _city_flag.SelectedIndex = 0;
+            }
+
+            if (department.Parent != null)
+            {
+                _superior_department.Text = department.Parent.Row["INFO_NAME"].ToString();
+            }
+            else
+            {
+                if (row["FLAG_TIER"].ToString() == "0")
+                {
+                    _superior_department.Text = "无";
+                }
+                else
+                {
+                    _superior_department.Text = dbOperation.GetDbHelper().GetSingle(string.Format("select INFO_NAME FROM sys_client_sysdept WHERE INFO_CODE = '{0}'", row["FK_CODE_DEPT"].ToString())).ToString();
+                }
+            }
+
+            _direct_station.IsChecked = false;
+            _cultivate_station.IsChecked = false;
+            _slaughter_station.IsChecked = false;
+            _direct_station_2.IsChecked = false;
+            if (row["type"].ToString().Length != 0)
+            {
+                if (Convert.ToInt32(row["type"].ToString()) == 2)
+                {
+                    _direct_station.IsChecked = true;
+                }
+                else if (Convert.ToInt32(row["type"].ToString()) == 1)
+                {
+                    _cultivate_station.IsChecked = true;
+                }
+                else if (Convert.ToInt32(row["type"].ToString()) == 0)
+                {
+                    _slaughter_station.IsChecked = true;
+                }
+                else if (Convert.ToInt32(row["type"].ToString()) == 3)
+                {
+                    _direct_station_2.IsChecked = true;
+                }
+            }
+
+            //_delete.Visibility = Visibility.Hidden;
+            //if (department.Children.Count == 0)
+            //{
+            //    _delete.Visibility = Visibility.Visible;
+            //}
         }
 
         private void _edit_Click(object sender, RoutedEventArgs e)
@@ -689,25 +708,13 @@ namespace FoodSafetyMonitoring.Manager
                 return;
             }
             state = "add";
-            
+
             _add.IsEnabled = false;
+            _add.Visibility = Visibility.Hidden;
             _edit.Visibility = Visibility.Hidden;
             _detail_info.IsEnabled = true;
             _station_property.IsEnabled = true;
             Department department = _add.Tag as Department;
-
-            //判断所在地下拉有无值，如果没有值，则显示文本框不显示下拉框；有值则显示下拉框不显示文本框
-            if (_lower_area.Items.Count == 0)
-            {
-                _lower_area.Visibility = Visibility.Hidden;
-                _belong_to.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                _lower_area.Visibility = Visibility.Visible;
-                //_belong_to.Visibility = Visibility.Hidden;
-                //_belong_to.Text = "";
-            }
 
             if (user_flag_tier == "0")
             {
@@ -723,10 +730,10 @@ namespace FoodSafetyMonitoring.Manager
 
             _station_flag.Text = "(必填)";
             
-            //如果当前添加的是检测站，则显示检测点性质信息
-            if (_regional_level.Text == "检测站")
+            //如果当前添加的是检测单位，则显示检测点性质信息
+            if (_regional_level.Text == "检测单位")
             {
-                _add.Visibility = Visibility.Hidden;
+                
                 _station_property.Visibility = Visibility.Visible;
                 _station_property_flag.Text = "(必填)";
                 //显示是否直属
@@ -738,7 +745,22 @@ namespace FoodSafetyMonitoring.Manager
             {
                 _area_flag.Text = "(必填)";
             }
-            if (_regional_level.Text == "检测站")
+
+            //判断所在地下拉有无值，如果没有值，则显示文本框不显示下拉框；有值则显示下拉框不显示文本框
+            if (_lower_area.Items.Count == 0)
+            {
+                _lower_area.Visibility = Visibility.Hidden;
+                _belong_to.Visibility = Visibility.Visible;
+                _area_flag.Text = "";
+            }
+            else
+            {
+                _lower_area.Visibility = Visibility.Visible;
+                //_belong_to.Visibility = Visibility.Hidden;
+                //_belong_to.Text = "";
+            }
+
+            if (_regional_level.Text == "检测单位")
             {
                 _station_name.Text = "检测单位名称:";
             }
@@ -788,6 +810,16 @@ namespace FoodSafetyMonitoring.Manager
                     int count = dbOperation.GetDbHelper().ExecuteSql(sql);
                     if (count == 1)
                     {
+                        if (department.Row["TYPE"].ToString() == "1")
+                        {
+                            int n = dbOperation.GetDbHelper().ExecuteSql(string.Format("update t_company set OPENFLAG = '0' where sysdeptid = '{0}'",
+                                                                          department.Row["INFO_CODE"]));
+                            if (n != 1)
+                            {
+                                Toolkit.MessageBox.Show("被检单位修改失败！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                                return;
+                            }
+                        }
                         Toolkit.MessageBox.Show("删除成功！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
                         Common.SysLogEntry.WriteLog("部门管理", (Application.Current.Resources["User"] as UserInfo).ShowName, Common.OperationType.Modify, "删除部门信息");
                     }
@@ -817,10 +849,18 @@ namespace FoodSafetyMonitoring.Manager
             if (department.Parent.Children.Count == 0)
             {
                 searchTxt = department.Name;
+                
+                //详细信息刷新
+                DataRow row = department.Row;
+                load_DeptDetails(row);
             }
             else
             {
                 searchTxt = department.Parent.Children[0].Name;
+
+                //详细信息刷新
+                DataRow row = department.Parent.Children[0].Row;
+                load_DeptDetails(row);
             }
             departmentViewModel.SearchText = searchTxt;
             departmentViewModel.SearchCommand.Execute(null);
