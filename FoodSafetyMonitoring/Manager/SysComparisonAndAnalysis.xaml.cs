@@ -51,9 +51,9 @@ namespace FoodSafetyMonitoring.Manager
                     dept_name_2 = "各省阳性样本检出量占比分析";
                     dept_name_3 = "各省疑似阳性样本检出量占比分析";
                     break;
-                case "1": dept_name = "各市州检测总量占比分析";
-                    dept_name_2 = "各市州阳性样本检出量占比分析";
-                    dept_name_3 = "各市州疑似阳性样本检出量占比分析";
+                case "1": dept_name = "各市(州)检测总量占比分析";
+                    dept_name_2 = "各市(州)阳性样本检出量占比分析";
+                    dept_name_3 = "各市(州)疑似阳性样本检出量占比分析";
                     break;
                 case "2": dept_name = "各区县检测总量占比分析";
                     dept_name_2 = "各区县阳性样本检出量占比分析";
@@ -105,15 +105,15 @@ namespace FoodSafetyMonitoring.Manager
             switch (_analysis_theme.Text)
             {
                 case "各省检测总量占比分析": function = "p_dbfx_jczl_hb"; break;
-                case "各市州检测总量占比分析": function = "p_dbfx_jczl_hb"; break;
+                case "各市(州)检测总量占比分析": function = "p_dbfx_jczl_hb"; break;
                 case "各区县检测总量占比分析": function = "p_dbfx_jczl_hb"; break;
                 case "各检测单位检测总量占比分析": function = "p_dbfx_jczl_hb"; break;
                 case "各省阳性样本检出量占比分析": function = "p_dbfx_jczl_yang_hb"; break;
-                case "各市州阳性样本检出量占比分析": function = "p_dbfx_jczl_yang_hb"; break;
+                case "各市(州)阳性样本检出量占比分析": function = "p_dbfx_jczl_yang_hb"; break;
                 case "各区县阳性样本检出量占比分析": function = "p_dbfx_jczl_yang_hb"; break;
                 case "各检测单位阳性样本检出量占比分析": function = "p_dbfx_jczl_yang_hb"; break;
                 case "各省疑似阳性样本检出量占比分析": function = "p_dbfx_jczl_like_yang_hb"; break;
-                case "各市州疑似阳性样本检出量占比分析": function = "p_dbfx_jczl_like_yang_hb"; break;
+                case "各市(州)疑似阳性样本检出量占比分析": function = "p_dbfx_jczl_like_yang_hb"; break;
                 case "各区县疑似阳性样本检出量占比分析": function = "p_dbfx_jczl_like_yang_hb"; break;
                 case "各检测单位疑似阳性样本检出量占比分析": function = "p_dbfx_jczl_like_yang_hb"; break;
                 //case "直属与企业检测点检测总量比较分析": function = "p_dbfx_jcdfx"; break;
@@ -134,7 +134,7 @@ namespace FoodSafetyMonitoring.Manager
                 case "各省检测总量占比分析": table.Columns[0].ColumnName = "省名称";
                     table.Columns[1].ColumnName = "检测数量";
                     break;
-                case "各市州检测总量占比分析": table.Columns[0].ColumnName = "市州名称";
+                case "各市(州)检测总量占比分析": table.Columns[0].ColumnName = "市(州)名称";
                     table.Columns[1].ColumnName = "检测数量";
                     break;
                 case "各区县检测总量占比分析": table.Columns[0].ColumnName = "区县名称";
@@ -146,7 +146,7 @@ namespace FoodSafetyMonitoring.Manager
                 case "各省阳性样本检出量占比分析": table.Columns[0].ColumnName = "省名称";
                     table.Columns[1].ColumnName = "阳性样本数量";
                     break;
-                case "各市州阳性样本检出量占比分析": table.Columns[0].ColumnName = "市州名称";
+                case "各市(州)阳性样本检出量占比分析": table.Columns[0].ColumnName = "市(州)名称";
                     table.Columns[1].ColumnName = "阳性样本数量";
                     break;
                 case "各区县阳性样本检出量占比分析": table.Columns[0].ColumnName = "区县名称";
@@ -158,7 +158,7 @@ namespace FoodSafetyMonitoring.Manager
                 case "各省疑似阳性样本检出量占比分析": table.Columns[0].ColumnName = "省名称";
                     table.Columns[1].ColumnName = "疑似阳性样本数量";
                     break;
-                case "各市州疑似阳性样本检出量占比分析": table.Columns[0].ColumnName = "市州名称";
+                case "各市(州)疑似阳性样本检出量占比分析": table.Columns[0].ColumnName = "市(州)名称";
                     table.Columns[1].ColumnName = "疑似阳性样本数量";
                     break;
                 case "各区县疑似阳性样本检出量占比分析": table.Columns[0].ColumnName = "区县名称";
@@ -248,11 +248,19 @@ namespace FoodSafetyMonitoring.Manager
 
             //string table_title = "数据统计时间:" + dtpStartDate.Value.Value.Year + "年" + dtpStartDate.Value.Value.Month + "月" + dtpStartDate.Value.Value.Day + "日到" + dtpEndDate.Value.Value.Year + "年" + dtpEndDate.Value.Value.Month + "月" + dtpEndDate.Value.Value.Day + "日" + "  合计" + row_count + "条数据";
 
+
             _title.Text = _analysis_theme.Text;
-            _title_1.Text = string.Format("合计{0}条数据", row_count);
             _title_2.Text = _analysis_theme.Text;
             _tableview.SetDataTable(table, "", new List<int>());
+            _sj.Visibility = Visibility.Visible;
+            _hj.Visibility = Visibility.Visible;
+            _title_1.Text = row_count.ToString();
 
+            if (row_count == 0)
+            {
+                Toolkit.MessageBox.Show("没有查询到数据！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
         }
 
         private void _export_Click(object sender, RoutedEventArgs e)

@@ -56,28 +56,28 @@ namespace FoodSafetyMonitoring.Manager
                 MyColumns.Add("objectname", new MyColumn("objectname", "检测对象") { BShow = false, Width = 8 });
                 MyColumns.Add("companyname", new MyColumn("companyname", "被检单位") { BShow = false, Width = 16 });
                 MyColumns.Add("sensitivityname", new MyColumn("sensitivityname", "检测灵敏度") { BShow = true, Width = 10 });
-                MyColumns.Add("cardbrandname", new MyColumn("cardbrandname", "检测用卡") { BShow = true, Width = 13 });
+                MyColumns.Add("cardbrandname", new MyColumn("cardbrandname", "检测卡品牌") { BShow = true, Width = 13 });
             }
             else if (DetectType == "0")//养殖检测
             {
                 MyColumns.Add("sensitivityname", new MyColumn("sensitivityname", "检测灵敏度") { BShow = true, Width = 10 });
                 MyColumns.Add("objectname", new MyColumn("objectname", "检测对象") { BShow = true, Width = 8 });
                 MyColumns.Add("companyname", new MyColumn("companyname", "被检单位") { BShow = false, Width = 16 });
-                MyColumns.Add("cardbrandname", new MyColumn("cardbrandname", "检测用卡") { BShow = true, Width = 13 });
+                MyColumns.Add("cardbrandname", new MyColumn("cardbrandname", "检测卡品牌") { BShow = true, Width = 13 });
             }
             else if (DetectType == "2")//同步检测
             {
                 MyColumns.Add("sensitivityname", new MyColumn("sensitivityname", "检测灵敏度") { BShow = false, Width = 10 });
                 MyColumns.Add("objectname", new MyColumn("objectname", "检测对象") { BShow = true, Width = 8 });
                 MyColumns.Add("companyname", new MyColumn("companyname", "被检单位") { BShow = true, Width = 16 });
-                MyColumns.Add("cardbrandname", new MyColumn("cardbrandname", "检测用卡") { BShow = false, Width = 13 });
+                MyColumns.Add("cardbrandname", new MyColumn("cardbrandname", "检测卡品牌") { BShow = false, Width = 13 });
             }
             else//其他检测
             {
                 MyColumns.Add("sensitivityname", new MyColumn("sensitivityname", "检测灵敏度") { BShow = true, Width = 10 });
                 MyColumns.Add("objectname", new MyColumn("objectname", "检测对象") { BShow = true, Width = 8 });
                 MyColumns.Add("companyname", new MyColumn("companyname", "被检单位") { BShow = true, Width = 16 });
-                MyColumns.Add("cardbrandname", new MyColumn("cardbrandname", "检测用卡") { BShow = true, Width = 13 });
+                MyColumns.Add("cardbrandname", new MyColumn("cardbrandname", "检测卡品牌") { BShow = true, Width = 13 });
             }
             MyColumns.Add("areaname", new MyColumn("areaname", "来源产地") { BShow = false });
             MyColumns.Add("sum_num", new MyColumn("sum_num", "总行数") { BShow = false });

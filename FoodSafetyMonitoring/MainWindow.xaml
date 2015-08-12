@@ -100,7 +100,7 @@
             </Grid.ColumnDefinitions>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,5,0">
                 <Image x:Name="_logo" Source="/res/title_logo.png" Margin="20,0,0,0" Width="40" Height="40" HorizontalAlignment="Left"/>
-                <TextBlock x:Name="_title_dept" FontFamily="微软雅黑" FontSize="22" FontWeight="400" HorizontalAlignment="Left" VerticalAlignment="Center"  Foreground="#003e8c" Margin="8,0,0,0"></TextBlock>
+                <TextBlock x:Name="_title_dept" FontFamily="微软雅黑" FontSize="22" FontWeight="400" HorizontalAlignment="Left" VerticalAlignment="Center"  Foreground="#003e8c" Margin="8,0,0,0">湖北省畜产品质量安全</TextBlock>
                 <TextBlock  FontFamily="微软雅黑" FontSize="22" FontWeight="400" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="#003e8c">检测监管系统</TextBlock>
             </StackPanel>
             <Thumb Grid.Column="1" DragDelta="Thumb_DragDelta" Background="White" Opacity="0"></Thumb>

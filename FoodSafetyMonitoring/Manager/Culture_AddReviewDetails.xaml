@@ -68,7 +68,7 @@
                 <TextBlock  Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="6" Name="_sensitivityName"  FontFamily="黑体" FontSize="14" VerticalAlignment="Center"></TextBlock>
                 <TextBlock  Grid.Column="0" Grid.Row="7" HorizontalAlignment="Right" VerticalAlignment="Center">检测结果:</TextBlock>
                 <TextBlock  Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="7" Name="_resultName" FontFamily="黑体" FontSize="14" VerticalAlignment="Center"></TextBlock>
-                <TextBlock  Grid.Column="0" Grid.Row="8" HorizontalAlignment="Right" VerticalAlignment="Center">检测用卡:</TextBlock>
+                <TextBlock  Grid.Column="0" Grid.Row="8" HorizontalAlignment="Right" VerticalAlignment="Center">检测卡品牌:</TextBlock>
                 <TextBlock  Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="8" Name="_cardbrand" FontFamily="黑体" FontSize="14" VerticalAlignment="Center"></TextBlock>
                 <TextBlock  Grid.Column="0" Grid.Row="9" HorizontalAlignment="Right" VerticalAlignment="Center">检测出时间:</TextBlock>
                 <TextBlock  Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="9" Name="_detectDate"  FontFamily="黑体" FontSize="14" VerticalAlignment="Center"></TextBlock>

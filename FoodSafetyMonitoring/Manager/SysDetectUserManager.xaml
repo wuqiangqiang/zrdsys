@@ -57,7 +57,7 @@
                             <ComboBox x:Name="_detect_station" Width="240"/>
                             <TextBlock MinWidth="30">检测师:</TextBlock>
                             <ComboBox Width="100" x:Name="_detect_person1" />
-                            <Button Name="_query" Width="120" Height="32" Style="{StaticResource SelectImageButtonTemplate}" Click="_query_Click" Margin="150,0,0,0" />
+                            <Button Name="_query" Width="120" Height="32" Style="{StaticResource SelectImageButtonTemplate}" Click="_query_Click" Margin="100,0,0,0" />
                         </StackPanel>
                     </Grid>
                 </Grid>
@@ -79,7 +79,9 @@
                     </Grid.Background>
                     <StackPanel>
                         <TextBlock Margin="40,0,0,0" VerticalAlignment="Center">查询结果</TextBlock>
-                        <TextBlock x:Name="_title" Margin="20,0,0,0" VerticalAlignment="Center"></TextBlock>
+                        <TextBlock x:Name="_hj" Margin="20,0,0,0" VerticalAlignment="Center" Visibility="Hidden">合计</TextBlock>
+                        <TextBlock x:Name="_title" Margin="10,0,10,0" VerticalAlignment="Center" MinWidth="10" Foreground="#1956a2" FontWeight="Bold"></TextBlock>
+                        <TextBlock x:Name="_sj" Margin="0,0,0,0" VerticalAlignment="Center" Visibility="Hidden">条数据</TextBlock>
                     </StackPanel>
                 </Grid>
                 <Grid Grid.Column="1">

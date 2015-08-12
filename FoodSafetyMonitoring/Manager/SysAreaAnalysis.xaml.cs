@@ -83,19 +83,19 @@ namespace FoodSafetyMonitoring.Manager
                 case "检测样本来源产地分布(全国)分析": table.Columns[0].ColumnName = "来源省市";
                                                        table.Columns[1].ColumnName = "检测数量"; 
                                                        break;
-                case "检测样本来源产地分布(省内)分析": table.Columns[0].ColumnName = "省内来源市州";
+                case "检测样本来源产地分布(省内)分析": table.Columns[0].ColumnName = "省内来源市(州)";
                                                        table.Columns[1].ColumnName = "检测数量";
                                                        break;
                 case "阳性样本检出来源产地分布(全国)分析": table.Columns[0].ColumnName = "来源省市";
                                                            table.Columns[1].ColumnName = "阳性检出数量";
                                                            break;
-                case "阳性样本检出来源产地分布(省内)分析": table.Columns[0].ColumnName = "省内来源市州";
+                case "阳性样本检出来源产地分布(省内)分析": table.Columns[0].ColumnName = "省内来源市(州)";
                                                            table.Columns[1].ColumnName = "阳性检出数量";
                                                            break;
                 case "疑似阳性样本检出来源产地分布(全国)分析": table.Columns[0].ColumnName = "来源省市";
                                                            table.Columns[1].ColumnName = "疑似阳性检出数量";
                                                            break;
-                case "疑似阳性样本检出来源产地分布(省内)分析": table.Columns[0].ColumnName = "省内来源市州";
+                case "疑似阳性样本检出来源产地分布(省内)分析": table.Columns[0].ColumnName = "省内来源市(州)";
                                                            table.Columns[1].ColumnName = "疑似阳性检出数量";
                                                            break;
                 default: break;
@@ -157,9 +157,18 @@ namespace FoodSafetyMonitoring.Manager
             //string table_title = "数据统计时间:" + dtpStartDate.Value.Value.Year + "年" + dtpStartDate.Value.Value.Month + "月" + dtpStartDate.Value.Value.Day + "日到" + dtpEndDate.Value.Value.Year + "年" + dtpEndDate.Value.Value.Month + "月" + dtpEndDate.Value.Value.Day + "日" + "  合计" + row_count + "条数据";
 
             _title.Text = _analysis_theme.Text;
-            _title_1.Text = string.Format("合计{0}条数据", row_count);
             _title_2.Text = _analysis_theme.Text;
             _tableview.SetDataTable(table, "", new List<int>());
+
+            _sj.Visibility = Visibility.Visible;
+            _hj.Visibility = Visibility.Visible;
+            _title_1.Text = row_count.ToString();
+
+            if (row_count == 0)
+            {
+                Toolkit.MessageBox.Show("没有查询到数据！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
 
         }
 

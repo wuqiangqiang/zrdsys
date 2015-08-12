@@ -57,7 +57,7 @@
                             <toolkit:DatePicker x:Name="dtpEndDate" VerticalAlignment="Center" />-->
                             <TextBlock MinWidth="50">来源产地:</TextBlock>
                             <ComboBox x:Name="_province" Width="120" Text="省" Margin="0,0,5,0"></ComboBox>
-                            <ComboBox x:Name="_city" Width="120" Text="市州" Margin="0,0,5,0"></ComboBox>
+                            <ComboBox x:Name="_city" Width="120" Text="市(州)" Margin="0,0,5,0"></ComboBox>
                             <ComboBox x:Name="_region" Width="120" Text="区县"></ComboBox>
                             <TextBlock MinWidth="50">被检单位:</TextBlock>
                             <ComboBox x:Name="_source_company" Width="240"></ComboBox>
@@ -112,7 +112,7 @@
                                 <GridViewColumn Width="160" Header="被检单位" DisplayMemberBinding="{Binding COMPANYNAME}" ></GridViewColumn>
                                 <GridViewColumn Width="110" Header="出证检测批次编码" DisplayMemberBinding="{Binding batchno}" ></GridViewColumn>
                                 <GridViewColumn Width="150" Header="出证审核状态"  DisplayMemberBinding="{Binding sh_ok}" ></GridViewColumn>
-                                <GridViewColumn Width="110" Header="出证检测单详情">
+                                <GridViewColumn Width="110" Header="检测信息详情">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
                                             <Button Content=">>" x:Name="_btn_details" Width="60" Tag="{Binding batchno}" Click="_btn_details_Click"></Button>

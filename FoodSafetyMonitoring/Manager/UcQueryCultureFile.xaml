@@ -59,7 +59,7 @@
                             <TextBlock MinWidth="50">建档人:</TextBlock>
                             <ComboBox Width="130" x:Name="_file_cuserid" />
                             <TextBlock MinWidth="30">圈舍号:</TextBlock>
-                            <ComboBox Width="130" x:Name="_colony_no"/>
+                            <ComboBox Width="140" x:Name="_colony_no"/>
                         </StackPanel>
                     </Grid>
                     <Grid Grid.Row="1">
@@ -90,7 +90,9 @@
                     </Grid.Background>
                     <StackPanel>
                         <TextBlock Margin="40,0,0,0" VerticalAlignment="Center">查询结果</TextBlock>
-                        <TextBlock x:Name="_title" Margin="20,0,0,0" VerticalAlignment="Center"></TextBlock>
+                        <TextBlock x:Name="_hj" Margin="20,0,0,0" VerticalAlignment="Center" Visibility="Hidden">合计</TextBlock>
+                        <TextBlock x:Name="_title" Margin="10,0,10,0" VerticalAlignment="Center" MinWidth="10" Foreground="#1956a2" FontWeight="Bold"></TextBlock>
+                        <TextBlock x:Name="_sj" Margin="0,0,0,0" VerticalAlignment="Center" Visibility="Hidden">条数据</TextBlock>
                     </StackPanel>
                 </Grid>
                 <Grid Grid.Column="1">

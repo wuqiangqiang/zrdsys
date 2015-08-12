@@ -53,7 +53,7 @@
                         <TextBlock HorizontalAlignment="Right" Width="60">被检单位:</TextBlock>
                         <ComboBox Width="200" x:Name="_source_company" IsEnabled="False"></ComboBox>
                         <TextBlock Width="70" >批次头数:</TextBlock>
-                        <TextBox Width="140" Margin="0" x:Name="_object_count" IsEnabled="False" MaxLength="5" TextAlignment="Right" InputMethod.IsInputMethodEnabled="False" DataObject.Pasting="Object_Count_Pasting" PreviewKeyDown="Object_Count_PreviewKeyDown"  PreviewTextInput="Object_Count_PreviewTextInput"></TextBox>
+                        <TextBox Width="140" Margin="0" x:Name="_object_count" IsEnabled="False" MaxLength="5"  InputMethod.IsInputMethodEnabled="False" DataObject.Pasting="Object_Count_Pasting" PreviewKeyDown="Object_Count_PreviewKeyDown"  PreviewTextInput="Object_Count_PreviewTextInput"></TextBox>
                         <TextBlock Width="70" >耳标号:</TextBlock>
                         <TextBox Width="170" Margin="0" x:Name="_object_label" MaxLength="15" InputMethod.IsInputMethodEnabled="False" DataObject.Pasting="Object_Lable_Pasting" PreviewKeyDown="Object_Lable_PreviewKeyDown"  PreviewTextInput="Object_Lable_PreviewTextInput"></TextBox>
                     </StackPanel>
@@ -83,7 +83,7 @@
                             <ComboBoxItem Height="30" VerticalContentAlignment="Center">有</ComboBoxItem>
                             <ComboBoxItem Height="30" VerticalContentAlignment="Center">无</ComboBoxItem>-->
                         </ComboBox>
-                        <!--<TextBlock  Width="70">检测用卡:</TextBlock>
+                        <!--<TextBlock  Width="70">检测卡品牌:</TextBlock>
                         <ComboBox  x:Name="_card_brand" Margin="0,0,0,0" Width="170" ></ComboBox>-->
                     </StackPanel>
                 </Grid>

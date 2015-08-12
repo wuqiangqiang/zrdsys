@@ -57,7 +57,7 @@
                             <toolkit:DatePicker x:Name="dtpEndDate" VerticalAlignment="Center" />
                             <TextBlock MinWidth="50">来源产地:</TextBlock>
                             <ComboBox x:Name="_province1" Width="120" Text="省" Margin="0,0,5,0"></ComboBox>
-                            <ComboBox x:Name="_city1" Width="120" Text="市州" Margin="0,0,5,0"></ComboBox>
+                            <ComboBox x:Name="_city1" Width="120" Text="市(州)" Margin="0,0,5,0"></ComboBox>
                             <ComboBox x:Name="_region1" Width="120" Text="区县"></ComboBox>
                             <TextBlock MinWidth="50">被检单位:</TextBlock>
                             <ComboBox x:Name="_source_company1" Width="240"></ComboBox>
@@ -89,7 +89,7 @@
                             </ComboBox>
                             <TextBlock MinWidth="40">数据来源:</TextBlock>
                             <ComboBox Width="120" x:Name="_detect_type" />
-                            <!--<TextBlock MinWidth="50" >检测用卡:</TextBlock>
+                            <!--<TextBlock MinWidth="50" >检测卡品牌:</TextBlock>
                             <ComboBox Width="170" x:Name="_card_brand" />-->
 
                             <Button Name="_query" Width="120" Height="32" Style="{StaticResource SelectImageButtonTemplate}" Click="_query_Click" Margin="290,0,0,0" />
@@ -115,7 +115,9 @@
                     </Grid.Background>
                     <StackPanel>
                         <TextBlock Margin="40,0,0,0" VerticalAlignment="Center">查询结果</TextBlock>
-                        <TextBlock x:Name="_title" Margin="20,0,0,0" VerticalAlignment="Center"></TextBlock>
+                        <TextBlock x:Name="_hj" Margin="20,0,0,0" VerticalAlignment="Center" Visibility="Hidden">合计</TextBlock>
+                        <TextBlock x:Name="_title" Margin="10,0,10,0" VerticalAlignment="Center" MinWidth="10" Foreground="#1956a2" FontWeight="Bold"></TextBlock>
+                        <TextBlock x:Name="_sj" Margin="0,0,0,0" VerticalAlignment="Center" Visibility="Hidden">条数据</TextBlock>
                     </StackPanel>
                 </Grid>
                 <Grid Grid.Column="1">

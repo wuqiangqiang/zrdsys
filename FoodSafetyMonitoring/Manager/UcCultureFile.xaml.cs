@@ -15,6 +15,8 @@ using FoodSafetyMonitoring.dao;
 using FoodSafetyMonitoring.Manager.UserControls;
 using FoodSafetyMonitoring.Common;
 using Toolkit = Microsoft.Windows.Controls;
+using System.Data;
+using System.IO;
 
 namespace FoodSafetyMonitoring.Manager
 {
@@ -32,7 +34,7 @@ namespace FoodSafetyMonitoring.Manager
             this.dbOperation = dbOperation;
             InitializeComponent();
             //画面初始化：养殖品种、建档时间、建档人、养殖企业
-            ComboboxTool.InitComboboxSource(_object_type, "SELECT ObjectTypeId,ObjectTypeName FROM t_culture_type where OpenFlag = '1'", "lr");
+            ComboboxTool.InitComboboxSource(_object_type, "SELECT ObjectTypeId,ObjectTypeName FROM t_culture_type where OpenFlag = '1'");
             _file_datetime.Text = string.Format("{0:g}", System.DateTime.Now);
             _file_person.Text = (Application.Current.Resources["User"] as UserInfo).ShowName;
             _culture_company.Text = dbOperation.GetDbHelper().GetSingle("SELECT INFO_NAME from sys_client_sysdept WHERE INFO_CODE = " + (Application.Current.Resources["User"] as UserInfo).DepartmentID).ToString();

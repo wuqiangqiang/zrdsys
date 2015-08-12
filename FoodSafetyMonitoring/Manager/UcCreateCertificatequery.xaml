@@ -57,7 +57,7 @@
                             <toolkit:DatePicker x:Name="dtpEndDate" VerticalAlignment="Center" />
                             <TextBlock MinWidth="50">来源产地:</TextBlock>
                             <ComboBox x:Name="_province" Width="120" Text="省" Margin="0,0,5,0"></ComboBox>
-                            <ComboBox x:Name="_city" Width="120" Text="市州" Margin="0,0,5,0"></ComboBox>
+                            <ComboBox x:Name="_city" Width="120" Text="市(州)" Margin="0,0,5,0"></ComboBox>
                             <ComboBox x:Name="_region" Width="120" Text="区县"></ComboBox>
                             <TextBlock MinWidth="50">被检单位:</TextBlock>
                             <ComboBox x:Name="_source_company" Width="240"></ComboBox>
@@ -123,7 +123,7 @@
                                 <GridViewColumn Width="130" Header="来源产地" DisplayMemberBinding="{Binding areaname}" ></GridViewColumn>
                                 <GridViewColumn Width="120" Header="被检单位" DisplayMemberBinding="{Binding COMPANYNAME}" ></GridViewColumn>
                                 <GridViewColumn Width="110" Header="出证检测批次编码" DisplayMemberBinding="{Binding batchno}" ></GridViewColumn>
-                                <GridViewColumn Width="110" Header="出证检测单详情">
+                                <GridViewColumn Width="110" Header="检测信息详情">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
                                             <Button Content=">>" x:Name="_btn_details" Width="60" Tag="{Binding batchno}" Click="_btn_details_Click"></Button>
@@ -131,7 +131,7 @@
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
                                 <GridViewColumn Width="100" Header="出证状态"   DisplayMemberBinding="{Binding cz_ok}"></GridViewColumn>
-                                <GridViewColumn Width="80" Header="电子证详情">
+                                <GridViewColumn Width="80" Header="检疫证详情">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
                                             <Button Content="电子证" x:Name="_btn_card" Width="60" Tag="{Binding CARDID}" Click="_btn_card_Click"></Button>

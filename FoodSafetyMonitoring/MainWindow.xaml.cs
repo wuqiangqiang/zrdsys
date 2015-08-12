@@ -110,7 +110,7 @@ namespace FoodSafetyMonitoring
                 this._bottom.Text = table.Rows[0][0].ToString() + "    版本号：" + ConfigurationManager.AppSettings["version"] + "    技术服务热线：" + table.Rows[0][1].ToString();
 
                 DataTable dt = dbOperation.GetDbHelper().GetDataSet(string.Format("SELECT INFO_NAME,image from sys_client_sysdept where INFO_CODE ='{0}'", (Application.Current.Resources["User"] as UserInfo).DepartmentID)).Tables[0];
-                this._title_dept.Text = dt.Rows[0][0].ToString();
+                //this._title_dept.Text = dt.Rows[0][0].ToString();
                 if (dt.Rows[0][1].ToString() != null && dt.Rows[0][1].ToString() != "")
                 {
                     byte[] img = (byte[])dt.Rows[0][1];

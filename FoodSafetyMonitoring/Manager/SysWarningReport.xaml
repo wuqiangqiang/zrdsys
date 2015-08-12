@@ -89,7 +89,9 @@
                     </Grid.Background>
                     <StackPanel>
                         <TextBlock Margin="40,0,0,0" VerticalAlignment="Center">查询结果</TextBlock>
-                        <TextBlock x:Name="_title" Margin="20,0,0,0" VerticalAlignment="Center"></TextBlock>
+                        <TextBlock x:Name="_hj" Margin="20,0,0,0" VerticalAlignment="Center" Visibility="Hidden">合计</TextBlock>
+                        <TextBlock x:Name="_title" Margin="10,0,10,0" VerticalAlignment="Center" MinWidth="10" Foreground="#1956a2" FontWeight="Bold"></TextBlock>
+                        <TextBlock x:Name="_sj" Margin="0,0,0,0" VerticalAlignment="Center" Visibility="Hidden">条数据</TextBlock>
                     </StackPanel>
                 </Grid>
                 <Grid Grid.Column="1">

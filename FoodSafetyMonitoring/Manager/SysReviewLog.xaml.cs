@@ -69,8 +69,16 @@ namespace FoodSafetyMonitoring.Manager
             GetData();
             //_tableview.Title = string.Format("数据统计时间:{0}年{1}月{2}日到{3}年{4}月{5}日  合计{6}条数据", reportDate_kssj.Value.Value.Year, reportDate_kssj.Value.Value.Month, reportDate_kssj.Value.Value.Day,
             //              reportDate_jssj.Value.Value.Year, reportDate_jssj.Value.Value.Month, reportDate_jssj.Value.Value.Day, _tableview.RowTotal);
-            _title.Text = string.Format("合计{0}条数据", _tableview.RowTotal);
+            _sj.Visibility = Visibility.Visible;
+            _hj.Visibility = Visibility.Visible;
+            _title.Text = _tableview.RowTotal.ToString();
             _tableview.PageIndex = 1;
+
+            if (_tableview.RowTotal == 0)
+            {
+                Toolkit.MessageBox.Show("没有查询到数据！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
         }
 
         private void GetData()

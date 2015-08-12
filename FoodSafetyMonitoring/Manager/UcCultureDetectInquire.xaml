@@ -55,10 +55,10 @@
                             <TextBlock xml:space="preserve" MinWidth="10" Margin="5,0,5,0">至</TextBlock>
                             <toolkit:DatePicker x:Name="dtpEndDate" VerticalAlignment="Center" />
                             <TextBlock MinWidth="50">养殖企业名称:</TextBlock>
-                            <ComboBox x:Name="_culture_company" Width="260"></ComboBox>
+                            <ComboBox x:Name="_culture_company" Width="240"></ComboBox>
                             <TextBlock Width="50">检测师:</TextBlock>
                             <ComboBox Width="110" x:Name="_detect_person1"/>
-                            <TextBlock Width="50">检测项目:</TextBlock>
+                            <TextBlock Width="70">检测项目:</TextBlock>
                             <ComboBox Width="130" x:Name="_detect_item1" />
                         </StackPanel>
                     </Grid>
@@ -67,10 +67,10 @@
                             <TextBlock MinWidth="50">检测对象:</TextBlock>
                             <ComboBox Width="262" x:Name="_detect_object1" />
                             <TextBlock Width="75">检测方法:</TextBlock>
-                            <ComboBox Width="260" x:Name="_detect_method" />
+                            <ComboBox Width="240" x:Name="_detect_method" />
                             <TextBlock Width="50">检测结果:</TextBlock>
                             <ComboBox Width="110" x:Name="_detect_result1"/>
-                            <TextBlock Width="50">检测用卡:</TextBlock>
+                            <TextBlock Width="70">检测卡品牌:</TextBlock>
                             <ComboBox Width="130" x:Name="_card_brand" />
                             
                         </StackPanel>
@@ -102,7 +102,9 @@
                     </Grid.Background>
                     <StackPanel>
                         <TextBlock Margin="40,0,0,0" VerticalAlignment="Center">查询结果</TextBlock>
-                        <TextBlock x:Name="_title" Margin="20,0,0,0" VerticalAlignment="Center"></TextBlock>
+                        <TextBlock x:Name="_hj" Margin="20,0,0,0" VerticalAlignment="Center" Visibility="Hidden">合计</TextBlock>
+                        <TextBlock x:Name="_title" Margin="10,0,10,0" VerticalAlignment="Center" MinWidth="10" Foreground="#1956a2" FontWeight="Bold"></TextBlock>
+                        <TextBlock x:Name="_sj" Margin="0,0,0,0" VerticalAlignment="Center" Visibility="Hidden">条数据</TextBlock>
                     </StackPanel>
                 </Grid>
                 <Grid Grid.Column="1">

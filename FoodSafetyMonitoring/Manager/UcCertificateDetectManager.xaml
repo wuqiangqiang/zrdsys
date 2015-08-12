@@ -63,10 +63,10 @@ xmlns:control="clr-namespace:FoodSafetyMonitoring.Manager.UserControls">
                 <Grid Grid.Row="3">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock  Width="80">批次编码:</TextBlock>
-                        <TextBlock  x:Name="_batch_number" Width="280" Margin="0,0,0,0"></TextBlock>
+                        <TextBox  x:Name="_batch_number" Width="280" Margin="0,0,0,0"  IsEnabled="False"></TextBox>
                         <Button Margin="13,0,0,0" Content="获取批次编码" Width="110" Name="btnGo"   VerticalAlignment="Center" Click="btnget_Click" />
                         <TextBlock  Width="80" Margin="26,0,10,0">批次头数:</TextBlock>
-                        <TextBox Width="140" Margin="0" x:Name="_object_count" MaxLength="5" TextAlignment="Right" InputMethod.IsInputMethodEnabled="False" DataObject.Pasting="Object_Count_Pasting" PreviewKeyDown="Object_Count_PreviewKeyDown"  PreviewTextInput="Object_Count_PreviewTextInput"></TextBox>
+                        <TextBox Width="140" Margin="0" x:Name="_object_count" MaxLength="5" InputMethod.IsInputMethodEnabled="False" DataObject.Pasting="Object_Count_Pasting" PreviewKeyDown="Object_Count_PreviewKeyDown"  PreviewTextInput="Object_Count_PreviewTextInput"></TextBox>
                     </StackPanel>
                 </Grid>
                 <Grid Grid.Row="4">
@@ -94,7 +94,7 @@ xmlns:control="clr-namespace:FoodSafetyMonitoring.Manager.UserControls">
                     <StackPanel >
                         <TextBlock Width="80" >检测结果:</TextBlock>
                         <ComboBox  Width="170" x:Name="_detect_result"></ComboBox>
-                        <TextBlock  Width="80">检测用卡:</TextBlock>
+                        <TextBlock  Width="80">检测卡品牌:</TextBlock>
                         <ComboBox  x:Name="_card_brand" Margin="0,0,0,0" Width="130" ></ComboBox>
                     </StackPanel>
                 </Grid>

@@ -40,7 +40,7 @@
                 <Grid Grid.Row="2">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Width="80" >圈舍养殖数量:</TextBlock>
-                        <TextBox Width="175" x:Name="_object_sum" MaxLength="5" TextAlignment="Right" InputMethod.IsInputMethodEnabled="False" DataObject.Pasting="Object_Sum_Pasting" PreviewKeyDown="Object_Sum_PreviewKeyDown"  PreviewTextInput="Object_Sum_PreviewTextInput" TextChanged="_object_sum_TextChanged"></TextBox>
+                        <TextBox Width="175" x:Name="_object_sum" MaxLength="5" InputMethod.IsInputMethodEnabled="False" DataObject.Pasting="Object_Sum_Pasting" PreviewKeyDown="Object_Sum_PreviewKeyDown"  PreviewTextInput="Object_Sum_PreviewTextInput" TextChanged="_object_sum_TextChanged"></TextBox>
                         <TextBlock Width="80" >档案编号:</TextBlock>
                         <TextBlock Width="120" x:Name="_file_num" Margin="5,0,0,0"></TextBlock>
                         <TextBlock > -</TextBlock>

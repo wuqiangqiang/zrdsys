@@ -57,7 +57,7 @@
                 <Grid Grid.Row="3">
                     <StackPanel >
                         <TextBlock Width="80" >批次头数:</TextBlock>
-                        <TextBox Width="120" Margin="0" x:Name="_object_count" MaxLength="5" TextAlignment="Right" InputMethod.IsInputMethodEnabled="False" DataObject.Pasting="Object_Count_Pasting" PreviewKeyDown="Object_Count_PreviewKeyDown"  PreviewTextInput="Object_Count_PreviewTextInput"></TextBox>
+                        <TextBox Width="120" Margin="0" x:Name="_object_count" MaxLength="5" InputMethod.IsInputMethodEnabled="False" DataObject.Pasting="Object_Count_Pasting" PreviewKeyDown="Object_Count_PreviewKeyDown"  PreviewTextInput="Object_Count_PreviewTextInput"></TextBox>
                         <TextBlock Width="60" >耳标号:</TextBlock>
                         <TextBox Width="100" Margin="0" x:Name="_object_label" MaxLength="15" InputMethod.IsInputMethodEnabled="False" DataObject.Pasting="Object_Lable_Pasting" PreviewKeyDown="Object_Lable_PreviewKeyDown"  PreviewTextInput="Object_Lable_PreviewTextInput"></TextBox>
                         <TextBlock  Width="70">检测方法:</TextBlock>
@@ -83,7 +83,7 @@
                         <ComboBox  Width="120" x:Name="_detect_sensitivity" Margin="0,0,0,0"></ComboBox>
                         <TextBlock Width="60">检测结果:</TextBlock>
                         <ComboBox  Width="100" x:Name="_detect_result"></ComboBox>
-                        <TextBlock  Width="75">检测用卡:</TextBlock>
+                        <TextBlock  Width="75">检测卡品牌:</TextBlock>
                         <ComboBox  x:Name="_card_brand" Margin="0,0,0,0" Width="280" ></ComboBox>
                     </StackPanel>
                 </Grid>

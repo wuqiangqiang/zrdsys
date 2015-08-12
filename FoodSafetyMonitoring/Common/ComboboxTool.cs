@@ -14,6 +14,41 @@ namespace FoodSafetyMonitoring.Common
         /// </summary>
         /// <param name="cmb">Combobox</param>
         /// <param name="strSql">sql语句</param>
+        /// 
+        //20150812养殖档案录入画面养殖品种下拉不想出现请选择
+        public static void InitComboboxSource(ComboBox cmb, string strSql)
+        {
+            try
+            {
+                DBUtility.DbHelperMySQL dbHelper = DBUtility.DbHelperMySQL.CreateDbHelper();
+                DataTable dt = dbHelper.GetDataSet(strSql).Tables[0];
+                if (cmb != null)
+                {
+                    if (cmb.Items.Count > 0)
+                    {
+                        cmb.Items.Clear();
+                    }
+                }
+                if (dt != null)
+                {
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        string strValue = dt.Rows[i][0].ToString();//隐藏值
+                        string strItem = dt.Rows[i][1].ToString();//显示值
+                        Label item1 = new Label();
+                        item1.Tag = strValue;
+                        item1.Content = strItem;
+                        cmb.Items.Add(item1);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                return;
+            }
+        }
+
+
         public static void InitComboboxSource(ComboBox cmb, string strSql ,string type)
         {
             try

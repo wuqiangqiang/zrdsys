@@ -84,7 +84,7 @@
                 </Grid>
                 <Grid Grid.Row="5">
                     <StackPanel >
-                        <TextBlock  Width="80">检测用卡:</TextBlock>
+                        <TextBlock  Width="80">检测卡品牌:</TextBlock>
                         <ComboBox  x:Name="_card_brand" Margin="5,0,0,0" Width="130" ></ComboBox>
                     </StackPanel>
                 </Grid>

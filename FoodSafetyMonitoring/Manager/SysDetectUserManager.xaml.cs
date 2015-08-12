@@ -45,8 +45,8 @@ namespace FoodSafetyMonitoring.Manager
                 case "0": _dept_name.Text = "选择省:";
                     dept_name = "省名称";
                     break;
-                case "1": _dept_name.Text = "选择市州:";
-                    dept_name = "市州名称";
+                case "1": _dept_name.Text = "选择市(州):";
+                    dept_name = "市(州)名称";
                     break;
                 case "2": _dept_name.Text = "选择区县:";
                     dept_name = "区县名称";
@@ -104,8 +104,17 @@ namespace FoodSafetyMonitoring.Manager
             }
             _tableview.GetDataByPageNumberEvent += new UcTableOperableView_NoTitle.GetDataByPageNumberEventHandler(_tableview_GetDataByPageNumberEvent);
             GetData();
-            _title.Text = string.Format("合计{0}条数据", _tableview.RowTotal);
+
+            _sj.Visibility = Visibility.Visible;
+            _hj.Visibility = Visibility.Visible;
+            _title.Text = _tableview.RowTotal.ToString();
             _tableview.PageIndex = 1;
+
+            if (_tableview.RowTotal == 0)
+            {
+                Toolkit.MessageBox.Show("没有查询到数据！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
         }
 
         private void GetData()

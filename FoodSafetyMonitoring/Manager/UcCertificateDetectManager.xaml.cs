@@ -140,7 +140,7 @@ namespace FoodSafetyMonitoring.Manager
             }
             else if (_card_brand.SelectedIndex < 1)
             {
-                msg = "*请选择检测用卡";
+                msg = "*请选择检测卡品牌";
             }
             else
             {

@@ -15,6 +15,7 @@ using FoodSafetyMonitoring.dao;
 using FoodSafetyMonitoring.Common;
 using System.Data;
 using FoodSafetyMonitoring.Manager.UserControls;
+using Toolkit = Microsoft.Windows.Controls;
 
 namespace FoodSafetyMonitoring.Manager
 {
@@ -60,7 +61,7 @@ namespace FoodSafetyMonitoring.Manager
             {
                 case "0": _dept_name.Text = "选择省:";
                     break;
-                case "1": _dept_name.Text = "选择市州:";
+                case "1": _dept_name.Text = "选择市(州):";
                     break;
                 case "2": _dept_name.Text = "选择区县:";
                     break;
@@ -159,7 +160,7 @@ namespace FoodSafetyMonitoring.Manager
             {
                 case "0": tabledisplay.Columns.Add(new DataColumn("省名称"));
                     break;
-                case "1": tabledisplay.Columns.Add(new DataColumn("市州名称"));
+                case "1": tabledisplay.Columns.Add(new DataColumn("市(州)名称"));
                     break;
                 case "2": tabledisplay.Columns.Add(new DataColumn("区县名称"));
                     break;
@@ -236,8 +237,16 @@ namespace FoodSafetyMonitoring.Manager
             string title = "";
             //title = string.Format("{0}年  检测数据年报表（单位：份次） 合计{1}条数据", _year.Text, row_count);
             _tableview.BShowDetails = true;
-            _title.Text = string.Format("合计{0}条数据", row_count);
             _tableview.SetDataTable(tabledisplay, title, new List<int>());
+            _sj.Visibility = Visibility.Visible;
+            _hj.Visibility = Visibility.Visible;
+            _title.Text = row_count.ToString();
+
+            if (row_count == 0)
+            {
+                Toolkit.MessageBox.Show("没有查询到数据！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
 
         }
 

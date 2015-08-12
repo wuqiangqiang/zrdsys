@@ -13,7 +13,6 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using FoodSafetyMonitoring.dao;
 using System.Data;
-
 using Toolkit = Microsoft.Windows.Controls;
 using Visifire.Charts;
 
@@ -169,9 +168,18 @@ namespace FoodSafetyMonitoring.Manager
             }
 
             _title.Text = _analysis_theme.Text;
-            _title_1.Text = string.Format("合计{0}条数据", row_count);
             _title_2.Text = _analysis_theme.Text;
             _tableview.SetDataTable(table, "", new List<int>());
+
+            _sj.Visibility = Visibility.Visible;
+            _hj.Visibility = Visibility.Visible;
+            _title_1.Text = row_count.ToString();
+
+            if (row_count == 0)
+            {
+                Toolkit.MessageBox.Show("没有查询到数据！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
 
             _chart.Children.Clear(); 
             chart = new Chart();

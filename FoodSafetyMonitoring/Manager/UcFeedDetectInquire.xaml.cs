@@ -72,8 +72,8 @@ namespace FoodSafetyMonitoring.Manager
             MyColumns.Add("itemname", new MyColumn("itemname", "检测项目") { BShow = true, Width = 12 });
             //MyColumns.Add("objectid", new MyColumn("objectid", "检测对象id") { BShow = false });
             //MyColumns.Add("objectname", new MyColumn("objectname", "检测对象") { BShow = false, Width = 10 });
-            MyColumns.Add("cardbrandid", new MyColumn("cardbrandid", "检测用卡id") { BShow = false });
-            MyColumns.Add("cardbrandname", new MyColumn("cardbrandname", "检测用卡") { BShow = true, Width = 12 });
+            MyColumns.Add("cardbrandid", new MyColumn("cardbrandid", "检测卡品牌id") { BShow = false });
+            MyColumns.Add("cardbrandname", new MyColumn("cardbrandname", "检测卡品牌") { BShow = true, Width = 12 });
             MyColumns.Add("sampleid", new MyColumn("sampleid", "检测样本id") { BShow = false });
             MyColumns.Add("samplename", new MyColumn("samplename", "检测样本") { BShow = true, Width = 10 });
             MyColumns.Add("sensitivityid", new MyColumn("sensitivityid", "检测灵敏度id") { BShow = false });
@@ -164,8 +164,16 @@ namespace FoodSafetyMonitoring.Manager
             GetData();
             //_tableview.Title = string.Format("数据统计时间:{0}年{1}月{2}日到{3}年{4}月{5}日 合计{6}条数据", dtpStartDate.SelectedDate.Value.Year, dtpStartDate.SelectedDate.Value.Month, dtpStartDate.SelectedDate.Value.Day,
             //              dtpEndDate.SelectedDate.Value.Year, dtpEndDate.SelectedDate.Value.Month, dtpEndDate.SelectedDate.Value.Day, _tableview.RowTotal);
-            _title.Text = string.Format("合计{0}条数据", _tableview.RowTotal);
+            _sj.Visibility = Visibility.Visible;
+            _hj.Visibility = Visibility.Visible;
+            _title.Text = _tableview.RowTotal.ToString();
             _tableview.PageIndex = 1;
+
+            if (_tableview.RowTotal == 0)
+            {
+                Toolkit.MessageBox.Show("没有查询到数据！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
         }
 
         private void GetData()

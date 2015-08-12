@@ -54,6 +54,16 @@ namespace FoodSafetyMonitoring.Manager
                 dbHelper = DBUtility.DbHelperMySQL.CreateDbHelper();
                 lvlist.DataContext = dbHelper.GetDataSet(sbSql.ToString()).Tables[0];
                 currentTable = dbHelper.GetDataSet(sbSql.ToString()).Tables[0];
+
+                _sj.Visibility = Visibility.Visible;
+                _hj.Visibility = Visibility.Visible;
+                _title.Text = currentTable.Rows.Count.ToString();
+
+                if (currentTable.Rows.Count == 0)
+                {
+                    Toolkit.MessageBox.Show("没有查询到数据！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                    return;
+                }
             }
             catch (Exception)
             {
