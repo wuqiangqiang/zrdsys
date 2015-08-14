@@ -107,6 +107,29 @@ namespace FoodSafetyMonitoring
             }
         }
 
+        //设置按钮
+        //private void set_MouseDown(object sender, MouseButtonEventArgs e)
+        //{
+        //    if (e.LeftButton == MouseButtonState.Pressed)
+        //    {
+        //        this._title_txt_1.Visibility = Visibility.Visible;
+        //        this._title_txt_2.Visibility = Visibility.Visible;
+        //        this._title_1.Visibility = Visibility.Hidden;
+        //        this._title_2.Visibility = Visibility.Hidden;
+        //    }
+        //}
+
+        //private void set_MouseEnter(object sender, MouseEventArgs e)
+        //{
+        //    set.Source = new BitmapImage(new Uri("pack://application:,," + "/res/set_click.png"));
+        //}
+
+        //private void set_MouseLeave(object sender, MouseEventArgs e)
+        //{
+        //    set.Source = new BitmapImage(new Uri("pack://application:,," + "/res/set.png"));
+        //}
+
+
         //鼠标点击最小化按钮时触发
         private void min_MouseDown(object sender, MouseButtonEventArgs e)
         {

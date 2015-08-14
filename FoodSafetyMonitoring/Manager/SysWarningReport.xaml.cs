@@ -69,7 +69,7 @@ namespace FoodSafetyMonitoring.Manager
             table_detect_type.Rows.Add(new object[] { "0", "养殖检测" });
             table_detect_type.Rows.Add(new object[] { "1", "出证检测" });
             table_detect_type.Rows.Add(new object[] { "4", "宰前检测" });
-            table_detect_type.Rows.Add(new object[] { "2", "屠宰同步检测" });
+            table_detect_type.Rows.Add(new object[] { "2", "屠宰检测" });
             ComboboxTool.InitComboboxSource(_detect_type, table_detect_type, "cxtj");
             _detect_type.SelectionChanged += new SelectionChangedEventHandler(_detect_type_SelectionChanged);
 

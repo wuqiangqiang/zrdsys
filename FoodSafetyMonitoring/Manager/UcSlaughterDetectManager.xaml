@@ -32,7 +32,7 @@
                     <RowDefinition Height="80"/>
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
-                    <TextBlock FontSize="20" Text="屠宰同步检测信息录入单" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" ></TextBlock>
+                    <TextBlock FontSize="20" Text="屠宰检测信息录入单" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" ></TextBlock>
                 </Grid>
                 <Grid Grid.Row="1">
                     <StackPanel >

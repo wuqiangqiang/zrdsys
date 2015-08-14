@@ -109,8 +109,13 @@ namespace FoodSafetyMonitoring
                 DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("select companyName,phone from t_supplier where supplierId ='{0}'", (Application.Current.Resources["User"] as UserInfo).SupplierId == "" ? "zrd" : (Application.Current.Resources["User"] as UserInfo).SupplierId)).Tables[0];
                 this._bottom.Text = table.Rows[0][0].ToString() + "    版本号：" + ConfigurationManager.AppSettings["version"] + "    技术服务热线：" + table.Rows[0][1].ToString();
 
-                DataTable dt = dbOperation.GetDbHelper().GetDataSet(string.Format("SELECT INFO_NAME,image from sys_client_sysdept where INFO_CODE ='{0}'", (Application.Current.Resources["User"] as UserInfo).DepartmentID)).Tables[0];
-                //this._title_dept.Text = dt.Rows[0][0].ToString();
+                //DataTable dt = dbOperation.GetDbHelper().GetDataSet(string.Format("SELECT title,image from sys_client_sysdept where INFO_CODE ='{0}'", (Application.Current.Resources["User"] as UserInfo).DepartmentID)).Tables[0];
+                DataTable dt = dbOperation.GetDbHelper().GetDataSet(string.Format("SELECT title,image from sys_client_sysdept where INFO_CODE ='102'")).Tables[0];
+                if (dt.Rows[0][0].ToString() != "")
+                {
+                    this._title_dept.Text = dt.Rows[0][0].ToString();
+                }
+                
                 if (dt.Rows[0][1].ToString() != null && dt.Rows[0][1].ToString() != "")
                 {
                     byte[] img = (byte[])dt.Rows[0][1];
@@ -123,11 +128,15 @@ namespace FoodSafetyMonitoring
 
                 //加载主画面
                 TabItem temptb = new TabItem();
-                temptb.Header = "首页";
+                temptb.Header = "地图";
                 temptb.Tag = "1";
                 temptb.Content = new UcMainPage();
                 _tab.Items.Add(temptb);
                 _tab.SelectedIndex = _tab.Items.Count - 1;
+
+                _grid_0.Background = new SolidColorBrush(Color.FromRgb(25, 49, 115));
+                _image_0.Source = new BitmapImage(new Uri("pack://application:,," + "/res/firstpage_select.png"));
+                //this.grid_Menu.Children.Add(childMenu);
 
                 flag = 1;
                 timer.Interval = new TimeSpan(1000);
@@ -145,7 +154,7 @@ namespace FoodSafetyMonitoring
             //int flag_exits = 0;
 
             //用户的查看权限
-            string strSql = "SELECT rp.SUB_ID,s.SUB_NAME,s.SUB_FATHER_ID,s.SUB_NORMAL_URL " +
+            string strSql = "SELECT rp.SUB_ID,s.SUB_NAME,s.SUB_FATHER_ID,s.SUB_NORMAL_URL,s.SUB_SELECT_URL " +
                             "FROM sys_sub_hb s ,sys_rolepermission_hb rp , sys_client_user u " +
                             "WHERE s.SUB_ID = rp.SUB_ID " +
                             "AND rp.ROLE_ID = u.ROLE_ID " +
@@ -185,12 +194,12 @@ namespace FoodSafetyMonitoring
                 //鉴于帮助是最后一个菜单，帮助又必须显示在_grid_13区域内，所以特殊处理如下
                 if (row["SUB_NAME"].ToString() == "帮助")
                 {
-                    mainMenus.Add(new MainMenuItem(row["SUB_NAME"].ToString(), images[13], grids[13], row["SUB_NORMAL_URL"].ToString(), childMenus, this));
+                    mainMenus.Add(new MainMenuItem(row["SUB_NAME"].ToString(), images[13], grids[13], row["SUB_NORMAL_URL"].ToString(), row["SUB_SELECT_URL"].ToString(), childMenus, this));
                     texts[13].Text = row["SUB_NAME"].ToString();
                 }
                 else
                 {
-                    mainMenus.Add(new MainMenuItem(row["SUB_NAME"].ToString(), images[i], grids[i], row["SUB_NORMAL_URL"].ToString(), childMenus, this));
+                    mainMenus.Add(new MainMenuItem(row["SUB_NAME"].ToString(), images[i], grids[i], row["SUB_NORMAL_URL"].ToString(), row["SUB_SELECT_URL"].ToString(), childMenus, this));
                     texts[i].Text = row["SUB_NAME"].ToString();
                 } 
                 i = i + 1;
@@ -340,7 +349,7 @@ namespace FoodSafetyMonitoring
     public class MainMenuItem
     {
         public string Name;
-        //public BitmapImage img_mouseEnter;
+        public BitmapImage img_mouseEnter;
         public BitmapImage img_mouseLeave;
         //public BitmapImage img_mouseUnpressed;
         public List<MyChildMenu> childMenus;
@@ -351,7 +360,7 @@ namespace FoodSafetyMonitoring
         public Grid grid;
         //public int Flag_Exits;
 
-        public MainMenuItem(string name, Image img,Grid grid, string mouseLeaveBackImgPath, List<MyChildMenu> childMenus, MainWindow mainWindow)
+        public MainMenuItem(string name, Image img, Grid grid, string mouseLeaveBackImgPath, string mouseEnterBackImgPath, List<MyChildMenu> childMenus, MainWindow mainWindow)
         {
             this.Name = name;
             this.childMenus = childMenus;
@@ -362,7 +371,7 @@ namespace FoodSafetyMonitoring
             this.grid = grid;
             this.img.Tag = name;
             //this.Flag_Exits = flag_exits;
-            //img_mouseEnter = new BitmapImage(new Uri("pack://application:,," + mouseEnterBackImgPath));
+            img_mouseEnter = new BitmapImage(new Uri("pack://application:,," + mouseEnterBackImgPath));
             img_mouseLeave = new BitmapImage(new Uri("pack://application:,," + mouseLeaveBackImgPath));
             //img_mouseUnpressed = new BitmapImage(new Uri("pack://application:,," + mouseUnpressedBackImgPath));
             //if (Flag_Exits == 1)
@@ -385,29 +394,33 @@ namespace FoodSafetyMonitoring
         void img_MouseDown(object sender, MouseButtonEventArgs e)
         {
             //if (Name == "首页" && Flag_Exits == 1)
-            if (Name == "首页" )
-            {
-                int flag = 0;
-                foreach (TabItem item in mainWindow._tab.Items)
-                {
-                    if (item.Tag.ToString() == "1")
-                    {
-                        mainWindow._tab.SelectedItem = item;
-                        flag = 1;
-                        break;
-                    }
-                }
-                if (flag == 0)
-                {
-                    TabItem temptb = new TabItem();
-                    temptb.Header = Name;
-                    temptb.Tag = "1";
-                    temptb.Content = new UcMainPage();
 
-                    mainWindow._tab.Items.Add(temptb);
-                    mainWindow._tab.SelectedIndex = mainWindow._tab.Items.Count - 1;
-                }
-            }
+            //20150814首页加二级菜单后去掉----------begin
+            //if (Name == "首页" )
+            //{
+            //    int flag = 0;
+            //    foreach (TabItem item in mainWindow._tab.Items)
+            //    {
+            //        if (item.Tag.ToString() == "1")
+            //        {
+            //            mainWindow._tab.SelectedItem = item;
+            //            flag = 1;
+            //            break;
+            //        }
+            //    }
+            //    if (flag == 0)
+            //    {
+            //        TabItem temptb = new TabItem();
+            //        temptb.Header = Name;
+            //        temptb.Tag = "1";
+            //        temptb.Content = new UcMainPage();
+
+            //        mainWindow._tab.Items.Add(temptb);
+            //        mainWindow._tab.SelectedIndex = mainWindow._tab.Items.Count - 1;
+            //    }
+            //}
+            //20150814首页加二级菜单后去掉----------end
+
             //mainWindow.IsEnbleMouseEnterLeave = true;
             //if (Flag_Exits == 1)
             //{
@@ -432,11 +445,12 @@ namespace FoodSafetyMonitoring
             {
                 //if (mainWindow.mainMenus[i].Flag_Exits == 1)
                 //{
-                //mainWindow.mainMenus[i].img.Source = mainWindow.mainMenus[i].img_mouseLeave;
+                mainWindow.mainMenus[i].img.Source = mainWindow.mainMenus[i].img_mouseLeave;
                 mainWindow.mainMenus[i].grid.Background = new SolidColorBrush(Color.FromRgb(25, 86, 162));
                 //}
             }
             grid.Background = new SolidColorBrush(Color.FromRgb(25, 49, 115));
+            this.img.Source = img_mouseEnter;
         }
 
         //void img_MouseLeave(object sender, MouseEventArgs e)

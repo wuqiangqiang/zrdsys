@@ -225,7 +225,12 @@ namespace FoodSafetyMonitoring.Manager
             int i = dbOperation.GetDbHelper().ExecuteSql(sql);
             if (i >= 0)
             {
-                
+                //List<string> cer_details = new List<string>() {_card_id.Text, company_id, _company.Text, batch_no, _detect_object.Text, _object_count.Text, _phone.Text,
+                //            _for_use.Text, _city_ks.Text, _region_ks.Text, _town_ks.Text, _village_ks.Text, _city_js.Text, _region_js.Text,
+                //            _town_js.Text, _village_js.Text, _object_lable.Text,
+                //            (Application.Current.Resources["User"] as UserInfo).DepartmentID,
+                //            (Application.Current.Resources["User"] as UserInfo).ID,
+                //            System.DateTime.Now };
             }
             else
             {
@@ -259,72 +264,45 @@ namespace FoodSafetyMonitoring.Manager
         private void _print_Click(object sender, RoutedEventArgs e)
         {
             UcCertificateDetails cer = new UcCertificateDetails();
-            //var printDialog = new PrintDialog();
-            //printDialog.PrintQueue = GetPrinter();
-            //printDialog.PrintVisual(cer, cer.Name);
+            var printDialog = new PrintDialog();
+            printDialog.PrintQueue = GetPrinter();
 
-             PrintDialog dialog = new PrintDialog();
-             if (dialog.ShowDialog() == true)
-             {
-                 dialog.PrintVisual(cer, "Print Test");
-             }
+            //cer.LayoutTransform = new ScaleTransform(scale, scale);
+            //Size sz = new Size(capabilities.PageImageableArea.ExtentWidth, capabilities.PageImageableArea.ExtentHeight);
+            //cer.Measure(sz);
+            //cer.Arrange(new Rect(new Point(0, 0), sz));
+
+
+            printDialog.PrintVisual(cer, "1111");
+
+            //PrintDialog dialog = new PrintDialog();
+
+            //var settings = new PrintSettings { Width = cer.Width, Height = cer.Height, DPI = 150 };
+            //var renderTarget = new RenderTargetBitmap((int)settings.Width, (int)settings.Height, settings.DPI, settings.DPI, PixelFormats.Default);
+            //dialog.PrintTicket = new PrintTicket();
+            //dialog.PrintTicket.PageMediaSize = new PageMediaSize(renderTarget.Width, renderTarget.Height);
+            //var capabilities = dialog.PrintQueue.GetPrintCapabilities(dialog.PrintTicket);
+            //double scale = Math.Max(capabilities.PageImageableArea.ExtentWidth / cer.Width, capabilities.PageImageableArea.ExtentHeight / cer.Height);
+            //cer.LayoutTransform = new ScaleTransform(scale, scale);
+            //Size sz = new Size(capabilities.PageImageableArea.ExtentWidth, capabilities.PageImageableArea.ExtentHeight);
+            //cer.Measure(sz);
+            //cer.Arrange(new Rect(new Point(0, 0), sz));
+
+            //if (dialog.ShowDialog() == true)
+            //{
+            //    dialog.PrintVisual(cer, "Print Test");
+            //}
+
         }
 
+        public class PrintSettings
+        {
+            public double Width { get; set; }
 
-        //private void btnSave_Click(object sender, RoutedEventArgs e)
-        //{
-        //    if (selectdetect.Count > 0)
-        //    {
-        //        string msg = "";
-        //        if (_object_count.Text.Trim().Length == 0)
-        //        {
-        //            msg = "*批次头数不能为空";
-        //        }
-        //        else if (_object_label.Text.Trim().Length == 0)
-        //        {
-        //            msg = "*耳标号不能为空";
-        //        }
-        //        else
-        //        {
-        //            //生成检疫证号
-        //            string card_id = dbOperation.GetDbHelper().GetSingle(string.Format("select f_create_cardid('{0}')", (Application.Current.Resources["User"] as UserInfo).DepartmentID)).ToString();
-        //            _cardId.Text = card_id;
+            public double Height { get; set; }
 
-        //            string detect_id = "";
-        //            foreach (var detectid in selectdetect)
-        //            {
-        //                detect_id = detect_id + "," + detectid;
-        //            }
-
-        //            string sql = string.Format("call p_insert_certificate('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}')"
-        //                          , card_id, (_source_company.SelectedItem as Label).Tag.ToString(),
-        //                          _object_count.Text, _object_label.Text,
-        //                          (Application.Current.Resources["User"] as UserInfo).DepartmentID,
-        //                          (Application.Current.Resources["User"] as UserInfo).ID,
-        //                          System.DateTime.Now,
-        //                          detect_id);
-
-
-        //            int i = dbOperation.GetDbHelper().ExecuteSql(sql);
-        //            if (i == 1)
-        //            {
-        //                Toolkit.MessageBox.Show("电子出证单生成成功！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
-        //                clear();
-        //            }
-        //            else
-        //            {
-        //                Toolkit.MessageBox.Show("电子出证单生成失败！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
-        //                return;
-        //            }
-        //        }
-        //        txtMsg.Text = msg;
-        //    }  
-        //    else
-        //    {
-        //        Toolkit.MessageBox.Show("请先选择检测数据！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
-        //        return;
-        //    }
-        //}
+            public int DPI { get; set; }
+        }
 
         //private void _btn_create_Click(object sender, RoutedEventArgs e)
         //{

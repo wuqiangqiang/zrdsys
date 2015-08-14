@@ -32,7 +32,7 @@
             <Grid Margin="0,10,0,10">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="37"/>
-                    <RowDefinition Height="459"/>
+                    <RowDefinition Height="419"/>
                     <RowDefinition />
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0" >
@@ -48,8 +48,8 @@
                         <Button Name="_print" Width="120" Height="32" Style="{StaticResource PrintImageButtonTemplate}" Click="_print_Click" Margin="50,0,0,0"/>
                     </StackPanel>
                 </Grid>
-                <Grid Grid.Row="1" >
-                    <Canvas Width="844" Height="419" Margin="60,0,0,0" VerticalAlignment="Center">
+                <Grid Grid.Row="1"  >
+                    <Canvas Width="844" Height="419" Margin="60,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left">
                         <Canvas.Background>
                             <ImageBrush ImageSource="/res/certificate.png"></ImageBrush>
                         </Canvas.Background>

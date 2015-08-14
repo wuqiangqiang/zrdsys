@@ -169,7 +169,7 @@ namespace FoodSafetyMonitoring.Manager
             }
             //表格后面为合计列
             tabledisplay.Columns.Add(new DataColumn("合计"));
-            //屠宰同步检测结果为有无
+            //屠宰检测结果为有无
             //if (detecttype == "2")
             //{
             //    tabledisplay.Columns.Add(new DataColumn("无"));

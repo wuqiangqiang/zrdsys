@@ -40,11 +40,11 @@ namespace FoodSafetyMonitoring.Manager
 
         private void _query_Click(object sender, RoutedEventArgs e)
         {
-            if (_card_no.Text.Trim().Length == 0 && _source_company.SelectedIndex == 0)
-            {
-                Toolkit.MessageBox.Show("检疫证号和被检单位必须输入一个！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
-                return;
-            }
+            //if (_card_no.Text.Trim().Length == 0 && _source_company.SelectedIndex == 0)
+            //{
+            //    Toolkit.MessageBox.Show("检疫证号和被检单位必须输入一个！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+            //    return;
+            //}
 
             //清空列表
             lvlist.DataContext = null;

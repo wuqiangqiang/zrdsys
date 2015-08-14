@@ -167,6 +167,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Login_SetTitle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -655,6 +659,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Manager\UcMainPageTwo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Manager\UcMonthReportDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -889,6 +897,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Login_SetTitle.xaml.cs">
+      <DependentUpon>Login_SetTitle.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -1111,6 +1122,9 @@
     <Compile Include="Manager\UcMainPage.xaml.cs">
       <DependentUpon>UcMainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Manager\UcMainPageTwo.xaml.cs">
+      <DependentUpon>UcMainPageTwo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Manager\UcMonthReportDetails.xaml.cs">
       <DependentUpon>UcMonthReportDetails.xaml</DependentUpon>
     </Compile>
@@ -1284,6 +1298,26 @@
     <Resource Include="Manager\Images\role.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="res\details.png" />
+    <Resource Include="res\details_big.png" />
+    <Resource Include="res\details_small.png" />
+    <Resource Include="res\analysis_select.png" />
+    <Resource Include="res\certificate_select.png" />
+    <Resource Include="res\check_select.png" />
+    <Resource Include="res\createcertificate_select.png" />
+    <Resource Include="res\culture_select.png" />
+    <Resource Include="res\feed_select.png" />
+    <Resource Include="res\firstpage_select.png" />
+    <Resource Include="res\retroactive_select.png" />
+    <Resource Include="res\search_select.png" />
+    <Resource Include="res\slaughter_before_select.png" />
+    <Resource Include="res\slaughter_select.png" />
+    <Resource Include="res\system_select.png" />
+    <Resource Include="res\warning_select.png" />
+    <Resource Include="res\login.png" />
+    <Resource Include="res\set.png" />
+    <Resource Include="res\set_click.png" />
+    <Resource Include="certificate.png" />
     <Content Include="DLL\ICSharpCode.SharpZipLib.dll" />
     <Content Include="DLL\MySql.Data.dll" />
     <Content Include="DLL\NPOI.dll" />
@@ -1342,13 +1376,10 @@
     <Resource Include="res\title_logo.png" />
     <Resource Include="res\help_title.png" />
     <Resource Include="res\line.png" />
-    <Resource Include="res\details_big.jpg" />
-    <Resource Include="res\details_small.jpg" />
     <Resource Include="res\logo.png" />
     <Resource Include="res\close_on.png" />
     <Resource Include="res\max_on.png" />
     <Resource Include="res\min_on.png" />
-    <Resource Include="res\details.jpg" />
     <Resource Include="res\help.jpg" />
     <Resource Include="Manager\Images\btn_back1.png" />
     <Resource Include="Manager\Images\btn_back2.png" />
