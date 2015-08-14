@@ -168,7 +168,7 @@
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Grid>
                         <Image x:Name="save" Source="/Manager/Images/btn_normal.png"></Image>
-                        <TextBlock FontFamily="微软雅黑" FontSize="14"  HorizontalAlignment="Center" VerticalAlignment="Center" Text="打印" Foreground="White"></TextBlock>
+                        <TextBlock FontFamily="微软雅黑" FontSize="14"  HorizontalAlignment="Center" VerticalAlignment="Center" Text="出证" Foreground="White"></TextBlock>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsPressed" Value="True">

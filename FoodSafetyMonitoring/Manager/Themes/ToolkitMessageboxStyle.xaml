@@ -52,9 +52,9 @@
 
         <!--<Setter Property="BorderBrush" Value="Red" />
         <Setter Property="CaptionForeground" Value="Orange" />
-         <Setter Property="WindowOpacity" Value="0.7" />
+         <Setter Property="WindowOpacity" Value="0.7" />-->
        
-        <Setter Property="WindowBackground" Value="Green" />-->
+        <!--<Setter Property="WindowBackground" Value="Green" />-->
         <Setter Property="FontFamily" Value="微软雅黑"/>
         <Setter Property="Foreground" Value="Black"/>
         <Setter Property="FontSize" Value="12"/>
@@ -66,4 +66,188 @@
         <!--<Setter Property="CloseButtonStyle" Value="{StaticResource CloseImageButtonTemplate}">  
         </Setter>-->
     </Style>
+
+    <!--<SolidColorBrush x:Key="TM_SubHeaderBackground" Color="#FF2D64A0" />
+    <SolidColorBrush x:Key="TM_MouseOverBorderBrush" Color="#FFA4BBD4" />
+    <SolidColorBrush x:Key="TM_SubTitleForeground" Color="#FFFBFBFB" />
+    <SolidColorBrush x:Key="TM_Textbackground" Color="#FFD9DFEC" />
+    <SolidColorBrush x:Key="TM_BackgroundBrush"  Color="#ffd1e7ff" />
+    <SolidColorBrush x:Key="TM_ButtonNormalBorder" Color="Transparent" />
+    <LinearGradientBrush x:Key="TM_ButtonMouseOverBackground" EndPoint="0.5,1" StartPoint="0.5,0">
+        <GradientStop Color="#FF0D66C4" />
+        <GradientStop Color="#FF328FF3" Offset="1" />
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="TM_ButtonPressBackground" EndPoint="0.5,1" StartPoint="0.5,0">
+        <GradientStop Color="#FF0D66C4" />
+        <GradientStop Color="#FF0B498B"  Offset="1" />
+    </LinearGradientBrush>
+    <SolidColorBrush x:Key="TM_TransparentBrush" Color="Transparent" />
+
+    <RadialGradientBrush  x:Key="MessageBoxBackground"  GradientOrigin="0.158,0.301" Center="0.544,0.54" RadiusY="0.842" RadiusX="0.664">
+        <GradientStop Color="#FFC0D8F3" Offset="1" />
+        <GradientStop Color="#FFF0F6FD"/>
+    </RadialGradientBrush>
+    <Style x:Key="MessageBoxButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="Focusable"  Value="False" />
+        <Setter Property="Foreground"
+                Value="{DynamicResource TM_SubTitleForeground}" />
+        <Setter Property="Padding" Value="2" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Background" Value="{DynamicResource TM_BackgroundBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource TM_TransparentBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource TM_SubHeaderBackground}" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="Bd"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Background="{TemplateBinding Background}"
+                            Padding="{TemplateBinding Padding}"
+                            SnapsToDevicePixels="True">
+                        <ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}"
+                                          Content="{TemplateBinding Content}"
+                                          ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver"
+                                 Value="True">
+                            <Setter Property="BorderBrush"
+                                    TargetName="Bd"
+                                    Value="#FF3399FF" />
+                            <Setter Property="Background"
+                                    TargetName="Bd"
+                                    Value="{DynamicResource TM_ButtonMouseOverBackground}" />
+                            <Setter Property="Foreground"
+                                    Value="{StaticResource TM_Textbackground}" />
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused"
+                                 Value="True">
+                            <Setter Property="BorderBrush"
+                                    TargetName="Bd"
+                                    Value="#FF3399FF" />
+                            <Setter Property="Background"
+                                    TargetName="Bd"
+                                    Value="{DynamicResource TM_ButtonMouseOverBackground}" />
+                        </Trigger>
+                        <Trigger Property="IsPressed"
+                                 Value="True">
+                            <Setter Property="BorderBrush"
+                                    TargetName="Bd"
+                                    Value="#FF3399FF" />
+                            <Setter Property="Background"
+                                    TargetName="Bd"
+                                    Value="{DynamicResource TM_ButtonPressBackground}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled"
+                                 Value="False">
+                            <Setter Property="Foreground"
+                                    Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <ControlTemplate x:Key="MessageBoxCT" TargetType="{x:Type toolkit:MessageBox}">
+        <Border Background="{TemplateBinding Background}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                CornerRadius="3" Margin="8">
+            <Border.Effect>
+                <DropShadowEffect Color="#FF004289"
+                                  Opacity="0.705"
+                                  BlurRadius="12" ShadowDepth="1" />
+            </Border.Effect>
+            <Grid x:Name="grid">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <TextBlock x:Name="textBlock" Text="{TemplateBinding Title}"
+                           Grid.Row="0"
+                           Margin="10,4"
+                           TextTrimming="CharacterEllipsis"
+                           Foreground="{TemplateBinding TitleForeground}" />
+                <Border Grid.Row="0"
+                        BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0,0,0,1"/>
+                <TextBlock Text="{TemplateBinding Message}"
+                           Grid.Row="1"
+                           Margin="10"
+                           TextTrimming="None"
+                           Foreground="{TemplateBinding Foreground}"
+                           TextWrapping="WrapWithOverflow"
+                           FontSize="{TemplateBinding FontSize}" />
+                <ItemsControl Grid.Row="2"
+           
+                              Margin="10"
+                              ItemsSource="{TemplateBinding CtrlButtonCollection}"
+                              ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                              HorizontalContentAlignment="Center"
+                              VerticalContentAlignment="Center"
+                              Padding="0,0,5,0">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid Rows="1" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+
+            </Grid>
+        </Border>
+    </ControlTemplate>
+
+    <Style TargetType="{x:Type toolkit:MessageBox}">
+        <Style.Resources>
+            <Storyboard x:Key="sbOpShow">
+
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="{x:Null}">
+                    <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:0.15" Value="0.975"/>
+                </DoubleAnimationUsingKeyFrames>
+
+            </Storyboard>
+        </Style.Resources>
+        <Style.Triggers>
+            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                <BeginStoryboard Storyboard="{StaticResource sbOpShow}"/>
+            </EventTrigger>
+        </Style.Triggers>
+
+        <Setter Property="ResizeMode"
+                Value="NoResize" />
+        <Setter Property="SizeToContent"
+                Value="WidthAndHeight" />
+        <Setter Property="MinWidth"
+                Value="330" />
+        <Setter Property="MinHeight"
+                Value="145" />
+        <Setter Property="MaxWidth"
+                Value="600" />
+        <Setter Property="MaxHeight"
+                Value="330" />
+        <Setter Property="WindowStyle"
+                Value="None" />
+        <Setter Property="Background"
+                Value="{DynamicResource MessageBoxBackground}" />
+        <Setter Property="Foreground"
+                Value="{StaticResource TM_SubHeaderBackground}" />
+        <Setter Property="AllowsTransparency"
+                Value="True" />
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource TM_SubHeaderBackground}"/>
+        <Setter Property="Opacity" Value="0"/>
+        <Setter Property="Template"
+                Value="{StaticResource MessageBoxCT}" />
+    </Style>-->
+
 </ResourceDictionary>

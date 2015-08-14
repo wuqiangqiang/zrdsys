@@ -53,6 +53,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -100,6 +101,7 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Printing" />
     <Reference Include="System.Runtime.Serialization">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
@@ -108,7 +110,6 @@
     </Reference>
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -570,11 +571,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Manager\UcCertificateDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Manager\UcCertificateDetectManager.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Manager\UcCertificateInquire.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\UcCertificateReport.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1045,11 +1054,17 @@
     <Compile Include="Manager\Themes\UcChooseDataTime.xaml.cs">
       <DependentUpon>UcChooseDataTime.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Manager\UcCertificateDetails.xaml.cs">
+      <DependentUpon>UcCertificateDetails.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Manager\UcCertificateDetectManager.xaml.cs">
       <DependentUpon>UcCertificateDetectManager.xaml</DependentUpon>
     </Compile>
     <Compile Include="Manager\UcCertificateInquire.xaml.cs">
       <DependentUpon>UcCertificateInquire.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\UcCertificateReport.xaml.cs">
+      <DependentUpon>UcCertificateReport.xaml</DependentUpon>
     </Compile>
     <Compile Include="Manager\UcCreateCertificate.xaml.cs">
       <DependentUpon>UcCreateCertificate.xaml</DependentUpon>
@@ -1273,7 +1288,7 @@
     <Content Include="DLL\MySql.Data.dll" />
     <Content Include="DLL\NPOI.dll" />
     <Content Include="DLL\NPOI.OOXML.dll" />
-    <Resource Include="res\certificate.jpg" />
+    <Resource Include="res\certificate.png" />
     <Resource Include="res\down_click.png" />
     <Resource Include="res\left_click.png" />
     <Resource Include="res\right_click.png" />

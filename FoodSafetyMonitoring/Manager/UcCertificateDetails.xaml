@@ -1,0 +1,34 @@
+﻿<UserControl x:Class="FoodSafetyMonitoring.Manager.UcCertificateDetails"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="检疫证单">
+    <Grid x:Name="_grid">
+        <Canvas Width="844" Height="419" VerticalAlignment="Center">
+            <!--<Canvas.Background>
+                <ImageBrush ImageSource="/res/certificate.png"></ImageBrush>
+            </Canvas.Background>-->
+            <TextBlock Canvas.Left="620" Canvas.Top="64" x:Name="_card_id" Width="120" Margin="0">111</TextBlock>
+            <TextBlock Canvas.Left="150" Canvas.Top="104" x:Name="_company" Width="323" Margin="0" IsEnabled="False">222</TextBlock>
+            <TextBlock Canvas.Left="569" Canvas.Top="103" x:Name="_phone" Width="219" Margin="0">333</TextBlock>
+            <TextBlock Canvas.Left="149" Canvas.Top="134" x:Name="_detect_object" Width="124" Margin="0">444</TextBlock>
+            <TextBlock Canvas.Left="365" Canvas.Top="133" x:Name="_object_count" Width="174" Margin="0">555</TextBlock>
+            <!--<ComboBox Canvas.Left="450" Canvas.Top="133" x:Name="_object_type" Width="80" Margin="0" Visibility="Hidden">
+                <ComboBoxItem>头</ComboBoxItem>
+                <ComboBoxItem>只</ComboBoxItem>
+            </ComboBox>-->
+            <TextBlock Canvas.Left="603" Canvas.Top="133" x:Name="_for_use" Width="184" Margin="0">666</TextBlock>
+            <TextBlock Canvas.Left="144" Canvas.Top="165" x:Name="_city_ks" Width="74">777</TextBlock>
+            <TextBlock Canvas.Left="285" Canvas.Top="162" x:Name="_region_ks" Width="190" Height="20" Margin="0">888</TextBlock>
+            <TextBlock Canvas.Left="560" Canvas.Top="162" x:Name="_town_ks" Width="154" Height="20" Margin="0">999</TextBlock>
+            <TextBlock Canvas.Left="325" Canvas.Top="182" x:Name="_village_ks" Width="294" Height="20" Margin="0">111</TextBlock>
+            <TextBlock Canvas.Left="144" Canvas.Top="205" x:Name="_city_js" Width="74">222</TextBlock>
+            <TextBlock Canvas.Left="280" Canvas.Top="205" x:Name="_region_js" Width="190" Height="20">333</TextBlock>
+            <TextBlock Canvas.Left="555" Canvas.Top="205" x:Name="_town_js" Width="154" Height="20">444</TextBlock>
+            <TextBlock Canvas.Left="325" Canvas.Top="226" x:Name="_village_js" Width="294" Height="20" Margin="0">555</TextBlock>
+            <TextBlock Canvas.Left="144" Canvas.Top="250" x:Name="_object_lable" Width="634" >666</TextBlock>
+            <TextBlock Canvas.Left="614" Canvas.Top="290" x:Name="_user_name" Width="150" Margin="0" >777</TextBlock>
+            <TextBlock  Canvas.Left="570" Canvas.Top="318" Width="40" x:Name="_nian">888</TextBlock>
+            <TextBlock  Canvas.Left="630" Canvas.Top="318" Width="30" x:Name="_yue">999</TextBlock>
+            <TextBlock  Canvas.Left="680" Canvas.Top="318" Width="30" x:Name="_day">111</TextBlock>
+        </Canvas>
+    </Grid>
+</UserControl>

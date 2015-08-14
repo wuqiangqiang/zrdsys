@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="FoodSafetyMonitoring.Manager.UcCreateCertificatequery"
+﻿<UserControl x:Class="FoodSafetyMonitoring.Manager.UcCertificateReport"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:control="clr-namespace:FoodSafetyMonitoring.Manager.UserControls"
@@ -19,7 +19,7 @@
     </UserControl.Resources>
     <Grid >
         <Grid.RowDefinitions>
-            <RowDefinition Height="106"/>
+            <RowDefinition Height="143"/>
             <RowDefinition />
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" Width="auto" Margin="5,5,5,5">
@@ -48,35 +48,35 @@
                 <Grid Margin="0,10,0,10">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="37"/>
-                        <!--<RowDefinition Height="37"/>-->
+                        <RowDefinition Height="37"/>
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0" >
                         <StackPanel  VerticalAlignment="Center" >
-                            <!--<TextBlock MinWidth="50">设置日期:</TextBlock>
+                            <TextBlock MinWidth="50">设置日期:</TextBlock>
                             <toolkit:DatePicker x:Name="dtpStartDate" VerticalAlignment="Center"/>
                             <TextBlock xml:space="preserve" MinWidth="10" Margin="5,0,5,0">至</TextBlock>
                             <toolkit:DatePicker x:Name="dtpEndDate" VerticalAlignment="Center" />
                             <TextBlock MinWidth="50">来源产地:</TextBlock>
                             <ComboBox x:Name="_province" Width="120" Text="省" Margin="0,0,5,0"></ComboBox>
                             <ComboBox x:Name="_city" Width="120" Text="市(州)" Margin="0,0,5,0"></ComboBox>
-                            <ComboBox x:Name="_region" Width="120" Text="区县"></ComboBox>-->
-                            <TextBlock MinWidth="50">检疫证号:</TextBlock>
-                            <TextBox x:Name="_card_no" Width="240" MaxLength="10"></TextBox>
+                            <ComboBox x:Name="_region" Width="120" Text="区县"></ComboBox>
                             <TextBlock MinWidth="50">被检单位:</TextBlock>
                             <ComboBox x:Name="_source_company" Width="240" IsEditable="True"></ComboBox>
-                            <Button Name="_query" Width="120" Height="32" Style="{StaticResource SelectImageButtonTemplate}" Click="_query_Click" Margin="100,0,0,0" />
+                            
                         </StackPanel>
                     </Grid>
-                    <!--<Grid  Grid.Row="1">
+                    <Grid  Grid.Row="1">
                         <StackPanel VerticalAlignment="Center">
                             <TextBlock MinWidth="50">出证单位:</TextBlock>
                             <ComboBox x:Name="_certificate_station" Width="262" />
                             <TextBlock MinWidth="51">出证人:</TextBlock>
                             <ComboBox Width="120" x:Name="_detect_person1" />
                             <Button Name="_query" Width="120" Height="32" Style="{StaticResource SelectImageButtonTemplate}" Click="_query_Click" Margin="450,0,0,0" />
-                            --><!--<Button Name="_export" Width="120" Height="32" Style="{StaticResource ExportImageButtonTemplate}" Click="_export_Click" Margin="50,0,0,0"/>--><!--
+                            
+                             <!--<Button Name="_export" Width="120" Height="32" Style="{StaticResource ExportImageButtonTemplate}" Click="_export_Click" Margin="50,0,0,0"/>-->
+                    
                         </StackPanel>
-                    </Grid>-->
+                    </Grid>
                 </Grid>
             </Border>
         </Grid>
@@ -96,9 +96,7 @@
                     </Grid.Background>
                     <StackPanel>
                         <TextBlock Margin="40,0,0,0" VerticalAlignment="Center">查询结果</TextBlock>
-                        <TextBlock x:Name="_hj" Margin="20,0,0,0" VerticalAlignment="Center" Visibility="Hidden">合计</TextBlock>
-                        <TextBlock x:Name="_title" Margin="10,0,10,0" VerticalAlignment="Center" MinWidth="10" Foreground="#1956a2" FontWeight="Bold"></TextBlock>
-                        <TextBlock x:Name="_sj" Margin="0,0,0,0" VerticalAlignment="Center" Visibility="Hidden">条数据</TextBlock>
+                        <TextBlock x:Name="_title" Margin="20,0,0,0" VerticalAlignment="Center"></TextBlock>
                     </StackPanel>
                 </Grid>
                 <Grid Grid.Column="1">
