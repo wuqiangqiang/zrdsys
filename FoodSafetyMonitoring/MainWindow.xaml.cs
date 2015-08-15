@@ -122,21 +122,9 @@ namespace FoodSafetyMonitoring
                     ShowSelectedIMG(img);                //以流的方式显示图片的方法
                 }
 
-                //加载父菜单和子菜单
+                //加载父菜单和子菜单和首页
                 MainMenu_Load();
                 this.SizeChanged += new SizeChangedEventHandler(MainWindow_SizeChanged);
-
-                //加载主画面
-                TabItem temptb = new TabItem();
-                temptb.Header = "地图";
-                temptb.Tag = "1";
-                temptb.Content = new UcMainPage();
-                _tab.Items.Add(temptb);
-                _tab.SelectedIndex = _tab.Items.Count - 1;
-
-                _grid_0.Background = new SolidColorBrush(Color.FromRgb(25, 49, 115));
-                _image_0.Source = new BitmapImage(new Uri("pack://application:,," + "/res/firstpage_select.png"));
-                //this.grid_Menu.Children.Add(childMenu);
 
                 flag = 1;
                 timer.Interval = new TimeSpan(1000);
@@ -159,18 +147,18 @@ namespace FoodSafetyMonitoring
                             "WHERE s.SUB_ID = rp.SUB_ID " +
                             "AND rp.ROLE_ID = u.ROLE_ID " +
                             "AND u.RECO_PKID = " + (Application.Current.Resources["User"] as UserInfo).ID +
-                            " order by rp.SUB_ID asc";
+                            " order by orderid asc";
 
             DataTable table = dbOperation.GetDbHelper().GetDataSet(strSql).Tables[0];
             //一级菜单
             DataRow[] row_mainmenu = table.Select("SUB_FATHER_ID = '0'");
             //定义数组存放：一级菜单图片控件和一级菜单文字控件
             Image[] images = new Image[] { _image_0,_image_1,_image_2,_image_3,_image_4,_image_5,_image_6,
-                                           _image_7,_image_8,_image_9,_image_10,_image_11,_image_12,_image_13};
+                                           _image_7,_image_8,_image_9,_image_10,_image_11,_image_12,_image_13,_image_14};
             TextBlock[] texts = new TextBlock[] { _text_0, _text_1, _text_2, _text_3, _text_4, _text_5, _text_6,
-                                                  _text_7, _text_8, _text_9, _text_10, _text_11, _text_12, _text_13};
+                                                  _text_7, _text_8, _text_9, _text_10, _text_11, _text_12, _text_13, _text_14};
             Grid[] grids = new Grid[] { _grid_0, _grid_1, _grid_2, _grid_3, _grid_4, _grid_5, _grid_6,
-                                                  _grid_7, _grid_8, _grid_9, _grid_10, _grid_11, _grid_12, _grid_13};
+                                                  _grid_7, _grid_8, _grid_9, _grid_10, _grid_11, _grid_12, _grid_13, _grid_14};
 
             int i = 0;
             foreach (DataRow row in row_mainmenu )
@@ -191,11 +179,11 @@ namespace FoodSafetyMonitoring
                         childMenus.Add(new MyChildMenu(row_child["SUB_NAME"].ToString(), this, row_child_childmenu));
                     }
                 }
-                //鉴于帮助是最后一个菜单，帮助又必须显示在_grid_13区域内，所以特殊处理如下
+                //鉴于帮助是最后一个菜单，帮助又必须显示在_grid_14区域内，所以特殊处理如下
                 if (row["SUB_NAME"].ToString() == "帮助")
                 {
-                    mainMenus.Add(new MainMenuItem(row["SUB_NAME"].ToString(), images[13], grids[13], row["SUB_NORMAL_URL"].ToString(), row["SUB_SELECT_URL"].ToString(), childMenus, this));
-                    texts[13].Text = row["SUB_NAME"].ToString();
+                    mainMenus.Add(new MainMenuItem(row["SUB_NAME"].ToString(), images[14], grids[14], row["SUB_NORMAL_URL"].ToString(), row["SUB_SELECT_URL"].ToString(), childMenus, this));
+                    texts[14].Text = row["SUB_NAME"].ToString();
                 }
                 else
                 {
@@ -203,7 +191,27 @@ namespace FoodSafetyMonitoring
                     texts[i].Text = row["SUB_NAME"].ToString();
                 } 
                 i = i + 1;
-            }       
+            }
+
+            //加载主画面
+            TabItem temptb = new TabItem();
+            temptb.Header = "地图模式";
+            temptb.Tag = "10101";
+            temptb.Content = new UcMainPage();
+            _tab.Items.Add(temptb);
+            _tab.SelectedIndex = _tab.Items.Count - 1;
+
+            //让首页主菜单呈现选中状态，并显示二级菜单
+            _grid_0.Background = new SolidColorBrush(Color.FromRgb(25, 49, 115));
+            _image_0.Source = new BitmapImage(new Uri("pack://application:,," + "/res/firstpage_select.png"));
+            List<MyChildMenu> childMenu_main = new List<MyChildMenu>();
+            DataRow[] row_childmenu_main = table.Select("SUB_FATHER_ID ='1'");
+            foreach (DataRow row_child in row_childmenu_main)
+            {
+                DataRow[] row_child_childmenu = table.Select("SUB_FATHER_ID ='" + row_child["SUB_ID"] + "'");
+                childMenu_main.Add(new MyChildMenu(row_child["SUB_NAME"].ToString(), this, row_child_childmenu));
+            }
+            this.grid_Menu.Children.Add(new ChildMenu(childMenu_main));
         }
 
         //显示上传的自定义图片

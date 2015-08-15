@@ -683,6 +683,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Manager\UcSetSamplingRate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Manager\UcSlaughterDetectInquier.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -1137,6 +1141,9 @@
     <Compile Include="Manager\UcReviewdetails.xaml.cs">
       <DependentUpon>UcReviewdetails.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Manager\UcSetSamplingRate.xaml.cs">
+      <DependentUpon>UcSetSamplingRate.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Manager\UcSlaughterDetectInquier.xaml.cs">
       <DependentUpon>UcSlaughterDetectInquier.xaml</DependentUpon>
     </Compile>
@@ -1298,6 +1305,8 @@
     <Resource Include="Manager\Images\role.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="res\report_normal.png" />
+    <Resource Include="res\report_select.png" />
     <Resource Include="res\details.png" />
     <Resource Include="res\details_big.png" />
     <Resource Include="res\details_small.png" />

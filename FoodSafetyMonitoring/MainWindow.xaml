@@ -108,9 +108,9 @@
                 <Image Width="14" Height="20" Source="/res/user.png"/>
                 <TextBlock x:Name="_user" FontFamily="微软雅黑" FontSize="12"  Foreground="Black" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="8,0,8,2">加载中……</TextBlock>
             </StackPanel>
-            <Grid x:Name="_grid_13" Grid.Column="3" HorizontalAlignment="Right"  VerticalAlignment="Bottom">
-                <Image x:Name="_image_13" Width="50" Height="20" Source="/res/help_normal.png"/>
-                <TextBlock x:Name="_text_13" FontFamily="微软雅黑" FontSize="12" VerticalAlignment="Bottom" HorizontalAlignment="Right"  Foreground="Black" Margin="0,0,5,2" Visibility="Hidden">帮助</TextBlock>
+            <Grid x:Name="_grid_14" Grid.Column="3" HorizontalAlignment="Right"  VerticalAlignment="Bottom">
+                <Image x:Name="_image_14" Width="50" Height="20" Source="/res/help_normal.png"/>
+                <TextBlock x:Name="_text_14" FontFamily="微软雅黑" FontSize="12" VerticalAlignment="Bottom" HorizontalAlignment="Right"  Foreground="Black" Margin="0,0,5,2" Visibility="Hidden">帮助</TextBlock>
             </Grid>
             <StackPanel Orientation="Horizontal"  Grid.Column="4" HorizontalAlignment="Right"  VerticalAlignment="Top">
                 <Image Width="29" Height="26" MouseEnter ="min_MouseEnter" MouseLeave="all_MouseLeave" Source="/res/min.png" x:Name="min" MouseDown="min_MouseDown" ToolTip="缩小" />
@@ -123,7 +123,8 @@
                 <SolidColorBrush Color="#1956a2" />
             </Grid.Background>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="135"/>
+                <ColumnDefinition Width="125"/>
+                <ColumnDefinition Width="100"/>
                 <ColumnDefinition Width="100"/>
                 <ColumnDefinition Width="100"/>
                 <ColumnDefinition Width="100"/>
@@ -138,7 +139,7 @@
                 <ColumnDefinition Width="100"/>
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <Grid Grid.Column="0" x:Name="_grid_0" Margin="35,0,0,0">
+            <Grid Grid.Column="0" x:Name="_grid_0" Margin="25,0,0,0">
                 <Image x:Name="_image_0" />
                 <TextBlock x:Name="_text_0" FontFamily="微软雅黑"  Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,22"/>
             </Grid>
@@ -190,6 +191,11 @@
                 <Image x:Name="_image_12" />
                 <TextBlock x:Name="_text_12" FontFamily="微软雅黑"  Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,22"/>
             </Grid>
+            <Grid Grid.Column="13" x:Name="_grid_13">
+                <Image x:Name="_image_13" />
+                <TextBlock x:Name="_text_13" FontFamily="微软雅黑"  Foreground="White" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,22"/>
+            </Grid>
+            
         </Grid>
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
