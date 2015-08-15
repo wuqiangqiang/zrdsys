@@ -34,7 +34,8 @@ namespace FoodSafetyMonitoring.Manager
             InitializeComponent();
             this.dbOperation = dbOperation;
 
-            ComboboxTool.InitComboboxSource(_source_company, "SELECT COMPANYID,COMPANYNAME FROM t_company", "cxtj");
+            ComboboxTool.InitComboboxSource(_source_company, "select DISTINCT t_certificate.companyid ,t_company.COMPANYNAME"+
+                                             " FROM t_certificate left join t_company ON t_certificate.companyid = t_company.COMPANYID", "cxtj");
         }
 
 

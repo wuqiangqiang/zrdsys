@@ -1,0 +1,36 @@
+﻿<Window x:Class="FoodSafetyMonitoring.Manager.SetSampling"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Width="510" Height="511" WindowStyle="None" WindowStartupLocation="CenterScreen" BorderBrush="Transparent" ResizeMode="NoResize" Background="Transparent" AllowsTransparency ="True" >
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Themes/TextBlock.xaml"/>
+                <ResourceDictionary Source="Themes/Combobox.xaml"/>
+                <ResourceDictionary Source="Themes/TextBoxStyle.xaml"/>
+                <ResourceDictionary Source="Themes/ImageButtonStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid >
+        <Grid.Background>
+            <ImageBrush ImageSource="../res/sampling.png"/>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition />
+            <RowDefinition Height="120"/>
+        </Grid.RowDefinitions>
+        <Grid Margin="13,12,13,0">
+            <Thumb Width="440" Height="40" Background="Transparent" Opacity="0" DragDelta="Thumb_DragDelta" HorizontalAlignment="Left"></Thumb>
+            <TextBlock Height="20" Width="160" HorizontalAlignment="Left" FontSize="16" VerticalAlignment="Center" Foreground="White">抽检率设置</TextBlock>
+            <Image  Width="29" Height="26" Source="/res/close.png" x:Name="exit" MouseDown="exit_MouseDown" MouseEnter="exit_MouseEnter" MouseLeave="exit_MouseLeave" ToolTip="关闭"  HorizontalAlignment="Right" VerticalAlignment="Center" />
+        </Grid>
+        <Grid x:Name="_grid_detail" Margin="13,30,13,0" VerticalAlignment="Top" HorizontalAlignment="Center" Grid.Row="1">
+            
+        </Grid>
+        <Grid Grid.Row="2" Margin="13,0,13,50">
+            <Button Name="btnSave" Width="120" Height="32" Style="{StaticResource SaveImageButtonTemplate}" Click="btnSave_Click" />
+        </Grid>
+    </Grid>
+</Window>

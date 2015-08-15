@@ -5,32 +5,14 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../Themes/ImageButtonStyle.xaml"/>
-                <ResourceDictionary Source="../Themes/GridViewColumnHeaderStyle.xaml"/>
+                <ResourceDictionary Source="../Themes/ListViewColumn.xaml"/>
                 <ResourceDictionary Source="../Themes/TextBox.xaml"/>
-                <ResourceDictionary Source="../Themes/PasswordBox.xaml"/>
-                <ResourceDictionary Source="../Themes/ComboBox.xaml"/>
+                <!--<ResourceDictionary Source="../Themes/ComboBox.xaml"/>-->
                 <ResourceDictionary Source="../Themes/TextBlock.xaml"/>
                 <ResourceDictionary Source="../Themes/StackPanel.xaml"/>
-                <ResourceDictionary Source="../Themes/GridViewColumnHeaderStyle.xaml"/>
+                <ResourceDictionary Source="../Themes/Button_new.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-            <Style x:Key="_style_listviewItem" TargetType="ListViewItem">
-                <Setter Property="MinWidth" Value="30"/>
-                <Setter Property="Background">
-                    <Setter.Value>
-                        <Binding RelativeSource="{RelativeSource Self}"  />
-                    </Setter.Value>
-                </Setter>
-                <Setter Property="Foreground" Value="Black">
-                </Setter>
-                <Setter Property="HorizontalAlignment" Value="Center"></Setter>
-            </Style>
-            <Style x:Key="tb" TargetType="TextBlock">
-                <Setter Property="HorizontalAlignment" Value="Center"></Setter>
-                <Setter Property="VerticalAlignment" Value="Center"></Setter>
-            </Style>
         </ResourceDictionary>
-
     </UserControl.Resources>
     <Grid >
         <Grid.Resources>
@@ -45,20 +27,18 @@
                 </Setter>
                 <!--<Setter Property="HorizontalAlignment" Value="Center"></Setter>-->
                 <Setter Property="HorizontalContentAlignment" Value="Center" />
-            </Style>
-            <Style TargetType="{x:Type ListViewItem}">
-                <Setter Property="Height" Value="40" />
-                <Setter Property="Margin" Value="0"/>
-                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                <Setter Property="FontFamily" Value="微软雅黑"/>
+                <Setter Property="FontSize" Value="12"/>
+                <Setter Property="Height" Value="35" />
+                <Setter Property="BorderThickness" Value="0,0,0,1" />
+                <Setter Property="BorderBrush" Value="#e0e0e0" />
             </Style>
         </Grid.Resources>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30" />
             <RowDefinition />
-            <RowDefinition Height="30" />
         </Grid.RowDefinitions>
-        <TextBlock x:Name="_title" FontSize="16" FontWeight="100" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
-        <ListView x:Name="_listview" Grid.Row="1"  HorizontalContentAlignment="Center" ItemContainerStyle="{StaticResource ResourceKey= _style_listviewItem}">
+        <!--<TextBlock x:Name="_title" FontSize="16" FontWeight="100" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>-->
+        <ListView x:Name="_listview" Grid.Row="0"  HorizontalContentAlignment="Center" ItemContainerStyle="{StaticResource ResourceKey= _style_listviewItem}">
             <ListView.View >
                 <GridView x:Name="_gridview" >
                 </GridView>

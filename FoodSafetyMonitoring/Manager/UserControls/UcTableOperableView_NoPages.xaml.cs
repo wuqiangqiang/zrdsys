@@ -58,20 +58,20 @@ namespace FoodSafetyMonitoring.Manager.UserControls
                 return;
             }
 
-            int sumWidth = 0;
-            for (int j = 0; j < table.Columns.Count; j++)
-            {
-                int maxWidth = System.Text.Encoding.Default.GetByteCount(table.Columns[j].ColumnName.ToString());
-                for (int i = 0; i < table.Rows.Count; i++)
-                {
-                    if (maxWidth < System.Text.Encoding.Default.GetByteCount(table.Rows[i][j].ToString().Trim()))
-                    {
-                        maxWidth = System.Text.Encoding.Default.GetByteCount(table.Rows[i][j].ToString().Trim());
-                    }
-                }
-                sumWidth += maxWidth;
-                myColumns[table.Columns[j].ColumnName.ToLower()].Width = maxWidth;
-            }
+            //int sumWidth = 0;
+            //for (int j = 0; j < table.Columns.Count; j++)
+            //{
+            //    int maxWidth = System.Text.Encoding.Default.GetByteCount(table.Columns[j].ColumnName.ToString());
+            //    for (int i = 0; i < table.Rows.Count; i++)
+            //    {
+            //        if (maxWidth < System.Text.Encoding.Default.GetByteCount(table.Rows[i][j].ToString().Trim()))
+            //        {
+            //            maxWidth = System.Text.Encoding.Default.GetByteCount(table.Rows[i][j].ToString().Trim());
+            //        }
+            //    }
+            //    sumWidth += maxWidth;
+            //    myColumns[table.Columns[j].ColumnName.ToLower()].Width = maxWidth;
+            //}
 
             _gridview.Columns.Clear();
             for (int i = 0; i < table.Columns.Count; i++)
@@ -104,13 +104,14 @@ namespace FoodSafetyMonitoring.Manager.UserControls
             if (BShowModify)
             {
                 GridViewColumn gvc_modify = new GridViewColumn();
-                gvc_modify.Header = "修改";
+                gvc_modify.Width = 60;
+                gvc_modify.Header = "设置";
                 FrameworkElementFactory button_modify = new FrameworkElementFactory(typeof(Button));
                 button_modify.SetResourceReference(Button.HorizontalContentAlignmentProperty, HorizontalAlignment.Center);
                 button_modify.SetValue(Button.WidthProperty, 20.0);
                 button_modify.AddHandler(Button.ClickEvent, new RoutedEventHandler(modify_Click));
                 button_modify.SetBinding(Button.TagProperty, new Binding(table.Columns[0].ColumnName));
-                button_modify.SetResourceReference(Button.StyleProperty, "ListModifyImageButtonTemplate");
+                button_modify.SetResourceReference(Button.StyleProperty, "ListSetImageButtonTemplate");
                 DataTemplate dataTemplate_modify = new DataTemplate() { VisualTree = button_modify };
                 gvc_modify.CellTemplate = dataTemplate_modify;
                 _gridview.Columns.Add(gvc_modify);
@@ -195,7 +196,7 @@ namespace FoodSafetyMonitoring.Manager.UserControls
             set
             {
                 this.title = value;
-                _title.Text = title;
+                //_title.Text = title;
             }
         }
 

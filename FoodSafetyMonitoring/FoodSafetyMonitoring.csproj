@@ -245,6 +245,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Manager\SetSampling.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Manager\SetTaskGrade.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -985,6 +989,9 @@
     <Compile Include="Manager\LoadWindow.xaml.cs">
       <DependentUpon>LoadWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Manager\SetSampling.xaml.cs">
+      <DependentUpon>SetSampling.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Manager\SetTaskGrade.xaml.cs">
       <DependentUpon>SetTaskGrade.xaml</DependentUpon>
     </Compile>
@@ -1305,6 +1312,7 @@
     <Resource Include="Manager\Images\role.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="res\sampling.png" />
     <Resource Include="res\report_normal.png" />
     <Resource Include="res\report_select.png" />
     <Resource Include="res\details.png" />

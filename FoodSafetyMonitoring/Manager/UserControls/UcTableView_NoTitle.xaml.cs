@@ -24,6 +24,8 @@ namespace FoodSafetyMonitoring.Manager.UserControls
     {
         public delegate void DetailsRowEventHandler(string id);
         public event DetailsRowEventHandler DetailsRowEnvent;
+        public delegate void ModifyRowEventHandler(string id);
+        public event ModifyRowEventHandler ModifyRowEnvent;
 
         public UcTableView_NoTitle()
         {
@@ -42,7 +44,7 @@ namespace FoodSafetyMonitoring.Manager.UserControls
             {
                 GridViewColumn gvc = new GridViewColumn();
                 gvc.Header = c.ColumnName;
-                if (BShowDetails)
+                if (BShowDetails || BShowModify)
                 {
                     gvc.Width = (_listview.ActualWidth - 65) / dt.Columns.Count;
                 }
@@ -76,6 +78,20 @@ namespace FoodSafetyMonitoring.Manager.UserControls
                 DataTemplate dataTemplate_details = new DataTemplate() { VisualTree = button_details };
                 gvc_details.CellTemplate = dataTemplate_details;
                 _gridview.Columns.Add(gvc_details);
+            }
+            if (BShowModify)
+            {
+                GridViewColumn gvc_modify = new GridViewColumn();
+                gvc_modify.Header = "设置";
+                FrameworkElementFactory button_modify = new FrameworkElementFactory(typeof(Button));
+                button_modify.SetResourceReference(Button.HorizontalContentAlignmentProperty, HorizontalAlignment.Center);
+                button_modify.SetValue(Button.WidthProperty, 20.0);
+                button_modify.AddHandler(Button.ClickEvent, new RoutedEventHandler(modify_Click));
+                button_modify.SetBinding(Button.TagProperty, new Binding(dt.Columns[1].ColumnName));
+                button_modify.SetResourceReference(Button.StyleProperty, "ListModifyImageButtonTemplate");
+                DataTemplate dataTemplate_modify = new DataTemplate() { VisualTree = button_modify };
+                gvc_modify.CellTemplate = dataTemplate_modify;
+                _gridview.Columns.Add(gvc_modify);
             }
             _listview.ItemsSource = null;
             _listview.ItemsSource = dt.DefaultView;
@@ -97,7 +113,7 @@ namespace FoodSafetyMonitoring.Manager.UserControls
             {
                 GridViewColumn gvc = new GridViewColumn();
                 gvc.Header = c.ColumnName;
-                if (BShowDetails)
+                if (BShowDetails || BShowModify)
                 {
                     gvc.Width = (_listview.ActualWidth - 65) / dt.Columns.Count;
                 }
@@ -132,10 +148,29 @@ namespace FoodSafetyMonitoring.Manager.UserControls
                 gvc_details.CellTemplate = dataTemplate_details;
                 _gridview.Columns.Add(gvc_details);
             }
+            if (BShowModify)
+            {
+                GridViewColumn gvc_modify = new GridViewColumn();
+                gvc_modify.Header = "修改";
+                FrameworkElementFactory button_modify = new FrameworkElementFactory(typeof(Button));
+                button_modify.SetResourceReference(Button.HorizontalContentAlignmentProperty, HorizontalAlignment.Center);
+                button_modify.SetValue(Button.WidthProperty, 20.0);
+                button_modify.AddHandler(Button.ClickEvent, new RoutedEventHandler(modify_Click));
+                button_modify.SetBinding(Button.TagProperty, new Binding(dt.Columns[1].ColumnName));
+                button_modify.SetResourceReference(Button.StyleProperty, "ListModifyImageButtonTemplate");
+                DataTemplate dataTemplate_modify = new DataTemplate() { VisualTree = button_modify };
+                gvc_modify.CellTemplate = dataTemplate_modify;
+                _gridview.Columns.Add(gvc_modify);
+            }
             _listview.ItemsSource = dt.DefaultView;
         }
 
         public bool BShowDetails
+        {
+            get;
+            set;
+        }
+        public bool BShowModify
         {
             get;
             set;
@@ -146,6 +181,14 @@ namespace FoodSafetyMonitoring.Manager.UserControls
             if (DetailsRowEnvent != null)
             {
                 DetailsRowEnvent((sender as Button).Tag.ToString());
+            }
+        }
+
+        private void modify_Click(object sender, RoutedEventArgs e)
+        {
+            if (ModifyRowEnvent != null)
+            {
+                ModifyRowEnvent((sender as Button).Tag.ToString());
             }
         }
 

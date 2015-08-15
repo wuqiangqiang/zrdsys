@@ -41,7 +41,7 @@
                         <ComboBox x:Name="_province" Width="120" Text="省" Margin="0,0,5,0"></ComboBox>
                         <ComboBox x:Name="_city" Width="120" Text="市(州)" Margin="0,0,5,0"></ComboBox>
                         <ComboBox x:Name="_region" Width="120" Text="区县"></ComboBox>-->
-                        <TextBlock MinWidth="50">被检单位:</TextBlock>
+                        <TextBlock MinWidth="50">货主:</TextBlock>
                         <ComboBox x:Name="_source_company" Width="260" IsEditable="True"></ComboBox>
                         <Button Name="_query" Width="120" Height="32" Style="{StaticResource SelectImageButtonTemplate}" Click="_query_Click" Margin="100,0,0,0" />
                         <Button Name="_create" Width="120" Height="32" Style="{StaticResource PrintImageButtonTemplate}" Click="_create_Click" Margin="50,0,0,0"/>
@@ -54,14 +54,15 @@
                             <ImageBrush ImageSource="/res/certificate.png"></ImageBrush>
                         </Canvas.Background>
                         <TextBox Canvas.Left="620" Canvas.Top="64" x:Name="_card_id" Width="120" Margin="0" MaxLength="10"></TextBox>
-                        <TextBox Canvas.Left="150" Canvas.Top="104" x:Name="_company" Width="323" Margin="0" IsEnabled="False" MaxLength="25"></TextBox>
+                        <TextBox Canvas.Left="150" Canvas.Top="104" x:Name="_company" Width="323" Margin="0" MaxLength="25" IsEnabled="False"></TextBox>
                         <TextBox Canvas.Left="569" Canvas.Top="103" x:Name="_phone" Width="219" Margin="0" MaxLength="11"></TextBox>
                         <TextBox Canvas.Left="149" Canvas.Top="134" x:Name="_detect_object" Width="124" Margin="0" MaxLength="5"></TextBox>
-                        <TextBox Canvas.Left="365" Canvas.Top="133" x:Name="_object_count" Width="174" Margin="0" MaxLength="5"></TextBox>
-                        <ComboBox Canvas.Left="450" Canvas.Top="133" x:Name="_object_type" Width="80" Margin="0" Visibility="Hidden">
+                        <TextBox Canvas.Left="365" Canvas.Top="133" x:Name="_object_count" Width="100" Margin="0" MaxLength="5"></TextBox>
+                        <TextBox Canvas.Left="465" Canvas.Top="133" x:Name="_object_type" Width="74" Margin="0" MaxLength="5" IsEnabled="False"></TextBox>
+                        <!--<ComboBox Canvas.Left="450" Canvas.Top="133" x:Name="_object_type" Width="80" Margin="0" Visibility="Hidden">
                             <ComboBoxItem>头</ComboBoxItem>
                             <ComboBoxItem>只</ComboBoxItem>
-                        </ComboBox>
+                        </ComboBox>-->
                         <TextBox Canvas.Left="603" Canvas.Top="133" x:Name="_for_use" Width="184" Margin="0" MaxLength="5"></TextBox>
                         <TextBox Canvas.Left="144" Canvas.Top="165" x:Name="_city_ks" Width="74" MaxLength="5"></TextBox>
                         <TextBox Canvas.Left="285" Canvas.Top="162" x:Name="_region_ks" Width="190" Height="20" Margin="0" MaxLength="10"></TextBox>

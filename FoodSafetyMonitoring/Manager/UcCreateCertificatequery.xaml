@@ -8,7 +8,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Themes/ListViewColumn.xaml"/>
                 <ResourceDictionary Source="Themes/ImageButtonStyle.xaml"/>
-                <!--<ResourceDictionary Source="Themes/Button_new.xaml"/>-->
+                <ResourceDictionary Source="Themes/Button_new.xaml"/>
                 <ResourceDictionary Source="Themes/StackPanel.xaml"/>
                 <ResourceDictionary Source="Themes/ComboBox.xaml"/>
                 <ResourceDictionary Source="Themes/TextBlock.xaml"/>
@@ -62,7 +62,7 @@
                             <ComboBox x:Name="_region" Width="120" Text="区县"></ComboBox>-->
                             <TextBlock MinWidth="50">检疫证号:</TextBlock>
                             <TextBox x:Name="_card_no" Width="240" MaxLength="10"></TextBox>
-                            <TextBlock MinWidth="50">被检单位:</TextBlock>
+                            <TextBlock MinWidth="50">货主:</TextBlock>
                             <ComboBox x:Name="_source_company" Width="240" IsEditable="True"></ComboBox>
                             <Button Name="_query" Width="120" Height="32" Style="{StaticResource SelectImageButtonTemplate}" Click="_query_Click" Margin="100,0,0,0" />
                         </StackPanel>
@@ -127,7 +127,7 @@
                                 <GridViewColumn Width="120" Header="出证单位" DisplayMemberBinding="{Binding DeptName}" ></GridViewColumn>
                                 <GridViewColumn Width="100" Header="出证人" DisplayMemberBinding="{Binding username}" ></GridViewColumn>
                                 <GridViewColumn Width="140" Header="来源产地" DisplayMemberBinding="{Binding areaname}" ></GridViewColumn>
-                                <GridViewColumn Width="140" Header="被检单位" DisplayMemberBinding="{Binding COMPANYNAME}" ></GridViewColumn>
+                                <GridViewColumn Width="140" Header="货主" DisplayMemberBinding="{Binding COMPANYNAME}" ></GridViewColumn>
                                 <GridViewColumn Width="110" Header="检测批次编码" DisplayMemberBinding="{Binding batchno}" ></GridViewColumn>
                                 <GridViewColumn Width="110" Header="检测信息详情">
                                     <GridViewColumn.CellTemplate>
@@ -140,7 +140,7 @@
                                 <GridViewColumn Width="100" Header="检疫证详情">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
-                                            <Button Content="电子证" x:Name="_btn_card" Width="60" Tag="{Binding CARDID}" Click="_btn_card_Click"></Button>
+                                            <Button Content=">>" x:Name="_btn_card" Width="60" Tag="{Binding CARDID}" Click="_btn_card_Click" Style="{StaticResource certificate}"></Button>
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>

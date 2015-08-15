@@ -426,7 +426,7 @@ namespace FoodSafetyMonitoring
                         break;
                     //养殖检测->检测任务->任务分配
                     case "30501": temptb.Header = (sender as Button).Content.ToString() + "(养殖)";
-                        temptb.Content = new UcTaskAllocation("yz"); //传入检测站点的类型
+                        temptb.Content = new UcSetSamplingRate(mainWindow.dbOperation,"yz","0"); //传入检测站点的类型
                         flag = 1;
                         break;
                     //养殖检测->检测任务->任务考评
@@ -441,7 +441,7 @@ namespace FoodSafetyMonitoring
                         break;
                     //出证检测->检测任务->任务分配
                     case "40401": temptb.Header = (sender as Button).Content.ToString() + "(出证)";
-                        temptb.Content = new UcTaskAllocation("cz"); //传入检测站点的类型
+                        temptb.Content = new UcSetSamplingRate(mainWindow.dbOperation,"cz","1"); //传入检测站点的类型
                         flag = 1;
                         break;
                     //出证检测->检测任务->任务考评
@@ -456,7 +456,7 @@ namespace FoodSafetyMonitoring
                         break;
                     //宰前检测->检测任务->任务分配
                     case "50401": temptb.Header = (sender as Button).Content.ToString() + "(宰前)";
-                        temptb.Content = new UcTaskAllocation("tz"); //传入检测站点的类型
+                        temptb.Content = new UcSetSamplingRate(mainWindow.dbOperation,"tz",""); //传入检测站点的类型
                         flag = 1;
                         break;
                     //宰前检测->检测任务->任务考评

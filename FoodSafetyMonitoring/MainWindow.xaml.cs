@@ -165,7 +165,7 @@ namespace FoodSafetyMonitoring
             {
                 //二级菜单
                 List<MyChildMenu> childMenus = new List<MyChildMenu>();
-                DataRow[] row_childmenu = table.Select("SUB_FATHER_ID ='" + row["SUB_ID"] + "'");
+                DataRow[] row_childmenu = table.Select("SUB_FATHER_ID ='" + row["SUB_ID"] + "'", " SUB_ID asc");
                 //当一级菜单存在，但二级菜单为空时
                 if( row_childmenu.Count() == 0 )
                 {
@@ -175,7 +175,7 @@ namespace FoodSafetyMonitoring
                 {
                     foreach (DataRow row_child in row_childmenu)
                     {
-                        DataRow[] row_child_childmenu = table.Select("SUB_FATHER_ID ='" + row_child["SUB_ID"] + "'");
+                        DataRow[] row_child_childmenu = table.Select("SUB_FATHER_ID ='" + row_child["SUB_ID"] + "'", "SUB_ID asc");
                         childMenus.Add(new MyChildMenu(row_child["SUB_NAME"].ToString(), this, row_child_childmenu));
                     }
                 }

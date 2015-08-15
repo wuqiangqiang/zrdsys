@@ -1,7 +1,7 @@
 ﻿<Window x:Class="FoodSafetyMonitoring.Manager.CertificatePreview"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Width="844" Height="419" WindowStyle="None" WindowStartupLocation="CenterScreen" BorderBrush="Transparent" ResizeMode="NoResize">
+        Width="844" Height="419" WindowStyle="None" WindowStartupLocation="CenterScreen" BorderBrush="Transparent" ResizeMode="NoResize" Background="Transparent" AllowsTransparency ="True">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
