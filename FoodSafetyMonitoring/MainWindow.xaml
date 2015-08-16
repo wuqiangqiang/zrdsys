@@ -203,7 +203,7 @@
                 <ColumnDefinition Width="6"/>
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <Grid x:Name="grid_Menu" Background="#f2f1f1">
+            <Grid x:Name="grid_Menu" Background="#f2f1f1" ScrollViewer.VerticalScrollBarVisibility="Auto">
                 <!--<Grid.RowDefinitions>
                     <RowDefinition Height="30" />
                     <RowDefinition />

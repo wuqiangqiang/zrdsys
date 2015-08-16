@@ -166,7 +166,7 @@
             </Expander>
             <Expander ExpandDirection="Down" Width="210" x:Name="_expander_6">
                 <Expander.Header>
-                    <TextBlock x:Name="_text_6" FontFamily="微软雅黑" Margin="10,0,0,0" FontSize="12"/>
+                    <TextBlock x:Name="_text_6" FontFamily="微软雅黑" FontSize="12"/>
                 </Expander.Header>
                 <Expander.Content>
                     <Grid x:Name="_grid_6">

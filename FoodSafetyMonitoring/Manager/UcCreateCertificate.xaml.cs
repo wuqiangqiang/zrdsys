@@ -245,12 +245,36 @@ namespace FoodSafetyMonitoring.Manager
                 //            (Application.Current.Resources["User"] as UserInfo).DepartmentID,
                 //            (Application.Current.Resources["User"] as UserInfo).ID,
                 //            System.DateTime.Now };
+
+                Toolkit.MessageBox.Show("电子出证单生成成功！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                clear();
+                return;
             }
             else
             {
                 Toolkit.MessageBox.Show("电子出证单生成失败！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
+        }
+
+        private void clear()
+        {
+            ComboboxTool.InitComboboxSource(_source_company, string.Format(" call p_user_company_wcz('{0}') ", userId), "lr");
+            _card_id.Text = "";
+            _company.Text= "";
+            _detect_object.Text= "";
+            _object_count.Text= "";
+            _phone.Text= "";
+            _for_use.Text= "";
+            _city_ks.Text= "";
+            _region_ks.Text= "";
+            _town_ks.Text= "";
+            _village_ks.Text= "";
+            _city_js.Text= "";
+            _region_js.Text= "";
+            _town_js.Text= "";
+            _village_js.Text= "";
+            _object_lable.Text = "";
         }
 
         public static PrintQueue GetPrinter(string printerName = null)

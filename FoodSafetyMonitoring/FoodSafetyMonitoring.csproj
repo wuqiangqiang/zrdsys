@@ -267,11 +267,31 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Manager\SysAnalysis.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Manager\SysAreaAnalysis.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Manager\SysBigReport.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\SysCardGrade.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\SysCertificateReport.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\SysCityGrade.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Manager\SysComparisonAndAnalysis.xaml">
       <SubType>Designer</SubType>
@@ -294,6 +314,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Manager\SysDetectUserGrade.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Manager\SysDetectUserManager.xaml">
       <SubType>Designer</SubType>
@@ -347,6 +371,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Manager\SysRetroactiveQuery.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Manager\SysReviewInfo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -371,6 +399,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Manager\SysSrjGrade.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Manager\SysTaskCheck.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -382,6 +414,14 @@
       <Generator>MSBuild:Compile</Generator>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Manager\SysTzCompanyInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\SysTzGrade.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Manager\SysUserManager.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -608,6 +648,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Manager\UcCreateCertificateQueryDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\UcCreateCertificate_product.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1004,8 +1048,23 @@
     <Compile Include="Manager\Slaughter_DetectDetailsReview.xaml.cs">
       <DependentUpon>Slaughter_DetectDetailsReview.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Manager\SysAnalysis.xaml.cs">
+      <DependentUpon>SysAnalysis.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Manager\SysAreaAnalysis.xaml.cs">
       <DependentUpon>SysAreaAnalysis.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\SysBigReport.xaml.cs">
+      <DependentUpon>SysBigReport.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\SysCardGrade.xaml.cs">
+      <DependentUpon>SysCardGrade.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\SysCertificateReport.xaml.cs">
+      <DependentUpon>SysCertificateReport.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\SysCityGrade.xaml.cs">
+      <DependentUpon>SysCityGrade.xaml</DependentUpon>
     </Compile>
     <Compile Include="Manager\SysComparisonAndAnalysis.xaml.cs">
       <DependentUpon>SysComparisonAndAnalysis.xaml</DependentUpon>
@@ -1018,6 +1077,9 @@
     </Compile>
     <Compile Include="Manager\SysDayReport.xaml.cs">
       <DependentUpon>SysDayReport.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\SysDetectUserGrade.xaml.cs">
+      <DependentUpon>SysDetectUserGrade.xaml</DependentUpon>
     </Compile>
     <Compile Include="Manager\SysDetectUserManager.xaml.cs">
       <DependentUpon>SysDetectUserManager.xaml</DependentUpon>
@@ -1046,6 +1108,9 @@
     <Compile Include="Manager\SysPersonManager.xaml.cs">
       <DependentUpon>SysPersonManager.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Manager\SysRetroactiveQuery.xaml.cs">
+      <DependentUpon>SysRetroactiveQuery.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Manager\SysReviewInfo.xaml.cs">
       <DependentUpon>SysReviewInfo.xaml</DependentUpon>
     </Compile>
@@ -1058,11 +1123,20 @@
     <Compile Include="Manager\SysRolePowerManager.xaml.cs">
       <DependentUpon>SysRolePowerManager.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Manager\SysSrjGrade.xaml.cs">
+      <DependentUpon>SysSrjGrade.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Manager\SysTaskCheck.xaml.cs">
       <DependentUpon>SysTaskCheck.xaml</DependentUpon>
     </Compile>
     <Compile Include="Manager\SysTrendAnalysis.xaml.cs">
       <DependentUpon>SysTrendAnalysis.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\SysTzCompanyInfo.xaml.cs">
+      <DependentUpon>SysTzCompanyInfo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\SysTzGrade.xaml.cs">
+      <DependentUpon>SysTzGrade.xaml</DependentUpon>
     </Compile>
     <Compile Include="Manager\SysUserManager.xaml.cs">
       <DependentUpon>SysUserManager.xaml</DependentUpon>
@@ -1099,6 +1173,9 @@
     </Compile>
     <Compile Include="Manager\UcCreateCertificateQueryDetails.xaml.cs">
       <DependentUpon>UcCreateCertificateQueryDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\UcCreateCertificate_product.xaml.cs">
+      <DependentUpon>UcCreateCertificate_product.xaml</DependentUpon>
     </Compile>
     <Compile Include="Manager\UcCultureDetectInquire.xaml.cs">
       <DependentUpon>UcCultureDetectInquire.xaml</DependentUpon>
@@ -1312,6 +1389,8 @@
     <Resource Include="Manager\Images\role.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="res\zrd.jpg" />
+    <Resource Include="res\certificate_product.jpg" />
     <Resource Include="res\sampling.png" />
     <Resource Include="res\report_normal.png" />
     <Resource Include="res\report_select.png" />

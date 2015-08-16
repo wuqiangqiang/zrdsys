@@ -25,20 +25,20 @@ namespace FoodSafetyMonitoring.Manager
         {
             InitializeComponent();
 
-            string supplierId = (Application.Current.Resources["User"] as UserInfo).SupplierId;
+            //string supplierId = (Application.Current.Resources["User"] as UserInfo).SupplierId;
 
-            if (supplierId == "" || supplierId == "zrd")
-            {
-                _help.ImageSource = new BitmapImage(new Uri("pack://application:,," + "/res/zrd.png"));
-            }
-            else if(supplierId == "nkrx")
-            {
-                 _help.ImageSource = new BitmapImage(new Uri("pack://application:,," + "/res/nkrx.png"));
-            }
-            else if (supplierId == "wdwk")
-            {
-                _help.ImageSource = new BitmapImage(new Uri("pack://application:,," + "/res/wdwk.png"));
-            }
+            //if (supplierId == "" || supplierId == "zrd")
+            //{
+            //    _help.ImageSource = new BitmapImage(new Uri("pack://application:,," + "/res/zrd.png"));
+            //}
+            //else if(supplierId == "nkrx")
+            //{
+            //     _help.ImageSource = new BitmapImage(new Uri("pack://application:,," + "/res/nkrx.png"));
+            //}
+            //else if (supplierId == "wdwk")
+            //{
+            //    _help.ImageSource = new BitmapImage(new Uri("pack://application:,," + "/res/wdwk.png"));
+            //}
         }
     }
 }

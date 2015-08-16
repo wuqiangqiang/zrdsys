@@ -38,6 +38,7 @@ namespace FoodSafetyMonitoring.Manager
 
             ComboboxTool.InitComboboxSource(_province, rows, "lr");
             _province.SelectionChanged += new SelectionChangedEventHandler(_province_SelectionChanged);
+            this._province.SelectedIndex = 17;
 
             //ComboboxTool.InitComboboxSource(_source_company, string.Format("call p_provice_dept_hb('{0}','yz')", userId), "lr");
             //ComboboxTool.InitComboboxSource(_source_company, "SELECT COMPANYID,COMPANYNAME FROM t_company", "lr");
@@ -57,7 +58,7 @@ namespace FoodSafetyMonitoring.Manager
         }
         private void clear()
         {
-            this._province.Text = "";
+            this._province.SelectedIndex = 17;
             this._city.Text = "";
             this._region.Text = "";
             this._source_company.SelectedIndex = 0;
@@ -75,12 +76,35 @@ namespace FoodSafetyMonitoring.Manager
             this._detect_sensitivity.SelectedIndex = 0;
             this._detect_result.SelectedIndex = 0;
             this._entering_datetime.Text = string.Format("{0:g}", System.DateTime.Now);
+            this._card_no.Text = "";
+            this._colony_batch.SelectedIndex = 0;
+            this._colony_batch.Text = "";
         }
 
         private void btnget_Click(object sender, RoutedEventArgs e)
         {
-            string batch_no = dbOperation.GetDbHelper().GetSingle("select f_create_batchno()").ToString();
-            _batch_number.Text = batch_no;
+            if(_batch_number.Text != "")
+            {
+                if (Toolkit.MessageBox.Show("请确认是否需要更换批次编码？", "系统询问", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    string batch_no = dbOperation.GetDbHelper().GetSingle("select f_create_batchno()").ToString();
+                    _batch_number.Text = batch_no;
+                    clear();
+                    this._province.IsEnabled = true;
+                    this._city.IsEnabled = true;
+                    this._region.IsEnabled = true;
+                    this._source_company.IsEnabled = true;
+                    this._card_no.IsEnabled = true;
+                    this._colony_batch.IsEnabled = true;
+                    this._object_count.IsEnabled = true;
+                }
+            }
+            else
+            {
+                string batch_no = dbOperation.GetDbHelper().GetSingle("select f_create_batchno()").ToString();
+                _batch_number.Text = batch_no;
+            }
+            
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
@@ -210,6 +234,13 @@ namespace FoodSafetyMonitoring.Manager
                     this._detect_result.SelectedIndex = 0;
                     this._card_brand.SelectedIndex = 0;
                     this._entering_datetime.Text = string.Format("{0:g}", System.DateTime.Now);
+                    this._province.IsEnabled = false;
+                    this._city.IsEnabled = false;
+                    this._region.IsEnabled = false;
+                    this._source_company.IsEnabled = false;
+                    this._card_no.IsEnabled = false;
+                    this._colony_batch.IsEnabled = false;
+                    this._object_count.IsEnabled = false;
                     //}
                     //else
                     //{

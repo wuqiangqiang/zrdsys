@@ -1,0 +1,113 @@
+﻿<UserControl x:Class="FoodSafetyMonitoring.Manager.SysAnalysis"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:usercontrols="clr-namespace:FoodSafetyMonitoring.Manager.UserControls"
+             xmlns:toolkit ="http://schemas.microsoft.com/wpf/2008/toolkit">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Themes/ComboBox.xaml"/>
+                <ResourceDictionary Source="Themes/TextBlock.xaml"/>
+                <ResourceDictionary Source="Themes/StackPanel.xaml"/>
+                <ResourceDictionary Source="Themes/ImageButtonStyle.xaml"/>
+                <ResourceDictionary Source="Themes/DatePicker.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="143"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Width="auto" Margin="5,5,5,5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="37"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.Background>
+                    <ImageBrush ImageSource="/res/title.png"/>
+                </Grid.Background>
+                <TextBlock Margin="20,0,0,0" VerticalAlignment="Center">分析查询设置</TextBlock>
+            </Grid>
+            <Border Grid.Row="1" Background="#fbfbfc" BorderThickness="1,0,1,1" BorderBrush="#e0e0e0" CornerRadius="0,0,3,3">
+                <Grid Margin="0,10,0,10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="37"/>
+                        <RowDefinition Height="37"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0" >
+                        <StackPanel  VerticalAlignment="Center" >
+                            <TextBlock  >选择分析主题:</TextBlock>
+                            <ComboBox Name="_analysis_theme" MaxDropDownHeight="240" Width="280"/>
+                            <TextBlock  xml:space="preserve" MinWidth="10" >设置日期:</TextBlock>
+                            <toolkit:DatePicker x:Name="dtpStartDate" VerticalAlignment="Center"/>
+                            <TextBlock  xml:space="preserve" MinWidth="10" Margin="5,0,5,0">至</TextBlock>
+                            <toolkit:DatePicker x:Name="dtpEndDate" VerticalAlignment="Center" />
+                            <TextBlock  xml:space="preserve" MinWidth="10" x:Name="_dept_name" >选择检测单位:</TextBlock>
+                            <ComboBox Name="_detect_dept" Background="White" MaxDropDownHeight="200" Width="240" />
+                            
+                        </StackPanel>
+                    </Grid>
+                    <Grid Grid.Row="1" >
+                        <StackPanel  VerticalAlignment="Center" >
+                            <TextBlock  xml:space="preserve" MinWidth="10" >选择检测项目:</TextBlock>
+                            <ComboBox Name="_detect_item" Background="White" MaxDropDownHeight="200" Width="280" />
+                            <TextBlock  xml:space="preserve" MinWidth="10" >选择区域:</TextBlock>
+                            <ComboBox Name="_area" Background="White" MaxDropDownHeight="200" Width="120" />
+                            <Button Name="_query" Width="120" Height="32" Style="{StaticResource SelectImageButtonTemplate}" Click="_query_Click" Margin="200,0,0,0" />
+                            <Button Name="_export" Width="120" Height="32" Style="{StaticResource ExportImageButtonTemplate}" Click="_export_Click" Margin="50,0,0,0"/>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </Border>
+        </Grid>
+        <Grid Grid.Row="1" Margin="5,5,5,5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0" Margin="0,0,5,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="37"/>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Grid.Background>
+                        <ImageBrush ImageSource="/res/title.png"/>
+                    </Grid.Background>
+                    <StackPanel>
+                        <TextBlock x:Name="_title"  Margin="20,0,0,0" VerticalAlignment="Center"></TextBlock>
+                        <TextBlock x:Name="_hj" Margin="20,0,0,0" VerticalAlignment="Center" Visibility="Hidden">合计</TextBlock>
+                        <TextBlock x:Name="_title_1" Margin="10,0,10,0" VerticalAlignment="Center" MinWidth="10" Foreground="#1956a2" FontWeight="Bold"></TextBlock>
+                        <TextBlock x:Name="_sj" Margin="0,0,0,0" VerticalAlignment="Center" Visibility="Hidden">条数据</TextBlock>
+                    </StackPanel>
+                </Grid>
+                <Border Grid.Row="1" BorderThickness="1,0,1,1" BorderBrush="#e0e0e0" CornerRadius="0,0,3,3" Background="#fbfbfc">
+                    <Grid  x:Name="grid_table">
+                        <usercontrols:UcTableView_NoTitle x:Name="_tableview" Background="Transparent" Margin="0"/>
+                    </Grid>
+                </Border>
+            </Grid>
+            <Grid Grid.Column="1" Margin="5,0,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="37"/>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Grid.Background>
+                        <ImageBrush ImageSource="/res/title.png"/>
+                    </Grid.Background>
+                    <StackPanel>
+                        <TextBlock x:Name="_title_2" Margin="20,0,0,0" VerticalAlignment="Center"></TextBlock>
+                    </StackPanel>
+                </Grid>
+                <Border Grid.Row="1" BorderThickness="1,0,1,1" BorderBrush="#e0e0e0" CornerRadius="0,0,3,3" Background="#fbfbfc">
+                    <Grid  x:Name="_chart">
+
+                    </Grid>
+                </Border>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>
