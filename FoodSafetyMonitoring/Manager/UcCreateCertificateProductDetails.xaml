@@ -1,0 +1,33 @@
+﻿<UserControl x:Class="FoodSafetyMonitoring.Manager.UcCreateCertificateProductDetails"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+            xmlns:usercontrols="clr-namespace:FoodSafetyMonitoring.Manager.UserControls" >
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Themes/Button_new.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <usercontrols:BackGroundConverter x:Key="_converter"/>
+            <Style x:Key="_style_listviewItem" TargetType="ListViewItem">
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <Binding RelativeSource="{RelativeSource Self}" Converter="{ StaticResource ResourceKey=_converter}" />
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="Foreground" Value="Black"></Setter>
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid Background="#fbfbfc">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Button Name="btnBack" Width="60" Height="25"  Click="btnBack_Click" HorizontalAlignment="Left" Margin="5,0,0,0">&lt;&lt;返回</Button>
+        </Grid>
+        <Grid Grid.Row="1">
+            <usercontrols:UcTableOperableView_NoTitle x:Name="_tableview" Background="Transparent" Margin="0" />
+        </Grid>
+    </Grid>
+</UserControl>

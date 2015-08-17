@@ -128,7 +128,7 @@ namespace FoodSafetyMonitoring.Manager
                                              userId, _source_company.SelectedIndex < 1 ? "" : (_source_company.SelectedItem as Label).Tag)).Tables[0];
             if (table.Rows.Count == 0)
             {
-                Toolkit.MessageBox.Show("该被检单位还未做过出证检测！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                Toolkit.MessageBox.Show("该货主还未做过出证检测！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
             else
@@ -229,7 +229,7 @@ namespace FoodSafetyMonitoring.Manager
             //}
 
             string sql = string.Format("call p_insert_certificate('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}','{13}','{14}','{15}','{16}','{17}','{18}','{19}')"
-                            , _card_id.Text, company_id, _company.Text, batch_no, _detect_object.Text, _object_count.Text, _phone.Text,
+                            , _card_id.Text, company_id, _company.Text, batch_no, _detect_object.Text, _object_count.Text + _object_type.Text, _phone.Text,
                             _for_use.Text, _city_ks.Text, _region_ks.Text, _town_ks.Text, _village_ks.Text, _city_js.Text, _region_js.Text,
                             _town_js.Text, _village_js.Text, _object_lable.Text,
                             (Application.Current.Resources["User"] as UserInfo).DepartmentID,
@@ -264,6 +264,7 @@ namespace FoodSafetyMonitoring.Manager
             _company.Text= "";
             _detect_object.Text= "";
             _object_count.Text= "";
+            _object_type.Text = "";
             _phone.Text= "";
             _for_use.Text= "";
             _city_ks.Text= "";

@@ -47,7 +47,7 @@ namespace FoodSafetyMonitoring.Manager
             _objectName.Text = table.Rows[0][4].ToString();
             _sampleName.Text = table.Rows[0][5].ToString();
             _reangetName.Text = table.Rows[0][7].ToString();
-            _cardbrand.Text = table.Rows[0][6].ToString();
+            //_cardbrand.Text = table.Rows[0][6].ToString();
             _resultName.Text = table.Rows[0][8].ToString();
             _deptName.Text = table.Rows[0][2].ToString();
             _detectDate.Text = table.Rows[0][1].ToString();

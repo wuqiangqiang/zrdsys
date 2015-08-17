@@ -10,7 +10,7 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
-        <Grid HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,30,0,0" Width="1100" Height="500">
+        <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,30,0,0" Width="1100" Height="500">
             <Grid.Background>
                 <ImageBrush x:Name="_help" ImageSource="../res/zrd.jpg"/>
             </Grid.Background>

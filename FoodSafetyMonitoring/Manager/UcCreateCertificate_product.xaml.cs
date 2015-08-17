@@ -26,6 +26,9 @@ namespace FoodSafetyMonitoring.Manager
     public partial class UcCreateCertificate_product : UserControl
     {
         public IDBOperation dbOperation = null;
+        private string company_id;
+        private string dept_name;
+        private string dept_area;
         string userId = (Application.Current.Resources["User"] as UserInfo).ID;
         string username = (Application.Current.Resources["User"] as UserInfo).ShowName;
 
@@ -36,17 +39,134 @@ namespace FoodSafetyMonitoring.Manager
 
             this.dbOperation = dbOperation;
 
-            ComboboxTool.InitComboboxSource(_source_company, string.Format(" call p_user_company_wcz('{0}') ", userId), "lr");
+            ComboboxTool.InitComboboxSource(_source_company, string.Format(" call p_user_company_product_wcz('{0}') ", userId), "lr");
         }
 
         private void _query_Click(object sender, RoutedEventArgs e)
         {
+            if (_source_company.SelectedIndex == 0)
+            {
+                Toolkit.MessageBox.Show("货主不能为空", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
 
+            //根据条件查询出数据
+            DataTable table = dbOperation.GetDbHelper().GetDataSet(string.Format("call p_create_certificate_product({0},'{1}')",
+                                             userId, _source_company.SelectedIndex < 1 ? "" : (_source_company.SelectedItem as Label).Tag)).Tables[0];
+            if (table.Rows.Count == 0)
+            {
+                Toolkit.MessageBox.Show("该货主还未做过屠宰检测！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+            else
+            {
+                company_id = (_source_company.SelectedItem as Label).Tag.ToString();
+                _company.Text = table.Rows[0][4].ToString();
+                _product_name.Text = table.Rows[0][3].ToString()+"胴体";
+                _object_count.Text = table.Rows[0][1].ToString();
+                _object_type.Text = "头";
+                _cz_cardid.Text = table.Rows[0][0].ToString();
+                _product_area.Text = table.Rows[0][7].ToString();
+                _dept_name.Text = table.Rows[0][5].ToString() + "              " +table.Rows[0][6].ToString();
+                dept_name = table.Rows[0][5].ToString();
+                dept_area = table.Rows[0][6].ToString();
+                _user_name.Text = username;
+                _nian.Text = DateTime.Now.Year.ToString();
+                _yue.Text = DateTime.Now.Month.ToString();
+                _day.Text = DateTime.Now.Day.ToString();
+
+            }
         }
 
         private void _create_Click(object sender, RoutedEventArgs e)
         {
+            if (_card_id.Text.Trim().Length == 0)
+            {
+                Toolkit.MessageBox.Show("请输入检疫证号！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
 
+            if (_company.Text.Trim().Length == 0)
+            {
+                Toolkit.MessageBox.Show("请输入货主！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
+            if (_product_name.Text.Trim().Length == 0)
+            {
+                Toolkit.MessageBox.Show("请输入产品名称！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
+            if (_object_count.Text.Trim().Length == 0)
+            {
+                Toolkit.MessageBox.Show("请输入数量及单位！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
+            if (_product_area.Text.Trim().Length == 0)
+            {
+                Toolkit.MessageBox.Show("请输入产地！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
+            if (_dept_name.Text.Trim().Length == 0)
+            {
+                Toolkit.MessageBox.Show("请输入生产单位名称地址！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+            if (_mdd.Text.Trim().Length == 0)
+            {
+                Toolkit.MessageBox.Show("请输入目的地！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+            if (_cz_cardid.Text.Trim().Length == 0)
+            {
+                Toolkit.MessageBox.Show("请输入检疫标志号！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
+            string sql = string.Format("call p_insert_certificate_product('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}','{13}')"
+                            , _card_id.Text, company_id, _company.Text, _cz_cardid.Text, _product_name.Text, _object_count.Text + _object_type.Text, _product_area.Text,
+                            dept_name, dept_area, _mdd.Text, _bz.Text,
+                            (Application.Current.Resources["User"] as UserInfo).DepartmentID,
+                            (Application.Current.Resources["User"] as UserInfo).ID,
+                            System.DateTime.Now);
+
+            int i = dbOperation.GetDbHelper().ExecuteSql(sql);
+            if (i >= 0)
+            {
+                //List<string> cer_details = new List<string>() {_card_id.Text, company_id, _company.Text, batch_no, _detect_object.Text, _object_count.Text, _phone.Text,
+                //            _for_use.Text, _city_ks.Text, _region_ks.Text, _town_ks.Text, _village_ks.Text, _city_js.Text, _region_js.Text,
+                //            _town_js.Text, _village_js.Text, _object_lable.Text,
+                //            (Application.Current.Resources["User"] as UserInfo).DepartmentID,
+                //            (Application.Current.Resources["User"] as UserInfo).ID,
+                //            System.DateTime.Now };
+
+                Toolkit.MessageBox.Show("电子出证单生成成功！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                clear();
+                return;
+            }
+            else
+            {
+                Toolkit.MessageBox.Show("电子出证单生成失败！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+        }
+
+        private void clear()
+        {
+            ComboboxTool.InitComboboxSource(_source_company, string.Format(" call p_user_company_product_wcz('{0}') ", userId), "lr");
+            _card_id.Text = "";
+            _company.Text = "";
+            _cz_cardid.Text = "";
+            _object_count.Text = "";
+            _product_name.Text = "";
+            _dept_name.Text = "";
+            _object_type.Text = "";
+            _product_area.Text = "";
+            _mdd.Text = "";
+            _bz.Text = "";
         }
 
         private void _print_Click(object sender, RoutedEventArgs e)

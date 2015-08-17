@@ -51,22 +51,22 @@
                 <Grid Grid.Row="1"  >
                     <Canvas Width="844" Height="419" Margin="60,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left">
                         <Canvas.Background>
-                            <ImageBrush ImageSource="/res/certificate_product.jpg"></ImageBrush>
+                            <ImageBrush ImageSource="/res/certificate_product.png"></ImageBrush>
                         </Canvas.Background>
                         <TextBox Canvas.Left="620" Canvas.Top="64" x:Name="_card_id" Width="120" Margin="0" MaxLength="10"></TextBox>
                         <TextBox Canvas.Left="184" Canvas.Top="103" x:Name="_company" Width="248" Margin="0" MaxLength="25" IsEnabled="False"></TextBox>
-                        <TextBox Canvas.Left="539" Canvas.Top="103" x:Name="_product_name" Width="248" Margin="0" MaxLength="11"></TextBox>
+                        <TextBox Canvas.Left="539" Canvas.Top="103" x:Name="_product_name" Width="248" Margin="0" MaxLength="10" IsEnabled="False"></TextBox>
                         <TextBox Canvas.Left="184" Canvas.Top="132" x:Name="_object_count" Width="150" Margin="0" MaxLength="5" IsEnabled="False"></TextBox>
                         <TextBox Canvas.Left="336" Canvas.Top="132" x:Name="_object_type" Width="96" Margin="0" MaxLength="5" IsEnabled="False"></TextBox>
                         <!--<ComboBox Canvas.Left="450" Canvas.Top="133" x:Name="_object_type" Width="80" Margin="0" Visibility="Hidden">
                             <ComboBoxItem>头</ComboBoxItem>
                             <ComboBoxItem>只</ComboBoxItem>
                         </ComboBox>-->
-                        <TextBox Canvas.Left="539" Canvas.Top="132" x:Name="_for_use" Width="248" Margin="0" MaxLength="5"></TextBox>
-                        <TextBox Canvas.Left="179" Canvas.Top="161" x:Name="_city_ks" Width="603" MaxLength="5"></TextBox>
-                        <TextBox Canvas.Left="179" Canvas.Top="190" x:Name="_city_js" Width="603" MaxLength="5"></TextBox>
-                        <TextBox Canvas.Left="179" Canvas.Top="219" x:Name="_village_js" Width="603" MaxLength="10"></TextBox>
-                        <TextBox Canvas.Left="179" Canvas.Top="249" x:Name="_object_lable" Width="603" MaxLength="50"></TextBox>
+                        <TextBox Canvas.Left="539" Canvas.Top="132" x:Name="_product_area" Width="248" Margin="0" MaxLength="10" IsEnabled="False"></TextBox>
+                        <TextBox Canvas.Left="179" Canvas.Top="161" x:Name="_dept_name" Width="603" MaxLength="50" IsEnabled="False"></TextBox>
+                        <TextBox Canvas.Left="179" Canvas.Top="190" x:Name="_mdd" Width="603" MaxLength="50"></TextBox>
+                        <TextBox Canvas.Left="179" Canvas.Top="219" x:Name="_cz_cardid" Width="603" MaxLength="10" IsEnabled="False"></TextBox>
+                        <TextBox Canvas.Left="179" Canvas.Top="249" x:Name="_bz" Width="603" MaxLength="50"></TextBox>
                         <TextBlock Canvas.Left="614" Canvas.Top="290" x:Name="_user_name" Width="150" Margin="0" ></TextBlock>
                         <TextBlock  Canvas.Left="570" Canvas.Top="318" Width="40" x:Name="_nian"></TextBlock>
                         <TextBlock  Canvas.Left="630" Canvas.Top="318" Width="30" x:Name="_yue"></TextBlock>
