@@ -635,6 +635,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Manager\UcCertificateProductDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Manager\UcCertificateReport.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -1174,6 +1178,9 @@
     <Compile Include="Manager\UcCertificateInquire.xaml.cs">
       <DependentUpon>UcCertificateInquire.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Manager\UcCertificateProductDetails.xaml.cs">
+      <DependentUpon>UcCertificateProductDetails.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Manager\UcCertificateReport.xaml.cs">
       <DependentUpon>UcCertificateReport.xaml</DependentUpon>
     </Compile>
@@ -1410,6 +1417,7 @@
     <Resource Include="Manager\Images\role.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="res\certificate_print.png" />
     <Resource Include="res\certificate_product.png" />
     <Resource Include="res\zrd.jpg" />
     <Resource Include="res\sampling.png" />

@@ -157,6 +157,13 @@ namespace FoodSafetyMonitoring.Manager
                 return;
             }
 
+            bool exit_flag = dbOperation.GetDbHelper().Exists(string.Format("SELECT count(cardid) from t_certificate where cardid ='{0}'", _card_id.Text));
+            if (exit_flag)
+            {
+                Toolkit.MessageBox.Show("检疫证号已存在，请重新输入！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
             if(_company.Text.Trim().Length == 0)
             {
                 Toolkit.MessageBox.Show("请输入货主！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -239,14 +246,24 @@ namespace FoodSafetyMonitoring.Manager
             int i = dbOperation.GetDbHelper().ExecuteSql(sql);
             if (i >= 0)
             {
-                //List<string> cer_details = new List<string>() {_card_id.Text, company_id, _company.Text, batch_no, _detect_object.Text, _object_count.Text, _phone.Text,
-                //            _for_use.Text, _city_ks.Text, _region_ks.Text, _town_ks.Text, _village_ks.Text, _city_js.Text, _region_js.Text,
-                //            _town_js.Text, _village_js.Text, _object_lable.Text,
-                //            (Application.Current.Resources["User"] as UserInfo).DepartmentID,
-                //            (Application.Current.Resources["User"] as UserInfo).ID,
-                //            System.DateTime.Now };
+                List<string> cer_details = new List<string>() {_card_id.Text,_company.Text,_detect_object.Text, _object_count.Text,_object_type.Text, _phone.Text,
+                            _for_use.Text, _city_ks.Text, _region_ks.Text, _town_ks.Text, _village_ks.Text, _city_js.Text, _region_js.Text,
+                            _town_js.Text, _village_js.Text, _object_lable.Text,username,
+                            System.DateTime.Now.Year.ToString(),System.DateTime.Now.Month.ToString(),System.DateTime.Now.Day.ToString() };
 
-                Toolkit.MessageBox.Show("电子出证单生成成功！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                UcCertificateDetails cer = new UcCertificateDetails(cer_details);
+
+                PrintDialog dialog = new PrintDialog();
+                if (dialog.ShowDialog() == true)
+                {
+                    Size printSize = new Size(dialog.PrintableAreaWidth, dialog.PrintableAreaHeight);
+                    cer.Measure(printSize);
+                    cer.Arrange(new Rect(0, 0, dialog.PrintableAreaWidth, dialog.PrintableAreaHeight));
+
+                    dialog.PrintVisual(cer, "Print Test");
+                }
+
+                //Toolkit.MessageBox.Show("电子出证单生成成功！", "系统提示", MessageBoxButton.OK, MessageBoxImage.Information);
                 clear();
                 return;
             }
@@ -302,19 +319,13 @@ namespace FoodSafetyMonitoring.Manager
 
         private void _print_Click(object sender, RoutedEventArgs e)
         {
-            UcCertificateDetails cer = new UcCertificateDetails();
-            var printDialog = new PrintDialog();
-            printDialog.PrintQueue = GetPrinter();
+            List<string> list = new List<string> { };
+            UcCertificateDetails cer = new UcCertificateDetails(list);
+            //var printDialog = new PrintDialog();
+            //printDialog.PrintQueue = GetPrinter();
+            //printDialog.PrintVisual(cer, "1111");
 
-            //cer.LayoutTransform = new ScaleTransform(scale, scale);
-            //Size sz = new Size(capabilities.PageImageableArea.ExtentWidth, capabilities.PageImageableArea.ExtentHeight);
-            //cer.Measure(sz);
-            //cer.Arrange(new Rect(new Point(0, 0), sz));
-
-
-            printDialog.PrintVisual(cer, "1111");
-
-            //PrintDialog dialog = new PrintDialog();
+            PrintDialog dialog = new PrintDialog();
 
             //var settings = new PrintSettings { Width = cer.Width, Height = cer.Height, DPI = 150 };
             //var renderTarget = new RenderTargetBitmap((int)settings.Width, (int)settings.Height, settings.DPI, settings.DPI, PixelFormats.Default);
@@ -327,10 +338,14 @@ namespace FoodSafetyMonitoring.Manager
             //cer.Measure(sz);
             //cer.Arrange(new Rect(new Point(0, 0), sz));
 
-            //if (dialog.ShowDialog() == true)
-            //{
-            //    dialog.PrintVisual(cer, "Print Test");
-            //}
+            if (dialog.ShowDialog() == true)
+            {
+                Size printSize = new Size(dialog.PrintableAreaWidth, dialog.PrintableAreaHeight);
+                cer.Measure(printSize);
+                cer.Arrange(new Rect(0, 0, dialog.PrintableAreaWidth, dialog.PrintableAreaHeight));
+
+                dialog.PrintVisual(cer, "Print Test");
+            }
 
         }
 
